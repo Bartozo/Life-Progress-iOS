@@ -16,6 +16,7 @@
 		9D70828F29B8D1A100846F55 /* LifeProgressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828E29B8D1A100846F55 /* LifeProgressTests.swift */; };
 		9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */; };
 		9D70829B29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */; };
+		9D7082A929B8D34900846F55 /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7082A829B8D34900846F55 /* Life.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeProgressUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITests.swift; sourceTree = "<group>"; };
 		9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9D7082A829B8D34900846F55 /* Life.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Life.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
+				9D7082A729B8D32A00846F55 /* Models */,
 				9D70827829B8D1A000846F55 /* LifeProgressApp.swift */,
 				9D70827A29B8D1A000846F55 /* ContentView.swift */,
 				9D70827C29B8D1A100846F55 /* Assets.xcassets */,
@@ -131,6 +134,14 @@
 				9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */,
 			);
 			path = LifeProgressUITests;
+			sourceTree = "<group>";
+		};
+		9D7082A729B8D32A00846F55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9D7082A829B8D34900846F55 /* Life.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 				9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
+				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
