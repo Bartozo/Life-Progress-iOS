@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */; };
 		9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827829B8D1A000846F55 /* LifeProgressApp.swift */; };
 		9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827A29B8D1A000846F55 /* ContentView.swift */; };
 		9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827C29B8D1A100846F55 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroup.swift; sourceTree = "<group>"; };
 		9D70827529B8D1A000846F55 /* LifeProgress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeProgress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D70827829B8D1A000846F55 /* LifeProgressApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressApp.swift; sourceTree = "<group>"; };
 		9D70827A29B8D1A000846F55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				9D7082A829B8D34900846F55 /* Life.swift */,
+				9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
+				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
