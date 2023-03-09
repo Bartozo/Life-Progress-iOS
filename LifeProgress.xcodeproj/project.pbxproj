@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */; };
+		9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */; };
 		9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827829B8D1A000846F55 /* LifeProgressApp.swift */; };
 		9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827A29B8D1A000846F55 /* ContentView.swift */; };
 		9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827C29B8D1A100846F55 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +165,9 @@
 			dependencies = (
 			);
 			name = LifeProgress;
+			packageProductDependencies = (
+				9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */,
+			);
 			productName = LifeProgress;
 			productReference = 9D70827529B8D1A000846F55 /* LifeProgress.app */;
 			productType = "com.apple.product-type.application";
@@ -235,6 +240,9 @@
 				Base,
 			);
 			mainGroup = 9D70826C29B8D1A000846F55;
+			packageReferences = (
+				9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 9D70827629B8D1A000846F55 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -601,6 +609,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9D70828329B8D1A100846F55 /* LifeProgress.xcdatamodeld */ = {
