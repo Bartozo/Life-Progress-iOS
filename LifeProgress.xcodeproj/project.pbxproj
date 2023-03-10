@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */; };
 		9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */; };
+		9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */; };
 		9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827829B8D1A000846F55 /* LifeProgressApp.swift */; };
 		9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827A29B8D1A000846F55 /* ContentView.swift */; };
 		9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827C29B8D1A100846F55 /* Assets.xcassets */; };
@@ -19,6 +20,9 @@
 		9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */; };
 		9D70829B29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */; };
 		9D7082A929B8D34900846F55 /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7082A829B8D34900846F55 /* Life.swift */; };
+		9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */; };
+		9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */; };
+		9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroup.swift; sourceTree = "<group>"; };
+		9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarStore.swift; sourceTree = "<group>"; };
 		9D70827529B8D1A000846F55 /* LifeProgress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeProgress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D70827829B8D1A000846F55 /* LifeProgressApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressApp.swift; sourceTree = "<group>"; };
 		9D70827A29B8D1A000846F55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +58,9 @@
 		9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITests.swift; sourceTree = "<group>"; };
 		9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9D7082A829B8D34900846F55 /* Life.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Life.swift; sourceTree = "<group>"; };
+		9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarView.swift; sourceTree = "<group>"; };
+		9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithoutCurrentYear.swift; sourceTree = "<group>"; };
+		9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithCurrentYear.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D6ECBC429BA52CB000DF545 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9D6ECBC529BA5335000DF545 /* LifeCalendar */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		9D6ECBC529BA5335000DF545 /* LifeCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41F429BB98BC00F30BB3 /* Views */,
+				9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */,
+				9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */,
+			);
+			path = LifeCalendar;
+			sourceTree = "<group>";
+		};
 		9D70826C29B8D1A000846F55 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +130,7 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
+				9D6ECBC429BA52CB000DF545 /* Features */,
 				9D7082A729B8D32A00846F55 /* Models */,
 				9D70827829B8D1A000846F55 /* LifeProgressApp.swift */,
 				9D70827A29B8D1A000846F55 /* ContentView.swift */,
@@ -147,6 +174,15 @@
 				9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9DCF41F429BB98BC00F30BB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */,
+				9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,12 +321,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */,
 				9D70828229B8D1A100846F55 /* Persistence.swift in Sources */,
 				9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
+				9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */,
+				9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */,
 				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,
+				9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@ import Foundation
 /**
  A struct representing a person's life, including their age, current week of the year, and life expectancy.
  */
-struct Life {
+struct Life: Equatable {
     
     // MARK: - Static variables
     
