@@ -11,6 +11,7 @@ import ComposableArchitecture
 /// A type alias for a store of the `ProfileReducer`'s state and action types.
 typealias ProfileStore = Store<ProfileReducer.State, ProfileReducer.Action>
 
+/// A reducer that manages the state of the profile.
 struct ProfileReducer: ReducerProtocol {
     
     /// The state of the profile.
