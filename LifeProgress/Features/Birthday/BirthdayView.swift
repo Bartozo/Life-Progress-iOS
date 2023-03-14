@@ -12,50 +12,50 @@ struct BirthdayView: View {
     let store: BirthdayStore
 
     var body: some View {
-        Form {
-            WithViewStore(self.store) { viewStore in
-                let isDatePickerVisible = viewStore.isDatePickerVisible
-                
-                HStack {
-                    Text("Your Birthday")
-                    Spacer()
-                    Button {
-                        viewStore.send(
-                            .isDatePickerVisibleChanged,
-                            animation: .default
-                        )
-                    } label: {
-                        Text("\(DateFormatters.medium.string(from: viewStore.birthday))")
-                    }
-                    .buttonStyle(.bordered)
-                    .foregroundColor(isDatePickerVisible ? .blue : .primary)
-                }
-                .onTapGesture {
+        WithViewStore(self.store) { viewStore in
+            let isDatePickerVisible = viewStore.isDatePickerVisible
+            
+            HStack {
+                Text("Your Birthday")
+                Spacer()
+                Button {
                     viewStore.send(
                         .isDatePickerVisibleChanged,
                         animation: .default
                     )
+                } label: {
+                    Text("\(DateFormatters.medium.string(from: viewStore.birthday))")
                 }
-                
-                if isDatePickerVisible {
-                    DatePicker(
-                        "",
-                        selection: viewStore.binding(
-                            get: \.birthday,
-                            send: BirthdayReducer.Action.birthdayChanged
-                        ),
-                        displayedComponents: .date
-                    )
-                    .labelsHidden()
-                    .datePickerStyle(.graphical)
-                }
-                Text("Another label just for test :]")
+                .buttonStyle(.bordered)
+                .foregroundColor(isDatePickerVisible ? .blue : .primary)
+            }
+            .onTapGesture {
+                viewStore.send(
+                    .isDatePickerVisibleChanged,
+                    animation: .default
+                )
+            }
+            
+            if isDatePickerVisible {
+                DatePicker(
+                    "",
+                    selection: viewStore.binding(
+                        get: \.birthday,
+                        send: BirthdayReducer.Action.birthdayChanged
+                    ),
+                    displayedComponents: .date
+                )
+                .labelsHidden()
+                .datePickerStyle(.graphical)
             }
         }
     }
 }
 
+// MARK: - Previews
+
 struct BirthdayView_Previews: PreviewProvider {
+    
     static var previews: some View {
         let store = Store<BirthdayReducer.State, BirthdayReducer.Action>(
             initialState: BirthdayReducer.State(),
