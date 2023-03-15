@@ -24,6 +24,9 @@ struct ProfileReducer: ReducerProtocol {
         
         /// The user's weekly notification state.
         var weeklyNotification = WeeklyNotificationReducer.State()
+        
+        /// The user's theme.
+        var theme = ThemeReducer.State()
     }
     
     /// The actions that can be taken on the profile.
@@ -34,6 +37,8 @@ struct ProfileReducer: ReducerProtocol {
         case lifeExpectancy(LifeExpectancyReducer.Action)
         /// The actions that can be taken on the weekly notification.
         case weeklyNotification(WeeklyNotificationReducer.Action)
+        /// The actions that can be taken on the theme.
+        case theme(ThemeReducer.Action)
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -46,6 +51,9 @@ struct ProfileReducer: ReducerProtocol {
         }
         Scope(state: \.weeklyNotification, action: /Action.weeklyNotification) {
             WeeklyNotificationReducer()
+        }
+        Scope(state: \.theme, action: /Action.theme) {
+            ThemeReducer()
         }
     }
 }

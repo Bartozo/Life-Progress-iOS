@@ -43,6 +43,17 @@ struct ProfileView: View {
                 } footer: {
                     Text("Receive a weekly notification with your current life progress.")
                 }
+                
+                Section {
+                    ThemeView(
+                        store: self.store.scope(
+                            state: \.theme,
+                            action: ProfileReducer.Action.theme
+                        )
+                    )
+                } header: {
+                    Text("Theme")
+                }
             }
             .navigationTitle("Profile")
         }
