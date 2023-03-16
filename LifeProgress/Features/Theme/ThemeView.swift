@@ -21,12 +21,11 @@ struct ThemeView: View {
                 )
             ) {
                 ForEach(viewStore.themes, id: \.self) { color in
-                    Text(color.description)
-                        .foregroundColor(.red)
+                    Text(color.description.capitalized)
+                        .foregroundColor(color)
                 }
             }
-            .pickerStyle(.menu)
-            .tint(.secondary)
+            .pickerStyle(.navigationLink)
         }
     }
 }
