@@ -9,6 +9,9 @@ import SwiftUI
 import ComposableArchitecture
 
 struct BirthdayView: View {
+    
+    @Environment(\.theme) var theme
+    
     let store: BirthdayStore
 
     var body: some View {
@@ -27,7 +30,7 @@ struct BirthdayView: View {
                     Text("\(DateFormatters.medium.string(from: viewStore.birthday))")
                 }
                 .buttonStyle(.bordered)
-                .foregroundColor(isDatePickerVisible ? .blue : .primary)
+                .foregroundColor(isDatePickerVisible ? theme.color : .primary)
             }
             .onTapGesture {
                 viewStore.send(
@@ -47,6 +50,7 @@ struct BirthdayView: View {
                 )
                 .labelsHidden()
                 .datePickerStyle(.graphical)
+                .tint(theme.color)
             }
         }
     }

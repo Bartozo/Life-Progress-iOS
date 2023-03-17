@@ -18,7 +18,7 @@ struct ThemeReducer: ReducerProtocol {
     /// The state of the theme.
     struct State: Equatable {
         /// The user's selected theme.
-        var selectedTheme = Color.blue
+        var selectedTheme = Theme.Key.defaultValue
         
         /// A list of themes available in the app.
         var themes = [
@@ -43,7 +43,7 @@ struct ThemeReducer: ReducerProtocol {
         Reduce { state, action in
             switch action {
             case .themeChanged(let theme):
-                state.selectedTheme = theme
+                state.selectedTheme = Theme(color: theme)
                 return .none
             }
         }

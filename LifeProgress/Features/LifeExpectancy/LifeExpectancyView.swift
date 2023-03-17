@@ -9,6 +9,9 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LifeExpectancyView: View {
+    
+    @Environment(\.theme) var theme
+    
     let store: LifeExpectancyStore
 
     var body: some View {
@@ -28,7 +31,7 @@ struct LifeExpectancyView: View {
                     Text("\(lifeExpectancy)")
                 }
                 .buttonStyle(.bordered)
-                .foregroundColor(isSliderVisible ? .blue : .primary)
+                .foregroundColor(isSliderVisible ? theme.color : .primary)
             }
             .onTapGesture {
                 viewStore.send(
@@ -45,6 +48,7 @@ struct LifeExpectancyView: View {
                   ),
                   in: 0...150
                 )
+                .tint(theme.color)
             }
         }
     }

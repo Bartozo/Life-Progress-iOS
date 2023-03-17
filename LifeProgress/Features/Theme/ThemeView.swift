@@ -14,18 +14,32 @@ struct ThemeView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             Picker(
-                "Theme",
+                "Color",
                 selection: viewStore.binding(
-                    get: { $0.selectedTheme },
+                    get: { $0.selectedTheme.color },
                     send: ThemeReducer.Action.themeChanged
                 )
             ) {
                 ForEach(viewStore.themes, id: \.self) { color in
-                    Text(color.description.capitalized)
-                        .foregroundColor(color)
+                    HStack {
+                        Image(systemName: "circle.fill")
+                        Text(color.description.capitalized)
+                    }
+                    .foregroundColor(color)
                 }
             }
             .pickerStyle(.navigationLink)
+        }
+    }
+}
+
+struct ThemeApplicator: ViewModifier {
+    
+    let store: ThemeStore
+        
+    func body(content: Content) -> some View {
+        WithViewStore(self.store) { viewStore in
+            content.environment(\.theme, viewStore.selectedTheme)
         }
     }
 }
