@@ -24,7 +24,6 @@ struct RootView: View {
             )
             .tabItem {
                 Label("Life Calendar", systemImage: "calendar")
-                    .tint(.red)
             }
             
             ProfileView(
