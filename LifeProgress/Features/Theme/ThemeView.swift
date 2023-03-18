@@ -21,10 +21,11 @@ struct ThemeView: View {
                 )
             ) {
                 ForEach(viewStore.themes, id: \.self) { color in
-                    HStack {
-                        Image(systemName: "circle.fill")
-                        Text(color.description.capitalized)
-                    }
+                    Label(
+                        color.description.capitalized,
+                        systemImage:  "circle.fill"
+                    )
+                    .labelStyle(.titleAndIcon)
                     .foregroundColor(color)
                 }
             }
@@ -35,7 +36,7 @@ struct ThemeView: View {
 
 struct ThemeApplicator: ViewModifier {
     
-    let store: ThemeStore
+    let store: Store<ThemeReducer.State, Never>
         
     func body(content: Content) -> some View {
         WithViewStore(self.store) { viewStore in

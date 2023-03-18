@@ -9,62 +9,55 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ProfileView: View {
-    @Environment(\.theme) var theme
     
     let store: ProfileStore
     
     var body: some View {
-        Form {
-            Section {
-                BirthdayView(
-                    store: self.store.scope(
-                        state: \.birthday,
-                        action: ProfileReducer.Action.birthday
+        NavigationView {
+            Form {
+                Section {
+                    BirthdayView(
+                        store: self.store.scope(
+                            state: \.birthday,
+                            action: ProfileReducer.Action.birthday
+                        )
                     )
-                )
-                LifeExpectancyView(
-                    store: self.store.scope(
-                        state: \.lifeExpectancy,
-                        action: ProfileReducer.Action.lifeExpectancy
+                    LifeExpectancyView(
+                        store: self.store.scope(
+                            state: \.lifeExpectancy,
+                            action: ProfileReducer.Action.lifeExpectancy
+                        )
                     )
-                )
-            } header: {
-                Text("User")
+                } header: {
+                    Text("User")
+                }
+                
+                Section {
+                    WeeklyNotificationView(
+                        store: self.store.scope(
+                            state: \.weeklyNotification,
+                            action: ProfileReducer.Action.weeklyNotification
+                        )
+                    )
+                } header: {
+                    Text("Notifications")
+                } footer: {
+                    Text("Receive a weekly notification with your current life progress.")
+                }
+                
+                Section {
+                    ThemeView(
+                        store: self.store.scope(
+                            state: \.theme,
+                            action: ProfileReducer.Action.theme
+                        )
+                    )
+                } header: {
+                    Text("Theme")
+                }
             }
-            
-            Section {
-                WeeklyNotificationView(
-                    store: self.store.scope(
-                        state: \.weeklyNotification,
-                        action: ProfileReducer.Action.weeklyNotification
-                    )
-                )
-            } header: {
-                Text("Notifications")
-            } footer: {
-                Text("Receive a weekly notification with your current life progress.")
-            }
-            
-            Section {
-                ThemeView(
-                    store: self.store.scope(
-                        state: \.theme,
-                        action: ProfileReducer.Action.theme
-                    )
-                )
-            } header: {
-                Text("Theme")
-            }
+            .navigationTitle("Profile")
         }
-        .navigationTitle("Profile")
-        .modifier(
-            ThemeApplicator(
-                store: store.scope(
-                    state: \.theme,
-                    action: ProfileReducer.Action.theme
-                )
-            )
-        )
     }
 }
 

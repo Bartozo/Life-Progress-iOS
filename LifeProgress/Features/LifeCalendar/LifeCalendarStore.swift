@@ -18,15 +18,25 @@ enum CalendarType: Equatable {
 /// A type alias for a store of the `LifeCalendarReducer`'s state and action types.
 typealias LifeCalendarStore = Store<LifeCalendarReducer.State, LifeCalendarReducer.Action>
 
+typealias LifeCalendarViewStore = ViewStore<LifeCalendarReducer.State, LifeCalendarReducer.Action>
+
 /// A reducer that manages the state of the life calendar.
 struct LifeCalendarReducer: ReducerProtocol {
     
     /// The state of the life calendar.
     struct State: Equatable {
+        let currentYearModeColumnCount = 6
         /// The current type of calendar.
         var calendarType: CalendarType = .life
         /// The user's life information.
-        var life: Life = Life(birthday: Date.now, lifeExpectancy: 90)
+        var life: Life = Life(
+            birthday: Calendar.current.date(
+                byAdding: .year,
+                value: -28,
+                to: .now
+            )!,
+            lifeExpectancy: 90
+        )
     }
     
     /// The actions that can be taken on the life calendar.

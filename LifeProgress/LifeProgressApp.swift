@@ -13,8 +13,20 @@ struct LifeProgressApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            RootView(
+                store: RootStore(
+                    initialState: RootReducer.State(),
+                    reducer: RootReducer()
+                )
+            )
+//            HomeView(
+//                store: HomeStore(
+//                    initialState: HomeReducer.State(),
+//                    reducer: HomeReducer()
+//                )
+//            )
+//            ContentView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

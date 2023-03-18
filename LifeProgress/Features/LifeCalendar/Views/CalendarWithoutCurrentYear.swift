@@ -15,6 +15,7 @@ import ComposableArchitecture
  It uses a Composable Architecture `store` to access the `life` and `calendarType` state.
  */
 struct CalendarWithoutCurrentYear: View {
+    
     let store: LifeCalendarStore
     
     var body: some View {

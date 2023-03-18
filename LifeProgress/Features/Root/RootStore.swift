@@ -16,36 +16,28 @@ struct RootReducer: ReducerProtocol {
     
     /// The state of the root.
     struct State: Equatable {
-        /// The user's theme.
-        var theme = ThemeReducer.State()
+        /// The life calendar's state.
+        var lifeCalendar = LifeCalendarReducer.State()
+
         /// The profile's state.
         var profile = ProfileReducer.State()
     }
     
     /// The actions that can be taken on the root.
     enum Action: Equatable {
-        /// The actions that can be taken on the theme.
-        case theme(ThemeReducer.Action)
+        /// The actions that can be taken on the life calendar.
+        case lifeCalendar(LifeCalendarReducer.Action)
         /// The actions that can be taken on the profile.
         case profile(ProfileReducer.Action)
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
-//        Scope(state: \.theme, action: /Action.theme) {
-//            ThemeReducer()
-//        }
+        Scope(state: \.lifeCalendar, action: /Action.lifeCalendar) {
+            LifeCalendarReducer()
+        }
         Scope(state: \.profile, action: /Action.profile) {
             ProfileReducer()
-        }
-        Reduce { state, action in
-            switch action {
-            case .theme(_):
-                print("NOWE THEME")
-                return .none
-            case .profile(_):
-                return .none
-            }
         }
     }
 }
