@@ -20,9 +20,23 @@
 		9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */; };
 		9D70829B29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */; };
 		9D7082A929B8D34900846F55 /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7082A829B8D34900846F55 /* Life.swift */; };
+		9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CE5C229BFA45900B57F90 /* LifeExpectancyStore.swift */; };
+		9D7CE5C529BFA5ED00B57F90 /* LifeExpectancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CE5C429BFA5ED00B57F90 /* LifeExpectancyView.swift */; };
+		9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11729C216A300265C2E /* ThemeStore.swift */; };
+		9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11929C216B800265C2E /* ThemeView.swift */; };
+		9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */; };
+		9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A029C4F88300E2A4FA /* RootView.swift */; };
+		9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A229C4FBB400E2A4FA /* Theme.swift */; };
+		9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */; };
+		9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */; };
+		9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */; };
 		9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */; };
 		9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */; };
 		9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */; };
+		9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720F829BFB35C00634AB2 /* ProfileView.swift */; };
+		9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */; };
+		9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */; };
+		9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +72,23 @@
 		9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITests.swift; sourceTree = "<group>"; };
 		9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9D7082A829B8D34900846F55 /* Life.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Life.swift; sourceTree = "<group>"; };
+		9D7CE5C229BFA45900B57F90 /* LifeExpectancyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeExpectancyStore.swift; sourceTree = "<group>"; };
+		9D7CE5C429BFA5ED00B57F90 /* LifeExpectancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeExpectancyView.swift; sourceTree = "<group>"; };
+		9DB6D11729C216A300265C2E /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
+		9DB6D11929C216B800265C2E /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStore.swift; sourceTree = "<group>"; };
+		9DC5B6A029C4F88300E2A4FA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		9DC5B6A229C4FBB400E2A4FA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayStore.swift; sourceTree = "<group>"; };
+		9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayView.swift; sourceTree = "<group>"; };
+		9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarView.swift; sourceTree = "<group>"; };
 		9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithoutCurrentYear.swift; sourceTree = "<group>"; };
 		9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithCurrentYear.swift; sourceTree = "<group>"; };
+		9DD720F829BFB35C00634AB2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
+		9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationStore.swift; sourceTree = "<group>"; };
+		9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +120,12 @@
 		9D6ECBC429BA52CB000DF545 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9DC5B69D29C4F87000E2A4FA /* Root */,
+				9DB6D11629C2169800265C2E /* Theme */,
+				9DD720FC29BFBD2F00634AB2 /* WeeklyNotification */,
+				9DD720F729BFB34D00634AB2 /* Profile */,
+				9D7CE5C129BFA43400B57F90 /* LifeExpectancy */,
+				9DC9B70E29BD1F0B0088D6F9 /* Birthday */,
 				9D6ECBC529BA5335000DF545 /* LifeCalendar */,
 			);
 			path = Features;
@@ -130,6 +164,7 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
+				9DC9B71529BE05190088D6F9 /* Utils */,
 				9D6ECBC429BA52CB000DF545 /* Features */,
 				9D7082A729B8D32A00846F55 /* Models */,
 				9D70827829B8D1A000846F55 /* LifeProgressApp.swift */,
@@ -176,6 +211,51 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		9D7CE5C129BFA43400B57F90 /* LifeExpectancy */ = {
+			isa = PBXGroup;
+			children = (
+				9D7CE5C229BFA45900B57F90 /* LifeExpectancyStore.swift */,
+				9D7CE5C429BFA5ED00B57F90 /* LifeExpectancyView.swift */,
+			);
+			path = LifeExpectancy;
+			sourceTree = "<group>";
+		};
+		9DB6D11629C2169800265C2E /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				9DB6D11729C216A300265C2E /* ThemeStore.swift */,
+				9DB6D11929C216B800265C2E /* ThemeView.swift */,
+				9DC5B6A229C4FBB400E2A4FA /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		9DC5B69D29C4F87000E2A4FA /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */,
+				9DC5B6A029C4F88300E2A4FA /* RootView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		9DC9B70E29BD1F0B0088D6F9 /* Birthday */ = {
+			isa = PBXGroup;
+			children = (
+				9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */,
+				9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */,
+			);
+			path = Birthday;
+			sourceTree = "<group>";
+		};
+		9DC9B71529BE05190088D6F9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		9DCF41F429BB98BC00F30BB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +263,24 @@
 				9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9DD720F729BFB34D00634AB2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9DD720F829BFB35C00634AB2 /* ProfileView.swift */,
+				9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		9DD720FC29BFBD2F00634AB2 /* WeeklyNotification */ = {
+			isa = PBXGroup;
+			children = (
+				9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */,
+				9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */,
+			);
+			path = WeeklyNotification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,15 +420,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */,
+				9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */,
+				9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */,
 				9D70828229B8D1A100846F55 /* Persistence.swift in Sources */,
+				9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */,
 				9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */,
+				9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
+				9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */,
+				9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
+				9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */,
+				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
+				9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
+				9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */,
+				9D7CE5C529BFA5ED00B57F90 /* LifeExpectancyView.swift in Sources */,
 				9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */,
+				9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */,
 				9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */,
+				9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */,
 				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,
 				9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */,
+				9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

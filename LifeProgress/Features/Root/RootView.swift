@@ -10,6 +10,8 @@ import ComposableArchitecture
 
 struct RootView: View {
     
+    @Environment(\.theme) var theme
+    
     let store: RootStore
     
     var body: some View {
@@ -22,8 +24,8 @@ struct RootView: View {
             )
             .tabItem {
                 Label("Life Calendar", systemImage: "calendar")
+                    .tint(.red)
             }
-            
             
             ProfileView(
                 store: store.scope(
@@ -35,11 +37,7 @@ struct RootView: View {
                 Label("Profile", systemImage: "person")
             }
         }
-        .modifier(
-            ThemeApplicator(
-                store: store.scope(state: \.profile.theme).actionless
-            )
-        )
+        .accentColor(theme.color)
     }
 }
 

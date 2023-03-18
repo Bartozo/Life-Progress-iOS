@@ -10,21 +10,20 @@ import SwiftUI
 @main
 struct LifeProgressApp: App {
     let persistenceController = PersistenceController.shared
+    
+    let store = RootStore(
+        initialState: RootReducer.State(),
+        reducer: RootReducer()
+    )
 
     var body: some Scene {
         WindowGroup {
-            RootView(
-                store: RootStore(
-                    initialState: RootReducer.State(),
-                    reducer: RootReducer()
+            RootView(store: self.store)
+                .modifier(
+                    ThemeApplicator(
+                        store: self.store.scope(state: \.profile.theme).actionless
+                    )
                 )
-            )
-//            HomeView(
-//                store: HomeStore(
-//                    initialState: HomeReducer.State(),
-//                    reducer: HomeReducer()
-//                )
-//            )
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
