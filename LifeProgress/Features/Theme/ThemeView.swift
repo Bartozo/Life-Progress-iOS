@@ -16,20 +16,23 @@ struct ThemeView: View {
             Picker(
                 "Color",
                 selection: viewStore.binding(
-                    get: { $0.selectedTheme.color },
+                    get: { $0.selectedTheme },
                     send: ThemeReducer.Action.themeChanged
                 )
             ) {
-                ForEach(viewStore.themes, id: \.self) { color in
+                ForEach(viewStore.themes, id: \.self) { theme in
                     Label(
-                        color.description.capitalized,
+                        theme.color.description.capitalized,
                         systemImage:  "circle.fill"
                     )
                     .labelStyle(.titleAndIcon)
-                    .foregroundColor(color)
+                    .foregroundColor(theme.color)
                 }
             }
             .pickerStyle(.navigationLink)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }

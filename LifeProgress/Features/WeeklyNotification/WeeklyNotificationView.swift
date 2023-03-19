@@ -20,6 +20,9 @@ struct WeeklyNotificationView: View {
                     send: WeeklyNotificationReducer.Action.isWeeklyNotificationChanged
                 )
             )
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }

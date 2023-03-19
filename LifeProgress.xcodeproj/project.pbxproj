@@ -33,6 +33,8 @@
 		9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */; };
 		9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */; };
 		9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */; };
+		9DD4955E29C75757004001D9 /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4955D29C75757004001D9 /* UserClient.swift */; };
+		9DD4956029C76C5F004001D9 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4955F29C76C5F004001D9 /* UserDefaultsHelper.swift */; };
 		9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720F829BFB35C00634AB2 /* ProfileView.swift */; };
 		9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */; };
 		9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */; };
@@ -85,6 +87,8 @@
 		9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarView.swift; sourceTree = "<group>"; };
 		9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithoutCurrentYear.swift; sourceTree = "<group>"; };
 		9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithCurrentYear.swift; sourceTree = "<group>"; };
+		9DD4955D29C75757004001D9 /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
+		9DD4955F29C76C5F004001D9 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		9DD720F829BFB35C00634AB2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationStore.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
+				9DD4955C29C755B8004001D9 /* Dependencies */,
 				9DC9B71529BE05190088D6F9 /* Utils */,
 				9D6ECBC429BA52CB000DF545 /* Features */,
 				9D7082A729B8D32A00846F55 /* Models */,
@@ -263,6 +268,15 @@
 				9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9DD4955C29C755B8004001D9 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				9DD4955D29C75757004001D9 /* UserClient.swift */,
+				9DD4955F29C76C5F004001D9 /* UserDefaultsHelper.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		9DD720F729BFB34D00634AB2 /* Profile */ = {
@@ -424,6 +438,7 @@
 				9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */,
 				9D70828229B8D1A100846F55 /* Persistence.swift in Sources */,
 				9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */,
+				9DD4955E29C75757004001D9 /* UserClient.swift in Sources */,
 				9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */,
 				9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
@@ -432,6 +447,7 @@
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
 				9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */,
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
+				9DD4956029C76C5F004001D9 /* UserDefaultsHelper.swift in Sources */,
 				9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
 				9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */,

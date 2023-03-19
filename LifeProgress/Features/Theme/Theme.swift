@@ -8,28 +8,46 @@
 import Foundation
 import SwiftUI
 
-public struct Theme: Equatable {
+enum Theme: String, CaseIterable {
+    case red
+    case orange
+    case yellow
+    case green
+    case blue
+    case pink
+    case gray
+    
+    // MARK: - Computed properties
+    
+    /// Primary color of the theme.
+    var color: Color {
+        switch self {
+        case .red:
+            return Color.red
+        case .orange:
+            return Color.orange
+        case .yellow:
+            return Color.yellow
+        case .green:
+            return Color.green
+        case .blue:
+            return Color.blue
+        case .pink:
+            return Color.pink
+        case .gray:
+            return Color.gray
+        }
+    }
+    
     enum Key: EnvironmentKey {
-        static var defaultValue: Theme { Theme(color: Color.blue) }
+        static var defaultValue: Theme { Theme.blue }
     }
-    
-    init(color: Color) {
-        self.color = color
-        self.text = color.description
-        self.token = UUID()
-    }
-
-    var color = Color.blue
-    var text = "xd"
-    let token: UUID
-    
-    public static func == (a: Self, b: Self) -> Bool { a.token == b.token }
 }
 
 extension EnvironmentValues {
     
-   public var theme: Theme {
-       get { self[Theme.Key.self] }
-       set { self[Theme.Key.self] = newValue }
-   }
+    var theme: Theme {
+        get { self[Theme.Key.self] }
+        set { self[Theme.Key.self] = newValue }
+    }
 }

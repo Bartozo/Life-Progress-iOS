@@ -27,6 +27,9 @@ struct Life: Equatable {
     
     /// The person's life expectancy in years.
     let lifeExpectancy: Int
+
+    /// The person's birthday.
+    let birthday: Date
     
     // MARK: - Constructor
     
@@ -45,6 +48,7 @@ struct Life: Equatable {
         self.age = ageComponents.year!
         self.weekOfYear = ageComponents.weekOfYear!
         self.lifeExpectancy = lifeExpectancy
+        self.birthday = birthday
     }
     
     // MARK: - Computed properties
@@ -92,4 +96,18 @@ struct Life: Equatable {
     var numberOfWeeksLeft: Int {
         Life.totalWeeksInAYear * lifeExpectancy - numberOfWeeksSpent
     }
+}
+
+// MARK: - Mock data
+extension Life {
+    
+    /// Mocked model of users's life.
+    static let mock = Self(
+        birthday: Calendar.current.date(
+            byAdding: .year,
+            value: -28,
+            to: .now
+        )!,
+        lifeExpectancy: 90
+    )
 }

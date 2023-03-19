@@ -17,11 +17,7 @@ struct BirthdayReducer: ReducerProtocol {
     /// The state of the birthday.
     struct State: Equatable {
         /// The user's birthday.
-        var birthday: Date = Calendar.current.date(
-            byAdding: .year,
-            value: -28,
-            to: .now
-        )!
+        var birthday: Date = UserDefaultsHelper.getBirthday()
 
         /// Whether the date picker is visible.
         var isDatePickerVisible = false
@@ -33,6 +29,8 @@ struct BirthdayReducer: ReducerProtocol {
         case birthdayChanged(Date)
         /// Indicates that the date picker visible status has changed.
         case isDatePickerVisibleChanged
+        /// Indicates that the view has appeared.
+        case onAppear
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -41,10 +39,15 @@ struct BirthdayReducer: ReducerProtocol {
             switch action {
             case .birthdayChanged(let birthday):
                 state.birthday = birthday
+                UserDefaultsHelper.saveBirthday(birthday)
                 return .none
                 
             case .isDatePickerVisibleChanged:
                 state.isDatePickerVisible.toggle()
+                return .none
+                
+            case .onAppear:
+                state.birthday = UserDefaultsHelper.getBirthday()
                 return .none
             }
         }

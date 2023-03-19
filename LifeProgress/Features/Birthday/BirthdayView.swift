@@ -32,6 +32,9 @@ struct BirthdayView: View {
                 .buttonStyle(.bordered)
                 .foregroundColor(isDatePickerVisible ? theme.color : .primary)
             }
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             .onTapGesture {
                 viewStore.send(
                     .isDatePickerVisibleChanged,

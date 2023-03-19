@@ -33,12 +33,16 @@ struct LifeExpectancyView: View {
                 .buttonStyle(.bordered)
                 .foregroundColor(isSliderVisible ? theme.color : .primary)
             }
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             .onTapGesture {
                 viewStore.send(
                     .isSliderVisibleChanged,
                     animation: .default
                 )
             }
+        
             
             if isSliderVisible {
                 Slider(

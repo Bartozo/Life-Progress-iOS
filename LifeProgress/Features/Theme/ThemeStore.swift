@@ -18,24 +18,18 @@ struct ThemeReducer: ReducerProtocol {
     /// The state of the theme.
     struct State: Equatable {
         /// The user's selected theme.
-        var selectedTheme = Theme.Key.defaultValue
+        var selectedTheme = UserDefaultsHelper.getTheme()
         
         /// A list of themes available in the app.
-        var themes = [
-            Color.red,
-            Color.orange,
-            Color.yellow,
-            Color.green,
-            Color.blue,
-            Color.pink,
-            Color.gray
-        ]
+        var themes = Theme.allCases
     }
     
     /// The actions that can be taken on the theme.
     enum Action: Equatable {
         /// Indicates that the theme has changed.
-        case themeChanged(Color)
+        case themeChanged(Theme)
+        /// Indicates that the view has appeared.
+        case onAppear
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -43,7 +37,12 @@ struct ThemeReducer: ReducerProtocol {
         Reduce { state, action in
             switch action {
             case .themeChanged(let theme):
-                state.selectedTheme = Theme(color: theme)
+                state.selectedTheme = theme
+                UserDefaultsHelper.saveTheme(theme)
+                return .none
+                
+            case .onAppear:
+                state.selectedTheme = UserDefaultsHelper.getTheme()
                 return .none
             }
         }

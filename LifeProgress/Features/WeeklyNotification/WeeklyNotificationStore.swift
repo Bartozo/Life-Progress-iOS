@@ -24,6 +24,8 @@ struct WeeklyNotificationReducer: ReducerProtocol {
     enum Action: Equatable {
         /// Indicates that the weekly notification status has changed.
         case isWeeklyNotificationChanged
+        /// Indicates that the view has appeared.
+        case onAppear
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -32,6 +34,11 @@ struct WeeklyNotificationReducer: ReducerProtocol {
             switch action {
             case .isWeeklyNotificationChanged:
                 state.isWeeklyNotificationEnabled.toggle()
+                UserDefaultsHelper.saveIsWeeklyNotificationEnabled(state.isWeeklyNotificationEnabled)
+                return .none
+                
+            case .onAppear:
+                state.isWeeklyNotificationEnabled = UserDefaultsHelper.getIsWeeklyNotificationEnabled()
                 return .none
             }
         }
