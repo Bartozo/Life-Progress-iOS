@@ -21,7 +21,7 @@ struct ThemeView: View {
                 )
             ) {
                 ForEach(viewStore.themes, id: \.self) { theme in
-                    Label(
+                    Label( 
                         theme.color.description.capitalized,
                         systemImage:  "circle.fill"
                     )

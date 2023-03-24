@@ -16,13 +16,11 @@ struct LifeCalendarView: View {
 
     
     var body: some View {
-        NavigationView {
-            if verticalSizeClass == .regular {
+        if verticalSizeClass == .regular {
+            calendar
+        } else {
+            ScrollView(showsIndicators: false) {
                 calendar
-            } else {
-                ScrollView(showsIndicators: false) {
-                    calendar
-                }
             }
         }
     }

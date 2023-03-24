@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct LifeProgressApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
     
     let store = RootStore(
         initialState: RootReducer.State(),

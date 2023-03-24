@@ -13,7 +13,6 @@ struct ProfileView: View {
     let store: ProfileStore
     
     var body: some View {
-        NavigationView {
             Form {
                 Section {
                     BirthdayView(
@@ -57,7 +56,6 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle("Profile")
-        }
     }
 }
 
