@@ -13,7 +13,7 @@ struct LifeCalendarView: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     
     let store: LifeCalendarStore
-
+    @State private var isHelpSheetVisible = false
     
     var body: some View {
         if verticalSizeClass == .regular {
@@ -49,6 +49,18 @@ struct LifeCalendarView: View {
             }
         }
         .navigationTitle("Life Calendar")
+        .toolbar {
+              ToolbarItem(placement: .navigationBarTrailing) {
+                  Button(action: {
+                      isHelpSheetVisible = true
+                  }) {
+                      Image(systemName: "questionmark.circle")
+                  }
+              }
+          }
+        .sheet(isPresented: $isHelpSheetVisible) {
+            AboutLifeCalendarView(store: self.store)
+        }
     }
 }
 

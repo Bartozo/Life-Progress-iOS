@@ -39,6 +39,12 @@
 		9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */; };
 		9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */; };
 		9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */; };
+		9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */; };
+		9DEBBB9C29CF2A40008CE08C /* NavigationLink+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */; };
+		9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */; };
+		9DEBBBA229CF4D3E008CE08C /* ZoomedInCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */; };
+		9DEBBBA429CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */; };
+		9DEBBBA629CF5118008CE08C /* CurrentYearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBBA529CF5118008CE08C /* CurrentYearProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +99,12 @@
 		9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationStore.swift; sourceTree = "<group>"; };
 		9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationView.swift; sourceTree = "<group>"; };
+		9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLifeCalendarView.swift; sourceTree = "<group>"; };
+		9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationLink+Extension.swift"; sourceTree = "<group>"; };
+		9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomedInCalendarView.swift; sourceTree = "<group>"; };
+		9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedLifeCalendarView.swift; sourceTree = "<group>"; };
+		9DEBBBA529CF5118008CE08C /* CurrentYearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentYearProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +180,7 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
+				9DEBBB9829CF28BB008CE08C /* Views */,
 				9DD4955C29C755B8004001D9 /* Dependencies */,
 				9DC9B71529BE05190088D6F9 /* Utils */,
 				9D6ECBC429BA52CB000DF545 /* Features */,
@@ -266,6 +279,10 @@
 			children = (
 				9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */,
 				9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */,
+				9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */,
+				9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */,
+				9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */,
+				9DEBBBA529CF5118008CE08C /* CurrentYearProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +312,15 @@
 				9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */,
 			);
 			path = WeeklyNotification;
+			sourceTree = "<group>";
+		};
+		9DEBBB9829CF28BB008CE08C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */,
+				9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,7 +459,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DEBBBA229CF4D3E008CE08C /* ZoomedInCalendarView.swift in Sources */,
 				9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */,
+				9DEBBB9C29CF2A40008CE08C /* NavigationLink+Extension.swift in Sources */,
 				9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */,
 				9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */,
 				9D70828229B8D1A100846F55 /* Persistence.swift in Sources */,
@@ -443,9 +471,11 @@
 				9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
 				9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */,
+				9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */,
 				9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
 				9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */,
+				9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */,
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
 				9DD4956029C76C5F004001D9 /* UserDefaultsHelper.swift in Sources */,
 				9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */,
@@ -456,6 +486,8 @@
 				9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */,
 				9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */,
 				9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */,
+				9DEBBBA429CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift in Sources */,
+				9DEBBBA629CF5118008CE08C /* CurrentYearProgressView.swift in Sources */,
 				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,
 				9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */,
 				9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */,

@@ -107,4 +107,23 @@ enum AgeGroup: CaseIterable {
             return .brown
         }
     }
+    
+    var description: String {
+        switch self {
+        case .baby:
+            return "Baby (0-3)"
+        case .child:
+            return "Child (3-9)"
+        case .adolescent:
+            return "Adolescent (9-18)"
+        case .youngAdult:
+            return "Young Adult (18-25)"
+        case .adult:
+            return "Adult (25-40)"
+        case .middleAge:
+            return "Middle Age (40-60)"
+        case .oldAge:
+            return "Old Age (60+)"
+        }
+    }
 }
