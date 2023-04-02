@@ -95,7 +95,7 @@ struct LifeCalendarView: View {
                 )
             }
             .onAppear {
-                viewStore.send(.task)
+                viewStore.send(.onAppear)
             }
         }
     }

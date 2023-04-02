@@ -68,7 +68,8 @@ struct LifeCalendarReducer: ReducerProtocol {
     
     /// The actions that can be taken on the life calendar.
     enum Action: Equatable {
-        case task
+        /// Indicates that the view has appeared.
+        case onAppear
         /// Indicates that the calendar type has changed.
         case calendarTypeChanged(CalendarType)
         /// Indicates that the life has changed.
@@ -82,7 +83,7 @@ struct LifeCalendarReducer: ReducerProtocol {
     }
     
     @Dependency(\.userSettingsClient) var userSettingsClient
-    private enum BirthdayRequestID {}
+    private enum LifeRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
     
@@ -93,13 +94,17 @@ struct LifeCalendarReducer: ReducerProtocol {
         }
         Reduce { state, action in
             switch action {
-            case .task:
+            case .onAppear:
                 return userSettingsClient
                     .birthdayPublisher
+                    .zip(userSettingsClient.lifeExpectancyPublisher)
                     .receive(on: mainQueue)
                     .eraseToEffect()
-                    .map { Life(birthday: $0, lifeExpectancy: 90) }
+                    .map { birthday, lifeExpectancy in
+                        Life(birthday: birthday, lifeExpectancy: lifeExpectancy)
+                    }
                     .map { Action.lifeChanged($0) }
+                    .cancellable(id: LifeRequestID.self)
                 
             case .calendarTypeChanged(let calendarType):
                 state.calendarType = calendarType

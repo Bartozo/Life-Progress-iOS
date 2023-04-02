@@ -13,10 +13,10 @@ enum UserDefaultsHelper {
     
     /// Keys used to store objects in the user defautlts.
     enum Key: String {
-        case birthday
-        case lifeExpectancy
-        case isWeeklyNotificationEnabled
-        case theme
+        case birthday = "Birthday"
+        case lifeExpectancy = "LifeExpectancy"
+        case isWeeklyNotificationEnabled = "IsWeeklyNotificationEnabled"
+        case theme = "Theme"
     }
     
     
@@ -98,7 +98,28 @@ enum UserDefaultsHelper {
 
 
 extension UserDefaults {
-    @objc dynamic var birthday: Double {
-        return double(forKey: "birthday")
+    
+    @objc dynamic var birthday: NSNumber? {
+        get {
+            if let value = object(forKey: "Birthday") as? NSNumber {
+                return value
+            }
+            return nil
+        }
+        set {
+            set(newValue, forKey: "Birthday")
+        }
+    }
+        
+    @objc dynamic var lifeExpectancy: NSNumber? {
+        get {
+            if let value = object(forKey: "LifeExpectancy") as? NSNumber {
+                return value
+            }
+            return nil
+        }
+        set {
+            set(newValue, forKey: "LifeExpectancy")
+        }
     }
 }

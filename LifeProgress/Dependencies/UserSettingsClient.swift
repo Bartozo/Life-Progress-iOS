@@ -11,32 +11,35 @@ import Combine
 
 /// The `UserSettingsClient` is a struct that provides a set of closures for managing user settings.
 struct UserSettingsClient {
-    /// A closure that returns the user's birthday as a `Date` object.
+    /// A closure that returns the user's birthday.
     var getBirthday: () -> Date
     
-    /// A closure that asynchronously updates the user's birthday with a new `Date` object.
+    /// A closure that asynchronously updates the user's birthday.
     var updateBirthday: @Sendable (Date) async -> Void
     
-    /// A closure that returns the user's life expectancy as an `Int`.
+    /// A closure that returns the user's life expectancy..
     var getLifeExpectancy: () -> Int
     
-    /// A closure that asynchronously updates the user's life expectancy with a new `Int` value.
+    /// A closure that asynchronously updates the user's life expectancy.
     var updateLifeExpectancy: @Sendable (Int) async -> Void
     
-    /// A closure that returns the user's weekly notification setting as a `Bool`.
+    /// A closure that returns the user's weekly notification setting.
     var getIsWeeklyNotificationEnabled: () -> Bool
     
-    /// A closure that asynchronously updates the user's weekly notification setting with a new `Bool` value.
+    /// A closure that asynchronously updates the user's weekly notification setting.
     var updateIsWeeklyNotificationEnabled: @Sendable (Bool) async -> Void
     
-    /// A closure that returns the user's theme as a `Theme` object.
+    /// A closure that returns the user's `Theme`.
     var getTheme: () -> Theme
     
-    /// A closure that asynchronously updates the user's theme with a new `Theme` object.
+    /// A closure that asynchronously updates the user's `Theme`.
     var updateTheme: @Sendable(Theme) async -> Void
     
-    /// A publisher that emits the user's birthday as a `Date` object whenever it changes.
+    /// A publisher that emits the user's birthday whenever it changes.
     var birthdayPublisher: AnyPublisher<Date, Never>
+    
+    /// A publisher that emits the user's life expectancy  whenever it changes.
+    var lifeExpectancyPublisher: AnyPublisher<Int, Never>
 }
 
 // MARK: Dependency Key
@@ -53,16 +56,36 @@ extension UserSettingsClient: DependencyKey {
         updateIsWeeklyNotificationEnabled: { UserDefaultsHelper.saveIsWeeklyNotificationEnabled($0) },
         getTheme: { UserDefaultsHelper.getTheme() },
         updateTheme: { UserDefaultsHelper.saveTheme($0) },
-        birthdayPublisher: makeBirthdayPublisher()
+        birthdayPublisher: makeBirthdayPublisher(),
+        lifeExpectancyPublisher: makeLifeExpectancyPublisher()
     )
     
-    /// Creates a birthday publisher that emits the user's birthday as a `Date` object whenever it changes.
+    /// Creates a publisher that emits the user's birthday whenever it changes.
     ///
     /// - Returns: A publisher of type `AnyPublisher<Date, Never>`.
     private static func makeBirthdayPublisher() -> AnyPublisher<Date, Never> {
         return UserDefaultsHelper.defaults.publisher(for: \.birthday)
-            .map {
-                Date(timeIntervalSince1970: $0)
+            .map { value in
+                guard let birthday = value?.doubleValue else {
+                    return Life.mock.birthday
+                }
+                
+                return Date(timeIntervalSince1970: birthday)
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    /// Creates a publisher that emits the user's life expectancy whenever it changes.
+    ///
+    /// - Returns: A publisher of type `AnyPublisher<Int, Never>`.
+    private static func makeLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
+        return UserDefaultsHelper.defaults.publisher(for: \.lifeExpectancy)
+            .map { value in
+                guard let lifeExpectancy = value?.intValue else {
+                    return Life.mock.lifeExpectancy
+                }
+                
+                return lifeExpectancy
             }
             .eraseToAnyPublisher()
     }
@@ -81,7 +104,8 @@ extension UserSettingsClient: TestDependencyKey {
         updateIsWeeklyNotificationEnabled: { _ in },
         getTheme: { Theme.blue },
         updateTheme: { _ in },
-        birthdayPublisher: makeTestBirthdayPublisher()
+        birthdayPublisher: makeTestBirthdayPublisher(),
+        lifeExpectancyPublisher: makeTestLifeExpectancyPublisher()
     )
 
     /// A test instance of `UserSettingsClient` with mock data for unit testing purposes.
@@ -94,14 +118,22 @@ extension UserSettingsClient: TestDependencyKey {
         updateIsWeeklyNotificationEnabled: { _ in },
         getTheme: { Theme.blue },
         updateTheme: { _ in },
-        birthdayPublisher: makeTestBirthdayPublisher()
+        birthdayPublisher: makeTestBirthdayPublisher(),
+        lifeExpectancyPublisher: makeTestLifeExpectancyPublisher()
     )
     
-    /// Creates a test birthday publisher that emits a constant mock birthday as a `Date` object.
+    /// Creates a test publisher that emits a constant mock birthday.
     ///
     /// - Returns: A publisher of type `AnyPublisher<Date, Never>`.
     private static func makeTestBirthdayPublisher() -> AnyPublisher<Date, Never> {
         return Just(Life.mock.birthday).eraseToAnyPublisher()
+    }
+    
+    /// Creates a test publisher that emits a constant mock life expectancy.
+    ///
+    /// - Returns: A publisher of type `AnyPublisher<Int, Never>`.
+    private static func makeTestLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
+        return Just(Life.mock.lifeExpectancy).eraseToAnyPublisher()
     }
 }
 
