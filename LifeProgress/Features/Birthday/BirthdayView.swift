@@ -47,7 +47,7 @@ struct BirthdayView: View {
                     "",
                     selection: viewStore.binding(
                         get: \.birthday,
-                        send: BirthdayReducer.Action.birthdayChanged
+                        send: BirthdayReducer.Action.changeBirthdayTapped
                     ),
                     displayedComponents: .date
                 )

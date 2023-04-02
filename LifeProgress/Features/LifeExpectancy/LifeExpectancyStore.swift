@@ -15,8 +15,6 @@ typealias LifeExpectancyStore = Store<LifeExpectancyReducer.State, LifeExpectanc
 /// A reducer that manages the state of the life expectancy.
 struct LifeExpectancyReducer: ReducerProtocol {
     
-    @Dependency(\.userClient) var userClient: UserClient
-    
     /// The state of the birthday.
     struct State: Equatable {
         /// The user's life expectancy.
@@ -28,6 +26,8 @@ struct LifeExpectancyReducer: ReducerProtocol {
     
     /// The actions that can be taken on the life expectancy.
     enum Action: Equatable {
+        /// Indicates that user has ended using slider.
+        case lifeExpectancySelectionEnded(Double)
         /// Indicates that the life expectancy value has changed.
         case lifeExpectancyChanged(Double)
         /// Indicates that the slider visible status has changed.
@@ -36,13 +36,22 @@ struct LifeExpectancyReducer: ReducerProtocol {
         case onAppear
     }
     
+    @Dependency(\.userSettingsClient) var userSettingsClient
+    private enum LifeExpectancyRequestID {}
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
+            case .lifeExpectancySelectionEnded(let sliderValue):
+                return .run { send in
+                    await userSettingsClient.updateLifeExpectancy(Int(sliderValue))
+                    await send(.lifeExpectancyChanged(sliderValue))
+                }
+                .cancellable(id: LifeExpectancyRequestID.self)
+                
             case .lifeExpectancyChanged(let lifeExpectancy):
                 state.lifeExpectancy = Int(lifeExpectancy)
-                UserDefaultsHelper.saveLifeExpectancy(Int(lifeExpectancy))
                 return .none
                 
             case .isSliderVisibleChanged:

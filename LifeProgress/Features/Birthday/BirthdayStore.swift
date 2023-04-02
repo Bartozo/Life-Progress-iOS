@@ -25,6 +25,8 @@ struct BirthdayReducer: ReducerProtocol {
     
     /// The actions that can be taken on the birthday.
     enum Action: Equatable {
+        /// Indicates that the date picker was tapped.
+        case changeBirthdayTapped(Date)
         /// Indicates that the birthday date has changed.
         case birthdayChanged(Date)
         /// Indicates that the date picker visible status has changed.
@@ -33,13 +35,22 @@ struct BirthdayReducer: ReducerProtocol {
         case onAppear
     }
     
+    @Dependency(\.userSettingsClient) var userSettingsClient
+    private enum BirthdayRequestID {}
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
+            case .changeBirthdayTapped(let birthday):
+                return .run { send in
+                    await userSettingsClient.updateBirthday(birthday)
+                    await send(.birthdayChanged(birthday))
+                }
+                .cancellable(id: BirthdayRequestID.self)
+                
             case .birthdayChanged(let birthday):
                 state.birthday = birthday
-                UserDefaultsHelper.saveBirthday(birthday)
                 return .none
                 
             case .isDatePickerVisibleChanged:
@@ -47,7 +58,7 @@ struct BirthdayReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                state.birthday = UserDefaultsHelper.getBirthday()
+                state.birthday = userSettingsClient.getBirthday()
                 return .none
             }
         }

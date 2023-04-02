@@ -50,7 +50,12 @@ struct LifeExpectancyView: View {
                     get: { Double($0.lifeExpectancy) },
                     send: LifeExpectancyReducer.Action.lifeExpectancyChanged
                   ),
-                  in: 0...150
+                  in: 0...150,
+                  onEditingChanged: { editing in
+                      guard !editing else { return }
+                      
+                      viewStore.send(.lifeExpectancySelectionEnded(Double(viewStore.lifeExpectancy)))
+                  }
                 )
                 .tint(theme.color)
             }

@@ -17,7 +17,7 @@ struct ThemeView: View {
                 "Color",
                 selection: viewStore.binding(
                     get: { $0.selectedTheme },
-                    send: ThemeReducer.Action.themeChanged
+                    send: ThemeReducer.Action.changeThemeTapped
                 )
             ) {
                 ForEach(viewStore.themes, id: \.self) { theme in

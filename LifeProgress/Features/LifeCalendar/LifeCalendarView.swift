@@ -8,14 +8,61 @@
 import SwiftUI
 import ComposableArchitecture
 
+import UIKit
+
 struct LifeCalendarView: View {
     
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     
     let store: LifeCalendarStore
-    @State private var isHelpSheetVisible = false
     
     var body: some View {
+        WithViewStore(self.store) { viewStore in
+            calendarContent
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Picker(
+                        "",
+                        selection: viewStore.binding(
+                            get: \.calendarType,
+                            send: LifeCalendarReducer.Action.calendarTypeChanged
+                        )
+                    ) {
+                        ForEach(CalendarType.allCases, id: \.self) { calendarType in
+                            Text(calendarType.title)
+                                .tag(calendarType)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .scaledToFit()
+                }
+            }
+            .navigationTitle("Life Calendar")
+            .toolbar {
+                  ToolbarItem(placement: .navigationBarTrailing) {
+                      Button(action: {
+                          viewStore.send(.showAboutTheCalendarSheet)
+                      }) {
+                          Image(systemName: "questionmark.circle")
+                      }
+                  }
+              }
+            .sheet(isPresented: viewStore.binding(
+                get: \.isAboutTheCalendarSheetVisible,
+                send: LifeCalendarReducer.Action.closeAboutTheCalendarSheet
+            )) {
+                AboutTheAppView(
+                    store: self.store.scope(
+                        state: \.aboutTheApp,
+                        action: LifeCalendarReducer.Action.aboutTheApp
+                    )
+                )
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var calendarContent: some View {        
         if verticalSizeClass == .regular {
             calendar
         } else {
@@ -47,19 +94,9 @@ struct LifeCalendarView: View {
                     calendarType == .currentYear ? .life : .currentYear)
                 )
             }
-        }
-        .navigationTitle("Life Calendar")
-        .toolbar {
-              ToolbarItem(placement: .navigationBarTrailing) {
-                  Button(action: {
-                      isHelpSheetVisible = true
-                  }) {
-                      Image(systemName: "questionmark.circle")
-                  }
-              }
-          }
-        .sheet(isPresented: $isHelpSheetVisible) {
-            AboutLifeCalendarView(store: self.store)
+            .onAppear {
+                viewStore.send(.task)
+            }
         }
     }
 }

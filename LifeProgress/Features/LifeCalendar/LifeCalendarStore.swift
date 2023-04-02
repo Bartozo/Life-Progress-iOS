@@ -10,9 +10,18 @@ import ComposableArchitecture
 
 /// An enumeration representing the two possible types of calendars:
 ///  one for the current year, and one for the entire life.
-enum CalendarType: Equatable {
-    case currentYear
+enum CalendarType: Equatable, CaseIterable {
     case life
+    case currentYear
+    
+    var title: String {
+        switch self {
+        case .life:
+            return "Life"
+        case .currentYear:
+            return "Year"
+        }
+    }
 }
  
 /// A type alias for a store of the `LifeCalendarReducer`'s state and action types.
@@ -26,8 +35,10 @@ struct LifeCalendarReducer: ReducerProtocol {
     /// The state of the life calendar.
     struct State: Equatable {
         let currentYearModeColumnCount = 6
+        
         /// The current type of calendar.
         var calendarType: CalendarType = .life
+        
         /// The user's life information.
         var life: Life = Life(
             birthday: Calendar.current.date(
@@ -37,20 +48,75 @@ struct LifeCalendarReducer: ReducerProtocol {
             )!,
             lifeExpectancy: 90
         )
+        
+        /// Whether the about calendar sheet is visible.
+        var isAboutTheCalendarSheetVisible = false
+        
+        /// The about the app state.
+        var aboutTheApp: AboutTheAppReducer.State {
+            get {
+                AboutTheAppReducer.State(
+                    life: self.life,
+                    isAboutTheCalendarSheetVisible: self.isAboutTheCalendarSheetVisible
+                )
+            }
+            set {
+                self.isAboutTheCalendarSheetVisible = newValue.isAboutTheCalendarSheetVisible
+            }
+        }
     }
     
     /// The actions that can be taken on the life calendar.
     enum Action: Equatable {
+        case task
         /// Indicates that the calendar type has changed.
         case calendarTypeChanged(CalendarType)
+        /// Indicates that the life has changed.
+        case lifeChanged(Life)
+        /// Indicates that is about the app sheet should be visible.
+        case showAboutTheCalendarSheet
+        /// Indicates that is about the app sheet should be hidden.
+        case closeAboutTheCalendarSheet
+        /// The actions that can be taken on the about the app.
+        case aboutTheApp(AboutTheAppReducer.Action)
     }
+    
+    @Dependency(\.userSettingsClient) var userSettingsClient
+    private enum BirthdayRequestID {}
+    
+    @Dependency(\.mainQueue) var mainQueue
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
+        Scope(state: \.aboutTheApp, action: /Action.aboutTheApp) {
+            AboutTheAppReducer()
+        }
         Reduce { state, action in
             switch action {
+            case .task:
+                return userSettingsClient
+                    .birthdayPublisher
+                    .receive(on: mainQueue)
+                    .eraseToEffect()
+                    .map { Life(birthday: $0, lifeExpectancy: 90) }
+                    .map { Action.lifeChanged($0) }
+                
             case .calendarTypeChanged(let calendarType):
                 state.calendarType = calendarType
+                return .none
+                
+            case .lifeChanged(let life):
+                state.life = life
+                return .none
+                
+            case .showAboutTheCalendarSheet:
+                state.isAboutTheCalendarSheetVisible = true
+                return .none
+                
+            case .closeAboutTheCalendarSheet:
+                state.isAboutTheCalendarSheetVisible = false
+                return .none
+            case .aboutTheApp:
                 return .none
             }
         }

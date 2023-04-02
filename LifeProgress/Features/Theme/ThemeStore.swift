@@ -26,23 +26,34 @@ struct ThemeReducer: ReducerProtocol {
     
     /// The actions that can be taken on the theme.
     enum Action: Equatable {
+        /// Indicates that the theme picker was tapped.
+        case changeThemeTapped(Theme)
         /// Indicates that the theme has changed.
         case themeChanged(Theme)
         /// Indicates that the view has appeared.
         case onAppear
     }
     
+    @Dependency(\.userSettingsClient) var userSettingsClient
+    private enum ThemeRequestID {}
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
+            case .changeThemeTapped(let theme):
+                return .run { send in
+                    await userSettingsClient.updateTheme(theme)
+                    await send(.themeChanged(theme))
+                }
+                .cancellable(id: ThemeRequestID.self)
+                
             case .themeChanged(let theme):
                 state.selectedTheme = theme
-                UserDefaultsHelper.saveTheme(theme)
                 return .none
                 
             case .onAppear:
-                state.selectedTheme = UserDefaultsHelper.getTheme()
+                state.selectedTheme = userSettingsClient.getTheme()
                 return .none
             }
         }
