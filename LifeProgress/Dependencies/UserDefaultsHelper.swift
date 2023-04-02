@@ -20,7 +20,7 @@ enum UserDefaultsHelper {
     }
     
     
-    static private let defaults = UserDefaults(suiteName: "test") ?? .standard
+    static let defaults = UserDefaults(suiteName: "test") ?? .standard
 
 
     // MARK: - Static methods
@@ -70,8 +70,6 @@ enum UserDefaultsHelper {
             let theme = Theme(rawValue: data) else {
             return Theme.Key.defaultValue
         }
-        
-        print("stored theme \(theme)")
 
         return theme
     }
@@ -95,5 +93,12 @@ enum UserDefaultsHelper {
     /// Saves user's theme to the user defaults.
     static func saveTheme(_ theme: Theme) {
         defaults.set(theme.rawValue, forKey: UserDefaultsHelper.Key.theme.rawValue)
+    }
+}
+
+
+extension UserDefaults {
+    @objc dynamic var birthday: Double {
+        return double(forKey: "birthday")
     }
 }
