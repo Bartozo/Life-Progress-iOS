@@ -20,33 +20,30 @@ enum UserDefaultsHelper {
     }
     
     
-    static let defaults = UserDefaults(suiteName: "test") ?? .standard
+    static let store = NSUbiquitousKeyValueStore.default
 
 
     // MARK: - Static methods
     
-    /// Removes everything from the user defaults.
+    /// Removes everything from the NSUbiquitousKeyValueStore.
     static func clear() {
-        guard let domainName = Bundle.main.bundleIdentifier else {
-            return
+        for key in store.dictionaryRepresentation.keys {
+            store.removeObject(forKey: key)
         }
-        
-        defaults.removePersistentDomain(forName: domainName)
-        defaults.synchronize()
     }
     
-    /// Returns life expectancy stored in the user defaults.
+    /// Returns life expectancy stored in the NSUbiquitousKeyValueStore.
     static func getLifeExpectancy() -> Int {
-        guard let lifeExpectancy = defaults.object(forKey: UserDefaultsHelper.Key.lifeExpectancy.rawValue) as? Int else {
+        guard let lifeExpectancy = store.object(forKey: Key.lifeExpectancy.rawValue) as? Int else {
             return Life.mock.lifeExpectancy
         }
         
         return lifeExpectancy
     }
     
-    /// Returns user's birthday stored in the user defaults.
+    /// Returns user's birthday stored in the NSUbiquitousKeyValueStore.
     static func getBirthday() -> Date {
-        guard let data = defaults.object(forKey: UserDefaultsHelper.Key.birthday.rawValue) as? Double else {
+        guard let data = store.object(forKey: Key.birthday.rawValue) as? Double else {
             return Life.mock.birthday
         }
         
@@ -54,19 +51,19 @@ enum UserDefaultsHelper {
         return birthday
     }
     
-    /// Returns is weekly notification enabled flag stored in the user defaults.
+    /// Returns is weekly notification enabled flag stored in the NSUbiquitousKeyValueStore.
     static func getIsWeeklyNotificationEnabled() -> Bool {
-        guard let isWeeklyNotificationEnabled = defaults.object(forKey: UserDefaultsHelper.Key.isWeeklyNotificationEnabled.rawValue) as? Bool else {
+        guard let isWeeklyNotificationEnabled = store.object(forKey: Key.isWeeklyNotificationEnabled.rawValue) as? Bool else {
             return false
         }
         
         return isWeeklyNotificationEnabled
     }
     
-    /// Returns user's theme stored in the user defaults.
+    /// Returns user's theme stored in the NSUbiquitousKeyValueStore.
     static func getTheme() -> Theme {
         guard
-            let data = defaults.string(forKey: UserDefaultsHelper.Key.theme.rawValue),
+            let data = store.string(forKey: Key.theme.rawValue),
             let theme = Theme(rawValue: data) else {
             return Theme.Key.defaultValue
         }
@@ -75,51 +72,23 @@ enum UserDefaultsHelper {
     }
 
     
-    /// Saves life expectancy to the user defaults.
+    /// Saves life expectancy to the NSUbiquitousKeyValueStore.
     static func saveLifeExpectancy(_ lifeExpectancy: Int) {
-        defaults.set(lifeExpectancy, forKey: UserDefaultsHelper.Key.lifeExpectancy.rawValue)
+        store.set(lifeExpectancy, forKey: Key.lifeExpectancy.rawValue)
     }
     
-    /// Saves user's birthday to the user defaults.
+    /// Saves user's birthday to the NSUbiquitousKeyValueStore.
     static func saveBirthday(_ birthday: Date) {
-        defaults.set(birthday.timeIntervalSince1970, forKey: UserDefaultsHelper.Key.birthday.rawValue)
+        store.set(birthday.timeIntervalSince1970, forKey: Key.birthday.rawValue)
     }
     
-    /// Saves is weekly notification enabled flag to the user defaults.
+    /// Saves is weekly notification enabled flag to the NSUbiquitousKeyValueStore.
     static func saveIsWeeklyNotificationEnabled(_ isWeeklyNotificationEnabled: Bool) {
-        defaults.set(isWeeklyNotificationEnabled, forKey: UserDefaultsHelper.Key.isWeeklyNotificationEnabled.rawValue)
+        store.set(isWeeklyNotificationEnabled, forKey: Key.isWeeklyNotificationEnabled.rawValue)
     }
     
-    /// Saves user's theme to the user defaults.
+    /// Saves user's theme to the NSUbiquitousKeyValueStore.
     static func saveTheme(_ theme: Theme) {
-        defaults.set(theme.rawValue, forKey: UserDefaultsHelper.Key.theme.rawValue)
-    }
-}
-
-
-extension UserDefaults {
-    
-    @objc dynamic var birthday: NSNumber? {
-        get {
-            if let value = object(forKey: "Birthday") as? NSNumber {
-                return value
-            }
-            return nil
-        }
-        set {
-            set(newValue, forKey: "Birthday")
-        }
-    }
-        
-    @objc dynamic var lifeExpectancy: NSNumber? {
-        get {
-            if let value = object(forKey: "LifeExpectancy") as? NSNumber {
-                return value
-            }
-            return nil
-        }
-        set {
-            set(newValue, forKey: "LifeExpectancy")
-        }
+        store.set(theme.rawValue, forKey: Key.theme.rawValue)
     }
 }

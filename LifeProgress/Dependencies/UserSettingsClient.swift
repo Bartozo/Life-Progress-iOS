@@ -64,30 +64,14 @@ extension UserSettingsClient: DependencyKey {
     ///
     /// - Returns: A publisher of type `AnyPublisher<Date, Never>`.
     private static func makeBirthdayPublisher() -> AnyPublisher<Date, Never> {
-        return UserDefaultsHelper.defaults.publisher(for: \.birthday)
-            .map { value in
-                guard let birthday = value?.doubleValue else {
-                    return Life.mock.birthday
-                }
-                
-                return Date(timeIntervalSince1970: birthday)
-            }
-            .eraseToAnyPublisher()
+        return NSUbiquitousKeyValueStoreHelper.makeBirthdayPublisher()
     }
     
     /// Creates a publisher that emits the user's life expectancy whenever it changes.
     ///
     /// - Returns: A publisher of type `AnyPublisher<Int, Never>`.
     private static func makeLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
-        return UserDefaultsHelper.defaults.publisher(for: \.lifeExpectancy)
-            .map { value in
-                guard let lifeExpectancy = value?.intValue else {
-                    return Life.mock.lifeExpectancy
-                }
-                
-                return lifeExpectancy
-            }
-            .eraseToAnyPublisher()
+        return NSUbiquitousKeyValueStoreHelper.makeLifeExpectancyPublisher()
     }
 }
 

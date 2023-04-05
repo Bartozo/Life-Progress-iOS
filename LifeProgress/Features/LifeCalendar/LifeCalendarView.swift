@@ -8,8 +8,6 @@
 import SwiftUI
 import ComposableArchitecture
 
-import UIKit
-
 struct LifeCalendarView: View {
     
     @Environment(\.verticalSizeClass) private var verticalSizeClass
