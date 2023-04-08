@@ -18,7 +18,7 @@ struct ThemeReducer: ReducerProtocol {
     /// The state of the theme.
     struct State: Equatable {
         /// The user's selected theme.
-        var selectedTheme = UserDefaultsHelper.getTheme()
+        var selectedTheme = NSUbiquitousKeyValueStoreHelper.getTheme()
         
         /// A list of themes available in the app.
         var themes = Theme.allCases

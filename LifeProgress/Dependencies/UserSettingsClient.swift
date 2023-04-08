@@ -51,14 +51,14 @@ extension UserSettingsClient: DependencyKey {
     
     /// A live value of `UserSettingsClient` that uses the `UserDefaultsHelper` for managing user settings.
     static let liveValue = Self(
-        getBirthday: { UserDefaultsHelper.getBirthday() },
-        updateBirthday: { UserDefaultsHelper.saveBirthday($0) },
-        getLifeExpectancy: { UserDefaultsHelper.getLifeExpectancy() },
-        updateLifeExpectancy: { UserDefaultsHelper.saveLifeExpectancy($0) },
-        getIsWeeklyNotificationEnabled: { UserDefaultsHelper.getIsWeeklyNotificationEnabled() },
-        updateIsWeeklyNotificationEnabled: { UserDefaultsHelper.saveIsWeeklyNotificationEnabled($0) },
-        getTheme: { UserDefaultsHelper.getTheme() },
-        updateTheme: { UserDefaultsHelper.saveTheme($0) },
+        getBirthday: { NSUbiquitousKeyValueStoreHelper.getBirthday() },
+        updateBirthday: { NSUbiquitousKeyValueStoreHelper.saveBirthday($0) },
+        getLifeExpectancy: { NSUbiquitousKeyValueStoreHelper.getLifeExpectancy() },
+        updateLifeExpectancy: { NSUbiquitousKeyValueStoreHelper.saveLifeExpectancy($0) },
+        getIsWeeklyNotificationEnabled: { NSUbiquitousKeyValueStoreHelper.getIsWeeklyNotificationEnabled() },
+        updateIsWeeklyNotificationEnabled: { NSUbiquitousKeyValueStoreHelper.saveIsWeeklyNotificationEnabled($0) },
+        getTheme: { NSUbiquitousKeyValueStoreHelper.getTheme() },
+        updateTheme: { NSUbiquitousKeyValueStoreHelper.saveTheme($0) },
         birthdayPublisher: makeBirthdayPublisher(),
         lifeExpectancyPublisher: makeLifeExpectancyPublisher(),
         themePublisher: makeThemePublisher()

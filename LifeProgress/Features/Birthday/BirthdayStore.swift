@@ -17,7 +17,7 @@ struct BirthdayReducer: ReducerProtocol {
     /// The state of the birthday.
     struct State: Equatable {
         /// The user's birthday.
-        var birthday: Date = UserDefaultsHelper.getBirthday()
+        var birthday: Date = NSUbiquitousKeyValueStoreHelper.getBirthday()
 
         /// Whether the date picker is visible.
         var isDatePickerVisible = false

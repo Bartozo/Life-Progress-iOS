@@ -18,7 +18,7 @@ struct LifeExpectancyReducer: ReducerProtocol {
     /// The state of the birthday.
     struct State: Equatable {
         /// The user's life expectancy.
-        var lifeExpectancy: Int = UserDefaultsHelper.getLifeExpectancy()
+        var lifeExpectancy: Int = NSUbiquitousKeyValueStoreHelper.getLifeExpectancy()
         
         /// Whether the slider is visible.
         var isSliderVisible = false
