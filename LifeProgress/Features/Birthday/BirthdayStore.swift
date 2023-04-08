@@ -38,6 +38,8 @@ struct BirthdayReducer: ReducerProtocol {
     @Dependency(\.userSettingsClient) var userSettingsClient
     private enum BirthdayRequestID {}
     
+    @Dependency(\.mainQueue) var mainQueue
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -58,8 +60,12 @@ struct BirthdayReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                state.birthday = userSettingsClient.getBirthday()
-                return .none
+                return userSettingsClient
+                    .birthdayPublisher
+                    .receive(on: mainQueue)
+                    .eraseToEffect()
+                    .map { Action.birthdayChanged($0) }
+                    .cancellable(id: BirthdayRequestID.self)
             }
         }
     }

@@ -20,9 +20,6 @@ enum NSUbiquitousKeyValueStoreHelper {
         case theme = "Theme"
     }
     
-    private static var birthdaySubject = PassthroughSubject<Date, Never>()
-    private static var lifeExpectancySubject = PassthroughSubject<Int, Never>()
-    
     static let keyValueStore = NSUbiquitousKeyValueStore.default
 
 
@@ -105,14 +102,24 @@ enum NSUbiquitousKeyValueStoreHelper {
     ///
     /// - Returns: A publisher of type `AnyPublisher<Date, Never>`.
     static func makeBirthdayPublisher() -> AnyPublisher<Date, Never> {
-        keyValueStore.publisher(for: \.birthday)
+        let externalPublisher = NotificationCenter.default
+            .publisher(for: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
+            .map { _ in getBirthday() }
+            .eraseToAnyPublisher()
+
+        let internalPublisher = keyValueStore
+            .publisher(for: \.birthday)
             .map { value in
                 guard let birthday = value?.doubleValue else {
                     return Life.mock.birthday
                 }
-                
+
                 return Date(timeIntervalSince1970: birthday)
             }
+            .eraseToAnyPublisher()
+        
+        return Publishers.Merge(externalPublisher, internalPublisher)
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
@@ -121,7 +128,13 @@ enum NSUbiquitousKeyValueStoreHelper {
     ///
     /// - Returns: A publisher of type `AnyPublisher<Int, Never>`.
     static func makeLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
-        keyValueStore.publisher(for: \.lifeExpectancy)
+        let externalPublisher = NotificationCenter.default
+            .publisher(for: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
+            .map { _ in getLifeExpectancy() }
+            .eraseToAnyPublisher()
+
+        let internalPublisher = keyValueStore
+            .publisher(for: \.lifeExpectancy)
             .map { value in
                 guard let lifeExpectancy = value as? Int else {
                     return Life.mock.lifeExpectancy
@@ -129,6 +142,38 @@ enum NSUbiquitousKeyValueStoreHelper {
                 
                 return lifeExpectancy
             }
+            .eraseToAnyPublisher()
+        
+        return Publishers.Merge(externalPublisher, internalPublisher)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+    
+    /// Creates a publisher that emits the user's theme whenever it changes in the NSUbiquitousKeyValueStore.
+    ///
+    /// - Returns: A publisher of type `AnyPublisher<Theme, Never>`.
+    static func makeThemePublisher() -> AnyPublisher<Theme, Never> {
+        let externalPublisher = NotificationCenter.default
+            .publisher(for: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
+            .map { _ in getTheme() }
+            .eraseToAnyPublisher()
+
+        let internalPublisher = keyValueStore
+            .publisher(for: \.theme)
+            .map { value in
+                guard
+                    let data = value as? String,
+                    let theme = Theme.init(rawValue: data)
+                else {
+                    return Theme.Key.defaultValue
+                }
+                
+                return theme
+            }
+            .eraseToAnyPublisher()
+        
+        return Publishers.Merge(externalPublisher, internalPublisher)
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 }

@@ -40,6 +40,9 @@ struct UserSettingsClient {
     
     /// A publisher that emits the user's life expectancy  whenever it changes.
     var lifeExpectancyPublisher: AnyPublisher<Int, Never>
+    
+    /// A publisher that emits the user's theme whenever it changes.
+    var themePublisher: AnyPublisher<Theme, Never>
 }
 
 // MARK: Dependency Key
@@ -57,7 +60,8 @@ extension UserSettingsClient: DependencyKey {
         getTheme: { UserDefaultsHelper.getTheme() },
         updateTheme: { UserDefaultsHelper.saveTheme($0) },
         birthdayPublisher: makeBirthdayPublisher(),
-        lifeExpectancyPublisher: makeLifeExpectancyPublisher()
+        lifeExpectancyPublisher: makeLifeExpectancyPublisher(),
+        themePublisher: makeThemePublisher()
     )
     
     /// Creates a publisher that emits the user's birthday whenever it changes.
@@ -72,6 +76,13 @@ extension UserSettingsClient: DependencyKey {
     /// - Returns: A publisher of type `AnyPublisher<Int, Never>`.
     private static func makeLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
         return NSUbiquitousKeyValueStoreHelper.makeLifeExpectancyPublisher()
+    }
+    
+    /// Creates a publisher that emits the user's theme whenever it changes.
+    ///
+    /// - Returns: A publisher of type `AnyPublisher<Theme, Never>`.
+    private static func makeThemePublisher() -> AnyPublisher<Theme, Never> {
+        return NSUbiquitousKeyValueStoreHelper.makeThemePublisher()
     }
 }
 
@@ -89,7 +100,8 @@ extension UserSettingsClient: TestDependencyKey {
         getTheme: { Theme.blue },
         updateTheme: { _ in },
         birthdayPublisher: makeTestBirthdayPublisher(),
-        lifeExpectancyPublisher: makeTestLifeExpectancyPublisher()
+        lifeExpectancyPublisher: makeTestLifeExpectancyPublisher(),
+        themePublisher: makeThemePublisher()
     )
 
     /// A test instance of `UserSettingsClient` with mock data for unit testing purposes.
@@ -103,7 +115,8 @@ extension UserSettingsClient: TestDependencyKey {
         getTheme: { Theme.blue },
         updateTheme: { _ in },
         birthdayPublisher: makeTestBirthdayPublisher(),
-        lifeExpectancyPublisher: makeTestLifeExpectancyPublisher()
+        lifeExpectancyPublisher: makeTestLifeExpectancyPublisher(),
+        themePublisher: makeThemePublisher()
     )
     
     /// Creates a test publisher that emits a constant mock birthday.
@@ -118,6 +131,13 @@ extension UserSettingsClient: TestDependencyKey {
     /// - Returns: A publisher of type `AnyPublisher<Int, Never>`.
     private static func makeTestLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
         return Just(Life.mock.lifeExpectancy).eraseToAnyPublisher()
+    }
+    
+    /// Creates a test publisher that emits a constant mock theme.
+    ///
+    /// - Returns: A publisher of type `AnyPublisher<Theme, Never>`.
+    private static func makeTestThemePublisher() -> AnyPublisher<Theme, Never> {
+        return Just(Theme.Key.defaultValue).eraseToAnyPublisher()
     }
 }
 

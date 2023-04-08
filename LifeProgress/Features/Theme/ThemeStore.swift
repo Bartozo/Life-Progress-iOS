@@ -37,6 +37,8 @@ struct ThemeReducer: ReducerProtocol {
     @Dependency(\.userSettingsClient) var userSettingsClient
     private enum ThemeRequestID {}
     
+    @Dependency(\.mainQueue) var mainQueue
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -53,8 +55,12 @@ struct ThemeReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                state.selectedTheme = userSettingsClient.getTheme()
-                return .none
+                return userSettingsClient
+                    .themePublisher
+                    .receive(on: mainQueue)
+                    .eraseToEffect()
+                    .map { Action.themeChanged($0) }
+                    .cancellable(id: ThemeRequestID.self)
             }
         }
     }

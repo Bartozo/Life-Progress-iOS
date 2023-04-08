@@ -39,6 +39,8 @@ struct LifeExpectancyReducer: ReducerProtocol {
     @Dependency(\.userSettingsClient) var userSettingsClient
     private enum LifeExpectancyRequestID {}
     
+    @Dependency(\.mainQueue) var mainQueue
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -59,11 +61,14 @@ struct LifeExpectancyReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                state.lifeExpectancy = UserDefaultsHelper.getLifeExpectancy()
-                return .none
+                return userSettingsClient
+                    .lifeExpectancyPublisher
+                    .receive(on: mainQueue)
+                    .eraseToEffect()
+                    .map { Action.lifeExpectancyChanged(Double($0)) }
+                    .cancellable(id: LifeExpectancyRequestID.self)
             }
         }
     }
-
 }
 
