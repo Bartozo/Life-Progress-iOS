@@ -7,6 +7,7 @@
 
 import Foundation
 import ComposableArchitecture
+import WidgetKit
 
 /// An enumeration representing the two possible types of calendars:
 ///  one for the current year, and one for the entire life.
@@ -101,7 +102,7 @@ struct LifeCalendarReducer: ReducerProtocol {
                     .receive(on: mainQueue)
                     .eraseToEffect()
                     .map { birthday, lifeExpectancy in
-                        Life(birthday: birthday, lifeExpectancy: lifeExpectancy)
+                        return Life(birthday: birthday, lifeExpectancy: lifeExpectancy)
                     }
                     .map { Action.lifeChanged($0) }
                     .cancellable(id: LifeRequestID.self)

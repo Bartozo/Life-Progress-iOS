@@ -27,6 +27,25 @@
 		9D7CCA7F29DCA04D008CA928 /* NSUbiquitousKeyValueStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CCA7E29DCA04D008CA928 /* NSUbiquitousKeyValueStore+Extension.swift */; };
 		9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CE5C229BFA45900B57F90 /* LifeExpectancyStore.swift */; };
 		9D7CE5C529BFA5ED00B57F90 /* LifeExpectancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CE5C429BFA5ED00B57F90 /* LifeExpectancyView.swift */; };
+		9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8229E3174600841A47 /* LifeProgressWidget.swift */; };
+		9D869C8529E3175000841A47 /* YearProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8429E3175000841A47 /* YearProgressWidget.swift */; };
+		9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
+		9D869C8E29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
+		9DA378D029E19B9000074F01 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA378CF29E19B9000074F01 /* WidgetKit.framework */; };
+		9DA378D229E19B9000074F01 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA378D129E19B9000074F01 /* SwiftUI.framework */; };
+		9DA378D529E19B9000074F01 /* LifeProgressWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA378D429E19B9000074F01 /* LifeProgressWidgetBundle.swift */; };
+		9DA378D929E19B9100074F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA378D829E19B9100074F01 /* Assets.xcassets */; };
+		9DA378DD29E19B9100074F01 /* LifeProgressWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9DA378E229E1A1E400074F01 /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7082A829B8D34900846F55 /* Life.swift */; };
+		9DA378E329E1A70E00074F01 /* UserSettingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */; };
+		9DA378E529E1AA5000074F01 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA378E429E1AA5000074F01 /* Date+Extension.swift */; };
+		9DA378E629E1AA7200074F01 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA378E429E1AA5000074F01 /* Date+Extension.swift */; };
+		9DA378E729E1AC4B00074F01 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A229C4FBB400E2A4FA /* Theme.swift */; };
+		9DA378E929E1AC6F00074F01 /* NSUbiquitousKeyValueStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CCA7E29DCA04D008CA928 /* NSUbiquitousKeyValueStore+Extension.swift */; };
+		9DA378EA29E1AC7000074F01 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CCA7C29DC7BBF008CA928 /* NSUbiquitousKeyValueStoreHelper.swift */; };
+		9DA378EC29E1B11D00074F01 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 9DA378EB29E1B11D00074F01 /* ComposableArchitecture */; };
+		9DA378F029E1C2DE00074F01 /* SimplifiedLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */; };
+		9DA378F129E1C39800074F01 /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */; };
 		9DACC2D529D34EDF00AA48CE /* LifeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACC2D429D34EDF00AA48CE /* LifeProgressView.swift */; };
 		9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11729C216A300265C2E /* ThemeStore.swift */; };
 		9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11929C216B800265C2E /* ThemeView.swift */; };
@@ -39,7 +58,6 @@
 		9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */; };
 		9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */; };
 		9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */; };
-		9DD4956029C76C5F004001D9 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4955F29C76C5F004001D9 /* UserDefaultsHelper.swift */; };
 		9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720F829BFB35C00634AB2 /* ProfileView.swift */; };
 		9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */; };
 		9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */; };
@@ -67,7 +85,28 @@
 			remoteGlobalIDString = 9D70827429B8D1A000846F55;
 			remoteInfo = LifeProgress;
 		};
+		9DA378DB29E19B9100074F01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D70826D29B8D1A000846F55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DA378CC29E19B9000074F01;
+			remoteInfo = LifeProgressWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9DA378DE29E19B9200074F01 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9DA378DD29E19B9100074F01 /* LifeProgressWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsClient.swift; sourceTree = "<group>"; };
@@ -92,6 +131,17 @@
 		9D7CCA7E29DCA04D008CA928 /* NSUbiquitousKeyValueStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUbiquitousKeyValueStore+Extension.swift"; sourceTree = "<group>"; };
 		9D7CE5C229BFA45900B57F90 /* LifeExpectancyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeExpectancyStore.swift; sourceTree = "<group>"; };
 		9D7CE5C429BFA5ED00B57F90 /* LifeExpectancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeExpectancyView.swift; sourceTree = "<group>"; };
+		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
+		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
+		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
+		9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeProgressWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DA378CF29E19B9000074F01 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		9DA378D129E19B9000074F01 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9DA378D429E19B9000074F01 /* LifeProgressWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidgetBundle.swift; sourceTree = "<group>"; };
+		9DA378D829E19B9100074F01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9DA378DA29E19B9100074F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DA378E429E1AA5000074F01 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeProgressWidgetExtension.entitlements; sourceTree = "<group>"; };
 		9DA8B3D229D75378000D3F1F /* LifeProgress.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeProgress.entitlements; sourceTree = "<group>"; };
 		9DACC2D429D34EDF00AA48CE /* LifeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressView.swift; sourceTree = "<group>"; };
 		9DB6D11729C216A300265C2E /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
@@ -105,7 +155,6 @@
 		9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarView.swift; sourceTree = "<group>"; };
 		9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithoutCurrentYear.swift; sourceTree = "<group>"; };
 		9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithCurrentYear.swift; sourceTree = "<group>"; };
-		9DD4955F29C76C5F004001D9 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		9DD720F829BFB35C00634AB2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationStore.swift; sourceTree = "<group>"; };
@@ -138,6 +187,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9DA378CA29E19B9000074F01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DA378D229E19B9000074F01 /* SwiftUI.framework in Frameworks */,
+				9DA378D029E19B9000074F01 /* WidgetKit.framework in Frameworks */,
+				9DA378EC29E1B11D00074F01 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,9 +241,12 @@
 		9D70826C29B8D1A000846F55 = {
 			isa = PBXGroup;
 			children = (
+				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
 				9D70827729B8D1A000846F55 /* LifeProgress */,
 				9D70828D29B8D1A100846F55 /* LifeProgressTests */,
 				9D70829729B8D1A100846F55 /* LifeProgressUITests */,
+				9DA378D329E19B9000074F01 /* LifeProgressWidget */,
+				9DA378CE29E19B9000074F01 /* Frameworks */,
 				9D70827629B8D1A000846F55 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -195,6 +257,7 @@
 				9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */,
 				9D70828A29B8D1A100846F55 /* LifeProgressTests.xctest */,
 				9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */,
+				9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,6 +324,51 @@
 			path = LifeExpectancy;
 			sourceTree = "<group>";
 		};
+		9D869C8129E3173200841A47 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				9D869C8929E31C2800841A47 /* YearProgress */,
+				9D869C8829E31C1C00841A47 /* LifeProgress */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		9D869C8829E31C1C00841A47 /* LifeProgress */ = {
+			isa = PBXGroup;
+			children = (
+				9D869C8229E3174600841A47 /* LifeProgressWidget.swift */,
+			);
+			path = LifeProgress;
+			sourceTree = "<group>";
+		};
+		9D869C8929E31C2800841A47 /* YearProgress */ = {
+			isa = PBXGroup;
+			children = (
+				9D869C8429E3175000841A47 /* YearProgressWidget.swift */,
+			);
+			path = YearProgress;
+			sourceTree = "<group>";
+		};
+		9DA378CE29E19B9000074F01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DA378CF29E19B9000074F01 /* WidgetKit.framework */,
+				9DA378D129E19B9000074F01 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9DA378D329E19B9000074F01 /* LifeProgressWidget */ = {
+			isa = PBXGroup;
+			children = (
+				9D869C8129E3173200841A47 /* Widgets */,
+				9DA378D429E19B9000074F01 /* LifeProgressWidgetBundle.swift */,
+				9DA378D829E19B9100074F01 /* Assets.xcassets */,
+				9DA378DA29E19B9100074F01 /* Info.plist */,
+			);
+			path = LifeProgressWidget;
+			sourceTree = "<group>";
+		};
 		9DB6D11629C2169800265C2E /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */,
+				9DA378E429E1AA5000074F01 /* Date+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -314,6 +423,7 @@
 				9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */,
 				9DEBBBA529CF5118008CE08C /* CurrentYearProgressView.swift */,
 				9DACC2D429D34EDF00AA48CE /* LifeProgressView.swift */,
+				9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,7 +431,6 @@
 		9DD4955C29C755B8004001D9 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				9DD4955F29C76C5F004001D9 /* UserDefaultsHelper.swift */,
 				9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */,
 				9D7CCA7C29DC7BBF008CA928 /* NSUbiquitousKeyValueStoreHelper.swift */,
 				9D7CCA7E29DCA04D008CA928 /* NSUbiquitousKeyValueStore+Extension.swift */,
@@ -366,10 +475,12 @@
 				9D70827129B8D1A000846F55 /* Sources */,
 				9D70827229B8D1A000846F55 /* Frameworks */,
 				9D70827329B8D1A000846F55 /* Resources */,
+				9DA378DE29E19B9200074F01 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9DA378DC29E19B9100074F01 /* PBXTargetDependency */,
 			);
 			name = "Life Progress - Calendar";
 			packageProductDependencies = (
@@ -415,6 +526,26 @@
 			productReference = 9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9DA378CC29E19B9000074F01 /* LifeProgressWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9DA378E129E19B9200074F01 /* Build configuration list for PBXNativeTarget "LifeProgressWidgetExtension" */;
+			buildPhases = (
+				9DA378C929E19B9000074F01 /* Sources */,
+				9DA378CA29E19B9000074F01 /* Frameworks */,
+				9DA378CB29E19B9000074F01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LifeProgressWidgetExtension;
+			packageProductDependencies = (
+				9DA378EB29E1B11D00074F01 /* ComposableArchitecture */,
+			);
+			productName = LifeProgressWidgetExtension;
+			productReference = 9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -435,6 +566,9 @@
 					9D70829329B8D1A100846F55 = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 9D70827429B8D1A000846F55;
+					};
+					9DA378CC29E19B9000074F01 = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -457,6 +591,7 @@
 				9D70827429B8D1A000846F55 /* Life Progress - Calendar */,
 				9D70828929B8D1A100846F55 /* LifeProgressTests */,
 				9D70829329B8D1A100846F55 /* LifeProgressUITests */,
+				9DA378CC29E19B9000074F01 /* LifeProgressWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -485,6 +620,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9DA378CB29E19B9000074F01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DA378D929E19B9100074F01 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -506,14 +649,15 @@
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
 				9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */,
 				9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */,
+				9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */,
 				9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */,
 				9D46DCD329D839E900331456 /* AboutTheAppStore.swift in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
+				9DA378E529E1AA5000074F01 /* Date+Extension.swift in Sources */,
 				9DD720F929BFB35C00634AB2 /* ProfileView.swift in Sources */,
 				9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */,
 				9D7CCA7D29DC7BBF008CA928 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */,
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
-				9DD4956029C76C5F004001D9 /* UserDefaultsHelper.swift in Sources */,
 				9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
 				9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */,
@@ -549,6 +693,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9DA378C929E19B9000074F01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DA378F029E1C2DE00074F01 /* SimplifiedLifeCalendarView.swift in Sources */,
+				9DA378EA29E1AC7000074F01 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */,
+				9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */,
+				9DA378E629E1AA7200074F01 /* Date+Extension.swift in Sources */,
+				9D869C8529E3175000841A47 /* YearProgressWidget.swift in Sources */,
+				9DA378E929E1AC6F00074F01 /* NSUbiquitousKeyValueStore+Extension.swift in Sources */,
+				9DA378F129E1C39800074F01 /* AgeGroup.swift in Sources */,
+				9DA378E229E1A1E400074F01 /* Life.swift in Sources */,
+				9DA378E729E1AC4B00074F01 /* Theme.swift in Sources */,
+				9DA378E329E1A70E00074F01 /* UserSettingsClient.swift in Sources */,
+				9D869C8E29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */,
+				9DA378D529E19B9000074F01 /* LifeProgressWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -561,6 +724,11 @@
 			isa = PBXTargetDependency;
 			target = 9D70827429B8D1A000846F55 /* Life Progress - Calendar */;
 			targetProxy = 9D70829529B8D1A100846F55 /* PBXContainerItemProxy */;
+		};
+		9DA378DC29E19B9100074F01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9DA378CC29E19B9000074F01 /* LifeProgressWidgetExtension */;
+			targetProxy = 9DA378DB29E19B9100074F01 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -615,7 +783,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -669,7 +837,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -682,16 +850,18 @@
 		9D70829F29B8D1A100846F55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LifeProgress/LifeProgress.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Preview Content\"";
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Life Pogress";
+				INFOPLIST_KEY_CFBundleDisplayName = "Life Progress";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -706,6 +876,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -718,16 +889,18 @@
 		9D7082A029B8D1A100846F55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LifeProgress/LifeProgress.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Preview Content\"";
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Life Pogress";
+				INFOPLIST_KEY_CFBundleDisplayName = "Life Progress";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -742,6 +915,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -825,6 +999,66 @@
 			};
 			name = Release;
 		};
+		9DA378DF29E19B9200074F01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = LifeProgressWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2YRS6RS63;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeProgressWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeProgressWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgress.LifeProgressWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9DA378E029E19B9200074F01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = LifeProgressWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2YRS6RS63;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeProgressWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeProgressWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgress.LifeProgressWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -864,6 +1098,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9DA378E129E19B9200074F01 /* Build configuration list for PBXNativeTarget "LifeProgressWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DA378DF29E19B9200074F01 /* Debug */,
+				9DA378E029E19B9200074F01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -879,6 +1122,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		9DA378EB29E1B11D00074F01 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;

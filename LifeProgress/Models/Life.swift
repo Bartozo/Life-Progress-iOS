@@ -105,7 +105,7 @@ extension Life {
     static let mock = Self(
         birthday: Calendar.current.date(
             byAdding: .year,
-            value: -28,
+            value: -40,
             to: .now
         )!,
         lifeExpectancy: 90

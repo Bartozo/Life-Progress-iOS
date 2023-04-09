@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import WidgetKit
 
 enum NSUbiquitousKeyValueStoreHelper {
     
@@ -104,7 +105,10 @@ enum NSUbiquitousKeyValueStoreHelper {
     static func makeBirthdayPublisher() -> AnyPublisher<Date, Never> {
         let externalPublisher = NotificationCenter.default
             .publisher(for: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
-            .map { _ in getBirthday() }
+            .map { _ in
+                WidgetCenter.shared.reloadAllTimelines()
+                return getBirthday()
+            }
             .eraseToAnyPublisher()
 
         let internalPublisher = keyValueStore
@@ -113,7 +117,8 @@ enum NSUbiquitousKeyValueStoreHelper {
                 guard let birthday = value?.doubleValue else {
                     return Life.mock.birthday
                 }
-
+                
+                WidgetCenter.shared.reloadAllTimelines()
                 return Date(timeIntervalSince1970: birthday)
             }
             .eraseToAnyPublisher()
@@ -130,7 +135,10 @@ enum NSUbiquitousKeyValueStoreHelper {
     static func makeLifeExpectancyPublisher() -> AnyPublisher<Int, Never> {
         let externalPublisher = NotificationCenter.default
             .publisher(for: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
-            .map { _ in getLifeExpectancy() }
+            .map { _ in
+                WidgetCenter.shared.reloadAllTimelines()
+                return getLifeExpectancy()
+            }
             .eraseToAnyPublisher()
 
         let internalPublisher = keyValueStore
@@ -140,6 +148,7 @@ enum NSUbiquitousKeyValueStoreHelper {
                     return Life.mock.lifeExpectancy
                 }
                 
+                WidgetCenter.shared.reloadAllTimelines()
                 return lifeExpectancy
             }
             .eraseToAnyPublisher()
