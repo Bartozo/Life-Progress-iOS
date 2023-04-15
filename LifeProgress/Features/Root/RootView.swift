@@ -62,6 +62,14 @@ struct RootView: View {
                                     )
                                 )
                                 
+                            case .lifeGoals:
+                                LifeGoalsView(
+                                    store: store.scope(
+                                        state: \.lifeGoals,
+                                        action: RootReducer.Action.lifeGoals
+                                    )
+                                )
+                                
                             case .profile:
                                 ProfileView(
                                     store: store.scope(
@@ -94,6 +102,14 @@ struct RootView: View {
                                     store: store.scope(
                                         state: \.lifeCalendar,
                                         action: RootReducer.Action.lifeCalendar
+                                    )
+                                )
+                                
+                            case .lifeGoals:
+                                LifeGoalsView(
+                                    store: store.scope(
+                                        state: \.lifeGoals,
+                                        action: RootReducer.Action.lifeGoals
                                     )
                                 )
                                 

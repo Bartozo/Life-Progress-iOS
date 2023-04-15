@@ -18,6 +18,9 @@ struct RootReducer: ReducerProtocol {
     struct State: Equatable {
         /// The life calendar's state.
         var lifeCalendar = LifeCalendarReducer.State()
+        
+        /// The life goals state.
+        var lifeGoals = LifeGoalsReducer.State()
 
         /// The profile's state.
         var profile = ProfileReducer.State()
@@ -37,8 +40,11 @@ struct RootReducer: ReducerProtocol {
         enum Tab: Int, CaseIterable, Identifiable, Hashable {
             /// Represents life calendar screen
             case lifeCalendar
+            /// Represents life goals screen
+            case lifeGoals
             /// Represents profile screen
             case profile
+            
 
             /// The unique identifier for each case, derived from the rawValue of the enumeration.
             var id: Int { self.rawValue }
@@ -48,6 +54,8 @@ struct RootReducer: ReducerProtocol {
                 switch self {
                 case .lifeCalendar:
                     return "Life Calendar"
+                case .lifeGoals:
+                    return "Life Goals"
                 case .profile:
                     return "Profile"
                 }
@@ -59,6 +67,8 @@ struct RootReducer: ReducerProtocol {
                 switch self {
                 case .lifeCalendar:
                     return "calendar"
+                case .lifeGoals:
+                    return "flag"
                 case .profile:
                     return "person"
                 }
@@ -70,6 +80,8 @@ struct RootReducer: ReducerProtocol {
     enum Action: Equatable {
         /// The actions that can be taken on the life calendar.
         case lifeCalendar(LifeCalendarReducer.Action)
+        /// The actions that can be taken on the life goals.
+        case lifeGoals(LifeGoalsReducer.Action)
         /// The actions that can be taken on the profile.
         case profile(ProfileReducer.Action)
         /// Indicates that the tab has changed.
@@ -85,12 +97,18 @@ struct RootReducer: ReducerProtocol {
         Scope(state: \.lifeCalendar, action: /Action.lifeCalendar) {
             LifeCalendarReducer()
         }
+        Scope(state: \.lifeGoals, action: /Action.lifeGoals) {
+            LifeGoalsReducer()
+        }
         Scope(state: \.profile, action: /Action.profile) {
             ProfileReducer()
         }
         Reduce { state, action in
             switch action {
             case .lifeCalendar(_):
+                return .none
+                
+            case .lifeGoals(_):
                 return .none
                 
             case .profile(_):
