@@ -8,7 +8,6 @@
 import Foundation
 import ComposableArchitecture
 
-
 /// A type alias for a store of the `AddOrEditLifeGoalReducer`'s state and action types.
 typealias AddOrEditLifeGoalStore = Store<AddOrEditLifeGoalReducer.State, AddOrEditLifeGoalReducer.Action>
 
@@ -26,8 +25,8 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
          /// Whether the life goal was completed.
         var isCompleted = false
         
-        /// The selected SF Symbol for the life goal.
-        var symbolName = ""
+        /// The selected SF Symbol for the life goal. By default set to "trophy"
+        var symbolName = "trophy"
         
         /// The date when life goal was accomplished.
         var finishedAt = Date.now
@@ -46,6 +45,18 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 self.isDatePickerVisible = newValue.isDatePickerVisible
             }
         }
+        
+        /// Whether the SF Symbol picker is visible.
+        var isSFSymbolPickerVisible = false
+        
+        /// The state of SF Symbol picker.
+        var sfSymbolPicker: SFSymbolPickerReducer.State {
+            get { .init(symbolName: self.symbolName, isSheetVisible: self.isSFSymbolPickerVisible) }
+            set {
+                self.symbolName = newValue.symbolName
+                self.isSFSymbolPickerVisible = newValue.isSheetVisible
+            }
+        }
     }
     
     /// The actions that can be taken on the about the app.
@@ -60,14 +71,30 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         case symbolNameChanged(String)
         /// Indicates that the date when life goal was accomplished has changed.
         case finishedAtChanged(Date)
+        /// Indicates that the close button was tapped.
+        case closeButtonTapped
+        /// Indicates that the add button was tapped.
+        case addButtonTapped
+        /// Indicates that the save button was tapped.
+        case saveButtonTapped
         /// The actions that can be taken on the date picker.
         case datePicker(DatePickerReducer.Action)
+        /// The actions that can be taken on the SF Symbol picker.
+        case sfSymbolPicker(SFSymbolPickerReducer.Action)
     }
+    
+    @Dependency(\.lifeGoalsClient) var lifeGoalsClient
+    private enum LifeExpectancyRequestID {}
+    
+    @Dependency(\.mainQueue) var mainQueue
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Scope(state: \.datePicker, action: /Action.datePicker) {
             DatePickerReducer()
+        }
+        Scope(state: \.sfSymbolPicker, action: /Action.sfSymbolPicker) {
+            SFSymbolPickerReducer()
         }
         Reduce { state, action in
             switch action {
@@ -94,7 +121,34 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 state.finishedAt = finishedAt
                 return .none
                 
+            case .closeButtonTapped:
+                return .none
+                
+            case .addButtonTapped:
+                return .task { [
+                    title = state.title,
+                    finishedAt = state.isCompleted ? state.finishedAt : nil,
+                    symbolName = state.symbolName,
+                    details = state.details
+                ] in
+                    let lifeGoal = LifeGoal(
+                        id: UUID(),
+                        title: title,
+                        finishedAt: finishedAt,
+                        symbolName: symbolName,
+                        details: details
+                    )
+                    await lifeGoalsClient.createLifeGoal(lifeGoal)
+                    return .closeButtonTapped
+                }
+                
+            case .saveButtonTapped:
+                return .none
+                
             case .datePicker:
+                return .none
+                
+            case .sfSymbolPicker:
                 return .none
             }
         }

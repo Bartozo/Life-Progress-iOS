@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct LifeProgressApp: App {
-//    let persistenceController = PersistenceController.shared
+    let coreDataManager = CoreDataManager.shared
     
     let store = RootStore(
         initialState: RootReducer.State(),
@@ -24,8 +24,7 @@ struct LifeProgressApp: App {
                         store: self.store.scope(state: \.profile.theme).actionless
                     )
                 )
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, coreDataManager.container.viewContext)
         }
     }
 }

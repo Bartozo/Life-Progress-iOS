@@ -21,22 +21,24 @@ struct AddOrEditLifeGoalView: View {
                 let isEditing = viewStore.isEditing
                 
                 Form {
+                    IconSection(store: self.store)
                     TitleSection(store: self.store)
                     DetailsSection(store: self.store)
                     OthersSection(store: self.store)
                 }
                 .navigationTitle(isEditing ? "Edit Life Goal" : "Add Life Goal")
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            
+                            viewStore.send(.closeButtonTapped)
                         } label: {
                             Text("Close")
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-
+                            viewStore.send(isEditing ? .saveButtonTapped : .addButtonTapped)
                         } label: {
                             Text(isEditing ? "Save" : "Add")
                         }
@@ -45,6 +47,27 @@ struct AddOrEditLifeGoalView: View {
             }
         }
         .tint(theme.color)
+    }
+}
+
+private struct IconSection: View {
+    
+    let store: AddOrEditLifeGoalStore
+    
+    var body: some View {
+        Section {
+            HStack {
+                Spacer()
+                SFSymbolPickerView(
+                    store: self.store.scope(
+                        state: \.sfSymbolPicker,
+                        action: AddOrEditLifeGoalReducer.Action.sfSymbolPicker
+                    )
+                )
+                Spacer()
+            }
+        }
+        .listRowBackground(Color.clear)
     }
 }
 
@@ -84,6 +107,7 @@ private struct DetailsSection: View {
                         send: AddOrEditLifeGoalReducer.Action.detailsChanged
                     )
                 )
+                .frame(maxHeight: 150)
             }
         } header: {
             Text("Details")
@@ -100,21 +124,6 @@ private struct OthersSection: View {
     var body: some View {
         Section {
             WithViewStore(self.store) { viewStore in
-                NavigationLink {
-                    SymbolPicker(
-                        symbol: viewStore.binding(
-                            get: \.symbolName,
-                            send: AddOrEditLifeGoalReducer.Action.symbolNameChanged
-                        )
-                    )
-                } label: {
-                    HStack {
-                        Text("Selected icon")
-                        Spacer()
-                        Image(systemName: viewStore.symbolName)
-                    }
-                }
-                
                 Toggle(
                     "Is completed",
                     isOn: viewStore.binding(

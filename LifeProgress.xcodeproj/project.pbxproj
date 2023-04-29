@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		9D156C3F29D0AC0B00F2C992 /* UserSettingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */; };
+		9D3B855D29FD1AAD0026D814 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B855C29FD1AAD0026D814 /* CoreDataManager.swift */; };
+		9D3B855F29FD1C840026D814 /* LifeGoalEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */; };
+		9D3B856129FD1D600026D814 /* LifeGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B856029FD1D600026D814 /* LifeGoal.swift */; };
 		9D46DCD329D839E900331456 /* AboutTheAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D46DCD229D839E900331456 /* AboutTheAppStore.swift */; };
+		9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */; };
+		9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */; };
+		9D4C753A29EBFFBE007FFCBC /* LifeGoalsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */; };
 		9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */; };
 		9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9D660B7C29EA998900AE2445 /* SymbolPicker */; };
 		9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */; };
@@ -18,10 +24,8 @@
 		9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */; };
 		9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */; };
 		9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827829B8D1A000846F55 /* LifeProgressApp.swift */; };
-		9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70827A29B8D1A000846F55 /* ContentView.swift */; };
 		9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827C29B8D1A100846F55 /* Assets.xcassets */; };
 		9D70828029B8D1A100846F55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827F29B8D1A100846F55 /* Preview Assets.xcassets */; };
-		9D70828229B8D1A100846F55 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828129B8D1A100846F55 /* Persistence.swift */; };
 		9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828329B8D1A100846F55 /* LifeProgress.xcdatamodeld */; };
 		9D70828F29B8D1A100846F55 /* LifeProgressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828E29B8D1A100846F55 /* LifeProgressTests.swift */; };
 		9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */; };
@@ -118,7 +122,13 @@
 
 /* Begin PBXFileReference section */
 		9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsClient.swift; sourceTree = "<group>"; };
+		9D3B855C29FD1AAD0026D814 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalEntity.swift; sourceTree = "<group>"; };
+		9D3B856029FD1D600026D814 /* LifeGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoal.swift; sourceTree = "<group>"; };
 		9D46DCD229D839E900331456 /* AboutTheAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppStore.swift; sourceTree = "<group>"; };
+		9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerStore.swift; sourceTree = "<group>"; };
+		9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerView.swift; sourceTree = "<group>"; };
+		9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalsClient.swift; sourceTree = "<group>"; };
 		9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppView.swift; sourceTree = "<group>"; };
 		9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerStore.swift; sourceTree = "<group>"; };
 		9D660B8129EAA31500AE2445 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -127,10 +137,8 @@
 		9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarStore.swift; sourceTree = "<group>"; };
 		9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Progress - Calendar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D70827829B8D1A000846F55 /* LifeProgressApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressApp.swift; sourceTree = "<group>"; };
-		9D70827A29B8D1A000846F55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9D70827C29B8D1A100846F55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D70827F29B8D1A100846F55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9D70828129B8D1A100846F55 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		9D70828429B8D1A100846F55 /* LifeProgress.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeProgress.xcdatamodel; sourceTree = "<group>"; };
 		9D70828A29B8D1A100846F55 /* LifeProgressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeProgressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D70828E29B8D1A100846F55 /* LifeProgressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressTests.swift; sourceTree = "<group>"; };
@@ -219,6 +227,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D3B855729FD18D40026D814 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		9D46DCD129D838BB00331456 /* AboutTheApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,9 +244,19 @@
 			path = AboutTheApp;
 			sourceTree = "<group>";
 		};
+		9D4C753429EBF69C007FFCBC /* SFSymbolPicker */ = {
+			isa = PBXGroup;
+			children = (
+				9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */,
+				9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */,
+			);
+			path = SFSymbolPicker;
+			sourceTree = "<group>";
+		};
 		9D660B7E29EAA2FD00AE2445 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9D4C753429EBF69C007FFCBC /* SFSymbolPicker */,
 				9D660B8429EACCA900AE2445 /* Sheet */,
 				9D660B8329EACC8500AE2445 /* DatePicker */,
 			);
@@ -318,7 +344,6 @@
 				9D6ECBC429BA52CB000DF545 /* Features */,
 				9D7082A729B8D32A00846F55 /* Models */,
 				9D70827829B8D1A000846F55 /* LifeProgressApp.swift */,
-				9D70827A29B8D1A000846F55 /* ContentView.swift */,
 				9D70827C29B8D1A100846F55 /* Assets.xcassets */,
 				9D70827E29B8D1A100846F55 /* Preview Content */,
 			);
@@ -355,6 +380,7 @@
 			children = (
 				9D7082A829B8D34900846F55 /* Life.swift */,
 				9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */,
+				9D3B856029FD1D600026D814 /* LifeGoal.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -476,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */,
+				9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -528,6 +555,7 @@
 		9DEC1FB929E58A0300305429 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				9D3B855729FD18D40026D814 /* Entities */,
 				9DEC1FBB29E58A2F00305429 /* CoreData */,
 				9DEC1FBA29E58A2400305429 /* NSUbiquitousKeyValueStore */,
 			);
@@ -546,8 +574,8 @@
 		9DEC1FBB29E58A2F00305429 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9D70828129B8D1A100846F55 /* Persistence.swift */,
 				9D70828329B8D1A100846F55 /* LifeProgress.xcdatamodeld */,
+				9D3B855C29FD1AAD0026D814 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -724,20 +752,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3B855D29FD1AAD0026D814 /* CoreDataManager.swift in Sources */,
 				9DEBBBA229CF4D3E008CE08C /* ZoomedInCalendarView.swift in Sources */,
 				9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */,
 				9DEC1FB429E5891000305429 /* LifeGoalsStore.swift in Sources */,
 				9DEBBB9C29CF2A40008CE08C /* NavigationLink+Extension.swift in Sources */,
 				9D7CCA7F29DCA04D008CA928 /* NSUbiquitousKeyValueStore+Extension.swift in Sources */,
+				9D4C753A29EBFFBE007FFCBC /* LifeGoalsClient.swift in Sources */,
 				9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */,
 				9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */,
-				9D70828229B8D1A100846F55 /* Persistence.swift in Sources */,
+				9D3B855F29FD1C840026D814 /* LifeGoalEntity.swift in Sources */,
 				9DE3429529E6F48700E64548 /* AddOrEditLifeGoalView.swift in Sources */,
+				9D3B856129FD1D600026D814 /* LifeGoal.swift in Sources */,
 				9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */,
-				9D70827B29B8D1A000846F55 /* ContentView.swift in Sources */,
+				9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */,
 				9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */,
 				9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
+				9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */,
 				9D660B8229EAA31500AE2445 /* DatePickerView.swift in Sources */,
 				9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */,
 				9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */,

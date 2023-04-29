@@ -20,6 +20,16 @@ struct LifeGoalsReducer: ReducerProtocol {
         /// The user's life goals.
         var lifeGoals: [LifeGoal] = []
         
+        /// The user's filtered life goals.
+        var filteredLifeGoals: [LifeGoal] {
+            switch listType {
+            case .completed:
+                return self.lifeGoals.filter { $0.isCompleted }
+            case .uncompleted:
+                return self.lifeGoals.filter { !$0.isCompleted }
+            }
+        }
+        
         /// Whether the about calendar sheet is visible.
         var listType: ListType = .completed
         
@@ -32,12 +42,22 @@ struct LifeGoalsReducer: ReducerProtocol {
     
     /// The actions that can be taken on the about the app.
     enum Action: Equatable {
-        /// Indicates that is about the app sheet should be hidden.
+        /// Indicates that the view has appeared.
+        case onAppear
+        /// Indicates that list type has changed.
         case listTypeChanged(ListType)
+        /// Indicates that life goals have changed.
+        case lifeGoalsChanged([LifeGoal])
         /// Indicates that the add button has been tapped.
         case addButtonTapped
         /// Indicates that is add life goal sheet should be hidden.
         case closeAddLifeGoalSheet
+        /// Indicates that the swipe to delete action was performed.
+        case swipeToDelete(LifeGoal)
+        /// Indicates that the swipe to complete action was performed.
+        case swipeToComplete(LifeGoal)
+        /// Indicates that the swipe to uncomplete action was performed.
+        case swipeToUncomplete(LifeGoal)
         /// The actions that can be taken on the add or edit life goal.
         case addOrEditLifeGoal(AddOrEditLifeGoalReducer.Action)
     }
@@ -58,12 +78,26 @@ struct LifeGoalsReducer: ReducerProtocol {
         }
     }
     
+    @Dependency(\.lifeGoalsClient) var lifeGoalsClient
+    
+    @Dependency(\.mainQueue) var mainQueue
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                return .task {
+                    let lifeGoals = await lifeGoalsClient.fetchLifeGoals()
+                    return .lifeGoalsChanged(lifeGoals)
+                }
+                
             case .listTypeChanged(let listType):
                 state.listType = listType
+                return .none
+                
+            case .lifeGoalsChanged(let lifeGoals):
+                state.lifeGoals = lifeGoals
                 return .none
                 
             case .addButtonTapped:
@@ -75,7 +109,43 @@ struct LifeGoalsReducer: ReducerProtocol {
                 state.isAddLifeGoalSheetVisible = false
                 return .none
                 
-            case .addOrEditLifeGoal:
+            case .swipeToDelete(let lifeGoal):
+                return .task {
+                    await lifeGoalsClient.deleteLifeGoal(lifeGoal)
+                    return .onAppear
+                }
+                
+            case .swipeToComplete(let lifeGoal):
+                let newLifeGoal = LifeGoal(
+                    id: lifeGoal.id,
+                    title: lifeGoal.title,
+                    finishedAt: Date.now,
+                    symbolName: lifeGoal.symbolName,
+                    details: lifeGoal.details
+                )
+                return .task {
+                    await lifeGoalsClient.updateLifeGoal(newLifeGoal)
+                    return .onAppear
+                }
+                
+            case .swipeToUncomplete(let lifeGoal):
+                let newLifeGoal = LifeGoal(
+                    id: lifeGoal.id,
+                    title: lifeGoal.title,
+                    finishedAt: nil,
+                    symbolName: lifeGoal.symbolName,
+                    details: lifeGoal.details
+                )
+                return .task {
+                    await lifeGoalsClient.updateLifeGoal(newLifeGoal)
+                    return .onAppear
+                }
+            
+            case .addOrEditLifeGoal(let addOrEditLifeGoalAction):
+                if (addOrEditLifeGoalAction == .closeButtonTapped) {
+                    state.isAddLifeGoalSheetVisible = false
+                    return .none
+                }
                 return .none
             }
         }
