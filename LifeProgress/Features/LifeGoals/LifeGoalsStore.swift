@@ -40,6 +40,7 @@ struct LifeGoalsReducer: ReducerProtocol {
         var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
     }
     
+    
     /// The actions that can be taken on the about the app.
     enum Action: Equatable {
         /// Indicates that the view has appeared.
@@ -58,6 +59,8 @@ struct LifeGoalsReducer: ReducerProtocol {
         case swipeToComplete(LifeGoal)
         /// Indicates that the swipe to uncomplete action was performed.
         case swipeToUncomplete(LifeGoal)
+        /// Indicates that the life goal has beedn tapped.
+        case lifeGoalTapped(LifeGoal)
         /// The actions that can be taken on the add or edit life goal.
         case addOrEditLifeGoal(AddOrEditLifeGoalReducer.Action)
     }
@@ -140,6 +143,18 @@ struct LifeGoalsReducer: ReducerProtocol {
                     await lifeGoalsClient.updateLifeGoal(newLifeGoal)
                     return .onAppear
                 }
+                
+            case .lifeGoalTapped(let lifeGoal):
+                state.isAddLifeGoalSheetVisible = true
+                state.addOrEditLifeGoal = .init(
+                    title: lifeGoal.title,
+                    details: lifeGoal.details,
+                    isCompleted: lifeGoal.isCompleted,
+                    symbolName: lifeGoal.symbolName,
+                    finishedAt: lifeGoal.finishedAt ?? Date.now,
+                    lifeGoalToEdit: lifeGoal
+                )
+                return .none
             
             case .addOrEditLifeGoal(let addOrEditLifeGoalAction):
                 if (addOrEditLifeGoalAction == .closeButtonTapped) {

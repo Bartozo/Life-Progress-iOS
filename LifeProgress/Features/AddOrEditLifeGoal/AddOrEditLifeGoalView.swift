@@ -125,7 +125,7 @@ private struct OthersSection: View {
         Section {
             WithViewStore(self.store) { viewStore in
                 Toggle(
-                    "Is completed",
+                    "Mark as completed",
                     isOn: viewStore.binding(
                         get: \.isCompleted,
                         send: AddOrEditLifeGoalReducer.Action.isCompletedChanged

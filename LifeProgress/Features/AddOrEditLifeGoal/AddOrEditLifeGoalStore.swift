@@ -32,10 +32,15 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         var finishedAt = Date.now
         
         /// Whether the life goal is being edited.
-        var isEditing = false
+        var isEditing: Bool {
+            return lifeGoalToEdit != nil
+        }
         
         /// Whether the date picker is visible.
         var isDatePickerVisible = false
+        
+        /// The life goal to edit.
+        var lifeGoalToEdit: LifeGoal?
         
         /// The state of date picker.
         var datePicker: DatePickerReducer.State {
@@ -143,7 +148,23 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 }
                 
             case .saveButtonTapped:
-                return .none
+                return .task { [
+                    title = state.title,
+                    finishedAt = state.isCompleted ? state.finishedAt : nil,
+                    symbolName = state.symbolName,
+                    details = state.details,
+                    lifeGoalToEdit = state.lifeGoalToEdit
+                ] in
+                    let lifeGoal = LifeGoal(
+                        id: lifeGoalToEdit!.id,
+                        title: title,
+                        finishedAt: finishedAt,
+                        symbolName: symbolName,
+                        details: details
+                    )
+                    await lifeGoalsClient.updateLifeGoal(lifeGoal)
+                    return .closeButtonTapped
+                }
                 
             case .datePicker:
                 return .none

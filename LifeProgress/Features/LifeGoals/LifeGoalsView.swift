@@ -69,29 +69,33 @@ private struct LifeGoalsList: View {
             List {
                 Section {
                     ForEach(viewStore.lifeGoals, id: \.id) { lifeGoal in
-                        LifeGoalRow(lifeGoal: lifeGoal)
-                            .swipeActions(allowsFullSwipe: false) {
-                                Button(role: .destructive) {
-                                    viewStore.send(.swipeToDelete(lifeGoal))
-                                } label: {
-                                    Label("Delete", systemImage: "trash.fill")
-                                }
-                                
-                                if lifeGoal.isCompleted {
-                                    Button {
-                                        viewStore.send(.swipeToUncomplete(lifeGoal), animation: .default)
+                        Button {
+                            viewStore.send(.lifeGoalTapped(lifeGoal))
+                        } label: {
+                            LifeGoalRow(lifeGoal: lifeGoal)
+                                .swipeActions(allowsFullSwipe: false) {
+                                    Button(role: .destructive) {
+                                        viewStore.send(.swipeToDelete(lifeGoal))
                                     } label: {
-                                        Label("Uncomplete", systemImage: "xmark.circle.fill")
+                                        Label("Delete", systemImage: "trash.fill")
                                     }
-                                } else {
-                                    Button {
-                                        viewStore.send(.swipeToComplete(lifeGoal), animation: .default)
-                                    } label: {
-                                        Label("Complete", systemImage: "checkmark.circle.fill")
+                                    
+                                    if lifeGoal.isCompleted {
+                                        Button {
+                                            viewStore.send(.swipeToUncomplete(lifeGoal), animation: .default)
+                                        } label: {
+                                            Label("Uncomplete", systemImage: "xmark.circle.fill")
+                                        }
+                                    } else {
+                                        Button {
+                                            viewStore.send(.swipeToComplete(lifeGoal), animation: .default)
+                                        } label: {
+                                            Label("Complete", systemImage: "checkmark.circle.fill")
+                                        }
+                                        .tint(.green)
                                     }
-                                    .tint(.green)
                                 }
-                            }
+                        }
                     }
                 } header: {
                     Picker(
