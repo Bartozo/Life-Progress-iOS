@@ -69,6 +69,7 @@
 		9DD720FB29BFB36A00634AB2 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */; };
 		9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */; };
 		9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */; };
+		9DE2CEC929FFB30D00A9BE6D /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */; };
 		9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */; };
 		9DE3429529E6F48700E64548 /* AddOrEditLifeGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */; };
 		9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */; };
@@ -193,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DE2CEC929FFB30D00A9BE6D /* ConfettiSwiftUI in Frameworks */,
 				9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */,
 				9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */,
 			);
@@ -590,6 +592,7 @@
 			packageProductDependencies = (
 				9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */,
 				9D660B7C29EA998900AE2445 /* SymbolPicker */,
+				9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */,
 			);
 			productName = LifeProgress;
 			productReference = 9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */;
@@ -689,6 +692,7 @@
 			packageReferences = (
 				9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				9D660B7B29EA998900AE2445 /* XCRemoteSwiftPackageReference "SymbolPicker" */,
+				9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			productRefGroup = 9D70827629B8D1A000846F55 /* Products */;
 			projectDirPath = "";
@@ -1242,6 +1246,14 @@
 				minimumVersion = 0.9.0;
 			};
 		};
+		9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1259,6 +1271,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 
