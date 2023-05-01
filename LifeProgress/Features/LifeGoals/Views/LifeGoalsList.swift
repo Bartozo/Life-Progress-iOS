@@ -49,7 +49,7 @@ struct LifeGoalsList: View {
                             } else {
                                 Button {
                                     viewStore.send(.swipeToComplete(lifeGoal))
-                                    requestReview.callAsFunction()
+                                    requestReview()
                                 } label: {
                                     Label("Complete", systemImage: "checkmark.circle.fill")
                                 }
