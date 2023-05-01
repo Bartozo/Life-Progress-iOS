@@ -7,8 +7,10 @@
 
 import SwiftUI
 import ComposableArchitecture
+import StoreKit
 
 struct LifeGoalsList: View {
+    @Environment(\.requestReview) var requestReview
 
     let store: LifeGoalsStore
     
@@ -47,6 +49,7 @@ struct LifeGoalsList: View {
                             } else {
                                 Button {
                                     viewStore.send(.swipeToComplete(lifeGoal))
+                                    requestReview.callAsFunction()
                                 } label: {
                                     Label("Complete", systemImage: "checkmark.circle.fill")
                                 }
