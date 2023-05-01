@@ -36,7 +36,10 @@ struct LifeGoalsReducer: ReducerProtocol {
         /// Whether the about calendar sheet is visible.
         var isAddLifeGoalSheetVisible = false
         
-        /// The add or edit life goal state.
+        /// The confetti's state.
+        var confetti = ConfettiReducer.State()
+        
+        /// The add or edit life goal's state.
         var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
     }
     
@@ -61,6 +64,8 @@ struct LifeGoalsReducer: ReducerProtocol {
         case swipeToUncomplete(LifeGoal)
         /// Indicates that the life goal has beedn tapped.
         case lifeGoalTapped(LifeGoal)
+        /// The actions that can be taken on the confetti.
+        case confetti(ConfettiReducer.Action)
         /// The actions that can be taken on the add or edit life goal.
         case addOrEditLifeGoal(AddOrEditLifeGoalReducer.Action)
     }
@@ -87,6 +92,9 @@ struct LifeGoalsReducer: ReducerProtocol {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
+        Scope(state: \.confetti, action: /Action.confetti) {
+            ConfettiReducer()
+        }
         Reduce { state, action in
             switch action {
             case .onAppear:
@@ -126,10 +134,13 @@ struct LifeGoalsReducer: ReducerProtocol {
                     symbolName: lifeGoal.symbolName,
                     details: lifeGoal.details
                 )
-                return .task {
-                    await lifeGoalsClient.updateLifeGoal(newLifeGoal)
-                    return .onAppear
-                }
+                return .concatenate([
+                    .task {
+                        await lifeGoalsClient.updateLifeGoal(newLifeGoal)
+                        return .onAppear
+                    },
+                    .send(.confetti(.showConfetti))
+                ])
                 
             case .swipeToUncomplete(let lifeGoal):
                 let newLifeGoal = LifeGoal(
@@ -161,6 +172,9 @@ struct LifeGoalsReducer: ReducerProtocol {
                     state.isAddLifeGoalSheetVisible = false
                     return .none
                 }
+                return .none
+                
+            case .confetti:
                 return .none
             }
         }

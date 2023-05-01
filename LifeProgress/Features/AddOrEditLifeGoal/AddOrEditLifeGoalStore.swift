@@ -62,6 +62,9 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 self.isSFSymbolPickerVisible = newValue.isSheetVisible
             }
         }
+        
+        /// The confetti's state.
+        var confetti = ConfettiReducer.State()
     }
     
     /// The actions that can be taken on the about the app.
@@ -86,6 +89,8 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         case datePicker(DatePickerReducer.Action)
         /// The actions that can be taken on the SF Symbol picker.
         case sfSymbolPicker(SFSymbolPickerReducer.Action)
+        /// The actions that can be taken on the confetti.
+        case confetti(ConfettiReducer.Action)
     }
     
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
@@ -101,6 +106,9 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         Scope(state: \.sfSymbolPicker, action: /Action.sfSymbolPicker) {
             SFSymbolPickerReducer()
         }
+        Scope(state: \.confetti, action: /Action.confetti) {
+            ConfettiReducer()
+        }
         Reduce { state, action in
             switch action {
             case .titleChanged(let title):
@@ -113,10 +121,12 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 
             case .isCompletedChanged(let isCompleted):
                 state.isCompleted = isCompleted
-                if !isCompleted {
+                guard isCompleted else {
                     state.isDatePickerVisible = false
+                    return .none
                 }
-                return .none
+            
+                return .send(.confetti(.showConfetti))
                 
             case .symbolNameChanged(let symbolName):
                 state.symbolName = symbolName
@@ -170,6 +180,9 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 return .none
                 
             case .sfSymbolPicker:
+                return .none
+                
+            case .confetti:
                 return .none
             }
         }

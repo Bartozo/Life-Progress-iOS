@@ -44,6 +44,12 @@ struct AddOrEditLifeGoalView: View {
                         }
                     }
                 }
+                .overlay {
+                    ConfettiView(store: self.store.scope(
+                        state: \.confetti,
+                        action: AddOrEditLifeGoalReducer.Action.confetti
+                    ))
+                }
             }
         }
         .tint(theme.color)

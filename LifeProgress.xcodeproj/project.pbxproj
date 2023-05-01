@@ -70,6 +70,9 @@
 		9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */; };
 		9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */; };
 		9DE2CEC929FFB30D00A9BE6D /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */; };
+		9DE2CECC29FFB3FC00A9BE6D /* LifeGoalsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2CECB29FFB3FC00A9BE6D /* LifeGoalsList.swift */; };
+		9DE2CECF29FFBD1400A9BE6D /* ConfettiStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2CECE29FFBD1400A9BE6D /* ConfettiStore.swift */; };
+		9DE2CED129FFBF2600A9BE6D /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2CED029FFBF2600A9BE6D /* ConfettiView.swift */; };
 		9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */; };
 		9DE3429529E6F48700E64548 /* AddOrEditLifeGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */; };
 		9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */; };
@@ -177,6 +180,9 @@
 		9DD720FA29BFB36A00634AB2 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		9DD720FD29BFBD4000634AB2 /* WeeklyNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationStore.swift; sourceTree = "<group>"; };
 		9DD720FF29BFBD5100634AB2 /* WeeklyNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationView.swift; sourceTree = "<group>"; };
+		9DE2CECB29FFB3FC00A9BE6D /* LifeGoalsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalsList.swift; sourceTree = "<group>"; };
+		9DE2CECE29FFBD1400A9BE6D /* ConfettiStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiStore.swift; sourceTree = "<group>"; };
+		9DE2CED029FFBF2600A9BE6D /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalStore.swift; sourceTree = "<group>"; };
 		9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalView.swift; sourceTree = "<group>"; };
 		9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLifeCalendarView.swift; sourceTree = "<group>"; };
@@ -256,6 +262,7 @@
 		9D660B7E29EAA2FD00AE2445 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9DE2CECD29FFBD0500A9BE6D /* Confetti */,
 				9D4C753429EBF69C007FFCBC /* SFSymbolPicker */,
 				9D660B8329EACC8500AE2445 /* DatePicker */,
 			);
@@ -516,6 +523,23 @@
 			path = WeeklyNotification;
 			sourceTree = "<group>";
 		};
+		9DE2CECA29FFB3F300A9BE6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9DE2CECB29FFB3FC00A9BE6D /* LifeGoalsList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9DE2CECD29FFBD0500A9BE6D /* Confetti */ = {
+			isa = PBXGroup;
+			children = (
+				9DE2CECE29FFBD1400A9BE6D /* ConfettiStore.swift */,
+				9DE2CED029FFBF2600A9BE6D /* ConfettiView.swift */,
+			);
+			path = Confetti;
+			sourceTree = "<group>";
+		};
 		9DE3429029E6F34A00E64548 /* AddOrEditLifeGoal */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +561,7 @@
 		9DEC1FB029E588EC00305429 /* LifeGoals */ = {
 			isa = PBXGroup;
 			children = (
+				9DE2CECA29FFB3F300A9BE6D /* Views */,
 				9DEC1FB329E5891000305429 /* LifeGoalsStore.swift */,
 				9DEC1FB529E5891700305429 /* LifeGoalsView.swift */,
 			);
@@ -780,13 +805,16 @@
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
 				9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
+				9DE2CECF29FFBD1400A9BE6D /* ConfettiStore.swift in Sources */,
 				9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */,
 				9D7CE5C529BFA5ED00B57F90 /* LifeExpectancyView.swift in Sources */,
 				9DCF41F829BB993200F30BB3 /* CalendarWithCurrentYear.swift in Sources */,
 				9D156C3F29D0AC0B00F2C992 /* UserSettingsClient.swift in Sources */,
 				9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */,
 				9DACC2D529D34EDF00AA48CE /* LifeProgressView.swift in Sources */,
+				9DE2CED129FFBF2600A9BE6D /* ConfettiView.swift in Sources */,
 				9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */,
+				9DE2CECC29FFB3FC00A9BE6D /* LifeGoalsList.swift in Sources */,
 				9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */,
 				9DEBBBA429CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift in Sources */,
 				9DEBBBA629CF5118008CE08C /* CurrentYearProgressView.swift in Sources */,
