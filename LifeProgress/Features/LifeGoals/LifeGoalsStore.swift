@@ -31,7 +31,7 @@ struct LifeGoalsReducer: ReducerProtocol {
         }
         
         /// Whether the about calendar sheet is visible.
-        var listType: ListType = .completed
+        var listType: ListType = .uncompleted
         
         /// Whether the about calendar sheet is visible.
         var isAddLifeGoalSheetVisible = false
@@ -73,15 +73,15 @@ struct LifeGoalsReducer: ReducerProtocol {
     /// An enumeration representing the two possible types of calendars:
     ///  one for the current year, and one for the entire life.
     enum ListType: Equatable, CaseIterable {
-        case completed
         case uncompleted
+        case completed
         
         var title: String {
             switch self {
-            case .completed:
-                return "Completed"
             case .uncompleted:
                 return "Uncompleted"
+            case .completed:
+                return "Completed"
             }
         }
     }
