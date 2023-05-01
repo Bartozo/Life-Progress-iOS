@@ -27,32 +27,34 @@ struct LifeGoalsList: View {
             List {
                 Section {
                     ForEach(viewStore.lifeGoals, id: \.id) { lifeGoal in
-                        Button {
-                            viewStore.send(.lifeGoalTapped(lifeGoal))
-                        } label: {
-                            LifeGoalRow(lifeGoal: lifeGoal)
-                                .swipeActions(allowsFullSwipe: false) {
-                                    Button(role: .destructive) {
-                                        viewStore.send(.swipeToDelete(lifeGoal))
-                                    } label: {
-                                        Label("Delete", systemImage: "trash.fill")
-                                    }
-                                    
-                                    if lifeGoal.isCompleted {
-                                        Button {
-                                            viewStore.send(.swipeToUncomplete(lifeGoal), animation: .default)
-                                        } label: {
-                                            Label("Uncomplete", systemImage: "xmark.circle.fill")
-                                        }
-                                    } else {
-                                        Button {
-                                            viewStore.send(.swipeToComplete(lifeGoal), animation: .default)
-                                        } label: {
-                                            Label("Complete", systemImage: "checkmark.circle.fill")
-                                        }
-                                        .tint(.green)
-                                    }
+                        LifeGoalRow(
+                            lifeGoal: lifeGoal,
+                            onTapped: { viewStore.send(.lifeGoalTapped(lifeGoal)) }
+                        )
+                        .swipeActions(allowsFullSwipe: false) {
+                            Button(role: .destructive) {
+                                viewStore.send(.swipeToDelete(lifeGoal))
+                            } label: {
+                                Label("Delete", systemImage: "trash.fill")
+                            }
+                                
+                            if lifeGoal.isCompleted {
+                                Button {
+                                    viewStore.send(.swipeToUncomplete(lifeGoal))
+                                } label: {
+                                    Label("Uncomplete", systemImage: "xmark.circle.fill")
                                 }
+                            } else {
+                                Button {
+                                    viewStore.send(.swipeToComplete(lifeGoal))
+                                } label: {
+                                    Label("Complete", systemImage: "checkmark.circle.fill")
+                                }
+                                .tint(.green)
+                            }
+                        }
+                        .onTapGesture {
+                            viewStore.send(.lifeGoalTapped(lifeGoal))
                         }
                     }
                 } header: {
@@ -80,24 +82,27 @@ struct LifeGoalsList: View {
 
 private struct LifeGoalRow: View {
     let lifeGoal: LifeGoal
+    let onTapped: () -> Void
 
     var body: some View {
-        HStack {
-            Image(systemName: lifeGoal.symbolName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 30, height: 30)
-                .padding(.trailing, 10)
+        Button(action: onTapped) {
+            HStack {
+                Image(systemName: lifeGoal.symbolName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .padding(.trailing, 10)
 
-            VStack(alignment: .leading) {
-                Text(lifeGoal.title)
-                    .font(.headline)
-                    .lineLimit(2)
+                VStack(alignment: .leading) {
+                    Text(lifeGoal.title)
+                        .font(.headline)
+                        .lineLimit(2)
 
-                Text(lifeGoal.details)
-                    .lineLimit(2)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                    Text(lifeGoal.details)
+                        .lineLimit(2)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
             }
         }
     }
