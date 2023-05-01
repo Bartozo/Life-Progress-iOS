@@ -19,7 +19,6 @@
 		9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9D660B7C29EA998900AE2445 /* SymbolPicker */; };
 		9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */; };
 		9D660B8229EAA31500AE2445 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D660B8129EAA31500AE2445 /* DatePickerView.swift */; };
-		9D660B8629EACCC900AE2445 /* SheetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D660B8529EACCC900AE2445 /* SheetStore.swift */; };
 		9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */; };
 		9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */; };
 		9D6ECBC729BA5345000DF545 /* LifeCalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */; };
@@ -132,7 +131,6 @@
 		9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppView.swift; sourceTree = "<group>"; };
 		9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerStore.swift; sourceTree = "<group>"; };
 		9D660B8129EAA31500AE2445 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		9D660B8529EACCC900AE2445 /* SheetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetStore.swift; sourceTree = "<group>"; };
 		9D6ECBBE29BA378C000DF545 /* AgeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroup.swift; sourceTree = "<group>"; };
 		9D6ECBC629BA5345000DF545 /* LifeCalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarStore.swift; sourceTree = "<group>"; };
 		9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Progress - Calendar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				9D4C753429EBF69C007FFCBC /* SFSymbolPicker */,
-				9D660B8429EACCA900AE2445 /* Sheet */,
 				9D660B8329EACC8500AE2445 /* DatePicker */,
 			);
 			path = Shared;
@@ -270,14 +267,6 @@
 				9D660B8129EAA31500AE2445 /* DatePickerView.swift */,
 			);
 			path = DatePicker;
-			sourceTree = "<group>";
-		};
-		9D660B8429EACCA900AE2445 /* Sheet */ = {
-			isa = PBXGroup;
-			children = (
-				9D660B8529EACCC900AE2445 /* SheetStore.swift */,
-			);
-			path = Sheet;
 			sourceTree = "<group>";
 		};
 		9D6ECBC429BA52CB000DF545 /* Features */ = {
@@ -800,7 +789,6 @@
 				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,
 				9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */,
 				9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */,
-				9D660B8629EACCC900AE2445 /* SheetStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
