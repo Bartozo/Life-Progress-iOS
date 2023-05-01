@@ -17,8 +17,8 @@ struct AddOrEditLifeGoalView: View {
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store) { viewStore in
-                let isEditing = viewStore.isEditing
+            WithViewStore(self.store, observe: \.isEditing) { viewStore in
+                let isEditing = viewStore.state
                 
                 Form {
                     IconSection(store: self.store)
@@ -129,17 +129,18 @@ private struct OthersSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store) { viewStore in
+            WithViewStore(self.store, observe: \.isCompleted) { viewStore in
+                let isCompleted = viewStore.state
+                
                 Toggle(
                     "Mark as completed",
                     isOn: viewStore.binding(
-                        get: \.isCompleted,
+                        get: { $0 },
                         send: AddOrEditLifeGoalReducer.Action.isCompletedChanged
                     ).animation(.default)
                 )
-                
             
-                if viewStore.isCompleted {
+                if isCompleted {
                     DatePickerView(
                         title: "Accomplished on day",
                         store: self.store.scope(
