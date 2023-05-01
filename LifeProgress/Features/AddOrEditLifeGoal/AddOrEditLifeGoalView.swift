@@ -125,6 +125,8 @@ private struct DetailsSection: View {
 
 private struct OthersSection: View {
     
+    @Environment(\.requestReview) var requestReview
+    
     let store: AddOrEditLifeGoalStore
     
     var body: some View {
@@ -139,6 +141,12 @@ private struct OthersSection: View {
                         send: AddOrEditLifeGoalReducer.Action.isCompletedChanged
                     ).animation(.default)
                 )
+                .onChange(of: isCompleted) { isCompleted in
+                    guard isCompleted else { return }
+                    
+                    requestReview()
+                }
+            
             
                 if isCompleted {
                     DatePickerView(
