@@ -70,11 +70,11 @@ struct RootView: View {
                                     )
                                 )
                                 
-                            case .profile:
-                                ProfileView(
+                            case .settings:
+                                SettingsView(
                                     store: store.scope(
-                                        state: \.profile,
-                                        action: RootReducer.Action.profile
+                                        state: \.settings,
+                                        action: RootReducer.Action.settings
                                     )
                                 )
                             }
@@ -113,11 +113,11 @@ struct RootView: View {
                                     )
                                 )
                                 
-                            case .profile:
-                                ProfileView(
+                            case .settings:
+                                SettingsView(
                                     store: store.scope(
-                                        state: \.profile,
-                                        action: RootReducer.Action.profile
+                                        state: \.settings,
+                                        action: RootReducer.Action.settings
                                     )
                                 )
                             }

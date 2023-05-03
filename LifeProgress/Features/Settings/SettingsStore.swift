@@ -1,5 +1,5 @@
 //
-//  ProfileStore.swift
+//  SettingsStore.swift
 //  LifeProgress
 //
 //  Created by Bartosz Król on 13/03/2023.
@@ -8,14 +8,17 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `ProfileReducer`'s state and action types.
-typealias ProfileStore = Store<ProfileReducer.State, ProfileReducer.Action>
+/// A type alias for a store of the `SettingsReducer`'s state and action types.
+typealias SettingsStore = Store<SettingsReducer.State, SettingsReducer.Action>
 
-/// A reducer that manages the state of the profile.
-struct ProfileReducer: ReducerProtocol {
-    
-    /// The state of the profile.
+/// A reducer that manages the state of the settings.
+struct SettingsReducer: ReducerProtocol {
+
+    /// The state of the settings.
     struct State: Equatable {
+        /// The in-app purchases's state.
+        var iap = IAPReducer.State()
+        
         /// The user's birthday state.
         var birthday = BirthdayReducer.State()
         
@@ -29,8 +32,10 @@ struct ProfileReducer: ReducerProtocol {
         var theme = ThemeReducer.State()
     }
     
-    /// The actions that can be taken on the profile.
+    /// The actions that can be taken on the settings.
     enum Action: Equatable {
+        /// The actions that can be taken on the in-app purchase.
+        case iap(IAPReducer.Action)
         /// The actions that can be taken on the birthday.
         case birthday(BirthdayReducer.Action)
         /// The actions that can be taken on the life expectancy.
@@ -43,6 +48,9 @@ struct ProfileReducer: ReducerProtocol {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
+        Scope(state: \.iap, action: /Action.iap) {
+            IAPReducer()
+        }
         Scope(state: \.birthday, action: /Action.birthday) {
             BirthdayReducer()
         }
@@ -54,6 +62,24 @@ struct ProfileReducer: ReducerProtocol {
         }
         Scope(state: \.theme, action: /Action.theme) {
             ThemeReducer()
+        }
+        Reduce { state, action in
+            switch action {
+            case .iap(_):
+                return .none
+                
+            case .birthday(_):
+                return .none
+                
+            case .lifeExpectancy(_):
+                return .none
+                
+            case .weeklyNotification(_):
+                return .none
+                
+            case .theme(_):
+                return .none
+            }
         }
     }
 }

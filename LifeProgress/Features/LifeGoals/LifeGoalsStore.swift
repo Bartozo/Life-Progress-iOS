@@ -17,6 +17,9 @@ struct LifeGoalsReducer: ReducerProtocol {
     
     /// The state of the about the app.
     struct State: Equatable {
+        /// The in-app purchases's state.
+        var iap = IAPReducer.State()
+        
         /// The user's life goals.
         var lifeGoals: [LifeGoal] = []
         
@@ -46,6 +49,8 @@ struct LifeGoalsReducer: ReducerProtocol {
     
     /// The actions that can be taken on the about the app.
     enum Action: Equatable {
+        /// The actions that can be taken on the in-app purchase.
+        case iap(IAPReducer.Action)
         /// Indicates that the view has appeared.
         case onAppear
         /// Indicates that list type has changed.
@@ -92,11 +97,17 @@ struct LifeGoalsReducer: ReducerProtocol {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
+        Scope(state: \.iap, action: /Action.iap) {
+            IAPReducer()
+        }
         Scope(state: \.confetti, action: /Action.confetti) {
             ConfettiReducer()
         }
         Reduce { state, action in
             switch action {
+            case .iap(_):
+                return .none
+                
             case .onAppear:
                 return .task {
                     let lifeGoals = await lifeGoalsClient.fetchLifeGoals()
@@ -112,8 +123,12 @@ struct LifeGoalsReducer: ReducerProtocol {
                 return .none
                 
             case .addButtonTapped:
-                state.isAddLifeGoalSheetVisible = true
-                state.addOrEditLifeGoal = .init()
+                if !state.iap.hasUnlockedPremium && state.lifeGoals.count >= 3 {
+                    state.iap.isSheetVisible = true
+                } else {
+                    state.isAddLifeGoalSheetVisible = true
+                    state.addOrEditLifeGoal = .init()
+                }
                 return .none
                 
             case .closeAddLifeGoalSheet:

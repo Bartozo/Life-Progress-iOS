@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  SettingsView.swift
 //  LifeProgress
 //
 //  Created by Bartosz Król on 13/03/2023.
@@ -8,23 +8,30 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct ProfileView: View {
+struct SettingsView: View {
     
-    let store: ProfileStore
+    let store: SettingsStore
     
     var body: some View {
         Form {
+            PremiumCell(
+                store: self.store.scope(
+                    state: \.iap,
+                    action: SettingsReducer.Action.iap
+                )
+            )
+            
             Section {
                 BirthdayView(
                     store: self.store.scope(
                         state: \.birthday,
-                        action: ProfileReducer.Action.birthday
+                        action: SettingsReducer.Action.birthday
                     )
                 )
                 LifeExpectancyView(
                     store: self.store.scope(
                         state: \.lifeExpectancy,
-                        action: ProfileReducer.Action.lifeExpectancy
+                        action: SettingsReducer.Action.lifeExpectancy
                     )
                 )
             } header: {
@@ -35,7 +42,7 @@ struct ProfileView: View {
                 WeeklyNotificationView(
                     store: self.store.scope(
                         state: \.weeklyNotification,
-                        action: ProfileReducer.Action.weeklyNotification
+                        action: SettingsReducer.Action.weeklyNotification
                     )
                 )
             } header: {
@@ -48,7 +55,7 @@ struct ProfileView: View {
                 ThemeView(
                     store: self.store.scope(
                         state: \.theme,
-                        action: ProfileReducer.Action.theme
+                        action: SettingsReducer.Action.theme
                     )
                 )
             } header: {
@@ -59,15 +66,18 @@ struct ProfileView: View {
     }
 }
 
+
 // MARK: - Previews
 
 struct ProfileView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<ProfileReducer.State, ProfileReducer.Action>(
-            initialState: ProfileReducer.State(),
-            reducer: ProfileReducer()
+        let store = Store<SettingsReducer.State, SettingsReducer.Action>(
+            initialState: SettingsReducer.State(
+                iap: .init()
+            ),
+            reducer: SettingsReducer()
         )
-        ProfileView(store: store)
+        SettingsView(store: store)
     }
 }

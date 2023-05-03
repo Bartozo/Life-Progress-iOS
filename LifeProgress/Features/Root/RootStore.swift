@@ -22,9 +22,9 @@ struct RootReducer: ReducerProtocol {
         /// The life goals state.
         var lifeGoals = LifeGoalsReducer.State()
 
-        /// The profile's state.
-        var profile = ProfileReducer.State()
-        
+        /// The settings's state.
+        var settings = SettingsReducer.State()
+
         /// The current selected tab.
         var selectedTab: Tab? = .lifeCalendar
         
@@ -42,8 +42,8 @@ struct RootReducer: ReducerProtocol {
             case lifeCalendar
             /// Represents life goals screen
             case lifeGoals
-            /// Represents profile screen
-            case profile
+            /// Represents settings screen
+            case settings
             
 
             /// The unique identifier for each case, derived from the rawValue of the enumeration.
@@ -56,8 +56,8 @@ struct RootReducer: ReducerProtocol {
                     return "Life Calendar"
                 case .lifeGoals:
                     return "Life Goals"
-                case .profile:
-                    return "Profile"
+                case .settings:
+                    return "Settings"
                 }
             }
             
@@ -69,8 +69,8 @@ struct RootReducer: ReducerProtocol {
                     return "calendar"
                 case .lifeGoals:
                     return "flag"
-                case .profile:
-                    return "person"
+                case .settings:
+                    return "gear"
                 }
             }
         }
@@ -82,8 +82,8 @@ struct RootReducer: ReducerProtocol {
         case lifeCalendar(LifeCalendarReducer.Action)
         /// The actions that can be taken on the life goals.
         case lifeGoals(LifeGoalsReducer.Action)
-        /// The actions that can be taken on the profile.
-        case profile(ProfileReducer.Action)
+        /// The actions that can be taken on the settings.
+        case settings(SettingsReducer.Action)
         /// Indicates that the tab has changed.
         case tabChanged(State.Tab?)
         /// Indicates that the tab index has changed.
@@ -100,8 +100,8 @@ struct RootReducer: ReducerProtocol {
         Scope(state: \.lifeGoals, action: /Action.lifeGoals) {
             LifeGoalsReducer()
         }
-        Scope(state: \.profile, action: /Action.profile) {
-            ProfileReducer()
+        Scope(state: \.settings, action: /Action.settings) {
+            SettingsReducer()
         }
         Reduce { state, action in
             switch action {
@@ -111,7 +111,7 @@ struct RootReducer: ReducerProtocol {
             case .lifeGoals(_):
                 return .none
                 
-            case .profile(_):
+            case .settings(_):
                 return .none
                 
             case .tabChanged(let tab):

@@ -16,8 +16,18 @@ struct LifeGoalsView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.createdAt)])
     var lifeGoalEntities: FetchedResults<LifeGoalEntity>
     
+    struct ViewState: Equatable {
+        let isAddLifeGoalSheetVisible: Bool
+        let isIAPSheetVisible: Bool
+
+        init(state: LifeGoalsReducer.State) {
+            self.isAddLifeGoalSheetVisible = state.isAddLifeGoalSheetVisible
+            self.isIAPSheetVisible = state.iap.isSheetVisible
+        }
+    }
+    
     var body: some View {
-        WithViewStore(self.store, observe: \.isAddLifeGoalSheetVisible) { viewStore in
+        WithViewStore(self.store, observe: ViewState.init) { viewStore in
             LifeGoalsList(store: self.store)
                 .navigationTitle("Life Goals")
                 .toolbar {
@@ -30,7 +40,18 @@ struct LifeGoalsView: View {
                       }
                   }
                 .sheet(isPresented: viewStore.binding(
-                    get: { $0 },
+                    get: \.isIAPSheetVisible,
+                    send: LifeGoalsReducer.Action.iap(.hideSheet)
+                )) {
+                    IAPView(
+                        store: self.store.scope(
+                            state: \.iap,
+                            action: LifeGoalsReducer.Action.iap
+                        )
+                    )
+                }
+                .sheet(isPresented: viewStore.binding(
+                    get: \.isAddLifeGoalSheetVisible,
                     send: LifeGoalsReducer.Action.closeAddLifeGoalSheet
                 )) {
                     IfLetStore(
@@ -44,6 +65,9 @@ struct LifeGoalsView: View {
                 }
                 .onReceive(lifeGoalEntities.publisher) { _ in
                     viewStore.send(.onAppear, animation: .default)
+                }
+                .onAppear {
+                    viewStore.send(.iap(.refreshPurchasedProducts))
                 }
                 .overlay {
                     ConfettiView(store: self.store.scope(

@@ -21,7 +21,7 @@ struct LifeProgressApp: App {
             RootView(store: self.store)
                 .modifier(
                     ThemeApplicator(
-                        store: self.store.scope(state: \.profile.theme).actionless
+                        store: self.store.scope(state: \.settings.theme).actionless
                     )
                 )
                 .environment(\.managedObjectContext, coreDataManager.container.viewContext)
