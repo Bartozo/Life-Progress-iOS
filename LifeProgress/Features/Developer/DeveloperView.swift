@@ -32,13 +32,6 @@ struct DeveloperView: View {
                     ),
                     confettis: [
                         .text("❤️"),
-                        .text("💙"),
-                        .text("💚"),
-                        .text("🧡"),
-                        .text("💛"),
-                        .text("💜"),
-                        .text("🤍"),
-                        .text("🖤")
                     ]
                 )
             }
