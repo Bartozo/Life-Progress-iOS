@@ -31,6 +31,7 @@ struct LifeExpectancyView: View {
                     Text("\(lifeExpectancy)")
                 }
                 .buttonStyle(.bordered)
+                .tint(.gray)
                 .foregroundColor(isSliderVisible ? theme.color : .primary)
             }
             .onAppear {

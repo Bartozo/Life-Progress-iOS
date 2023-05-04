@@ -30,6 +30,7 @@ struct BirthdayView: View {
                     Text("\(DateFormatters.medium.string(from: viewStore.birthday))")
                 }
                 .buttonStyle(.bordered)
+                .tint(.gray)
                 .foregroundColor(isDatePickerVisible ? theme.color : .primary)
             }
             .onAppear {
