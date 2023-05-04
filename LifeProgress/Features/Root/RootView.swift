@@ -10,6 +10,26 @@ import ComposableArchitecture
 
 struct RootView: View {
     
+    let store: RootStore
+    
+    var body: some View {
+        WithViewStore(self.store, observe: \.didCompleteOnboarding) { viewStore in
+            if viewStore.state {
+                ContentView(store: self.store)
+            } else {
+                OnboardingView(
+                    store: self.store.scope(
+                        state: \.onboarding,
+                        action: RootReducer.Action.onboarding
+                    )
+                )
+            }
+        }
+    }
+}
+
+private struct ContentView: View {
+    
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.theme) var theme
     
@@ -131,8 +151,8 @@ struct RootView: View {
             }
         }
     }
-
 }
+
 
 // MARK: - Previews
 

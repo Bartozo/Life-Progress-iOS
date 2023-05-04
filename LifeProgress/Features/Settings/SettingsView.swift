@@ -61,8 +61,38 @@ struct SettingsView: View {
             } header: {
                 Text("Theme")
             }
+            
+            Section {
+                SettingsCell(title: "Share the app", systemImage: "square.and.arrow.up") {
+                    ShareLink("Check out this cool app!", item: URL(string: "https://www.google.com")!)
+                }
+                SettingsCell(title: "Rate the app", systemImage: "star") {
+                    
+                }
+                SettingsCell(title: "Contact developer", systemImage: "envelope") {
+                    
+                }
+            } header: {
+                Text("Feedback")
+            }
         }
-        .navigationTitle("Profile")
+        .navigationTitle("Settings")
+    }
+    
+    private func shareApp() {
+        let items = ["Check out this cool app!"]
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func rateApp() {
+        guard let url = URL(string: "https://itunes.apple.com/app/idYOUR_APP_ID_HERE") else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func contactDeveloper() {
+        guard let email = URL(string: "mailto:youremail@example.com") else { return }
+        UIApplication.shared.open(email)
     }
 }
 

@@ -16,6 +16,9 @@ struct RootReducer: ReducerProtocol {
     
     /// The state of the root.
     struct State: Equatable {
+        /// The onboarding's state.
+        var onboarding = OnboardingReducer.State()
+        
         /// The life calendar's state.
         var lifeCalendar = LifeCalendarReducer.State()
         
@@ -30,6 +33,9 @@ struct RootReducer: ReducerProtocol {
         
         /// The index of selected tab.
         var selectedTabIndex: Int = 0
+        
+        /// Whether the user has completed the onboarding flow.
+        var didCompleteOnboarding = UserDefaultsHelper.didCompleteOnboarding()
         
         /// The path used for NavigationStack.
         var path: [Tab] = []
@@ -78,6 +84,8 @@ struct RootReducer: ReducerProtocol {
     
     /// The actions that can be taken on the root.
     enum Action: Equatable {
+        /// The actions that can be taken on the onboarding.
+        case onboarding(OnboardingReducer.Action)
         /// The actions that can be taken on the life calendar.
         case lifeCalendar(LifeCalendarReducer.Action)
         /// The actions that can be taken on the life goals.
@@ -94,6 +102,9 @@ struct RootReducer: ReducerProtocol {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
+        Scope(state: \.onboarding, action: /Action.onboarding) {
+            OnboardingReducer()
+        }
         Scope(state: \.lifeCalendar, action: /Action.lifeCalendar) {
             LifeCalendarReducer()
         }
@@ -105,6 +116,12 @@ struct RootReducer: ReducerProtocol {
         }
         Reduce { state, action in
             switch action {
+            case .onboarding(let onboardingAction):
+                if onboardingAction == .finishOnboarding {
+                    state.didCompleteOnboarding = true
+                }
+                return .none
+                
             case .lifeCalendar(_):
                 return .none
                 
