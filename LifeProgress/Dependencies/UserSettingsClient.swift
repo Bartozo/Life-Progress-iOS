@@ -43,13 +43,20 @@ struct UserSettingsClient {
     
     /// A publisher that emits the user's theme whenever it changes.
     var themePublisher: AnyPublisher<Theme, Never>
+    
+    /// A closure that returns the did complete onboarding flag.
+    var getDidCompleteOnboarding: () -> Bool
+    
+    /// A closure that asynchronously updates the did complete onboarding flag.
+    var updateDidCompleteOnboarding: (Bool) async -> Void
 }
 
 // MARK: Dependency Key
 
 extension UserSettingsClient: DependencyKey {
     
-    /// A live value of `UserSettingsClient` that uses the `UserDefaultsHelper` for managing user settings.
+    /// A live value of `UserSettingsClient` that uses the `NSUbiquitousKeyValueStoreHelper`
+    /// and `UserDefaultsHelper` for managing user settings.
     static let liveValue = Self(
         getBirthday: { NSUbiquitousKeyValueStoreHelper.getBirthday() },
         updateBirthday: { NSUbiquitousKeyValueStoreHelper.saveBirthday($0) },
@@ -61,7 +68,9 @@ extension UserSettingsClient: DependencyKey {
         updateTheme: { NSUbiquitousKeyValueStoreHelper.saveTheme($0) },
         birthdayPublisher: makeBirthdayPublisher(),
         lifeExpectancyPublisher: makeLifeExpectancyPublisher(),
-        themePublisher: makeThemePublisher()
+        themePublisher: makeThemePublisher(),
+        getDidCompleteOnboarding: { UserDefaultsHelper.didCompleteOnboarding() },
+        updateDidCompleteOnboarding: { UserDefaultsHelper.saveDidCompleteOnboarding($0) }
     )
     
     /// Creates a publisher that emits the user's birthday whenever it changes.
@@ -101,7 +110,9 @@ extension UserSettingsClient: TestDependencyKey {
         updateTheme: { _ in },
         birthdayPublisher: makeTestBirthdayPublisher(),
         lifeExpectancyPublisher: makeTestLifeExpectancyPublisher(),
-        themePublisher: makeThemePublisher()
+        themePublisher: makeThemePublisher(),
+        getDidCompleteOnboarding: { true },
+        updateDidCompleteOnboarding: { _ in }
     )
 
     /// A test instance of `UserSettingsClient` with mock data for unit testing purposes.
@@ -116,7 +127,9 @@ extension UserSettingsClient: TestDependencyKey {
         updateTheme: { _ in },
         birthdayPublisher: makeTestBirthdayPublisher(),
         lifeExpectancyPublisher: makeTestLifeExpectancyPublisher(),
-        themePublisher: makeThemePublisher()
+        themePublisher: makeThemePublisher(),
+        getDidCompleteOnboarding: { true },
+        updateDidCompleteOnboarding: { _ in }
     )
     
     /// Creates a test publisher that emits a constant mock birthday.
