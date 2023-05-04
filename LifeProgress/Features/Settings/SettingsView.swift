@@ -74,6 +74,18 @@ struct SettingsView: View {
                 }
             } header: {
                 Text("Feedback")
+            } footer: {
+                HStack {
+                    Spacer()
+                    DeveloperView(
+                        store: self.store.scope(
+                            state: \.developer,
+                            action: SettingsReducer.Action.developer
+                        )
+                    )
+                    .padding()
+                    Spacer()
+                }
             }
         }
         .navigationTitle("Settings")

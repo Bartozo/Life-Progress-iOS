@@ -48,6 +48,8 @@
 		9D813B182A039B710054020F /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B172A039B710054020F /* About.swift */; };
 		9D813B1E2A03A76A0054020F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */; };
 		9D813B1F2A03A7CC0054020F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */; };
+		9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B212A03C99D0054020F /* DeveloperStore.swift */; };
+		9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B252A03CCE60054020F /* DeveloperView.swift */; };
 		9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8229E3174600841A47 /* LifeProgressWidget.swift */; };
 		9D869C8529E3175000841A47 /* YearProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8429E3175000841A47 /* YearProgressWidget.swift */; };
 		9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
@@ -181,6 +183,8 @@
 		9D813B142A039AA20054020F /* OnboardingAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAboutView.swift; sourceTree = "<group>"; };
 		9D813B172A039B710054020F /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		9D813B212A03C99D0054020F /* DeveloperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperStore.swift; sourceTree = "<group>"; };
+		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 		9D6ECBC429BA52CB000DF545 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D813B202A03C9810054020F /* Developer */,
 				9D8041402A0262B400E3B74A /* Onboarding */,
 				9D660B7E29EAA2FD00AE2445 /* Shared */,
 				9DE3429029E6F34A00E64548 /* AddOrEditLifeGoal */,
@@ -482,6 +487,15 @@
 				9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		9D813B202A03C9810054020F /* Developer */ = {
+			isa = PBXGroup;
+			children = (
+				9D813B212A03C99D0054020F /* DeveloperStore.swift */,
+				9D813B252A03CCE60054020F /* DeveloperView.swift */,
+			);
+			path = Developer;
 			sourceTree = "<group>";
 		};
 		9D869C8129E3173200841A47 /* Widgets */ = {
@@ -925,6 +939,7 @@
 				9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */,
 				9D6C5E6E2A02A37F0024F11F /* OnboardingNotificationsView.swift in Sources */,
 				9D813B182A039B710054020F /* About.swift in Sources */,
+				9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */,
 				9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */,
 				9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */,
 				9D46DCD329D839E900331456 /* AboutTheAppStore.swift in Sources */,
@@ -951,6 +966,7 @@
 				9DE2CECC29FFB3FC00A9BE6D /* LifeGoalsList.swift in Sources */,
 				9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */,
 				9DEBBBA429CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift in Sources */,
+				9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */,
 				9DEBBBA629CF5118008CE08C /* CurrentYearProgressView.swift in Sources */,
 				9D8041422A0263F200E3B74A /* OnboardingStore.swift in Sources */,
 				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,

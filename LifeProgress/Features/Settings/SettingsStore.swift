@@ -30,6 +30,9 @@ struct SettingsReducer: ReducerProtocol {
         
         /// The user's theme.
         var theme = ThemeReducer.State()
+        
+        /// The developer's state.
+        var developer = DeveloperReducer.State()
     }
     
     /// The actions that can be taken on the settings.
@@ -44,6 +47,8 @@ struct SettingsReducer: ReducerProtocol {
         case weeklyNotification(WeeklyNotificationReducer.Action)
         /// The actions that can be taken on the theme.
         case theme(ThemeReducer.Action)
+        /// The actions that can be taken on the developer.
+        case developer(DeveloperReducer.Action)
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -63,6 +68,9 @@ struct SettingsReducer: ReducerProtocol {
         Scope(state: \.theme, action: /Action.theme) {
             ThemeReducer()
         }
+        Scope(state: \.developer, action: /Action.developer) {
+            DeveloperReducer()
+        }
         Reduce { state, action in
             switch action {
             case .iap(_):
@@ -78,6 +86,9 @@ struct SettingsReducer: ReducerProtocol {
                 return .none
                 
             case .theme(_):
+                return .none
+                
+            case .developer:
                 return .none
             }
         }
