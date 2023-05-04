@@ -50,6 +50,7 @@
 		9D813B1F2A03A7CC0054020F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */; };
 		9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B212A03C99D0054020F /* DeveloperStore.swift */; };
 		9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B252A03CCE60054020F /* DeveloperView.swift */; };
+		9D813B282A03E8F10054020F /* OnboardingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */; };
 		9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8229E3174600841A47 /* LifeProgressWidget.swift */; };
 		9D869C8529E3175000841A47 /* YearProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8429E3175000841A47 /* YearProgressWidget.swift */; };
 		9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
@@ -185,6 +186,7 @@
 		9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		9D813B212A03C99D0054020F /* DeveloperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperStore.swift; sourceTree = "<group>"; };
 		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
+		9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedView.swift; sourceTree = "<group>"; };
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				9D80414B2A026BD000E3B74A /* OnboardingLifeExpectancyView.swift */,
 				9D6C5E6D2A02A37F0024F11F /* OnboardingNotificationsView.swift */,
 				9D813B142A039AA20054020F /* OnboardingAboutView.swift */,
+				9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				9D80414A2A0268B200E3B74A /* OnboardingBirthdayView.swift in Sources */,
 				9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */,
 				9DEC1FB629E5891700305429 /* LifeGoalsView.swift in Sources */,
+				9D813B282A03E8F10054020F /* OnboardingCompletedView.swift in Sources */,
 				9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */,
 				9D6C5E6E2A02A37F0024F11F /* OnboardingNotificationsView.swift in Sources */,
 				9D813B182A039B710054020F /* About.swift in Sources */,

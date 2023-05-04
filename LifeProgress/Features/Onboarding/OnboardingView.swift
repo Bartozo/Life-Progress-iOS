@@ -54,6 +54,9 @@ struct OnboardingView: View {
 
                     case .notifications:
                         OnboardingNotificationsView(store: self.store)
+                        
+                    case .completed:
+                        OnboardingCompletedView(store: self.store)
                     }
                 }
             }

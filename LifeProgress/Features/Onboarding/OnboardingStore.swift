@@ -38,6 +38,8 @@ struct OnboardingReducer: ReducerProtocol {
             case lifeExpectancy
             /// Represents the notifications screen
             case notifications
+            /// Represents the completed screen
+            case completed
             
             /// The unique identifier for each case, derived from the rawValue of the enumeration.
             var id: Int { self.rawValue }
@@ -60,6 +62,8 @@ struct OnboardingReducer: ReducerProtocol {
         case skipNotificationsButtonTapped
         /// Indicates that path has changed.
         case pathChanged([State.Screen])
+        /// Indicates that start journey button has been tapped.
+        case startJourneyButtonTapped
         /// Indicates that onboarding is finished.
         case finishOnboarding
     }
@@ -106,26 +110,35 @@ struct OnboardingReducer: ReducerProtocol {
                     state.path.append(State.Screen.notifications)
                     return .none
                 }
+                
+                guard state.path.contains(State.Screen.completed) else {
+                    state.path.append(State.Screen.completed)
+                    return .none
+                }
                 return .none
                 
             case .allowNotificationsButtonTapped:
                 return .task {
                     let notificationCenter = UNUserNotificationCenter.current()
                     try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
-                    await self.userSettingsClient.updateDidCompleteOnboarding(true)
-                    return .finishOnboarding
+                    return .continueButtonTapped
                 }
                 .cancellable(id: CancelID.self)
                 
             case .skipNotificationsButtonTapped:
-                return .task {
-                    await self.userSettingsClient.updateDidCompleteOnboarding(true)
-                    return .finishOnboarding
-                }
+                state.path.append(State.Screen.completed)
+                return .none
                 
             case .pathChanged(let path):
                 state.path = path
                 return .none
+                
+            case .startJourneyButtonTapped:
+                return .task {
+                    await self.userSettingsClient.updateDidCompleteOnboarding(true)
+                    return .finishOnboarding
+                }
+                .cancellable(id: CancelID.self)
                 
             case .finishOnboarding:
                 return .none
