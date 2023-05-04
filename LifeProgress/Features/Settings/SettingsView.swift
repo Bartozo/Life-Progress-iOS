@@ -108,6 +108,8 @@ struct ProfileView_Previews: PreviewProvider {
             ),
             reducer: SettingsReducer()
         )
-        SettingsView(store: store)
+        NavigationStack {
+            SettingsView(store: store)
+        }
     }
 }

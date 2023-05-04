@@ -79,12 +79,80 @@ struct LifeGoalsList: View {
                 }
             }
             .listStyle(.plain)
+            .overlay {
+                if viewStore.lifeGoals.isEmpty {
+                    GeometryReader { geometry in
+                        VStack {
+                            switch viewStore.listType {
+                            case .completed:
+                                EmptyLifeGoalsCompletedList()
+                                
+                            case .uncompleted:
+                                EmptyLifeGoalsUncompletedList()
+                            }
+                        }
+                        .frame(
+                            width: geometry.size.width,
+                            height: geometry.size.height
+                        )
+                    }
+                }
+            }
         }
     }
 }
 
+private struct EmptyLifeGoalsCompletedList: View {
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 20) {
+            VStack(spacing: 10) {
+                Image(systemName: "checkmark.circle")
+                   .font(.largeTitle)
+                   .foregroundColor(.gray)
+
+                Text("No Completed Goals")
+                   .font(.callout)
+                   .foregroundColor(.gray)
+            }
+
+            Text("You haven't marked any goals as completed yet. Keep working towards your objectives and celebrate your achievements here.")
+                .multilineTextAlignment(.center)
+                .font(.footnote)
+                .foregroundColor(.gray)
+         }
+        .frame(maxWidth: 300)
+    }
+}
+
+private struct EmptyLifeGoalsUncompletedList: View {
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 20) {
+            VStack(spacing: 10) {
+                Image(systemName: "square.and.pencil")
+                    .font(.largeTitle)
+                    .foregroundColor(.gray)
+
+                Text("No Active Goals")
+                    .font(.callout)
+                    .foregroundColor(.gray)
+            }
+
+            Text("You haven't set any goals yet. Start setting your objectives to track your progress and achieve personal growth.")
+                .multilineTextAlignment(.center)
+                .font(.footnote)
+                .foregroundColor(.gray)
+        }
+        .frame(maxWidth: 300)
+    }
+}
+
+
 private struct LifeGoalRow: View {
+    
     let lifeGoal: LifeGoal
+    
     let onTapped: () -> Void
 
     var body: some View {
@@ -114,6 +182,7 @@ private struct LifeGoalRow: View {
 // MARK: - Previews
 
 struct LifeGoalsList_Previews: PreviewProvider {
+    
     static var previews: some View {
         let store = Store<LifeGoalsReducer.State, LifeGoalsReducer.Action>(
             initialState: LifeGoalsReducer.State(),
