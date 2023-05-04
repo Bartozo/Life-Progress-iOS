@@ -24,9 +24,6 @@ struct AboutTheAppView: View {
                     LearnMoreSection { url in
                         openURL(URL(string: url)!)
                     }
-                    SupportSection { url in
-                        openURL(URL(string: url)!)
-                    }
                 }
                 .navigationTitle("About Life Progress")
                 .toolbar {
@@ -173,33 +170,6 @@ private struct LearnMoreSection: View {
                 tint: theme.color,
                 action: {
                     openUrl("https://github.com/Bartozo/Life-Progress-iOS")
-                }
-            )
-        }
-    }
-}
-
-// MARK: - Support section
-
-private struct SupportSection: View {
-    
-    @Environment(\.theme) var theme
-    
-    private let openUrl: (String) -> Void
-    
-    init(openUrl: @escaping (String) -> Void) {
-        self.openUrl = openUrl
-    }
-    
-    var body: some View {
-        Section("Support") {
-            CustomCell(
-                title: "Support this project",
-                description: "If you enjoy using this application and want it to has more features, you can support the development of this project by buying me a coffee.",
-                systemImage: "cup.and.saucer",
-                tint: theme.color,
-                action: {
-                    openUrl("https://www.buymeacoffee.com/bartozo")
                 }
             )
         }
