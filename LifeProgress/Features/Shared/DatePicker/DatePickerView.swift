@@ -37,6 +37,7 @@ struct DatePickerView: View {
                     Text("\(DateFormatters.medium.string(from: viewStore.date))")
                 }
                 .buttonStyle(.bordered)
+                .tint(.gray)
                 .foregroundColor(isDatePickerVisible ? theme.color : .primary)
             }
             
