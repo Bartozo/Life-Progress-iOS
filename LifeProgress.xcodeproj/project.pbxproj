@@ -73,6 +73,7 @@
 		9DACC2D529D34EDF00AA48CE /* LifeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACC2D429D34EDF00AA48CE /* LifeProgressView.swift */; };
 		9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11729C216A300265C2E /* ThemeStore.swift */; };
 		9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11929C216B800265C2E /* ThemeView.swift */; };
+		9DB996962A050930004EF0FF /* NotificationsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB996952A050930004EF0FF /* NotificationsClient.swift */; };
 		9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */; };
 		9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A029C4F88300E2A4FA /* RootView.swift */; };
 		9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A229C4FBB400E2A4FA /* Theme.swift */; };
@@ -187,6 +188,7 @@
 		9D813B212A03C99D0054020F /* DeveloperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperStore.swift; sourceTree = "<group>"; };
 		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedView.swift; sourceTree = "<group>"; };
+		9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Life-Progress---Calendar-Info.plist"; sourceTree = "<group>"; };
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		9DACC2D429D34EDF00AA48CE /* LifeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressView.swift; sourceTree = "<group>"; };
 		9DB6D11729C216A300265C2E /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
 		9DB6D11929C216B800265C2E /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		9DB996952A050930004EF0FF /* NotificationsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsClient.swift; sourceTree = "<group>"; };
 		9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStore.swift; sourceTree = "<group>"; };
 		9DC5B6A029C4F88300E2A4FA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9DC5B6A229C4FBB400E2A4FA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -351,6 +354,7 @@
 		9D70826C29B8D1A000846F55 = {
 			isa = PBXGroup;
 			children = (
+				9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */,
 				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
 				9D70827729B8D1A000846F55 /* LifeProgress */,
 				9D70828D29B8D1A100846F55 /* LifeProgressTests */,
@@ -627,6 +631,7 @@
 				9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */,
 				9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */,
 				9D70DC342A00FAFC000C2AF0 /* IAPClient.swift */,
+				9DB996952A050930004EF0FF /* NotificationsClient.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -945,6 +950,7 @@
 				9D813B182A039B710054020F /* About.swift in Sources */,
 				9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */,
 				9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */,
+				9DB996962A050930004EF0FF /* NotificationsClient.swift in Sources */,
 				9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */,
 				9D46DCD329D839E900331456 /* AboutTheAppStore.swift in Sources */,
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
@@ -1165,6 +1171,7 @@
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Life-Progress---Calendar-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Life Progress";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1204,6 +1211,7 @@
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Life-Progress---Calendar-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Life Progress";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

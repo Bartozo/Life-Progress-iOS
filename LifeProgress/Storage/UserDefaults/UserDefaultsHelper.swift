@@ -14,6 +14,7 @@ enum UserDefaultsHelper {
     /// Keys used to store objects in the user defautlts.
     enum Key: String {
         case didCompleteOnboarding = "DidCompleteOnboarding"
+        case didScheduleWeeklyNotification = "DidScheduleWeeklyNotification"
     }
     
     
@@ -37,8 +38,18 @@ enum UserDefaultsHelper {
         return defaults.bool(forKey: UserDefaultsHelper.Key.didCompleteOnboarding.rawValue)
     }
     
+    /// Returns did schedule weekly notification flag stored in the user defaults.
+    static func didScheduleWeeklyNotification() -> Bool {
+        return defaults.bool(forKey: UserDefaultsHelper.Key.didScheduleWeeklyNotification.rawValue)
+    }
+    
     /// Saves did complete onboarding flag to the user defaults.
     static func saveDidCompleteOnboarding(_ value: Bool) {
         defaults.set(value, forKey: UserDefaultsHelper.Key.didCompleteOnboarding.rawValue)
+    }
+    
+    /// Saves did schedule weekly notification flag to the user defaults.
+    static func saveDidScheduleWeeklyNotification(_ value: Bool) {
+        defaults.set(value, forKey: UserDefaultsHelper.Key.didScheduleWeeklyNotification.rawValue)
     }
 }
