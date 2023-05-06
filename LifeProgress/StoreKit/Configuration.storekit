@@ -1,0 +1,33 @@
+{
+  "identifier" : "4DCFA846",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : true,
+      "internalID" : "EEE84D45",
+      "localizations" : [
+        {
+          "description" : "Unlock exclusive features with premium",
+          "displayName" : "Life Progress Premium",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.bartozo.lifeprogress.premium",
+      "referenceName" : "Life Progress Premium",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}
