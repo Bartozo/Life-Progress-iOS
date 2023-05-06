@@ -10,6 +10,8 @@ import ComposableArchitecture
 
 struct SettingsView: View {
     
+    @Environment(\.theme) var theme
+    
     let store: SettingsStore
     
     var body: some View {
@@ -63,14 +65,27 @@ struct SettingsView: View {
             }
             
             Section {
-                SettingsCell(title: "Share the app", systemImage: "square.and.arrow.up") {
-                    ShareLink("Check out this cool app!", item: URL(string: "https://www.google.com")!)
+                ShareLink(item: URL(string: "https://apps.apple.com/us/app/life-progress-calendar/id6447311106")!) {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                            .frame(maxWidth: 30)
+                            .padding(.trailing, 10)
+                            .foregroundColor(theme.color)
+                        
+                        Text("Share the app")
+                        
+                        Spacer()
+                        NavigationLink.empty
+                            .frame(maxWidth: 30)
+                    }
                 }
+                .tint(.primary)
+                
                 SettingsCell(title: "Rate the app", systemImage: "star") {
-                    
+                    rateApp()
                 }
                 SettingsCell(title: "Contact developer", systemImage: "envelope") {
-                    
+                    contactDeveloper()
                 }
             } header: {
                 Text("Feedback")
@@ -91,19 +106,15 @@ struct SettingsView: View {
         .navigationTitle("Settings")
     }
     
-    private func shareApp() {
-        let items = ["Check out this cool app!"]
-        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
-    }
-    
     func rateApp() {
-        guard let url = URL(string: "https://itunes.apple.com/app/idYOUR_APP_ID_HERE") else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        guard let url = URL(string: "https://apps.apple.com/us/app/life-progress-calendar/id6447311106") else { return }
+        
+        UIApplication.shared.open(url)
     }
     
     func contactDeveloper() {
-        guard let email = URL(string: "mailto:youremail@example.com") else { return }
+        guard let email = URL(string: "mailto:bartozo.dev@gmail.com")  else { return }
+        
         UIApplication.shared.open(email)
     }
 }
