@@ -13,9 +13,13 @@ enum Theme: String, CaseIterable {
     case orange
     case yellow
     case green
+    case mint
+    case cyan
     case blue
+    case indigo
+    case purple
     case pink
-    case gray
+    case brown
     
     // MARK: - Computed properties
     
@@ -30,12 +34,20 @@ enum Theme: String, CaseIterable {
             return Color.yellow
         case .green:
             return Color.green
+        case .mint:
+            return Color.mint
+        case .cyan:
+            return Color.cyan
         case .blue:
             return Color.blue
+        case .indigo:
+            return Color.indigo
+        case .purple:
+            return Color.purple
         case .pink:
             return Color.pink
-        case .gray:
-            return Color.gray
+        case .brown:
+            return Color.brown
         }
     }
     
