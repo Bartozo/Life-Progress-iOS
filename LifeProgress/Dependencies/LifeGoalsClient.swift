@@ -63,6 +63,7 @@ extension LifeGoalsClient: DependencyKey {
             entity.details = lifeGoal.details
             entity.symbolName = lifeGoal.symbolName
             entity.finishedAt = lifeGoal.finishedAt
+            entity.type = 1
                         
             do {
                 viewContext.insert(entity)

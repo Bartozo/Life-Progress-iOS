@@ -10,10 +10,10 @@ import CoreData
 struct CoreDataManager {
     static let shared = CoreDataManager()
     
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
     
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "LifeProgress")
+        container = NSPersistentCloudKitContainer(name: "LifeProgress")
         if inMemory,
            let storeDescription = container.persistentStoreDescriptions.first {
             storeDescription.url = URL(fileURLWithPath: "/dev/null")
