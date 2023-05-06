@@ -95,6 +95,8 @@ struct LifeGoalsReducer: ReducerProtocol {
     
     @Dependency(\.mainQueue) var mainQueue
     
+    @Dependency(\.analyticsClient) var analyticsClient
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Scope(state: \.iap, action: /Action.iap) {
@@ -123,6 +125,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                 return .none
                 
             case .addButtonTapped:
+                analyticsClient.send("life_goals.add_button_tapped")
                 if !state.iap.hasUnlockedPremium && state.lifeGoals.count >= 3 {
                     state.iap.isSheetVisible = true
                 } else {
@@ -136,12 +139,14 @@ struct LifeGoalsReducer: ReducerProtocol {
                 return .none
                 
             case .swipeToDelete(let lifeGoal):
+                analyticsClient.send("life_goals.swipe_to_delete")
                 return .task {
                     await lifeGoalsClient.deleteLifeGoal(lifeGoal)
                     return .onAppear
                 }
                 
             case .swipeToComplete(let lifeGoal):
+                analyticsClient.send("life_goals.swipe_to_complete")
                 let newLifeGoal = LifeGoal(
                     id: lifeGoal.id,
                     title: lifeGoal.title,
@@ -158,6 +163,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                 ])
                 
             case .swipeToUncomplete(let lifeGoal):
+                analyticsClient.send("life_goals.swipe_to_uncomplete")
                 let newLifeGoal = LifeGoal(
                     id: lifeGoal.id,
                     title: lifeGoal.title,

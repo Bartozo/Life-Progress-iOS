@@ -27,7 +27,8 @@ struct WeeklyNotificationReducer: ReducerProtocol {
         /// Indicates that the view has appeared.
         case onAppear
     }
-
+    
+    @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
@@ -36,6 +37,10 @@ struct WeeklyNotificationReducer: ReducerProtocol {
             case .isWeeklyNotificationChanged:
                 state.isWeeklyNotificationEnabled.toggle()
                 NSUbiquitousKeyValueStoreHelper.saveIsWeeklyNotificationEnabled(state.isWeeklyNotificationEnabled)
+                analyticsClient.sendWithPayload(
+                    "weekly_notification.is_weekly_notification_changed", [
+                        "isWeeklyNotificationEnabled": "\(state.isWeeklyNotificationEnabled)"
+                    ])
                 return .none
                 
             case .onAppear:

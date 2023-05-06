@@ -8,6 +8,7 @@
 import SwiftUI
 import BackgroundTasks
 import ComposableArchitecture
+import TelemetryClient
 
 @main
 struct LifeProgressApp: App {
@@ -16,13 +17,21 @@ struct LifeProgressApp: App {
     
     @Dependency(\.notificationsClient) var notificationsClient
     @Dependency(\.userSettingsClient) var userSettingsClient
+    @Dependency(\.analyticsClient) var analyticsClient
     
-    let coreDataManager = CoreDataManager.shared
+    let store: RootStore
     
-    let store = RootStore(
-        initialState: RootReducer.State(),
-        reducer: RootReducer()
-    )
+    let coreDataManager: CoreDataManager
+    
+    init() {
+        self.store = RootStore(
+            initialState: RootReducer.State(),
+            reducer: RootReducer()
+        )
+        self.coreDataManager = CoreDataManager.shared
+        
+        analyticsClient.initialize()
+    }
 
     var body: some Scene {
         WindowGroup {

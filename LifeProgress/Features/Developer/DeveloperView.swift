@@ -18,7 +18,7 @@ struct DeveloperView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             Button {
-                viewStore.send(.onDeveloperButtonTapped)
+                viewStore.send(.developerButtonTapped)
             } label: {
                 Text("Developed with ❤️ by Bartozo")
                     .font(.footnote)

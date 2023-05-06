@@ -73,6 +73,8 @@ struct IAPReducer: ReducerProtocol {
     
     @Dependency(\.iapClient) var iapClient
     
+    @Dependency(\.analyticsClient) var analyticsClient
+    
     private enum CancelID {}
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -80,6 +82,7 @@ struct IAPReducer: ReducerProtocol {
         Reduce { state, action in
             switch action {
             case .fetchProducts:
+                analyticsClient.send("iap.fetch_products")
                 state.isLoading = true
                 return .task { [productIds = state.productIds] in
                     await .productsResponse(TaskResult {
@@ -89,11 +92,13 @@ struct IAPReducer: ReducerProtocol {
                 .cancellable(id: CancelID.self)
 
             case .productsResponse(.success(let products)):
+                analyticsClient.send("iap.products_response_success")
                 state.isLoading = false
                 state.products = products
                 return .none
 
             case .productsResponse(.failure):
+                analyticsClient.send("iap.products_response_failure")
                 state.isLoading = false
                 state.alert = AlertState {
                     TextState("Product Fetch Failed")
@@ -115,12 +120,14 @@ struct IAPReducer: ReducerProtocol {
                 .cancellable(id: CancelID.self)
                 
             case .purchaseResponse(.success(let productId)):
+                analyticsClient.send("iap.purchase_response_success")
                 state.purchasedProductIDs.insert(productId)
                 state.isLoading = false
                 state.isSheetVisible = false
                 return .none
     
             case .purchaseResponse(.failure):
+                analyticsClient.send("iap.purchase_response_failure")
                 state.isLoading = false
                 state.alert = AlertState {
                   TextState("Purchase Failed")
@@ -146,6 +153,7 @@ struct IAPReducer: ReducerProtocol {
                 return .none
                 
             case .buyPremiumButtonTapped:
+                analyticsClient.send("iap.buy_premium_button_tapped")
                 guard let product = state.products.first else {
                     return .none
                 }
@@ -154,6 +162,7 @@ struct IAPReducer: ReducerProtocol {
                 return .send(.purchase(product))
                 
             case .restorePurchasesButtonTapped:
+                analyticsClient.send("iap.restore_purchases_button_tapped")
                 return .task {
                     await .restorePurchasesResponse(TaskResult {
                         try await self.iapClient.restorePurchases()
@@ -162,11 +171,13 @@ struct IAPReducer: ReducerProtocol {
                 .cancellable(id: CancelID.self)
                 
             case .restorePurchasesResponse(.success):
+                analyticsClient.send("iap.restore_purchases_response_success")
                 state.isLoading = false
                 state.isSheetVisible = false
                 return .none
     
             case .restorePurchasesResponse(.failure):
+                analyticsClient.send("iap.restore_purchases_response_failure")
                 return .none
                 
             case .refreshPurchasedProducts:

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9D156C3F29D0AC0B00F2C992 /* UserSettingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */; };
+		9D2045912A056E0100CAAAC6 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = 9D2045902A056E0100CAAAC6 /* TelemetryClient */; };
+		9D2045932A057A8200CAAAC6 /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2045922A057A8200CAAAC6 /* AnalyticsClient.swift */; };
 		9D3B855D29FD1AAD0026D814 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B855C29FD1AAD0026D814 /* CoreDataManager.swift */; };
 		9D3B855F29FD1C840026D814 /* LifeGoalEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */; };
 		9D3B856129FD1D600026D814 /* LifeGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B856029FD1D600026D814 /* LifeGoal.swift */; };
@@ -146,6 +148,7 @@
 
 /* Begin PBXFileReference section */
 		9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsClient.swift; sourceTree = "<group>"; };
+		9D2045922A057A8200CAAAC6 /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
 		9D3B855C29FD1AAD0026D814 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalEntity.swift; sourceTree = "<group>"; };
 		9D3B856029FD1D600026D814 /* LifeGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoal.swift; sourceTree = "<group>"; };
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DE2CEC929FFB30D00A9BE6D /* ConfettiSwiftUI in Frameworks */,
+				9D2045912A056E0100CAAAC6 /* TelemetryClient in Frameworks */,
 				9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */,
 				9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */,
 			);
@@ -329,7 +333,6 @@
 				9DE3429029E6F34A00E64548 /* AddOrEditLifeGoal */,
 				9DEC1FB029E588EC00305429 /* LifeGoals */,
 				9D46DCD129D838BB00331456 /* AboutTheApp */,
-				9DC6E51729D36BCA005A4FD4 /* AboutCalendar */,
 				9DC5B69D29C4F87000E2A4FA /* Root */,
 				9DB6D11629C2169800265C2E /* Theme */,
 				9DD720FC29BFBD2F00634AB2 /* WeeklyNotification */,
@@ -569,13 +572,6 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		9DC6E51729D36BCA005A4FD4 /* AboutCalendar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AboutCalendar;
-			sourceTree = "<group>";
-		};
 		9DC9B70E29BD1F0B0088D6F9 /* Birthday */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +628,7 @@
 				9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */,
 				9D70DC342A00FAFC000C2AF0 /* IAPClient.swift */,
 				9DB996952A050930004EF0FF /* NotificationsClient.swift */,
+				9D2045922A057A8200CAAAC6 /* AnalyticsClient.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -759,6 +756,7 @@
 				9D6ECBC129BA4EF9000DF545 /* ComposableArchitecture */,
 				9D660B7C29EA998900AE2445 /* SymbolPicker */,
 				9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */,
+				9D2045902A056E0100CAAAC6 /* TelemetryClient */,
 			);
 			productName = LifeProgress;
 			productReference = 9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */;
@@ -859,6 +857,7 @@
 				9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				9D660B7B29EA998900AE2445 /* XCRemoteSwiftPackageReference "SymbolPicker" */,
 				9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				9D20458F2A056E0100CAAAC6 /* XCRemoteSwiftPackageReference "SwiftClient" */,
 			);
 			productRefGroup = 9D70827629B8D1A000846F55 /* Products */;
 			projectDirPath = "";
@@ -938,6 +937,7 @@
 				9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */,
 				9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */,
 				9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */,
+				9D2045932A057A8200CAAAC6 /* AnalyticsClient.swift in Sources */,
 				9D660B8229EAA31500AE2445 /* DatePickerView.swift in Sources */,
 				9D7CE5C329BFA45900B57F90 /* LifeExpectancyStore.swift in Sources */,
 				9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */,
@@ -1422,6 +1422,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9D20458F2A056E0100CAAAC6 /* XCRemoteSwiftPackageReference "SwiftClient" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TelemetryDeck/SwiftClient";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.3;
+			};
+		};
 		9D660B7B29EA998900AE2445 /* XCRemoteSwiftPackageReference "SymbolPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/xnth97/SymbolPicker.git";
@@ -1449,6 +1457,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9D2045902A056E0100CAAAC6 /* TelemetryClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D20458F2A056E0100CAAAC6 /* XCRemoteSwiftPackageReference "SwiftClient" */;
+			productName = TelemetryClient;
+		};
 		9D660B7C29EA998900AE2445 /* SymbolPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9D660B7B29EA998900AE2445 /* XCRemoteSwiftPackageReference "SymbolPicker" */;

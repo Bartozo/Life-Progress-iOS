@@ -23,16 +23,19 @@ struct DeveloperReducer: ReducerProtocol {
     /// The actions that can be taken on the developer.
     enum Action: Equatable {
         /// Indicates that the developer button has been tapped.
-        case onDeveloperButtonTapped
+        case developerButtonTapped
         /// Indicates that the heart confetti has changed.
         case confettiChanged(Int)
     }
+    
+    @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
-            case .onDeveloperButtonTapped:
+            case .developerButtonTapped:
+                analyticsClient.send("developer.developer_button_tapped")
                 state.confetti += 1
                 return .none
                 

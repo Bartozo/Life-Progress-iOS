@@ -98,6 +98,8 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
     
     @Dependency(\.mainQueue) var mainQueue
     
+    @Dependency(\.analyticsClient) var analyticsClient
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Scope(state: \.datePicker, action: /Action.datePicker) {
@@ -140,6 +142,7 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 return .none
                 
             case .addButtonTapped:
+                analyticsClient.send("add_or_edit_life_goal.add_button_tapped")
                 return .task { [
                     title = state.title,
                     finishedAt = state.isCompleted ? state.finishedAt : nil,
@@ -158,6 +161,7 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 }
                 
             case .saveButtonTapped:
+                analyticsClient.send("add_or_edit_life_goal.save_button_tapped")
                 return .task { [
                     title = state.title,
                     finishedAt = state.isCompleted ? state.finishedAt : nil,

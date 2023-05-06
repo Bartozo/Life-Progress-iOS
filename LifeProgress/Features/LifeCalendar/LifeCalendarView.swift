@@ -39,7 +39,7 @@ struct LifeCalendarView: View {
             .toolbar {
                   ToolbarItem(placement: .navigationBarTrailing) {
                       Button(action: {
-                          viewStore.send(.showAboutTheCalendarSheet)
+                          viewStore.send(.aboutLifeCalendarButtonTapped)
                       }) {
                           Image(systemName: "questionmark.circle")
                       }

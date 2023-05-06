@@ -75,8 +75,8 @@ struct LifeCalendarReducer: ReducerProtocol {
         case calendarTypeChanged(CalendarType)
         /// Indicates that the life has changed.
         case lifeChanged(Life)
-        /// Indicates that is about the app sheet should be visible.
-        case showAboutTheCalendarSheet
+        /// Indicates that is about the life calendar button has been tapped.
+        case aboutLifeCalendarButtonTapped
         /// Indicates that is about the app sheet should be hidden.
         case closeAboutTheCalendarSheet
         /// The actions that can be taken on the about the app.
@@ -87,6 +87,8 @@ struct LifeCalendarReducer: ReducerProtocol {
     private enum LifeRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
+    
+    @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
@@ -108,6 +110,10 @@ struct LifeCalendarReducer: ReducerProtocol {
                     .cancellable(id: LifeRequestID.self)
                 
             case .calendarTypeChanged(let calendarType):
+                analyticsClient.sendWithPayload(
+                    "life_calendar.calendar_type_changed", [
+                        "calendarType": "\(calendarType)"
+                    ])
                 state.calendarType = calendarType
                 return .none
                 
@@ -115,13 +121,15 @@ struct LifeCalendarReducer: ReducerProtocol {
                 state.life = life
                 return .none
                 
-            case .showAboutTheCalendarSheet:
+            case .aboutLifeCalendarButtonTapped:
+                analyticsClient.send("life_calendar.about_life_calendar_button_tapped")
                 state.isAboutTheCalendarSheetVisible = true
                 return .none
                 
             case .closeAboutTheCalendarSheet:
                 state.isAboutTheCalendarSheetVisible = false
                 return .none
+                
             case .aboutTheApp:
                 return .none
             }

@@ -28,11 +28,14 @@ struct ConfettiReducer: ReducerProtocol {
         case confettiChanged(Int)
     }
     
+    @Dependency(\.analyticsClient) var analyticsClient
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
             case .showConfetti:
+                analyticsClient.send("confetti.show_confetti")
                 state.confetti += 1
                 return .none
                 

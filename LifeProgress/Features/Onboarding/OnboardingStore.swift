@@ -73,6 +73,8 @@ struct OnboardingReducer: ReducerProtocol {
     
     @Dependency(\.mainQueue) var mainQueue
     
+    @Dependency(\.analyticsClient) var analyticsClient
+    
     private enum CancelID {}
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -92,6 +94,7 @@ struct OnboardingReducer: ReducerProtocol {
                 return .none
                 
             case .getStartedButtonTapped:
+                analyticsClient.send("onboarding.get_started_button_tapped")
                 state.path.append(State.Screen.about)
                 return .none
                 
@@ -121,12 +124,14 @@ struct OnboardingReducer: ReducerProtocol {
                 return .task {
                     let notificationCenter = UNUserNotificationCenter.current()
                     try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
+                    analyticsClient.send("onboarding.allow_notifications_button_tapped")
                     return .continueButtonTapped
                 }
                 .cancellable(id: CancelID.self)
                 
             case .skipNotificationsButtonTapped:
                 state.path.append(State.Screen.completed)
+                analyticsClient.send("onboarding.skip_notifications_button_tapped")
                 return .none
                 
             case .pathChanged(let path):
@@ -136,15 +141,15 @@ struct OnboardingReducer: ReducerProtocol {
             case .startJourneyButtonTapped:
                 return .task {
                     await self.userSettingsClient.updateDidCompleteOnboarding(true)
+                    analyticsClient.send("onboarding.start_journey_button_tapped")
                     return .finishOnboarding
                 }
                 .cancellable(id: CancelID.self)
                 
             case .finishOnboarding:
+                analyticsClient.send("onboarding.onboarding_finished")
                 return .none
             }
         }
     }
 }
-
-

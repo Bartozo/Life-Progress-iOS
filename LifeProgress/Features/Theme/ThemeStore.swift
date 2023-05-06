@@ -39,11 +39,17 @@ struct ThemeReducer: ReducerProtocol {
     
     @Dependency(\.mainQueue) var mainQueue
     
+    @Dependency(\.analyticsClient) var analyticsClient
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
             case .changeThemeTapped(let theme):
+                analyticsClient.sendWithPayload(
+                    "theme.change_theme_tapped", [
+                        "selectedTheme": "\(theme)"
+                    ])
                 return .run { send in
                     await userSettingsClient.updateTheme(theme)
                     await send(.themeChanged(theme))
