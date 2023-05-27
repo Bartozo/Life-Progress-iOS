@@ -1166,7 +1166,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeProgress/LifeProgress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Preview Content\"";
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
@@ -1206,7 +1206,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeProgress/LifeProgress.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Preview Content\"";
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
@@ -1319,7 +1319,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeProgressWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LifeProgressWidget/Info.plist;
@@ -1349,7 +1349,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeProgressWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LifeProgressWidget/Info.plist;

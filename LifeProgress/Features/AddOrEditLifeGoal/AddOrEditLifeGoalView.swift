@@ -37,11 +37,7 @@ struct AddOrEditLifeGoalView: View {
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            viewStore.send(isEditing ? .saveButtonTapped : .addButtonTapped)
-                        } label: {
-                            Text(isEditing ? "Save" : "Add")
-                        }
+                        AddOrSaveButton(store: self.store)
                     }
                 }
                 .overlay {
@@ -53,6 +49,35 @@ struct AddOrEditLifeGoalView: View {
             }
         }
         .tint(theme.color)
+    }
+}
+
+private struct AddOrSaveButton: View {
+    
+    let store: AddOrEditLifeGoalStore
+    
+    struct ViewState: Equatable {
+        let isEditing: Bool
+        let title: String
+        
+        init(state: AddOrEditLifeGoalReducer.State) {
+            self.isEditing = state.isEditing
+            self.title = state.title
+        }
+    }
+    
+    var body: some View {
+        WithViewStore(self.store, observe: ViewState.init) { viewStore in
+            let isEditing = viewStore.isEditing;
+            let title = viewStore.title
+            
+            Button {
+                viewStore.send(isEditing ? .saveButtonTapped : .addButtonTapped)
+            } label: {
+                Text(isEditing ? "Save" : "Add")
+            }
+            .disabled(title.isEmpty)
+        }
     }
 }
 
