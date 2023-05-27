@@ -79,6 +79,7 @@
 		9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */; };
 		9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A029C4F88300E2A4FA /* RootView.swift */; };
 		9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A229C4FBB400E2A4FA /* Theme.swift */; };
+		9DC634512A22370C00BC55CB /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC634502A22370C00BC55CB /* WhatsNewKit */; };
 		9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */; };
 		9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */; };
 		9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */; };
@@ -246,6 +247,7 @@
 			files = (
 				9DE2CEC929FFB30D00A9BE6D /* ConfettiSwiftUI in Frameworks */,
 				9D2045912A056E0100CAAAC6 /* TelemetryClient in Frameworks */,
+				9DC634512A22370C00BC55CB /* WhatsNewKit in Frameworks */,
 				9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */,
 				9D6ECBC229BA4EF9000DF545 /* ComposableArchitecture in Frameworks */,
 			);
@@ -757,6 +759,7 @@
 				9D660B7C29EA998900AE2445 /* SymbolPicker */,
 				9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */,
 				9D2045902A056E0100CAAAC6 /* TelemetryClient */,
+				9DC634502A22370C00BC55CB /* WhatsNewKit */,
 			);
 			productName = LifeProgress;
 			productReference = 9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */;
@@ -858,6 +861,7 @@
 				9D660B7B29EA998900AE2445 /* XCRemoteSwiftPackageReference "SymbolPicker" */,
 				9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 				9D20458F2A056E0100CAAAC6 /* XCRemoteSwiftPackageReference "SwiftClient" */,
+				9DC6344F2A22370C00BC55CB /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 			);
 			productRefGroup = 9D70827629B8D1A000846F55 /* Products */;
 			projectDirPath = "";
@@ -1446,6 +1450,14 @@
 				minimumVersion = 0.9.0;
 			};
 		};
+		9DC6344F2A22370C00BC55CB /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 		9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
@@ -1476,6 +1488,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		9DC634502A22370C00BC55CB /* WhatsNewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9DC6344F2A22370C00BC55CB /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
+			productName = WhatsNewKit;
 		};
 		9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
