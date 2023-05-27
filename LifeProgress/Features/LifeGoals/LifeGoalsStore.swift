@@ -92,8 +92,7 @@ struct LifeGoalsReducer: ReducerProtocol {
     }
     
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
-    
-    @Dependency(\.mainQueue) var mainQueue
+    private enum LifeGoalsRequestID {}
     
     @Dependency(\.analyticsClient) var analyticsClient
     
@@ -115,6 +114,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                     let lifeGoals = await lifeGoalsClient.fetchLifeGoals()
                     return .lifeGoalsChanged(lifeGoals)
                 }
+                .cancellable(id: LifeGoalsRequestID.self)
                 
             case .listTypeChanged(let listType):
                 state.listType = listType
@@ -191,7 +191,7 @@ struct LifeGoalsReducer: ReducerProtocol {
             case .addOrEditLifeGoal(let addOrEditLifeGoalAction):
                 if (addOrEditLifeGoalAction == .closeButtonTapped) {
                     state.isAddLifeGoalSheetVisible = false
-                    return .none
+                    return .send(.onAppear)
                 }
                 return .none
                 

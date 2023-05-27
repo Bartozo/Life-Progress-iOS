@@ -27,6 +27,7 @@ struct LifeGoalsClient {
 
 extension LifeGoalsClient: DependencyKey {
     
+    /// A live value of `LifeGoalsClient`  for managing life goals.
     static let liveValue = LifeGoalsClient(
         fetchLifeGoals: {
             let viewContext = CoreDataManager.shared.container.viewContext
@@ -116,7 +117,92 @@ extension LifeGoalsClient: DependencyKey {
 // MARK: Test Dependency Key
 
 extension LifeGoalsClient: TestDependencyKey {
-    // Provide a preview or test instance of LifeGoalsClient with mock data as needed.
+    
+    /// A preview instance of `LifeGoalsClient` with mock data for SwiftUI previews and testing purposes.
+    static let previewValue = Self(
+        fetchLifeGoals: {
+            let viewContext = CoreDataManager.preview.container.viewContext
+            let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
+
+            // Add a sort descriptor to sort by creationDate
+            let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+
+            do {
+                let fetchedEntities = try viewContext.fetch(fetchRequest)
+                let lifeGoals = fetchedEntities.map { entity in
+                    return LifeGoal(
+                        id: entity.id!,
+                        title: entity.title!,
+                        finishedAt: entity.finishedAt,
+                        symbolName: entity.symbolName!,
+                        details: entity.details!
+                    )
+                }
+                return lifeGoals
+            } catch {
+                print("❌ Couldn't fetch life goals")
+                return []
+            }
+        },
+        createLifeGoal: { lifeGoal in
+            let viewContext = CoreDataManager.preview.container.viewContext
+            let entity = LifeGoalEntity(context: viewContext)
+
+            entity.id = UUID()
+            entity.createdAt = Date()
+            entity.title = lifeGoal.title
+            entity.details = lifeGoal.details
+            entity.symbolName = lifeGoal.symbolName
+            entity.finishedAt = lifeGoal.finishedAt
+            entity.type = 1
+
+            do {
+                viewContext.insert(entity)
+                try viewContext.save()
+            } catch {
+                print("❌ Couldn't create life goal")
+            }
+        },
+        updateLifeGoal: { lifeGoal in
+            let viewContext = CoreDataManager.preview.container.viewContext
+            let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", lifeGoal.id as CVarArg)
+
+            do {
+                let fetchedEntities = try viewContext.fetch(fetchRequest)
+                if let entity = fetchedEntities.first {
+                    entity.title = lifeGoal.title
+                    entity.details = lifeGoal.details
+                    entity.symbolName = lifeGoal.symbolName
+                    entity.finishedAt = lifeGoal.finishedAt
+
+                    try viewContext.save()
+                } else {
+                    print("❌ Couldn't find life goal with id: \(lifeGoal.id)")
+                }
+            } catch {
+                print("❌ Couldn't update life goal")
+            }
+        },
+        deleteLifeGoal: { lifeGoal in
+            let viewContext = CoreDataManager.preview.container.viewContext
+            let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", lifeGoal.id as CVarArg)
+
+            do {
+                let fetchedEntities = try viewContext.fetch(fetchRequest)
+                if let entity = fetchedEntities.first {
+                    viewContext.delete(entity)
+                    try viewContext.save()
+                } else {
+                    print("❌ Couldn't find life goal with id: \(lifeGoal.id)")
+                }
+            } catch {
+                print("❌ Couldn't delete life goal")
+            }
+        }
+    )
 }
 
 // MARK: Dependency Values

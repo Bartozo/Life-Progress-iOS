@@ -67,6 +67,7 @@ struct LifeGoalsView: View {
                     viewStore.send(.onAppear, animation: .default)
                 }
                 .onAppear {
+                    viewStore.send(.onAppear, animation: .default)
                     viewStore.send(.iap(.refreshPurchasedProducts))
                 }
                 .overlay {

@@ -34,6 +34,7 @@ struct CoreDataManager {
         
         for number in 0..<10 {
             let newLifeGoalEntity = LifeGoalEntity(context: viewContext)
+            newLifeGoalEntity.id = UUID()
             newLifeGoalEntity.title = "Goal #\(number)"
             newLifeGoalEntity.details = "Very long and intersting details"
             newLifeGoalEntity.symbolName = "trophy"
