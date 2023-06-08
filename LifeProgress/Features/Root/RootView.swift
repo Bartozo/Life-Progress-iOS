@@ -7,8 +7,11 @@
 
 import SwiftUI
 import ComposableArchitecture
+import WhatsNewKit
 
 struct RootView: View {
+    
+    @Environment(\.theme) var theme
     
     let store: RootStore
     
@@ -16,6 +19,7 @@ struct RootView: View {
         WithViewStore(self.store, observe: \.didCompleteOnboarding) { viewStore in
             if viewStore.state {
                 ContentView(store: self.store)
+                    .whatsNewSheet()
             } else {
                 OnboardingView(
                     store: self.store.scope(
@@ -25,6 +29,7 @@ struct RootView: View {
                 )
             }
         }
+        .environment(\.whatsNew, WhatsNewEnvironment(whatsNewCollection: self))
     }
 }
 
