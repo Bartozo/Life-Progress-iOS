@@ -8,7 +8,7 @@
 
 Welcome to Life Progress, a powerful iOS and iPadOS application designed to help you track your life goals and milestones. Whether you're striving for personal or professional milestones, Life Progress is your ultimate companion on the journey of self-improvement. Start tracking your goals, celebrating your achievements, and living a more fulfilling life with Life Progress.
 
-
+[![LifeProgress](Images/iOS-Marketing-Image@1x.png)](https://apps.apple.com/us/app/life-progress-calendar/id6447311106)
 
 ## Features
 
