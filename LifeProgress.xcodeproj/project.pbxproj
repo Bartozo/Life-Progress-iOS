@@ -17,6 +17,7 @@
 		9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */; };
 		9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */; };
 		9D4C753A29EBFFBE007FFCBC /* LifeGoalsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */; };
+		9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */; };
 		9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */; };
 		9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9D660B7C29EA998900AE2445 /* SymbolPicker */; };
 		9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */; };
@@ -312,9 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				9D70DC3B2A010218000C2AF0 /* StoreKit */,
-				9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */,
-				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
-				9DA8B3D229D75378000D3F1F /* LifeProgress.entitlements */,
 				9D70827E29B8D1A100846F55 /* Preview Content */,
 				9D70827C29B8D1A100846F55 /* Assets.xcassets */,
 			);
@@ -375,6 +373,8 @@
 		9D70826C29B8D1A000846F55 = {
 			isa = PBXGroup;
 			children = (
+				9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */,
+				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
 				9D70827729B8D1A000846F55 /* LifeProgress */,
 				9D70828D29B8D1A100846F55 /* LifeProgressTests */,
 				9D70829729B8D1A100846F55 /* LifeProgressUITests */,
@@ -398,6 +398,7 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
+				9DA8B3D229D75378000D3F1F /* LifeProgress.entitlements */,
 				9D5FB3C92A32059D000E69D7 /* Resources */,
 				9DEC1FB929E58A0300305429 /* Storage */,
 				9DEBBB9829CF28BB008CE08C /* Views */,
@@ -900,6 +901,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D70828029B8D1A100846F55 /* Preview Assets.xcassets in Resources */,
+				9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */,
 				9D70DC3D2A010291000C2AF0 /* Configuration.storekit in Resources */,
 				9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */,
 			);
@@ -1191,7 +1193,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1231,7 +1233,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"LifeProgress/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
