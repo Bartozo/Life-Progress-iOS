@@ -193,7 +193,7 @@
 		9D813B212A03C99D0054020F /* DeveloperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperStore.swift; sourceTree = "<group>"; };
 		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedView.swift; sourceTree = "<group>"; };
-		9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Life-Progress---Calendar-Info.plist"; sourceTree = "<group>"; };
+		9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Life-Progress---Calendar-Info.plist"; sourceTree = "<group>"; };
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
@@ -308,6 +308,19 @@
 			path = SFSymbolPicker;
 			sourceTree = "<group>";
 		};
+		9D5FB3C92A32059D000E69D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D70DC3B2A010218000C2AF0 /* StoreKit */,
+				9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */,
+				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
+				9DA8B3D229D75378000D3F1F /* LifeProgress.entitlements */,
+				9D70827E29B8D1A100846F55 /* Preview Content */,
+				9D70827C29B8D1A100846F55 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9D660B7E29EAA2FD00AE2445 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,8 +375,6 @@
 		9D70826C29B8D1A000846F55 = {
 			isa = PBXGroup;
 			children = (
-				9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */,
-				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
 				9D70827729B8D1A000846F55 /* LifeProgress */,
 				9D70828D29B8D1A100846F55 /* LifeProgressTests */,
 				9D70829729B8D1A100846F55 /* LifeProgressUITests */,
@@ -387,17 +398,14 @@
 		9D70827729B8D1A000846F55 /* LifeProgress */ = {
 			isa = PBXGroup;
 			children = (
-				9D70DC3B2A010218000C2AF0 /* StoreKit */,
+				9D5FB3C92A32059D000E69D7 /* Resources */,
 				9DEC1FB929E58A0300305429 /* Storage */,
-				9DA8B3D229D75378000D3F1F /* LifeProgress.entitlements */,
 				9DEBBB9829CF28BB008CE08C /* Views */,
 				9DD4955C29C755B8004001D9 /* Dependencies */,
 				9DC9B71529BE05190088D6F9 /* Utils */,
 				9D6ECBC429BA52CB000DF545 /* Features */,
 				9D7082A729B8D32A00846F55 /* Models */,
 				9D70827829B8D1A000846F55 /* LifeProgressApp.swift */,
-				9D70827C29B8D1A100846F55 /* Assets.xcassets */,
-				9D70827E29B8D1A100846F55 /* Preview Content */,
 			);
 			path = LifeProgress;
 			sourceTree = "<group>";
