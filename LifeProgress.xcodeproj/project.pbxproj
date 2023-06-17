@@ -79,6 +79,7 @@
 		9DB6D11A29C216B800265C2E /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6D11929C216B800265C2E /* ThemeView.swift */; };
 		9DB996962A050930004EF0FF /* NotificationsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB996952A050930004EF0FF /* NotificationsClient.swift */; };
 		9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB9F3AB2A3DEEBC001AF6D4 /* BirthdayTests.swift */; };
+		9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB9F3AE2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift */; };
 		9DC5B69F29C4F87B00E2A4FA /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */; };
 		9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A029C4F88300E2A4FA /* RootView.swift */; };
 		9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A229C4FBB400E2A4FA /* Theme.swift */; };
@@ -215,6 +216,7 @@
 		9DB6D11929C216B800265C2E /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		9DB996952A050930004EF0FF /* NotificationsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsClient.swift; sourceTree = "<group>"; };
 		9DB9F3AB2A3DEEBC001AF6D4 /* BirthdayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTests.swift; sourceTree = "<group>"; };
+		9DB9F3AE2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyNotificationTests.swift; sourceTree = "<group>"; };
 		9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStore.swift; sourceTree = "<group>"; };
 		9DC5B6A029C4F88300E2A4FA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9DC5B6A229C4FBB400E2A4FA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9DB9F3AD2A3DF8A2001AF6D4 /* WeeklyNotification */,
 				9DB9F3AA2A3DEEAC001AF6D4 /* Birthday */,
 				9D8322072A3DAE3800A66037 /* LifeExpectancy */,
 				9D8322062A3DAE2D00A66037 /* Developer */,
@@ -613,6 +616,14 @@
 				9DB9F3AB2A3DEEBC001AF6D4 /* BirthdayTests.swift */,
 			);
 			path = Birthday;
+			sourceTree = "<group>";
+		};
+		9DB9F3AD2A3DF8A2001AF6D4 /* WeeklyNotification */ = {
+			isa = PBXGroup;
+			children = (
+				9DB9F3AE2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift */,
+			);
+			path = WeeklyNotification;
 			sourceTree = "<group>";
 		};
 		9DC5B69D29C4F87000E2A4FA /* Root */ = {
@@ -1056,6 +1067,7 @@
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
+				9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
