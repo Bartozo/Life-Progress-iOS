@@ -30,7 +30,6 @@
 		9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827C29B8D1A100846F55 /* Assets.xcassets */; };
 		9D70828029B8D1A100846F55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827F29B8D1A100846F55 /* Preview Assets.xcassets */; };
 		9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828329B8D1A100846F55 /* LifeProgress.xcdatamodeld */; };
-		9D70828F29B8D1A100846F55 /* LifeProgressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828E29B8D1A100846F55 /* LifeProgressTests.swift */; };
 		9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */; };
 		9D70829B29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */; };
 		9D7082A929B8D34900846F55 /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7082A829B8D34900846F55 /* Life.swift */; };
@@ -54,6 +53,8 @@
 		9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B212A03C99D0054020F /* DeveloperStore.swift */; };
 		9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B252A03CCE60054020F /* DeveloperView.swift */; };
 		9D813B282A03E8F10054020F /* OnboardingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */; };
+		9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8322042A3D9B0300A66037 /* DeveloperTests.swift */; };
+		9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8322082A3DAE5A00A66037 /* LifeExpectancyTests.swift */; };
 		9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8229E3174600841A47 /* LifeProgressWidget.swift */; };
 		9D869C8529E3175000841A47 /* YearProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8429E3175000841A47 /* YearProgressWidget.swift */; };
 		9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
@@ -171,7 +172,6 @@
 		9D70827F29B8D1A100846F55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9D70828429B8D1A100846F55 /* LifeProgress.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeProgress.xcdatamodel; sourceTree = "<group>"; };
 		9D70828A29B8D1A100846F55 /* LifeProgressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeProgressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D70828E29B8D1A100846F55 /* LifeProgressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressTests.swift; sourceTree = "<group>"; };
 		9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeProgressUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITests.swift; sourceTree = "<group>"; };
 		9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -195,6 +195,8 @@
 		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedView.swift; sourceTree = "<group>"; };
 		9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Life-Progress---Calendar-Info.plist"; sourceTree = "<group>"; };
+		9D8322042A3D9B0300A66037 /* DeveloperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTests.swift; sourceTree = "<group>"; };
+		9D8322082A3DAE5A00A66037 /* LifeExpectancyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeExpectancyTests.swift; sourceTree = "<group>"; };
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
@@ -422,7 +424,7 @@
 		9D70828D29B8D1A100846F55 /* LifeProgressTests */ = {
 			isa = PBXGroup;
 			children = (
-				9D70828E29B8D1A100846F55 /* LifeProgressTests.swift */,
+				9D8322032A3D9AE300A66037 /* Features */,
 			);
 			path = LifeProgressTests;
 			sourceTree = "<group>";
@@ -520,6 +522,31 @@
 				9D813B252A03CCE60054020F /* DeveloperView.swift */,
 			);
 			path = Developer;
+			sourceTree = "<group>";
+		};
+		9D8322032A3D9AE300A66037 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9D8322072A3DAE3800A66037 /* LifeExpectancy */,
+				9D8322062A3DAE2D00A66037 /* Developer */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		9D8322062A3DAE2D00A66037 /* Developer */ = {
+			isa = PBXGroup;
+			children = (
+				9D8322042A3D9B0300A66037 /* DeveloperTests.swift */,
+			);
+			path = Developer;
+			sourceTree = "<group>";
+		};
+		9D8322072A3DAE3800A66037 /* LifeExpectancy */ = {
+			isa = PBXGroup;
+			children = (
+				9D8322082A3DAE5A00A66037 /* LifeExpectancyTests.swift */,
+			);
+			path = LifeExpectancy;
 			sourceTree = "<group>";
 		};
 		9D869C8129E3173200841A47 /* Widgets */ = {
@@ -1015,7 +1042,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D70828F29B8D1A100846F55 /* LifeProgressTests.swift in Sources */,
+				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
+				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1270,6 +1298,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -1278,7 +1307,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LifeProgress.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LifeProgress";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Life Progress - Calendar.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Life Progress - Calendar";
 			};
 			name = Debug;
 		};
@@ -1289,6 +1318,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -1297,7 +1327,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LifeProgress.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LifeProgress";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Life Progress - Calendar.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Life Progress - Calendar";
 			};
 			name = Release;
 		};
@@ -1307,6 +1337,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -1325,6 +1356,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
