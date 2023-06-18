@@ -28,14 +28,14 @@ class BirthdayTests: XCTestCase {
         // Start a birthday listener
         let task = await store.send(.onAppear)
   
-        let firstBirthday = createDate(year: 2000, month: 1, day: 1)
+        let firstBirthday = Date.createDate(year: 2000, month: 1, day: 1)
         birthdayPublisher.send(firstBirthday)
         await mainQueue.advance(by: .seconds(1))
         await store.receive(.birthdayChanged(firstBirthday)) {
             $0.birthday = firstBirthday
         }
         
-        let secondBirthday = createDate(year: 1990, month: 2, day: 2)
+        let secondBirthday = Date.createDate(year: 1990, month: 2, day: 2)
         birthdayPublisher.send(secondBirthday)
         await mainQueue.advance(by: .seconds(1))
         await store.receive(.birthdayChanged(secondBirthday)) {
@@ -46,14 +46,14 @@ class BirthdayTests: XCTestCase {
         await task.cancel()
         
         // Verify that new birthday values are not received after cancellation
-        let thirdBirthday = createDate(year: 1980, month: 3, day: 3)
+        let thirdBirthday = Date.createDate(year: 1980, month: 3, day: 3)
         birthdayPublisher.send(thirdBirthday)
         await mainQueue.advance(by: .seconds(1))
         XCTAssert(store.state.birthday == secondBirthday)
     }
 
     func testChangeBirthdayTapped_ShouldSaveAndUpdateBirthday() async {
-        let initialBirthday = createDate(year: 2000, month: 1, day: 1)
+        let initialBirthday = Date.createDate(year: 2000, month: 1, day: 1)
         var birthday = Date()
         let store = TestStore(
             initialState: BirthdayReducer.State(),
@@ -73,7 +73,7 @@ class BirthdayTests: XCTestCase {
     }
 
     func testBirthdayChanged_ShouldUpdateBirthday() async {
-        let birthday = createDate(year: 2000, month: 1, day: 1)
+        let birthday = Date.createDate(year: 2000, month: 1, day: 1)
         let store = TestStore(
             initialState: BirthdayReducer.State(),
             reducer: BirthdayReducer()
@@ -104,16 +104,5 @@ class BirthdayTests: XCTestCase {
         await store.send(.isDatePickerVisibleChanged) {
             $0.isDatePickerVisible = false
         }
-    }
-    
-    private func createDate(year: Int, month: Int, day: Int) -> Date {
-        let calendar = Calendar.current
-
-        var dateComponents = DateComponents()
-        dateComponents.year = year
-        dateComponents.month = month
-        dateComponents.day = day
-
-        return calendar.date(from: dateComponents)!
     }
 }
