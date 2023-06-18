@@ -59,6 +59,7 @@
 		9D869C8529E3175000841A47 /* YearProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8429E3175000841A47 /* YearProgressWidget.swift */; };
 		9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
 		9D869C8E29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
+		9D877C492A3F55F700CC0562 /* DatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D877C482A3F55F700CC0562 /* DatePickerTests.swift */; };
 		9DA378D029E19B9000074F01 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA378CF29E19B9000074F01 /* WidgetKit.framework */; };
 		9DA378D229E19B9000074F01 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA378D129E19B9000074F01 /* SwiftUI.framework */; };
 		9DA378D529E19B9000074F01 /* LifeProgressWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA378D429E19B9000074F01 /* LifeProgressWidgetBundle.swift */; };
@@ -104,6 +105,7 @@
 		9DE2CED429FFD60500A9BE6D /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2CED329FFD60500A9BE6D /* SettingsCell.swift */; };
 		9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */; };
 		9DE3429529E6F48700E64548 /* AddOrEditLifeGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */; };
+		9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */; };
 		9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */; };
 		9DEBBB9C29CF2A40008CE08C /* NavigationLink+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */; };
 		9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */; };
@@ -202,6 +204,7 @@
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
+		9D877C482A3F55F700CC0562 /* DatePickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTests.swift; sourceTree = "<group>"; };
 		9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeProgressWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA378CF29E19B9000074F01 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9DA378D129E19B9000074F01 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -239,6 +242,7 @@
 		9DE2CED329FFD60500A9BE6D /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalStore.swift; sourceTree = "<group>"; };
 		9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalView.swift; sourceTree = "<group>"; };
+		9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLifeCalendarView.swift; sourceTree = "<group>"; };
 		9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationLink+Extension.swift"; sourceTree = "<group>"; };
 		9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 		9D70828D29B8D1A100846F55 /* LifeProgressTests */ = {
 			isa = PBXGroup;
 			children = (
+				9DEA944F2A3F5A0900E125EA /* Utils */,
 				9D8322032A3D9AE300A66037 /* Features */,
 			);
 			path = LifeProgressTests;
@@ -531,6 +536,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D877C462A3F55E200CC0562 /* Shared */,
 				9DB9F3AD2A3DF8A2001AF6D4 /* WeeklyNotification */,
 				9DB9F3AA2A3DEEAC001AF6D4 /* Birthday */,
 				9D8322072A3DAE3800A66037 /* LifeExpectancy */,
@@ -578,6 +584,22 @@
 				9D869C8429E3175000841A47 /* YearProgressWidget.swift */,
 			);
 			path = YearProgress;
+			sourceTree = "<group>";
+		};
+		9D877C462A3F55E200CC0562 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9D877C472A3F55EA00CC0562 /* DatePicker */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		9D877C472A3F55EA00CC0562 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				9D877C482A3F55F700CC0562 /* DatePickerTests.swift */,
+			);
+			path = DatePicker;
 			sourceTree = "<group>";
 		};
 		9DA378CE29E19B9000074F01 /* Frameworks */ = {
@@ -755,6 +777,14 @@
 				9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */,
 			);
 			path = AddOrEditLifeGoal;
+			sourceTree = "<group>";
+		};
+		9DEA944F2A3F5A0900E125EA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		9DEBBB9829CF28BB008CE08C /* Views */ = {
@@ -1064,10 +1094,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D877C492A3F55F700CC0562 /* DatePickerTests.swift in Sources */,
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
 				9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */,
+				9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
