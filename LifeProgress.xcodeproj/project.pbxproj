@@ -14,6 +14,7 @@
 		9D3B855F29FD1C840026D814 /* LifeGoalEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */; };
 		9D3B856129FD1D600026D814 /* LifeGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B856029FD1D600026D814 /* LifeGoal.swift */; };
 		9D4110492A4821A10069DFED /* SFSymbolPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4110482A4821A10069DFED /* SFSymbolPickerTests.swift */; };
+		9D41104C2A4828DF0069DFED /* ConfettiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D41104B2A4828DF0069DFED /* ConfettiTests.swift */; };
 		9D46DCD329D839E900331456 /* AboutTheAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D46DCD229D839E900331456 /* AboutTheAppStore.swift */; };
 		9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */; };
 		9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */; };
@@ -162,6 +163,7 @@
 		9D3B855E29FD1C840026D814 /* LifeGoalEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalEntity.swift; sourceTree = "<group>"; };
 		9D3B856029FD1D600026D814 /* LifeGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoal.swift; sourceTree = "<group>"; };
 		9D4110482A4821A10069DFED /* SFSymbolPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerTests.swift; sourceTree = "<group>"; };
+		9D41104B2A4828DF0069DFED /* ConfettiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiTests.swift; sourceTree = "<group>"; };
 		9D46DCD229D839E900331456 /* AboutTheAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppStore.swift; sourceTree = "<group>"; };
 		9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerStore.swift; sourceTree = "<group>"; };
 		9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerView.swift; sourceTree = "<group>"; };
@@ -309,6 +311,14 @@
 				9D4110482A4821A10069DFED /* SFSymbolPickerTests.swift */,
 			);
 			path = SFSymbolPicker;
+			sourceTree = "<group>";
+		};
+		9D41104A2A4823770069DFED /* Confetti */ = {
+			isa = PBXGroup;
+			children = (
+				9D41104B2A4828DF0069DFED /* ConfettiTests.swift */,
+			);
+			path = Confetti;
 			sourceTree = "<group>";
 		};
 		9D46DCD129D838BB00331456 /* AboutTheApp */ = {
@@ -599,6 +609,7 @@
 		9D877C462A3F55E200CC0562 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9D41104A2A4823770069DFED /* Confetti */,
 				9D4110472A4821910069DFED /* SFSymbolPicker */,
 				9D877C472A3F55EA00CC0562 /* DatePicker */,
 			);
@@ -1110,6 +1121,7 @@
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
 				9D4110492A4821A10069DFED /* SFSymbolPickerTests.swift in Sources */,
+				9D41104C2A4828DF0069DFED /* ConfettiTests.swift in Sources */,
 				9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */,
 				9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */,
 			);
