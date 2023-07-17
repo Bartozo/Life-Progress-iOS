@@ -89,6 +89,55 @@ extension IAPClient: DependencyKey {
     )
 }
 
+// MARK: Test Dependency Key
+
+extension IAPClient: TestDependencyKey {
+    
+    /// A test instance of `IAPClient` with mock data for unit testing purposes.
+    static let testValue = Self(
+        requestProducts: { productIds in
+            try await Product.products(for: productIds)
+        },
+        purchase: { product in
+            let result = try await product.purchase()
+            
+            switch result {
+            case let .success(.verified(transaction)):
+                await transaction.finish()
+                return transaction.productID
+                
+            case .success(.unverified(_, _)):
+                throw PurchaseError.unverified
+                
+            case .userCancelled:
+                throw PurchaseError.userCancelled
+                
+            case .pending:
+                throw PurchaseError.pending
+                
+            @unknown default:
+                throw PurchaseError.unknown
+            }
+        },
+        requestPurchasedProductIds: {
+            var purchasedProductIDs: [String] = []
+            
+            for await result in Transaction.currentEntitlements {
+                guard case .verified(let transaction) = result else {
+                    continue
+                }
+                
+                if transaction.revocationDate == nil {
+                    purchasedProductIDs.append(transaction.productID)
+                }
+            }
+            
+            return purchasedProductIDs
+        },
+        restorePurchases: { true }
+    )
+}
+
 // MARK: Dependency Values
 
 extension DependencyValues {

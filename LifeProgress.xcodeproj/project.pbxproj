@@ -19,6 +19,7 @@
 		9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */; };
 		9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */; };
 		9D4C753A29EBFFBE007FFCBC /* LifeGoalsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */; };
+		9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D556A962A628D1D00A7E8F3 /* IAPTests.swift */; };
 		9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */; };
 		9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */; };
 		9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9D660B7C29EA998900AE2445 /* SymbolPicker */; };
@@ -168,6 +169,7 @@
 		9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerStore.swift; sourceTree = "<group>"; };
 		9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerView.swift; sourceTree = "<group>"; };
 		9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalsClient.swift; sourceTree = "<group>"; };
+		9D556A962A628D1D00A7E8F3 /* IAPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPTests.swift; sourceTree = "<group>"; };
 		9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppView.swift; sourceTree = "<group>"; };
 		9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerStore.swift; sourceTree = "<group>"; };
 		9D660B8129EAA31500AE2445 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -337,6 +339,14 @@
 				9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */,
 			);
 			path = SFSymbolPicker;
+			sourceTree = "<group>";
+		};
+		9D556A952A628D0F00A7E8F3 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				9D556A962A628D1D00A7E8F3 /* IAPTests.swift */,
+			);
+			path = IAP;
 			sourceTree = "<group>";
 		};
 		9D5FB3C92A32059D000E69D7 /* Resources */ = {
@@ -609,6 +619,7 @@
 		9D877C462A3F55E200CC0562 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9D556A952A628D0F00A7E8F3 /* IAP */,
 				9D41104A2A4823770069DFED /* Confetti */,
 				9D4110472A4821910069DFED /* SFSymbolPicker */,
 				9D877C472A3F55EA00CC0562 /* DatePicker */,
@@ -1116,6 +1127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */,
 				9D877C492A3F55F700CC0562 /* DatePickerTests.swift in Sources */,
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
