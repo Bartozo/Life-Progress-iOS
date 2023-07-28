@@ -75,8 +75,6 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         case detailsChanged(String)
         /// Indicates that is completed flag has changed.
         case isCompletedChanged(Bool)
-        /// Indicates that is SF Symbol has changed.
-        case symbolNameChanged(String)
         /// Indicates that the date when life goal was accomplished has changed.
         case finishedAtChanged(Date)
         /// Indicates that the close button was tapped.
@@ -129,10 +127,6 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 }
             
                 return .send(.confetti(.showConfetti))
-                
-            case .symbolNameChanged(let symbolName):
-                state.symbolName = symbolName
-                return .none
                 
             case .finishedAtChanged(let finishedAt):
                 state.finishedAt = finishedAt
