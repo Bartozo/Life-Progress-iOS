@@ -20,6 +20,7 @@
 		9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */; };
 		9D4C753A29EBFFBE007FFCBC /* LifeGoalsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */; };
 		9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D556A962A628D1D00A7E8F3 /* IAPTests.swift */; };
+		9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */; };
 		9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */; };
 		9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */; };
 		9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9D660B7C29EA998900AE2445 /* SymbolPicker */; };
@@ -170,6 +171,7 @@
 		9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerView.swift; sourceTree = "<group>"; };
 		9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalsClient.swift; sourceTree = "<group>"; };
 		9D556A962A628D1D00A7E8F3 /* IAPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPTests.swift; sourceTree = "<group>"; };
+		9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
 		9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppView.swift; sourceTree = "<group>"; };
 		9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerStore.swift; sourceTree = "<group>"; };
 		9D660B8129EAA31500AE2445 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -347,6 +349,14 @@
 				9D556A962A628D1D00A7E8F3 /* IAPTests.swift */,
 			);
 			path = IAP;
+			sourceTree = "<group>";
+		};
+		9D5F8E0A2A66C71100867D1F /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		9D5FB3C92A32059D000E69D7 /* Resources */ = {
@@ -566,6 +576,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D5F8E0A2A66C71100867D1F /* Theme */,
 				9D877C462A3F55E200CC0562 /* Shared */,
 				9DB9F3AD2A3DF8A2001AF6D4 /* WeeklyNotification */,
 				9DB9F3AA2A3DEEAC001AF6D4 /* Birthday */,
@@ -1132,6 +1143,7 @@
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
+				9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */,
 				9D4110492A4821A10069DFED /* SFSymbolPickerTests.swift in Sources */,
 				9D41104C2A4828DF0069DFED /* ConfettiTests.swift in Sources */,
 				9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */,
