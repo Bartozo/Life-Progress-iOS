@@ -57,6 +57,7 @@
 		9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B212A03C99D0054020F /* DeveloperStore.swift */; };
 		9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B252A03CCE60054020F /* DeveloperView.swift */; };
 		9D813B282A03E8F10054020F /* OnboardingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */; };
+		9D8272412A73A9680001925C /* AddOrEditLifeGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8272402A73A9680001925C /* AddOrEditLifeGoalTests.swift */; };
 		9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8322042A3D9B0300A66037 /* DeveloperTests.swift */; };
 		9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8322082A3DAE5A00A66037 /* LifeExpectancyTests.swift */; };
 		9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8229E3174600841A47 /* LifeProgressWidget.swift */; };
@@ -207,6 +208,7 @@
 		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedView.swift; sourceTree = "<group>"; };
 		9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Life-Progress---Calendar-Info.plist"; sourceTree = "<group>"; };
+		9D8272402A73A9680001925C /* AddOrEditLifeGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalTests.swift; sourceTree = "<group>"; };
 		9D8322042A3D9B0300A66037 /* DeveloperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTests.swift; sourceTree = "<group>"; };
 		9D8322082A3DAE5A00A66037 /* LifeExpectancyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeExpectancyTests.swift; sourceTree = "<group>"; };
 		9D869C8229E3174600841A47 /* LifeProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressWidget.swift; sourceTree = "<group>"; };
@@ -573,9 +575,18 @@
 			path = Developer;
 			sourceTree = "<group>";
 		};
+		9D82723F2A73A9460001925C /* AddOrEditLifeGoal */ = {
+			isa = PBXGroup;
+			children = (
+				9D8272402A73A9680001925C /* AddOrEditLifeGoalTests.swift */,
+			);
+			path = AddOrEditLifeGoal;
+			sourceTree = "<group>";
+		};
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D82723F2A73A9460001925C /* AddOrEditLifeGoal */,
 				9D5F8E0A2A66C71100867D1F /* Theme */,
 				9D877C462A3F55E200CC0562 /* Shared */,
 				9DB9F3AD2A3DF8A2001AF6D4 /* WeeklyNotification */,
@@ -1145,6 +1156,7 @@
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
 				9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */,
 				9D4110492A4821A10069DFED /* SFSymbolPickerTests.swift in Sources */,
+				9D8272412A73A9680001925C /* AddOrEditLifeGoalTests.swift in Sources */,
 				9D41104C2A4828DF0069DFED /* ConfettiTests.swift in Sources */,
 				9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */,
 				9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */,

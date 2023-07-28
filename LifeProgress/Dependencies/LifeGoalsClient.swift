@@ -203,6 +203,14 @@ extension LifeGoalsClient: TestDependencyKey {
             }
         }
     )
+    
+    /// A test instance of `LifeGoalsClient` with mock data for unit testing purposes.
+    static let testValue = Self(
+        fetchLifeGoals: { [] },
+        createLifeGoal: { _ in },
+        updateLifeGoal: { _ in },
+        deleteLifeGoal: { _ in }
+    )
 }
 
 // MARK: Dependency Values
