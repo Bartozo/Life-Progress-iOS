@@ -20,6 +20,7 @@
 		9D4C753629EBF6C0007FFCBC /* SFSymbolPickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */; };
 		9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */; };
 		9D4C753A29EBFFBE007FFCBC /* LifeGoalsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */; };
+		9D4CAE0C2A75281A00B454B8 /* AboutTheAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CAE0B2A75281A00B454B8 /* AboutTheAppTests.swift */; };
 		9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D556A962A628D1D00A7E8F3 /* IAPTests.swift */; };
 		9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */; };
 		9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */; };
@@ -174,6 +175,7 @@
 		9D4C753529EBF6C0007FFCBC /* SFSymbolPickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerStore.swift; sourceTree = "<group>"; };
 		9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolPickerView.swift; sourceTree = "<group>"; };
 		9D4C753929EBFFBE007FFCBC /* LifeGoalsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalsClient.swift; sourceTree = "<group>"; };
+		9D4CAE0B2A75281A00B454B8 /* AboutTheAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppTests.swift; sourceTree = "<group>"; };
 		9D556A962A628D1D00A7E8F3 /* IAPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPTests.swift; sourceTree = "<group>"; };
 		9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
 		9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppView.swift; sourceTree = "<group>"; };
@@ -355,6 +357,14 @@
 				9D4C753729EBF6CB007FFCBC /* SFSymbolPickerView.swift */,
 			);
 			path = SFSymbolPicker;
+			sourceTree = "<group>";
+		};
+		9D4CAE0A2A75280C00B454B8 /* AboutTheApp */ = {
+			isa = PBXGroup;
+			children = (
+				9D4CAE0B2A75281A00B454B8 /* AboutTheAppTests.swift */,
+			);
+			path = AboutTheApp;
 			sourceTree = "<group>";
 		};
 		9D556A952A628D0F00A7E8F3 /* IAP */ = {
@@ -598,6 +608,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D4CAE0A2A75280C00B454B8 /* AboutTheApp */,
 				9D04CAAB2A750F7C007C678D /* LifeCalendar */,
 				9DC756A62A73D78A00E6F3F1 /* LifeGoals */,
 				9D82723F2A73A9460001925C /* AddOrEditLifeGoal */,
@@ -1174,6 +1185,7 @@
 				9DC756A82A73D7AE00E6F3F1 /* LifeGoalsTests.swift in Sources */,
 				9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */,
 				9D877C492A3F55F700CC0562 /* DatePickerTests.swift in Sources */,
+				9D4CAE0C2A75281A00B454B8 /* AboutTheAppTests.swift in Sources */,
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
 				9D04CAAD2A7516E7007C678D /* LifeCalendarTests.swift in Sources */,
