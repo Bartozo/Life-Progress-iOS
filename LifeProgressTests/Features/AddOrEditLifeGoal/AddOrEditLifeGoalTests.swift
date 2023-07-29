@@ -18,7 +18,11 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(),
             reducer: AddOrEditLifeGoalReducer()
-        )
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
         
         await store.send(.titleChanged(title)) {
             $0.title = title
@@ -30,7 +34,11 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(),
             reducer: AddOrEditLifeGoalReducer()
-        )
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
         
         await store.send(.detailsChanged(details)) {
             $0.details = details
@@ -42,7 +50,11 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(),
             reducer: AddOrEditLifeGoalReducer()
-        )
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
         
         await store.send(.isCompletedChanged(isCompleted)) {
             $0.isCompleted = isCompleted
@@ -61,7 +73,11 @@ class AddOrEditLifeGoalTests: XCTestCase {
                 isDatePickerVisible: true
             ),
             reducer: AddOrEditLifeGoalReducer()
-        )
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
         
         await store.send(.isCompletedChanged(isCompleted)) {
             $0.isCompleted = isCompleted
@@ -74,7 +90,11 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(),
             reducer: AddOrEditLifeGoalReducer()
-        )
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2022, month: 1, day: 1)
+            }()
+        }
         
         await store.send(.finishedAtChanged(finishedAt)) {
             $0.finishedAt = finishedAt
@@ -126,6 +146,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
         }
         store.exhaustivity = .off
         
@@ -193,6 +216,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
         }
         store.exhaustivity = .off
         
