@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D04CAAD2A7516E7007C678D /* LifeCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04CAAC2A7516E7007C678D /* LifeCalendarTests.swift */; };
 		9D156C3F29D0AC0B00F2C992 /* UserSettingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */; };
 		9D2045912A056E0100CAAAC6 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = 9D2045902A056E0100CAAAC6 /* TelemetryClient */; };
 		9D2045932A057A8200CAAAC6 /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2045922A057A8200CAAAC6 /* AnalyticsClient.swift */; };
@@ -161,6 +162,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D04CAAC2A7516E7007C678D /* LifeCalendarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarTests.swift; sourceTree = "<group>"; };
 		9D156C3E29D0AC0B00F2C992 /* UserSettingsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsClient.swift; sourceTree = "<group>"; };
 		9D2045922A057A8200CAAAC6 /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
 		9D3B855C29FD1AAD0026D814 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -305,6 +307,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D04CAAB2A750F7C007C678D /* LifeCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				9D04CAAC2A7516E7007C678D /* LifeCalendarTests.swift */,
+			);
+			path = LifeCalendar;
+			sourceTree = "<group>";
+		};
 		9D3B855729FD18D40026D814 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +598,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D04CAAB2A750F7C007C678D /* LifeCalendar */,
 				9DC756A62A73D78A00E6F3F1 /* LifeGoals */,
 				9D82723F2A73A9460001925C /* AddOrEditLifeGoal */,
 				9D5F8E0A2A66C71100867D1F /* Theme */,
@@ -1165,6 +1176,7 @@
 				9D877C492A3F55F700CC0562 /* DatePickerTests.swift in Sources */,
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
+				9D04CAAD2A7516E7007C678D /* LifeCalendarTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
 				9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */,
 				9D4110492A4821A10069DFED /* SFSymbolPickerTests.swift in Sources */,
