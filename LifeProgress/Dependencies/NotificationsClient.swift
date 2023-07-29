@@ -19,6 +19,9 @@ struct NotificationsClient {
     
     /// A closure that asynchronously returns a `UNMutableNotificationContent` for the weekly notification.
     var getWeeklyNotification: () -> UNMutableNotificationContent
+    
+    /// A closure that asynchronously requests the user’s authorization to allow notifications.
+    var requestPermission: () async -> Void
 }
 
 // MARK: Dependency Key
@@ -30,7 +33,15 @@ extension NotificationsClient: DependencyKey {
     static let liveValue = Self(
         getDidScheduleWeeklyNotification: { UserDefaultsHelper.didScheduleWeeklyNotification() },
         updateDidScheduleWeeklyNotification: { UserDefaultsHelper.saveDidScheduleWeeklyNotification($0) },
-        getWeeklyNotification: { createWeeklyNotification() }
+        getWeeklyNotification: { createWeeklyNotification() },
+        requestPermission: {
+            let notificationCenter = UNUserNotificationCenter.current()
+            do {
+                try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
+            } catch {
+                print("❌ Couldn't request notification authorization")
+            }
+        }
     )
     
     /// Creates a weekly notification with a randomly selected title and body from a predefined list.
@@ -82,14 +93,16 @@ extension NotificationsClient: TestDependencyKey {
     static let previewValue = Self(
         getDidScheduleWeeklyNotification: { false },
         updateDidScheduleWeeklyNotification: { _ in },
-        getWeeklyNotification: { UNMutableNotificationContent() }
+        getWeeklyNotification: { UNMutableNotificationContent() },
+        requestPermission: { }
     )
 
     /// A test instance of `NotificationsClient` with mock data for unit testing purposes.
     static let testValue = Self(
         getDidScheduleWeeklyNotification: { false },
         updateDidScheduleWeeklyNotification: { _ in },
-        getWeeklyNotification: { UNMutableNotificationContent() }
+        getWeeklyNotification: { UNMutableNotificationContent() },
+        requestPermission: { }
     )
 }
 

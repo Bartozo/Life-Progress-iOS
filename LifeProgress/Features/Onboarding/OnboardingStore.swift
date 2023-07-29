@@ -75,6 +75,8 @@ struct OnboardingReducer: ReducerProtocol {
     
     @Dependency(\.analyticsClient) var analyticsClient
     
+    @Dependency(\.notificationsClient) var nofiticationsClient
+    
     private enum CancelID {}
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -122,9 +124,8 @@ struct OnboardingReducer: ReducerProtocol {
                 
             case .allowNotificationsButtonTapped:
                 return .task {
-                    let notificationCenter = UNUserNotificationCenter.current()
-                    try await notificationCenter.requestAuthorization(options: [.alert, .badge, .sound])
                     analyticsClient.send("onboarding.allow_notifications_button_tapped")
+                    await nofiticationsClient.requestPermission()
                     return .continueButtonTapped
                 }
                 .cancellable(id: CancelID.self)
