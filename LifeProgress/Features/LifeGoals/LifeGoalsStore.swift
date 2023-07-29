@@ -91,6 +91,8 @@ struct LifeGoalsReducer: ReducerProtocol {
         }
     }
     
+    @Dependency(\.date.now) var now
+    
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
     private enum LifeGoalsRequestID {}
     
@@ -150,7 +152,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                 let newLifeGoal = LifeGoal(
                     id: lifeGoal.id,
                     title: lifeGoal.title,
-                    finishedAt: Date.now,
+                    finishedAt: now,
                     symbolName: lifeGoal.symbolName,
                     details: lifeGoal.details
                 )
@@ -183,7 +185,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                     details: lifeGoal.details,
                     isCompleted: lifeGoal.isCompleted,
                     symbolName: lifeGoal.symbolName,
-                    finishedAt: lifeGoal.finishedAt ?? Date.now,
+                    finishedAt: lifeGoal.finishedAt ?? now,
                     lifeGoalToEdit: lifeGoal
                 )
                 return .none

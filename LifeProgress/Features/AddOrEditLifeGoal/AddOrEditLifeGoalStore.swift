@@ -29,7 +29,10 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         var symbolName = "trophy"
         
         /// The date when life goal was accomplished.
-        var finishedAt = Date.now
+        var finishedAt: Date = {
+            @Dependency(\.date.now) var now: Date
+            return now
+        }()
         
         /// Whether the life goal is being edited.
         var isEditing: Bool {
@@ -90,6 +93,8 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         /// The actions that can be taken on the confetti.
         case confetti(ConfettiReducer.Action)
     }
+    
+    @Dependency(\.date) var date
     
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
     private enum LifeExpectancyRequestID {}
