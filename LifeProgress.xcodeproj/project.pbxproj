@@ -98,6 +98,10 @@
 		9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */; };
 		9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */; };
 		9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */; };
+		9DCB34E02A793F7200E0DD7F /* CreditsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34DF2A793F7200E0DD7F /* CreditsStore.swift */; };
+		9DCB34E22A793F7B00E0DD7F /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34E12A793F7B00E0DD7F /* CreditsView.swift */; };
+		9DCB34E72A7940A700E0DD7F /* PackageCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34E62A7940A700E0DD7F /* PackageCredit.swift */; };
+		9DCB34EA2A79472B00E0DD7F /* CreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34E92A79472B00E0DD7F /* CreditCell.swift */; };
 		9DCC207D2A0132E700D151F0 /* PremiumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC207C2A0132E700D151F0 /* PremiumCell.swift */; };
 		9DCC20812A013DBE00D151F0 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC20802A013DBE00D151F0 /* Feature.swift */; };
 		9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */; };
@@ -245,6 +249,10 @@
 		9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayStore.swift; sourceTree = "<group>"; };
 		9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayView.swift; sourceTree = "<group>"; };
 		9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
+		9DCB34DF2A793F7200E0DD7F /* CreditsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsStore.swift; sourceTree = "<group>"; };
+		9DCB34E12A793F7B00E0DD7F /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		9DCB34E62A7940A700E0DD7F /* PackageCredit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCredit.swift; sourceTree = "<group>"; };
+		9DCB34E92A79472B00E0DD7F /* CreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCell.swift; sourceTree = "<group>"; };
 		9DCC207C2A0132E700D151F0 /* PremiumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCell.swift; sourceTree = "<group>"; };
 		9DCC20802A013DBE00D151F0 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarView.swift; sourceTree = "<group>"; };
@@ -426,6 +434,7 @@
 		9D6ECBC429BA52CB000DF545 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9DCB34DE2A793F6300E0DD7F /* Credits */,
 				9DC634532A223A7E00BC55CB /* WhatsNew */,
 				9D813B202A03C9810054020F /* Developer */,
 				9D8041402A0262B400E3B74A /* Onboarding */,
@@ -782,6 +791,33 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		9DCB34DE2A793F6300E0DD7F /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				9DCB34E82A7946B200E0DD7F /* Views */,
+				9DCB34E32A793FC600E0DD7F /* Model */,
+				9DCB34DF2A793F7200E0DD7F /* CreditsStore.swift */,
+				9DCB34E12A793F7B00E0DD7F /* CreditsView.swift */,
+			);
+			path = Credits;
+			sourceTree = "<group>";
+		};
+		9DCB34E32A793FC600E0DD7F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DCB34E62A7940A700E0DD7F /* PackageCredit.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DCB34E82A7946B200E0DD7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9DCB34E92A79472B00E0DD7F /* CreditCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9DCC207A2A01311900D151F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1133,6 +1169,8 @@
 				9D80414C2A026BD000E3B74A /* OnboardingLifeExpectancyView.swift in Sources */,
 				9D3B856129FD1D600026D814 /* LifeGoal.swift in Sources */,
 				9DB6D11829C216A300265C2E /* ThemeStore.swift in Sources */,
+				9DCB34E22A793F7B00E0DD7F /* CreditsView.swift in Sources */,
+				9DCB34E72A7940A700E0DD7F /* PackageCredit.swift in Sources */,
 				9D70DC352A00FAFC000C2AF0 /* IAPClient.swift in Sources */,
 				9D4C753829EBF6CB007FFCBC /* SFSymbolPickerView.swift in Sources */,
 				9DCC20812A013DBE00D151F0 /* Feature.swift in Sources */,
@@ -1153,6 +1191,7 @@
 				9D813B182A039B710054020F /* About.swift in Sources */,
 				9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */,
 				9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */,
+				9DCB34EA2A79472B00E0DD7F /* CreditCell.swift in Sources */,
 				9DB996962A050930004EF0FF /* NotificationsClient.swift in Sources */,
 				9DC9B71729BE052B0088D6F9 /* DateFormatters.swift in Sources */,
 				9D46DCD329D839E900331456 /* AboutTheAppStore.swift in Sources */,
@@ -1179,6 +1218,7 @@
 				9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */,
 				9DE2CECC29FFB3FC00A9BE6D /* LifeGoalsList.swift in Sources */,
 				9DD720FE29BFBD4000634AB2 /* WeeklyNotificationStore.swift in Sources */,
+				9DCB34E02A793F7200E0DD7F /* CreditsStore.swift in Sources */,
 				9DEBBBA429CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift in Sources */,
 				9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */,
 				9DEBBBA629CF5118008CE08C /* CurrentYearProgressView.swift in Sources */,

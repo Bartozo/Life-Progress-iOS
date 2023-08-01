@@ -33,6 +33,9 @@ struct SettingsReducer: ReducerProtocol {
         
         /// The developer's state.
         var developer = DeveloperReducer.State()
+        
+        /// The credits state.
+        var credits = CreditsReducer.State()
     }
     
     /// The actions that can be taken on the settings.
@@ -49,6 +52,8 @@ struct SettingsReducer: ReducerProtocol {
         case theme(ThemeReducer.Action)
         /// The actions that can be taken on the developer.
         case developer(DeveloperReducer.Action)
+        /// The actions that can be taken on the credits.
+        case credits(CreditsReducer.Action)
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
@@ -71,6 +76,9 @@ struct SettingsReducer: ReducerProtocol {
         Scope(state: \.developer, action: /Action.developer) {
             DeveloperReducer()
         }
+        Scope(state: \.credits, action: /Action.credits) {
+            CreditsReducer()
+        }
         Reduce { state, action in
             switch action {
             case .iap(_):
@@ -89,6 +97,9 @@ struct SettingsReducer: ReducerProtocol {
                 return .none
                 
             case .developer:
+                return .none
+                
+            case .credits:
                 return .none
             }
         }

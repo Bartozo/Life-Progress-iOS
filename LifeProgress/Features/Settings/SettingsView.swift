@@ -87,6 +87,21 @@ struct SettingsView: View {
                 SettingsCell(title: "Contact developer", systemImage: "envelope") {
                     contactDeveloper()
                 }
+                NavigationLink {
+                    CreditsView(
+                        store: self.store.scope(
+                            state: \.credits,
+                            action: SettingsReducer.Action.credits
+                        )
+                    )
+                } label: {
+                    Image(systemName: "shippingbox")
+                        .frame(maxWidth: 30)
+                        .padding(.trailing, 10)
+                        .foregroundColor(theme.color)
+                    
+                    Text("Credits")
+                }
             } header: {
                 Text("Feedback")
             } footer: {
