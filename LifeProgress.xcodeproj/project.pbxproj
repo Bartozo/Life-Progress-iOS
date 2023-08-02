@@ -102,6 +102,7 @@
 		9DCB34E22A793F7B00E0DD7F /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34E12A793F7B00E0DD7F /* CreditsView.swift */; };
 		9DCB34E72A7940A700E0DD7F /* PackageCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34E62A7940A700E0DD7F /* PackageCredit.swift */; };
 		9DCB34EA2A79472B00E0DD7F /* CreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34E92A79472B00E0DD7F /* CreditCell.swift */; };
+		9DCB34ED2A7957AD00E0DD7F /* CreditsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCB34EC2A7957AD00E0DD7F /* CreditsTests.swift */; };
 		9DCC207D2A0132E700D151F0 /* PremiumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC207C2A0132E700D151F0 /* PremiumCell.swift */; };
 		9DCC20812A013DBE00D151F0 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC20802A013DBE00D151F0 /* Feature.swift */; };
 		9DCF41F329BB94D300F30BB3 /* LifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */; };
@@ -253,6 +254,7 @@
 		9DCB34E12A793F7B00E0DD7F /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		9DCB34E62A7940A700E0DD7F /* PackageCredit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCredit.swift; sourceTree = "<group>"; };
 		9DCB34E92A79472B00E0DD7F /* CreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCell.swift; sourceTree = "<group>"; };
+		9DCB34EC2A7957AD00E0DD7F /* CreditsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsTests.swift; sourceTree = "<group>"; };
 		9DCC207C2A0132E700D151F0 /* PremiumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCell.swift; sourceTree = "<group>"; };
 		9DCC20802A013DBE00D151F0 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		9DCF41F229BB94D300F30BB3 /* LifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCalendarView.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9DCB34EB2A79579F00E0DD7F /* Credits */,
 				9D4CAE0D2A75294100B454B8 /* Onboarding */,
 				9D4CAE0A2A75280C00B454B8 /* AboutTheApp */,
 				9D04CAAB2A750F7C007C678D /* LifeCalendar */,
@@ -816,6 +819,14 @@
 				9DCB34E92A79472B00E0DD7F /* CreditCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9DCB34EB2A79579F00E0DD7F /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				9DCB34EC2A7957AD00E0DD7F /* CreditsTests.swift */,
+			);
+			path = Credits;
 			sourceTree = "<group>";
 		};
 		9DCC207A2A01311900D151F0 /* Views */ = {
@@ -1247,6 +1258,7 @@
 				9D41104C2A4828DF0069DFED /* ConfettiTests.swift in Sources */,
 				9D4CAE0F2A75294D00B454B8 /* OnboardingTests.swift in Sources */,
 				9DB9F3AF2A3DF8B7001AF6D4 /* WeeklyNotificationTests.swift in Sources */,
+				9DCB34ED2A7957AD00E0DD7F /* CreditsTests.swift in Sources */,
 				9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
