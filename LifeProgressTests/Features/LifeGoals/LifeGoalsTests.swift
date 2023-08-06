@@ -217,6 +217,28 @@ class LifeGoalsTests: XCTestCase {
         }
     }
     
+    func testCloseShareLifeGoalSheet_ShouldCloseShareLifeGoalSheet() async {
+        let lifeGoal = LifeGoal(
+            id: UUID(),
+            title: "title",
+            finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
+            symbolName: "symbolName",
+            details: "details"
+        )
+        let store = TestStore(
+            initialState: LifeGoalsReducer.State(
+                shareLifeGoal: .init(lifeGoal: lifeGoal),
+                isShareLifeGoalSheetVisible: true
+            ),
+            reducer: LifeGoalsReducer()
+        )
+        
+        await store.send(.closeShareLifeGoalSheet) {
+            $0.isShareLifeGoalSheetVisible = false
+            $0.shareLifeGoal = nil
+        }
+    }
+    
     func testSwipeToDelete_ShouldDeleteLifeGoal() async {
         let lifeGoal = LifeGoal(
             id: UUID(),
@@ -397,6 +419,49 @@ class LifeGoalsTests: XCTestCase {
         await store.send(.swipeToUncomplete(lifeGoal))
         
         XCTAssertEqual(eventName, "life_goals.swipe_to_uncomplete")
+    }
+    
+    func testSwipeToShare_ShouldShowShareLifeGoalSheet() async {
+        let lifeGoal = LifeGoal(
+            id: UUID(),
+            title: "title",
+            finishedAt: Date.createDate(year: 2000, month: 1, day: 1),
+            symbolName: "symbolName",
+            details: "details"
+        )
+        let store = TestStore(
+            initialState: LifeGoalsReducer.State(),
+            reducer: LifeGoalsReducer()
+        )
+        
+        await store.send(.swipeToShare(lifeGoal)) {
+            $0.shareLifeGoal = .init(lifeGoal: lifeGoal)
+            $0.isShareLifeGoalSheetVisible = true
+        }
+    }
+    
+    func testSwipeToShare_ShouldAddToAnalytics() async {
+        var eventName = ""
+        let lifeGoal = LifeGoal(
+            id: UUID(),
+            title: "title",
+            finishedAt: Date.createDate(year: 2000, month: 1, day: 1),
+            symbolName: "symbolName",
+            details: "details"
+        )
+        let store = TestStore(
+            initialState: LifeGoalsReducer.State(),
+            reducer: LifeGoalsReducer()
+        ) {
+            $0.analyticsClient.send = { event in
+                eventName = event
+            }
+        }
+        store.exhaustivity = .off
+        
+        await store.send(.swipeToShare(lifeGoal))
+        
+        XCTAssertEqual(eventName, "life_goals.swipe_to_share")
     }
     
     func testLifeGoalTapped_ShouldShowAddOrEditLifeGoalSheet() async {
