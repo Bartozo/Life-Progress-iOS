@@ -19,10 +19,12 @@ struct LifeGoalsView: View {
     struct ViewState: Equatable {
         let isAddLifeGoalSheetVisible: Bool
         let isIAPSheetVisible: Bool
+        let isShareLifeGoalSheetVisible: Bool
 
         init(state: LifeGoalsReducer.State) {
             self.isAddLifeGoalSheetVisible = state.isAddLifeGoalSheetVisible
             self.isIAPSheetVisible = state.iap.isSheetVisible
+            self.isShareLifeGoalSheetVisible = state.isShareLifeGoalSheetVisible
         }
     }
     
@@ -61,6 +63,19 @@ struct LifeGoalsView: View {
                         )
                     ) {
                         AddOrEditLifeGoalView(store: $0)
+                    }
+                }
+                .sheet(isPresented: viewStore.binding(
+                    get: \.isShareLifeGoalSheetVisible,
+                    send: LifeGoalsReducer.Action.closeShareLifeGoalSheet
+                )) {
+                    IfLetStore(
+                        self.store.scope(
+                            state: \.shareLifeGoal,
+                            action: LifeGoalsReducer.Action.shareLifeGoal
+                        )
+                    ) {
+                        ShareLifeGoalView(store: $0)
                     }
                 }
                 .onReceive(lifeGoalEntities.publisher) { _ in

@@ -15,16 +15,27 @@ struct AddOrEditLifeGoalView: View {
     
     let store: AddOrEditLifeGoalStore
     
+    struct ViewState: Equatable {
+        let isEditing: Bool
+        let isShareLifeGoalSheetVisible: Bool
+
+        init(state: AddOrEditLifeGoalReducer.State) {
+            self.isEditing = state.isEditing
+            self.isShareLifeGoalSheetVisible = state.isShareLifeGoalSheetVisible
+        }
+    }
+    
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: \.isEditing) { viewStore in
-                let isEditing = viewStore.state
+            WithViewStore(self.store, observe: ViewState.init) { viewStore in
+                let isEditing = viewStore.isEditing
                 
                 Form {
                     IconSection(store: self.store)
                     TitleSection(store: self.store)
                     DetailsSection(store: self.store)
                     OthersSection(store: self.store)
+                    ShareSection(store: self.store)
                 }
                 .navigationTitle(isEditing ? "Edit Life Goal" : "Add Life Goal")
                 .navigationBarTitleDisplayMode(.inline)
@@ -45,6 +56,19 @@ struct AddOrEditLifeGoalView: View {
                         state: \.confetti,
                         action: AddOrEditLifeGoalReducer.Action.confetti
                     ))
+                }
+                .sheet(isPresented: viewStore.binding(
+                    get: \.isShareLifeGoalSheetVisible,
+                    send: AddOrEditLifeGoalReducer.Action.closeShareLifeGoalSheet
+                )) {
+                    IfLetStore(
+                        self.store.scope(
+                            state: \.shareLifeGoal,
+                            action: AddOrEditLifeGoalReducer.Action.shareLifeGoal
+                        )
+                    ) {
+                        ShareLifeGoalView(store: $0)
+                    }
                 }
             }
         }
@@ -181,6 +205,27 @@ private struct OthersSection: View {
                             action: AddOrEditLifeGoalReducer.Action.datePicker
                         )
                     )
+                }
+            }
+        }
+    }
+}
+
+private struct ShareSection: View {
+
+    let store: AddOrEditLifeGoalStore
+    
+    var body: some View {
+        Section {
+            WithViewStore(self.store, observe: \.isCompleted) { viewStore in
+                let isCompleted = viewStore.state
+                
+                if isCompleted {
+                    Button {
+                        viewStore.send(.shareLifeGoalButtonTapped)
+                    } label: {
+                        Text("Share Life Goal")
+                    }
                 }
             }
         }

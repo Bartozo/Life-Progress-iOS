@@ -68,6 +68,12 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         
         /// The confetti's state.
         var confetti = ConfettiReducer.State()
+        
+        /// The share life goal's state.
+        var shareLifeGoal: ShareLifeGoalReducer.State?
+        
+        /// Whether the share life goal sheet is visible.
+        var isShareLifeGoalSheetVisible = false
     }
     
     /// The actions that can be taken on the about the app.
@@ -86,12 +92,18 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
         case addButtonTapped
         /// Indicates that the save button was tapped.
         case saveButtonTapped
+        /// Indicates that the share life goal button was tapped.
+        case shareLifeGoalButtonTapped
+        /// Indicates that is share life goal sheet should be hidden.
+        case closeShareLifeGoalSheet
         /// The actions that can be taken on the date picker.
         case datePicker(DatePickerReducer.Action)
         /// The actions that can be taken on the SF Symbol picker.
         case sfSymbolPicker(SFSymbolPickerReducer.Action)
         /// The actions that can be taken on the confetti.
         case confetti(ConfettiReducer.Action)
+        /// The actions that can be taken on the share life goal.
+        case shareLifeGoal(ShareLifeGoalReducer.Action)
     }
     
     @Dependency(\.date) var date
@@ -179,6 +191,19 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                     return .closeButtonTapped
                 }
                 
+            case .shareLifeGoalButtonTapped:
+                guard let lifeGoal = state.lifeGoalToEdit else {
+                    return .none
+                }
+                
+                state.shareLifeGoal = .init(lifeGoal: lifeGoal)
+                state.isShareLifeGoalSheetVisible = true
+                return .none
+                
+            case .closeShareLifeGoalSheet:
+                state.isShareLifeGoalSheetVisible = false
+                return .none
+                
             case .datePicker:
                 return .none
                 
@@ -187,7 +212,16 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 
             case .confetti:
                 return .none
+                
+            case .shareLifeGoal(let shareLifeGoalAction):
+                if shareLifeGoalAction == .closeButtonTapped {
+                    state.isShareLifeGoalSheetVisible = false
+                }
+                return .none
             }
+        }
+        .ifLet(\.shareLifeGoal, action: /Action.shareLifeGoal) {
+            ShareLifeGoalReducer()
         }
     }
 }

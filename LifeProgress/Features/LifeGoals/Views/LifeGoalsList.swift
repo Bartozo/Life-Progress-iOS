@@ -11,6 +11,8 @@ import StoreKit
 
 struct LifeGoalsList: View {
     @Environment(\.requestReview) var requestReview
+    
+    @Environment(\.theme) var theme
 
     let store: LifeGoalsStore
     
@@ -46,6 +48,12 @@ struct LifeGoalsList: View {
                                 } label: {
                                     Label("Uncomplete", systemImage: "xmark.circle.fill")
                                 }
+                                Button {
+                                    viewStore.send(.swipeToShare(lifeGoal))
+                                } label: {
+                                    Label("Share", systemImage: "square.and.arrow.up.fill")
+                                }
+                                .tint(theme.color)
                             } else {
                                 Button {
                                     viewStore.send(.swipeToComplete(lifeGoal))

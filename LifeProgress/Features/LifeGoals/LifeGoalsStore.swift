@@ -33,7 +33,7 @@ struct LifeGoalsReducer: ReducerProtocol {
             }
         }
         
-        /// Whether the about calendar sheet is visible.
+        /// Represents the currently selected list type.
         var listType: ListType = .uncompleted
         
         /// Whether the about calendar sheet is visible.
@@ -44,6 +44,12 @@ struct LifeGoalsReducer: ReducerProtocol {
         
         /// The add or edit life goal's state.
         var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
+        
+        /// The share life goal's state.
+        var shareLifeGoal: ShareLifeGoalReducer.State?
+        
+        /// Whether the share life goal sheet is visible.
+        var isShareLifeGoalSheetVisible = false
     }
     
     
@@ -61,18 +67,24 @@ struct LifeGoalsReducer: ReducerProtocol {
         case addButtonTapped
         /// Indicates that is add life goal sheet should be hidden.
         case closeAddLifeGoalSheet
+        /// Indicates that is share life goal sheet should be hidden.
+        case closeShareLifeGoalSheet
         /// Indicates that the swipe to delete action was performed.
         case swipeToDelete(LifeGoal)
         /// Indicates that the swipe to complete action was performed.
         case swipeToComplete(LifeGoal)
         /// Indicates that the swipe to uncomplete action was performed.
         case swipeToUncomplete(LifeGoal)
-        /// Indicates that the life goal has beedn tapped.
+        /// Indicates that the swipe to share action was performed.
+        case swipeToShare(LifeGoal)
+        /// Indicates that the life goal has been tapped.
         case lifeGoalTapped(LifeGoal)
         /// The actions that can be taken on the confetti.
         case confetti(ConfettiReducer.Action)
         /// The actions that can be taken on the add or edit life goal.
         case addOrEditLifeGoal(AddOrEditLifeGoalReducer.Action)
+        /// The actions that can be taken on the share life goal.
+        case shareLifeGoal(ShareLifeGoalReducer.Action)
     }
     
     /// An enumeration representing the two possible types of calendars:
@@ -140,6 +152,11 @@ struct LifeGoalsReducer: ReducerProtocol {
                 state.isAddLifeGoalSheetVisible = false
                 return .none
                 
+            case .closeShareLifeGoalSheet:
+                state.isShareLifeGoalSheetVisible = false
+                state.shareLifeGoal = nil
+                return .none
+                
             case .swipeToDelete(let lifeGoal):
                 analyticsClient.send("life_goals.swipe_to_delete")
                 return .task {
@@ -178,6 +195,11 @@ struct LifeGoalsReducer: ReducerProtocol {
                     return .onAppear
                 }
                 
+            case .swipeToShare(let lifeGoal):
+                state.shareLifeGoal = .init(lifeGoal: lifeGoal)
+                state.isShareLifeGoalSheetVisible = true
+                return .none
+                
             case .lifeGoalTapped(let lifeGoal):
                 state.isAddLifeGoalSheetVisible = true
                 state.addOrEditLifeGoal = .init(
@@ -191,7 +213,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                 return .none
             
             case .addOrEditLifeGoal(let addOrEditLifeGoalAction):
-                if (addOrEditLifeGoalAction == .closeButtonTapped) {
+                if addOrEditLifeGoalAction == .closeButtonTapped {
                     state.isAddLifeGoalSheetVisible = false
                     return .send(.onAppear)
                 }
@@ -199,10 +221,19 @@ struct LifeGoalsReducer: ReducerProtocol {
                 
             case .confetti:
                 return .none
+                
+            case .shareLifeGoal(let shareLifeGoalAction):
+                if shareLifeGoalAction == .closeButtonTapped {
+                    state.isShareLifeGoalSheetVisible = false
+                }
+                return .none
             }
         }
         .ifLet(\.addOrEditLifeGoal, action: /Action.addOrEditLifeGoal) {
-          AddOrEditLifeGoalReducer()
+            AddOrEditLifeGoalReducer()
+        }
+        .ifLet(\.shareLifeGoal, action: /Action.shareLifeGoal) {
+            ShareLifeGoalReducer()
         }
     }
 }
