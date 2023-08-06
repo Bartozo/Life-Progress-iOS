@@ -196,6 +196,7 @@ struct LifeGoalsReducer: ReducerProtocol {
                 }
                 
             case .swipeToShare(let lifeGoal):
+                analyticsClient.send("life_goals.swipe_to_share")
                 state.shareLifeGoal = .init(lifeGoal: lifeGoal)
                 state.isShareLifeGoalSheetVisible = true
                 return .none
