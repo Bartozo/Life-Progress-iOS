@@ -133,6 +133,7 @@
 		9DFFA0782A7FAB5900C6D235 /* ColorPickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFA0772A7FAB5900C6D235 /* ColorPickerStore.swift */; };
 		9DFFA07A2A7FAB6100C6D235 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFA0792A7FAB6100C6D235 /* ColorPickerView.swift */; };
 		9DFFA07E2A7FE22800C6D235 /* ColorPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFA07D2A7FE22800C6D235 /* ColorPickerTests.swift */; };
+		9DFFA0812A7FFE4D00C6D235 /* ShareLifeGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFA0802A7FFE4D00C6D235 /* ShareLifeGoalTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +290,7 @@
 		9DFFA0772A7FAB5900C6D235 /* ColorPickerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerStore.swift; sourceTree = "<group>"; };
 		9DFFA0792A7FAB6100C6D235 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		9DFFA07D2A7FE22800C6D235 /* ColorPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerTests.swift; sourceTree = "<group>"; };
+		9DFFA0802A7FFE4D00C6D235 /* ShareLifeGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLifeGoalTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -641,6 +643,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9DFFA07F2A7FFE3E00C6D235 /* ShareLifeGoal */,
 				9DCB34EB2A79579F00E0DD7F /* Credits */,
 				9D4CAE0D2A75294100B454B8 /* Onboarding */,
 				9D4CAE0A2A75280C00B454B8 /* AboutTheApp */,
@@ -1020,6 +1023,14 @@
 			path = ColorPicker;
 			sourceTree = "<group>";
 		};
+		9DFFA07F2A7FFE3E00C6D235 /* ShareLifeGoal */ = {
+			isa = PBXGroup;
+			children = (
+				9DFFA0802A7FFE4D00C6D235 /* ShareLifeGoalTests.swift */,
+			);
+			path = ShareLifeGoal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1293,6 +1304,7 @@
 				9D4CAE0C2A75281A00B454B8 /* AboutTheAppTests.swift in Sources */,
 				9D8322052A3D9B0300A66037 /* DeveloperTests.swift in Sources */,
 				9D8322092A3DAE5A00A66037 /* LifeExpectancyTests.swift in Sources */,
+				9DFFA0812A7FFE4D00C6D235 /* ShareLifeGoalTests.swift in Sources */,
 				9D04CAAD2A7516E7007C678D /* LifeCalendarTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
 				9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */,
