@@ -226,4 +226,98 @@ class AddOrEditLifeGoalTests: XCTestCase {
         
         XCTAssertEqual(eventName, "add_or_edit_life_goal.save_button_tapped")
     }
+    
+    func testShareLifeGoalButtonTapped_ShouldShowShareLifeGoalSheet() async {
+        let lifeGoal = LifeGoal(
+            id: UUID(),
+            title: "title",
+            finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
+            symbolName: "symbolName",
+            details: "details"
+        )
+        let store = TestStore(
+            initialState: AddOrEditLifeGoalReducer.State(
+                lifeGoalToEdit: lifeGoal
+            ),
+            reducer: AddOrEditLifeGoalReducer()
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
+        
+        await store.send(.shareLifeGoalButtonTapped) {
+            $0.shareLifeGoal = .init(lifeGoal: lifeGoal)
+            $0.isShareLifeGoalSheetVisible = true
+        }
+    }
+    
+    func testShareLifeGoalButtonTapped_ShouldntShowShareLifeGoalSheet() async {
+        let store = TestStore(
+            initialState: AddOrEditLifeGoalReducer.State(),
+            reducer: AddOrEditLifeGoalReducer()
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
+        
+        await store.send(.shareLifeGoalButtonTapped)
+    }
+    
+    func testShareLifeGoalButtonTapped_ShouldAddToAnalytics() async {
+        let lifeGoal = LifeGoal(
+            id: UUID(),
+            title: "title",
+            finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
+            symbolName: "symbolName",
+            details: "details"
+        )
+        var eventName = ""
+        let store = TestStore(
+            initialState: AddOrEditLifeGoalReducer.State(
+                lifeGoalToEdit: lifeGoal
+            ),
+            reducer: AddOrEditLifeGoalReducer()
+        ) {
+            $0.analyticsClient.send = { event in
+                eventName = event
+            }
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
+        store.exhaustivity = .off
+        
+        await store.send(.shareLifeGoalButtonTapped)
+        
+        XCTAssertEqual(eventName, "add_or_edit_life_goal.share_life_goal_button_tapped")
+    }
+    
+    func testCloseShareLifeGoalSheet_ShouldCloseLifeGoalSheet() async {
+        let lifeGoal = LifeGoal(
+            id: UUID(),
+            title: "title",
+            finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
+            symbolName: "symbolName",
+            details: "details"
+        )
+        var eventName = ""
+        let store = TestStore(
+            initialState: AddOrEditLifeGoalReducer.State(
+                shareLifeGoal: .init(lifeGoal: lifeGoal),
+                isShareLifeGoalSheetVisible: true
+            ),
+            reducer: AddOrEditLifeGoalReducer()
+        ) {
+            $0.date.now = {
+                Date.createDate(year: 2023, month: 1, day: 1)
+            }()
+        }
+        
+        await store.send(.closeShareLifeGoalSheet) {
+            $0.shareLifeGoal = nil
+            $0.isShareLifeGoalSheetVisible = false
+        }
+    }
 }
