@@ -202,6 +202,7 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 return .none
                 
             case .closeShareLifeGoalSheet:
+                state.shareLifeGoal = nil
                 state.isShareLifeGoalSheetVisible = false
                 return .none
                 
