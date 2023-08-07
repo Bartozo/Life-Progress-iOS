@@ -52,6 +52,10 @@ struct PackageCredit: Hashable, Identifiable {
             PackageCredit(
                 title: "WhatsNewKit",
                 url: "https://github.com/SvenTiigi/WhatsNewKit"
+            ),
+            PackageCredit(
+                title: "Siren",
+                url: "https://github.com/ArtSabintsev/Siren"
             )
         ]
     }
