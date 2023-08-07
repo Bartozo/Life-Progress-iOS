@@ -23,6 +23,7 @@
 		9D4CAE0C2A75281A00B454B8 /* AboutTheAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CAE0B2A75281A00B454B8 /* AboutTheAppTests.swift */; };
 		9D4CAE0F2A75294D00B454B8 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CAE0E2A75294D00B454B8 /* OnboardingTests.swift */; };
 		9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D556A962A628D1D00A7E8F3 /* IAPTests.swift */; };
+		9D5D81052A8101D90080E37D /* Siren in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5D81042A8101D90080E37D /* Siren */; };
 		9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */; };
 		9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */; };
 		9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */; };
@@ -298,6 +299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5D81052A8101D90080E37D /* Siren in Frameworks */,
 				9DE2CEC929FFB30D00A9BE6D /* ConfettiSwiftUI in Frameworks */,
 				9D2045912A056E0100CAAAC6 /* TelemetryClient in Frameworks */,
 				9DC634512A22370C00BC55CB /* WhatsNewKit in Frameworks */,
@@ -1047,6 +1049,7 @@
 				9DE2CEC829FFB30D00A9BE6D /* ConfettiSwiftUI */,
 				9D2045902A056E0100CAAAC6 /* TelemetryClient */,
 				9DC634502A22370C00BC55CB /* WhatsNewKit */,
+				9D5D81042A8101D90080E37D /* Siren */,
 			);
 			productName = LifeProgress;
 			productReference = 9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */;
@@ -1149,6 +1152,7 @@
 				9DE2CEC729FFB30D00A9BE6D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 				9D20458F2A056E0100CAAAC6 /* XCRemoteSwiftPackageReference "SwiftClient" */,
 				9DC6344F2A22370C00BC55CB /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
+				9D5D81032A8101D90080E37D /* XCRemoteSwiftPackageReference "Siren" */,
 			);
 			productRefGroup = 9D70827629B8D1A000846F55 /* Products */;
 			projectDirPath = "";
@@ -1752,6 +1756,14 @@
 				minimumVersion = 1.4.3;
 			};
 		};
+		9D5D81032A8101D90080E37D /* XCRemoteSwiftPackageReference "Siren" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArtSabintsev/Siren";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.1;
+			};
+		};
 		9D660B7B29EA998900AE2445 /* XCRemoteSwiftPackageReference "SymbolPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/xnth97/SymbolPicker.git";
@@ -1791,6 +1803,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9D20458F2A056E0100CAAAC6 /* XCRemoteSwiftPackageReference "SwiftClient" */;
 			productName = TelemetryClient;
+		};
+		9D5D81042A8101D90080E37D /* Siren */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5D81032A8101D90080E37D /* XCRemoteSwiftPackageReference "Siren" */;
+			productName = Siren;
 		};
 		9D660B7C29EA998900AE2445 /* SymbolPicker */ = {
 			isa = XCSwiftPackageProductDependency;
