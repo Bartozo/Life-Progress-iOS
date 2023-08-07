@@ -9,6 +9,7 @@ import SwiftUI
 import BackgroundTasks
 import ComposableArchitecture
 import TelemetryClient
+import Siren
 
 @main
 struct LifeProgressApp: App {
@@ -42,6 +43,9 @@ struct LifeProgressApp: App {
                     )
                 )
                 .environment(\.managedObjectContext, coreDataManager.container.viewContext)
+                .task {
+                    Siren.shared.wail()
+                }
         }
         .backgroundTask(.appRefresh("com.bartozo.LifeProgress.weekly-notification")) {
             notificationsClient.updateDidScheduleWeeklyNotification(false)
