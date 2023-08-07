@@ -15,7 +15,7 @@ extension RootView: WhatsNewCollectionProvider {
     /// Provides the collection of "What's New" information for the LifeProgressApp.
     var whatsNewCollection: WhatsNewCollection {
         WhatsNew(
-            version: "1.0.1",
+            version: "1.1.0",
             title: "What's New in Life Progress",
             features: [
                 .init(
@@ -28,19 +28,27 @@ extension RootView: WhatsNewCollectionProvider {
                 ),
                 .init(
                     image: .init(
-                        systemName: "sparkles",
-                        foregroundColor: theme.color
-                    ),
-                    title: "Discover new features",
-                    subtitle: "Stay up-to-date with cool additions"
-                ),
-                .init(
-                    image: .init(
                         systemName: "wrench",
                         foregroundColor: theme.color
                     ),
                     title: "Bug fixes",
                     subtitle: "Improving stability and reliability"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "square.and.arrow.up",
+                        foregroundColor: theme.color
+                    ),
+                    title: "Share Life Goal",
+                    subtitle: "Share completed life goals as images with friends"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "gear",
+                        foregroundColor: theme.color
+                    ),
+                    title: "Added Credits to Settings",
+                    subtitle: "View packages used in the project"
                 ),
             ],
             primaryAction: .init(

@@ -451,7 +451,6 @@
 			children = (
 				9D8336382A7A473700DC6720 /* ShareLifeGoal */,
 				9DCB34DE2A793F6300E0DD7F /* Credits */,
-				9DC634532A223A7E00BC55CB /* WhatsNew */,
 				9D813B202A03C9810054020F /* Developer */,
 				9D8041402A0262B400E3B74A /* Onboarding */,
 				9D660B7E29EAA2FD00AE2445 /* Shared */,
@@ -784,13 +783,6 @@
 				9DC634542A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		9DC634532A223A7E00BC55CB /* WhatsNew */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WhatsNew;
 			sourceTree = "<group>";
 		};
 		9DC756A62A73D78A00E6F3F1 /* LifeGoals */ = {
