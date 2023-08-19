@@ -69,6 +69,7 @@ struct ShareLifeGoalView: View {
         let imagePreview = ImagePreview(store: self.store)
             .frame(width: screenSize.width, height: screenSize.width)
             .environment(\.colorScheme, theme == .dark ? .dark : .light)
+            .environment(\.locale, Locale.current)
         let renderer = ImageRenderer(content: imagePreview)
         renderer.scale = UIScreen.main.scale
      
