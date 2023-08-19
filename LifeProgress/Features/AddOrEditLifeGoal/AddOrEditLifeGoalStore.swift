@@ -197,7 +197,15 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 }
                 
                 analyticsClient.send("add_or_edit_life_goal.share_life_goal_button_tapped")
-                state.shareLifeGoal = .init(lifeGoal: lifeGoal)
+                state.shareLifeGoal = .init(
+                    lifeGoal: LifeGoal(
+                        id: lifeGoal.id,
+                        title: lifeGoal.title,
+                        finishedAt: state.finishedAt,
+                        symbolName: lifeGoal.symbolName,
+                        details: lifeGoal.details
+                    )
+                )
                 state.isShareLifeGoalSheetVisible = true
                 return .none
                 
