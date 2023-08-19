@@ -55,5 +55,22 @@ extension RootView: WhatsNewCollectionProvider {
                 backgroundColor: theme.color
             )
         )
+        WhatsNew(
+            version: "1.1.1",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "wrench.adjustable",
+                        foregroundColor: theme.color
+                    ),
+                    title: "Bug Fixes",
+                    subtitle: "Fixed issues and improved app stability for a smoother experience"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: theme.color
+            )
+        )
     }
 }
