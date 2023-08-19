@@ -156,13 +156,17 @@ private struct DetailsSection: View {
     var body: some View {
         Section {
             WithViewStore(self.store, observe: \.details) { viewStore in
-                TextEditor(
+                TextField(
                     text: viewStore.binding(
                         get: { $0 },
                         send: AddOrEditLifeGoalReducer.Action.detailsChanged
-                    )
-                )
-                .frame(maxHeight: 150)
+                    ),
+                    prompt: Text("Optional"),
+                    axis: .vertical
+                ) {
+                    Text("Details")
+                }
+                .lineLimit(5)
             }
         } header: {
             Text("Details")
