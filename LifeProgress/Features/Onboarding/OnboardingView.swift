@@ -13,7 +13,7 @@ struct OnboardingView: View {
     
     @Environment(\.theme) var theme
     
-    let store: OnboardingStore
+    let store: StoreOf<OnboardingReducer>
 
     var body: some View {
         WithViewStore(self.store, observe: \.path) { viewStore in
@@ -70,10 +70,10 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<OnboardingReducer.State, OnboardingReducer.Action>(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        )
+        let store = Store(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
+        
         OnboardingView(store: store)
     }
 }

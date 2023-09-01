@@ -9,11 +9,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `LifeExpectancyReducer`'s state and action types.
-typealias LifeExpectancyStore = Store<LifeExpectancyReducer.State, LifeExpectancyReducer.Action>
-
 /// A reducer that manages the state of the life expectancy.
-struct LifeExpectancyReducer: ReducerProtocol {
+struct LifeExpectancyReducer: Reducer {
     
     /// The state of the birthday.
     struct State: Equatable {
@@ -37,12 +34,11 @@ struct LifeExpectancyReducer: ReducerProtocol {
     }
     
     @Dependency(\.userSettingsClient) var userSettingsClient
-    private enum LifeExpectancyRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .lifeExpectancySelectionEnded(let sliderValue):
@@ -50,7 +46,6 @@ struct LifeExpectancyReducer: ReducerProtocol {
                     await userSettingsClient.updateLifeExpectancy(Int(sliderValue))
                     await send(.lifeExpectancyChanged(sliderValue))
                 }
-                .cancellable(id: LifeExpectancyRequestID.self)
                 
             case .lifeExpectancyChanged(let lifeExpectancy):
                 state.lifeExpectancy = Int(lifeExpectancy)
@@ -61,12 +56,11 @@ struct LifeExpectancyReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                return userSettingsClient
-                    .lifeExpectancyPublisher
-                    .receive(on: mainQueue)
-                    .eraseToEffect()
-                    .map { Action.lifeExpectancyChanged(Double($0)) }
-                    .cancellable(id: LifeExpectancyRequestID.self)
+                return .run { send in
+                    for await lifeExpectancy in userSettingsClient.lifeExpectancyPublisher.values {
+                        await send(.lifeExpectancyChanged(Double(lifeExpectancy)))
+                    }
+                }
             }
         }
     }

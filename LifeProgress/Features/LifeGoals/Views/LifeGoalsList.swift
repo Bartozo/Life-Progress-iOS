@@ -14,7 +14,7 @@ struct LifeGoalsList: View {
     
     @Environment(\.theme) var theme
 
-    let store: LifeGoalsStore
+    let store: StoreOf<LifeGoalsReducer>
     
     struct ViewState: Equatable {
         let listType: LifeGoalsReducer.ListType
@@ -192,10 +192,10 @@ private struct LifeGoalRow: View {
 struct LifeGoalsList_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<LifeGoalsReducer.State, LifeGoalsReducer.Action>(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        )
+        let store = Store(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        }
+        
         LifeGoalsList(store: store)
     }
 }

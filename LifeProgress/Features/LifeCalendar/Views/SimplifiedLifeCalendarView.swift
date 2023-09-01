@@ -52,7 +52,10 @@ struct SimplifiedLifeCalendarView: View {
     }
 }
 
+// MARK: - Previews
+
 struct SimplifiedLifeCalendarView_Previews: PreviewProvider {
+    
     static var previews: some View {
         SimplifiedLifeCalendarView(life: Life.mock)
     }

@@ -8,12 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-
-/// A type alias for a store of the `LifeGoalsReducer`'s state and action types.
-typealias LifeGoalsStore = Store<LifeGoalsReducer.State, LifeGoalsReducer.Action>
-
 /// A reducer that manages the state of the about the app.
-struct LifeGoalsReducer: ReducerProtocol {
+struct LifeGoalsReducer: Reducer {
     
     /// The state of the about the app.
     struct State: Equatable {
@@ -106,12 +102,11 @@ struct LifeGoalsReducer: ReducerProtocol {
     @Dependency(\.date.now) var now
     
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
-    private enum LifeGoalsRequestID {}
     
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.iap, action: /Action.iap) {
             IAPReducer()
         }
@@ -124,11 +119,10 @@ struct LifeGoalsReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                return .task {
+                return .run { send in
                     let lifeGoals = await lifeGoalsClient.fetchLifeGoals()
-                    return .lifeGoalsChanged(lifeGoals)
+                    await send(.lifeGoalsChanged(lifeGoals))
                 }
-                .cancellable(id: LifeGoalsRequestID.self)
                 
             case .listTypeChanged(let listType):
                 state.listType = listType
@@ -159,9 +153,9 @@ struct LifeGoalsReducer: ReducerProtocol {
                 
             case .swipeToDelete(let lifeGoal):
                 analyticsClient.send("life_goals.swipe_to_delete")
-                return .task {
+                return .run { send in
                     await lifeGoalsClient.deleteLifeGoal(lifeGoal)
-                    return .onAppear
+                    await send(.onAppear)
                 }
                 
             case .swipeToComplete(let lifeGoal):
@@ -174,9 +168,9 @@ struct LifeGoalsReducer: ReducerProtocol {
                     details: lifeGoal.details
                 )
                 return .concatenate([
-                    .task {
+                    .run { send in
                         await lifeGoalsClient.updateLifeGoal(newLifeGoal)
-                        return .onAppear
+                        await send(.onAppear)
                     },
                     .send(.confetti(.showConfetti))
                 ])
@@ -190,9 +184,9 @@ struct LifeGoalsReducer: ReducerProtocol {
                     symbolName: lifeGoal.symbolName,
                     details: lifeGoal.details
                 )
-                return .task {
+                return .run { send in
                     await lifeGoalsClient.updateLifeGoal(newLifeGoal)
-                    return .onAppear
+                    await send(.onAppear)
                 }
                 
             case .swipeToShare(let lifeGoal):

@@ -16,10 +16,10 @@ import ComposableArchitecture
  */
 struct CalendarWithoutCurrentYear: View {
     
-    let store: LifeCalendarStore
+    let store: StoreOf<LifeCalendarReducer>
     
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             // Extract the current life expectancy and calendar type from the store.
             let life = viewStore.life
             let calendarType = viewStore.calendarType
@@ -81,10 +81,9 @@ struct CalendarWithoutCurrentYear: View {
 struct CalendarWithoutCurrentYear_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<LifeCalendarReducer.State, LifeCalendarReducer.Action>(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        )
+        let store = Store(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        }
         
         Group {
             CalendarWithoutCurrentYear(store: store)

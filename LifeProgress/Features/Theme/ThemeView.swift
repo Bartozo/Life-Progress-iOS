@@ -9,10 +9,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ThemeView: View {
-    let store: ThemeStore
+    let store: StoreOf<ThemeReducer>
     
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             Picker(
                 "Color",
                 selection: viewStore.binding(
@@ -39,10 +39,10 @@ struct ThemeView: View {
 
 struct ThemeApplicator: ViewModifier {
     
-    let store: Store<ThemeReducer.State, Never>
+    let store: StoreOf<ThemeReducer>
         
     func body(content: Content) -> some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             content.environment(\.theme, viewStore.selectedTheme)
         }
     }
@@ -53,10 +53,10 @@ struct ThemeApplicator: ViewModifier {
 struct ThemeView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<ThemeReducer.State, ThemeReducer.Action>(
-            initialState: ThemeReducer.State(),
-            reducer: ThemeReducer()
-        )
+        let store = Store(initialState: ThemeReducer.State()) {
+            ThemeReducer()
+        }
+        
         ThemeView(store: store)
     }
 }

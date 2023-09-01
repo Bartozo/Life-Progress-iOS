@@ -10,19 +10,18 @@ import ComposableArchitecture
 
 struct DatePickerView: View {
     
-    
     @Environment(\.theme) var theme
     
-    init(title: String, store: DatePickerStore) {
+    init(title: String, store: StoreOf<DatePickerReducer>) {
         self.title = title
         self.store = store
     }
     
-    let store: DatePickerStore
+    let store: StoreOf<DatePickerReducer>
     let title: String
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             let isDatePickerVisible = viewStore.isDatePickerVisible
             
             HStack {
@@ -63,10 +62,10 @@ struct DatePickerView: View {
 struct DatePickerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<DatePickerReducer.State, DatePickerReducer.Action>(
-            initialState: DatePickerReducer.State(),
-            reducer: DatePickerReducer()
-        )
+        let store = Store(initialState: DatePickerReducer.State()) {
+            DatePickerReducer()
+        }
+        
         DatePickerView(title: "Selected date", store: store)
     }
 }

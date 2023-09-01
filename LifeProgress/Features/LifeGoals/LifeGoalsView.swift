@@ -11,7 +11,7 @@ import ConfettiSwiftUI
 
 struct LifeGoalsView: View {
     
-    let store: LifeGoalsStore
+    let store: StoreOf<LifeGoalsReducer>
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.createdAt)])
     var lifeGoalEntities: FetchedResults<LifeGoalEntity>
@@ -101,10 +101,10 @@ struct LifeGoalsView: View {
 struct LifeGoalsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<LifeGoalsReducer.State, LifeGoalsReducer.Action>(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        )
+        let store = Store(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        }
+        
         NavigationStack {
             LifeGoalsView(store: store)
         }

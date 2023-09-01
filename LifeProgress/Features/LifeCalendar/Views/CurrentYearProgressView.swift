@@ -33,7 +33,10 @@ struct CurrentYearProgressView: View {
     }
 }
 
+// MARK: - Previews
+
 struct CurrentYearProgressView_Previews: PreviewProvider {
+    
     static var previews: some View {
         CurrentYearProgressView(life: Life.mock)
     }

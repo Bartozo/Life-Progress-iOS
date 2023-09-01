@@ -12,7 +12,7 @@ struct SettingsView: View {
     
     @Environment(\.theme) var theme
     
-    let store: SettingsStore
+    let store: StoreOf<SettingsReducer>
     
     var body: some View {
         Form {
@@ -140,12 +140,10 @@ struct SettingsView: View {
 struct ProfileView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<SettingsReducer.State, SettingsReducer.Action>(
-            initialState: SettingsReducer.State(
-                iap: .init()
-            ),
-            reducer: SettingsReducer()
-        )
+        let store = Store(initialState: SettingsReducer.State()) {
+            SettingsReducer()
+        }
+        
         NavigationStack {
             SettingsView(store: store)
         }

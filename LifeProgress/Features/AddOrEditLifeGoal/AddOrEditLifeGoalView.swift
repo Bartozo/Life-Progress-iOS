@@ -13,7 +13,7 @@ struct AddOrEditLifeGoalView: View {
     
     @Environment(\.theme) var theme
     
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     struct ViewState: Equatable {
         let isEditing: Bool
@@ -78,7 +78,7 @@ struct AddOrEditLifeGoalView: View {
 
 private struct AddOrSaveButton: View {
     
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     struct ViewState: Equatable {
         let isEditing: Bool
@@ -107,7 +107,7 @@ private struct AddOrSaveButton: View {
 
 private struct IconSection: View {
     
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
@@ -128,7 +128,7 @@ private struct IconSection: View {
 
 private struct TitleSection: View {
     
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
@@ -151,7 +151,7 @@ private struct TitleSection: View {
 
 private struct DetailsSection: View {
     
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
@@ -180,7 +180,7 @@ private struct OthersSection: View {
     
     @Environment(\.requestReview) var requestReview
     
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
@@ -217,7 +217,7 @@ private struct OthersSection: View {
 
 private struct ShareSection: View {
 
-    let store: AddOrEditLifeGoalStore
+    let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
@@ -242,10 +242,9 @@ private struct ShareSection: View {
 struct AddOrEditLifeGoalView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<AddOrEditLifeGoalReducer.State, AddOrEditLifeGoalReducer.Action>(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        )
+        let store = Store(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        }
         
         NavigationStack {
             AddOrEditLifeGoalView(store: store)

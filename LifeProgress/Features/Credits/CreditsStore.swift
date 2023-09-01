@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `CreditsReducer`'s state and action types.
-typealias CreditsStore = Store<CreditsReducer.State, CreditsReducer.Action>
-
 /// A reducer that manages the state of the credits.
-struct CreditsReducer: ReducerProtocol {
+struct CreditsReducer: Reducer {
     
     /// The state of the credits.
     struct State: Equatable {
@@ -29,7 +26,7 @@ struct CreditsReducer: ReducerProtocol {
     @Dependency(\.openURL) var openURL
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .packageCreditTapped(let packageCredit):
@@ -37,7 +34,7 @@ struct CreditsReducer: ReducerProtocol {
                     return .none
                 }
                 
-                return .fireAndForget {
+                return .run { _ in 
                     await openURL(url)
                 }
             }

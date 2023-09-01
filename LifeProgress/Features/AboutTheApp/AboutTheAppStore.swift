@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `AboutTheAppReducer`'s state and action types.
-typealias AboutTheAppStore = Store<AboutTheAppReducer.State, AboutTheAppReducer.Action>
-
 /// A reducer that manages the state of the about the app.
-struct AboutTheAppReducer: ReducerProtocol {
+struct AboutTheAppReducer: Reducer {
     
     /// The state of the about the app.
     struct State: Equatable {
@@ -30,7 +27,7 @@ struct AboutTheAppReducer: ReducerProtocol {
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .closeAboutTheCalendarSheet:

@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import WidgetKit
+import Combine
 
 /// An enumeration representing the two possible types of calendars:
 ///  one for the current year, and one for the entire life.
@@ -24,14 +25,9 @@ enum CalendarType: Equatable, CaseIterable {
         }
     }
 }
- 
-/// A type alias for a store of the `LifeCalendarReducer`'s state and action types.
-typealias LifeCalendarStore = Store<LifeCalendarReducer.State, LifeCalendarReducer.Action>
-
-typealias LifeCalendarViewStore = ViewStore<LifeCalendarReducer.State, LifeCalendarReducer.Action>
 
 /// A reducer that manages the state of the life calendar.
-struct LifeCalendarReducer: ReducerProtocol {
+struct LifeCalendarReducer: Reducer {
     
     /// The state of the life calendar.
     struct State: Equatable {
@@ -84,30 +80,25 @@ struct LifeCalendarReducer: ReducerProtocol {
     }
     
     @Dependency(\.userSettingsClient) var userSettingsClient
-    private enum LifeRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
     
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.aboutTheApp, action: /Action.aboutTheApp) {
             AboutTheAppReducer()
         }
         Reduce { state, action in
             switch action {
             case .onAppear:
-                return userSettingsClient
-                    .birthdayPublisher
-                    .zip(userSettingsClient.lifeExpectancyPublisher)
-                    .receive(on: mainQueue)
-                    .eraseToEffect()
-                    .map { birthday, lifeExpectancy in
-                        return Life(birthday: birthday, lifeExpectancy: lifeExpectancy)
+                return .run { send in
+                    for await (birthday, lifeExpectancy) in Publishers.Zip(userSettingsClient.birthdayPublisher, userSettingsClient.lifeExpectancyPublisher).values {
+                        let life = Life(birthday: birthday, lifeExpectancy: lifeExpectancy)
+                        await send(.lifeChanged(life))
                     }
-                    .map { Action.lifeChanged($0) }
-                    .cancellable(id: LifeRequestID.self)
+                }
                 
             case .calendarTypeChanged(let calendarType):
                 analyticsClient.sendWithPayload(

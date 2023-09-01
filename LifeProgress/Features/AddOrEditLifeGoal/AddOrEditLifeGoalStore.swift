@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `AddOrEditLifeGoalReducer`'s state and action types.
-typealias AddOrEditLifeGoalStore = Store<AddOrEditLifeGoalReducer.State, AddOrEditLifeGoalReducer.Action>
-
 /// A reducer that manages the state of the add or edit life goal.
-struct AddOrEditLifeGoalReducer: ReducerProtocol {
+struct AddOrEditLifeGoalReducer: Reducer {
     
     /// The state of the about the app.
     struct State: Equatable {
@@ -109,14 +106,13 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
     @Dependency(\.date) var date
     
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
-    private enum LifeExpectancyRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
     
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.datePicker, action: /Action.datePicker) {
             DatePickerReducer()
         }
@@ -154,12 +150,12 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                 
             case .addButtonTapped:
                 analyticsClient.send("add_or_edit_life_goal.add_button_tapped")
-                return .task { [
+                return .run { [
                     title = state.title,
                     finishedAt = state.isCompleted ? state.finishedAt : nil,
                     symbolName = state.symbolName,
                     details = state.details
-                ] in
+                ] send in
                     let lifeGoal = LifeGoal(
                         id: UUID(),
                         title: title,
@@ -168,18 +164,18 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                         details: details
                     )
                     await lifeGoalsClient.createLifeGoal(lifeGoal)
-                    return .closeButtonTapped
+                    await send(.closeButtonTapped)
                 }
                 
             case .saveButtonTapped:
                 analyticsClient.send("add_or_edit_life_goal.save_button_tapped")
-                return .task { [
+                return .run { [
                     title = state.title,
                     finishedAt = state.isCompleted ? state.finishedAt : nil,
                     symbolName = state.symbolName,
                     details = state.details,
                     lifeGoalToEdit = state.lifeGoalToEdit
-                ] in
+                ] send in
                     let lifeGoal = LifeGoal(
                         id: lifeGoalToEdit!.id,
                         title: title,
@@ -188,7 +184,7 @@ struct AddOrEditLifeGoalReducer: ReducerProtocol {
                         details: details
                     )
                     await lifeGoalsClient.updateLifeGoal(lifeGoal)
-                    return .closeButtonTapped
+                    await send(.closeButtonTapped)
                 }
                 
             case .shareLifeGoalButtonTapped:

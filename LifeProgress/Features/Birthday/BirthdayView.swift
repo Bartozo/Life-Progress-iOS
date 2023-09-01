@@ -12,10 +12,10 @@ struct BirthdayView: View {
     
     @Environment(\.theme) var theme
     
-    let store: BirthdayStore
+    let store: StoreOf<BirthdayReducer>
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             let isDatePickerVisible = viewStore.isDatePickerVisible
             
             HStack {
@@ -65,10 +65,10 @@ struct BirthdayView: View {
 struct BirthdayView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<BirthdayReducer.State, BirthdayReducer.Action>(
-            initialState: BirthdayReducer.State(),
-            reducer: BirthdayReducer()
-        )
+        let store = Store(initialState: BirthdayReducer.State()) {
+            BirthdayReducer()
+        }
+        
         BirthdayView(store: store)
     }
 }

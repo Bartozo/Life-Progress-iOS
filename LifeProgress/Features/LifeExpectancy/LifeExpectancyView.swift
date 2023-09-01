@@ -12,10 +12,10 @@ struct LifeExpectancyView: View {
     
     @Environment(\.theme) var theme
     
-    let store: LifeExpectancyStore
+    let store: StoreOf<LifeExpectancyReducer>
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             let isSliderVisible = viewStore.isSliderVisible
             let lifeExpectancy = viewStore.lifeExpectancy
             
@@ -43,7 +43,6 @@ struct LifeExpectancyView: View {
                     animation: .default
                 )
             }
-        
             
             if isSliderVisible {
                 Slider(
@@ -69,10 +68,10 @@ struct LifeExpectancyView: View {
 struct LifeExpectancyView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<LifeExpectancyReducer.State, LifeExpectancyReducer.Action>(
-            initialState: LifeExpectancyReducer.State(),
-            reducer: LifeExpectancyReducer()
-        )
+        let store = Store(initialState: LifeExpectancyReducer.State()) {
+            LifeExpectancyReducer()
+        }
+        
         LifeExpectancyView(store: store)
     }
 }

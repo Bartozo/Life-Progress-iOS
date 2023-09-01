@@ -12,51 +12,49 @@ struct OnboardingBirthdayView: View {
     
     @Environment(\.theme) var theme
     
-    let store: OnboardingStore
+    let store: StoreOf<OnboardingReducer>
     
     var body: some View {
-        WithViewStore(self.store.stateless) { viewStore in
-            VStack {
-                List {
-                    Section {
-                        VStack(spacing: 24) {
-                            HStack {
-                                Spacer()
-                                Image(systemName: "birthday.cake.fill")
-                                    .font(.system(size: 72))
-                                    .foregroundColor(theme.color)
-                                Spacer()
-                            }
-                            
-                            Text("Select Your Birthday")
-                                .font(.system(size: 32, weight: .bold))
-                                .multilineTextAlignment(.center)
+        VStack {
+            List {
+                Section {
+                    VStack(spacing: 24) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "birthday.cake.fill")
+                                .font(.system(size: 72))
+                                .foregroundColor(theme.color)
+                            Spacer()
                         }
-                        .padding()
+                        
+                        Text("Select Your Birthday")
+                            .font(.system(size: 32, weight: .bold))
+                            .multilineTextAlignment(.center)
                     }
-                    .listRowBackground(Color.clear)
-                    
-                    Section {
-                        BirthdayView(
-                            store: self.store.scope(
-                                state: \.birthday,
-                                action: OnboardingReducer.Action.birthday
-                            )
-                        )
-                    } footer: {
-                        Text("This information allows us to customize your experience and deliver relevant insights. Your data is safe and will not be shared with anyone.")
-                    }
+                    .padding()
                 }
+                .listRowBackground(Color.clear)
                 
-                Button {
-                    viewStore.send(.continueButtonTapped)
-                } label: {
-                    Text("Continue")
-                        .font(.headline)
+                Section {
+                    BirthdayView(
+                        store: self.store.scope(
+                            state: \.birthday,
+                            action: OnboardingReducer.Action.birthday
+                        )
+                    )
+                } footer: {
+                    Text("This information allows us to customize your experience and deliver relevant insights. Your data is safe and will not be shared with anyone.")
                 }
-                .tint(theme.color)
-                .padding()
             }
+            
+            Button {
+                self.store.send(.continueButtonTapped)
+            } label: {
+                Text("Continue")
+                    .font(.headline)
+            }
+            .tint(theme.color)
+            .padding()
         }
     }
 }
@@ -66,10 +64,10 @@ struct OnboardingBirthdayView: View {
 struct OnboardingBirthdayView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<OnboardingReducer.State, OnboardingReducer.Action>(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        )
+        let store = Store(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
+        
         OnboardingBirthdayView(store: store)
     }
 }

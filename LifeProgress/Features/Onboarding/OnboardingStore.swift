@@ -9,11 +9,8 @@ import Foundation
 import ComposableArchitecture
 import UserNotifications
 
-/// A type alias for a store of the `OnboardingReducer`'s state and action types.
-typealias OnboardingStore = Store<OnboardingReducer.State, OnboardingReducer.Action>
-
 /// A reducer that manages the state of the onboarding.
-struct OnboardingReducer: ReducerProtocol {
+struct OnboardingReducer: Reducer {
     
     /// The state of the onboarding.
     struct State: Equatable {
@@ -77,10 +74,8 @@ struct OnboardingReducer: ReducerProtocol {
     
     @Dependency(\.notificationsClient) var nofiticationsClient
     
-    private enum CancelID {}
-    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.birthday, action: /Action.birthday) {
             BirthdayReducer()
         }
@@ -123,12 +118,11 @@ struct OnboardingReducer: ReducerProtocol {
                 return .none
                 
             case .allowNotificationsButtonTapped:
-                return .task {
+                return .run { send in
                     analyticsClient.send("onboarding.allow_notifications_button_tapped")
                     await nofiticationsClient.requestPermission()
-                    return .continueButtonTapped
+                    await send(.continueButtonTapped)
                 }
-                .cancellable(id: CancelID.self)
                 
             case .skipNotificationsButtonTapped:
                 state.path.append(State.Screen.completed)
@@ -140,12 +134,11 @@ struct OnboardingReducer: ReducerProtocol {
                 return .none
                 
             case .startJourneyButtonTapped:
-                return .task {
+                return .run { send in
                     await self.userSettingsClient.updateDidCompleteOnboarding(true)
                     analyticsClient.send("onboarding.start_journey_button_tapped")
-                    return .finishOnboarding
+                    await send(.finishOnboarding)
                 }
-                .cancellable(id: CancelID.self)
                 
             case .finishOnboarding:
                 analyticsClient.send("onboarding.onboarding_finished")

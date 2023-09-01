@@ -12,51 +12,50 @@ struct OnboardingCompletedView: View {
     
     @Environment(\.theme) var theme
     
-    let store: OnboardingStore
+    let store: StoreOf<OnboardingReducer>
     
     var body: some View {
-        WithViewStore(self.store.stateless) { viewStore in
-            VStack {
-                List {
-                    HStack {
-                        Spacer()
-                        Text("That's all, enjoy your life!")
-                            .font(.largeTitle.weight(.bold))
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                    .listRowBackground(Color.clear)
-                    
-                    Section {
-                        Text("Now you're ready to make the most of your life journey with this app by your side.")
-                            .font(.body)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 20)
-                    }
+        VStack {
+            List {
+                HStack {
+                    Spacer()
+                    Text("That's all, enjoy your life!")
+                        .font(.largeTitle.weight(.bold))
+                        .multilineTextAlignment(.center)
+                    Spacer()
                 }
+                .listRowBackground(Color.clear)
                 
-                Button {
-                    viewStore.send(.startJourneyButtonTapped)
-                } label: {
-                    Text("Start Your Journey")
-                        .font(.headline)
+                Section {
+                    Text("Now you're ready to make the most of your life journey with this app by your side.")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
                 }
-                .tint(theme.color)
-                .padding()
             }
+            
+            Button {
+                self.store.send(.startJourneyButtonTapped)
+            } label: {
+                Text("Start Your Journey")
+                    .font(.headline)
+            }
+            .tint(theme.color)
+            .padding()
         }
     }
 }
 
 
 // MARK: - Previews
+
 struct OnboardingCompletedView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<OnboardingReducer.State, OnboardingReducer.Action>(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        )
+        let store = Store(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
+        
         OnboardingCompletedView(store: store)
     }
 }

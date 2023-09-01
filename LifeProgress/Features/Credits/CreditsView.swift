@@ -12,10 +12,10 @@ struct CreditsView: View {
     
     @Environment(\.theme) var theme
     
-    let store: CreditsStore
+    let store: StoreOf<CreditsReducer>
     
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             List {
                 Section {
                     ForEach(viewStore.packageCredits, id: \.id) { packageCredit in
@@ -40,10 +40,9 @@ struct CreditsView: View {
 struct CreditsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<CreditsReducer.State, CreditsReducer.Action>(
-            initialState: CreditsReducer.State(),
-            reducer: CreditsReducer()
-        )
+        let store = Store(initialState: CreditsReducer.State()) {
+            CreditsReducer()
+        }
         
         NavigationStack {
             CreditsView(store: store)

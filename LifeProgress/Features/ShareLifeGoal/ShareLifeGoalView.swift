@@ -12,7 +12,7 @@ struct ShareLifeGoalView: View {
     
     @Environment(\.theme) var theme
     
-    let store: ShareLifeGoalStore
+    let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
         NavigationStack {
@@ -79,7 +79,7 @@ struct ShareLifeGoalView: View {
 
 private struct ImagePreview: View {
     
-    let store: ShareLifeGoalStore
+    let store: StoreOf<ShareLifeGoalReducer>
     
     struct ViewState: Equatable {
         let lifeGoal: LifeGoal
@@ -157,7 +157,7 @@ private struct ImagePreview: View {
 
 private struct ThemePicker: View {
     
-    let store: ShareLifeGoalStore
+    let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
         WithViewStore(self.store, observe: \.theme) { viewStore in
@@ -181,7 +181,7 @@ private struct ThemePicker: View {
 
 private struct TimeSwitch: View {
     
-    let store: ShareLifeGoalStore
+    let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
         WithViewStore(self.store, observe: \.isTimeVisible) { viewStore in
@@ -199,7 +199,7 @@ private struct TimeSwitch: View {
 
 private struct WatermarkSwitch: View {
     
-    let store: ShareLifeGoalStore
+    let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
         WithViewStore(self.store, observe: \.isWatermarkVisible) { viewStore in
@@ -220,7 +220,7 @@ private struct WatermarkSwitch: View {
 struct ShareLifeGoalView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<ShareLifeGoalReducer.State, ShareLifeGoalReducer.Action>(
+        let store = Store(
             initialState: ShareLifeGoalReducer.State(
                 lifeGoal: LifeGoal(
                     id: UUID(),
@@ -229,9 +229,10 @@ struct ShareLifeGoalView_Previews: PreviewProvider {
                     symbolName: "trophy",
                     details: "Plan and embark on a memorable road trip across America's historic Route 66"
                 )
-            ),
-            reducer: ShareLifeGoalReducer()
-        )
+            )
+        ) {
+            ShareLifeGoalReducer()
+        }
         
         NavigationStack {
             ShareLifeGoalView(store: store)

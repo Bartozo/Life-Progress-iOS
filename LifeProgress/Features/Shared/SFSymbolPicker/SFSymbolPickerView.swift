@@ -13,10 +13,10 @@ struct SFSymbolPickerView: View {
         
     @Environment(\.theme) var theme
 
-    let store: SFSymbolPickerStore
+    let store: StoreOf<SFSymbolPickerReducer>
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             let symbolName = viewStore.symbolName
             
             Button {
@@ -51,10 +51,10 @@ struct SFSymbolPickerView: View {
 struct SFSymbolPickerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<SFSymbolPickerReducer.State, SFSymbolPickerReducer.Action>(
-            initialState: SFSymbolPickerReducer.State(),
-            reducer: SFSymbolPickerReducer()
-        )
+        let store = Store(initialState: SFSymbolPickerReducer.State()) {
+            SFSymbolPickerReducer()
+        }
+        
         SFSymbolPickerView(store: store)
     }
 }
