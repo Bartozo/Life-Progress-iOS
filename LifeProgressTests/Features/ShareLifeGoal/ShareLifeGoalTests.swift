@@ -23,9 +23,10 @@ class ShareLifeGoalTests: XCTestCase {
                     symbolName: "symbolName",
                     details: "details"
                 )
-            ),
-            reducer: ShareLifeGoalReducer()
-        )
+            )
+        ) {
+            ShareLifeGoalReducer()
+        }
         let theme: ShareLifeGoalReducer.State.Theme = .dark
         
         await store.send(.themeChanged(theme)) {
@@ -43,9 +44,10 @@ class ShareLifeGoalTests: XCTestCase {
                     symbolName: "symbolName",
                     details: "details"
                 )
-            ),
-            reducer: ShareLifeGoalReducer()
-        )
+            )
+        ) {
+            ShareLifeGoalReducer()
+        }
         
         await store.send(.isTimeVisibleChanged(false)) {
             $0.isTimeVisible = false
@@ -62,9 +64,10 @@ class ShareLifeGoalTests: XCTestCase {
                     symbolName: "symbolName",
                     details: "details"
                 )
-            ),
-            reducer: ShareLifeGoalReducer()
-        )
+            )
+        ) {
+            ShareLifeGoalReducer()
+        }
         
         await store.send(.isWatermarkVisibleChanged(false)) {
             $0.isWatermarkVisible = false
@@ -82,9 +85,10 @@ class ShareLifeGoalTests: XCTestCase {
                     symbolName: "symbolName",
                     details: "details"
                 )
-            ),
-            reducer: ShareLifeGoalReducer()
+            )
         ) {
+            ShareLifeGoalReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }

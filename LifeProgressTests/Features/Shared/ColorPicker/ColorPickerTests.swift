@@ -14,10 +14,9 @@ import ComposableArchitecture
 class ColorPickerTests: XCTestCase {
     
     func testColorChanged_ShouldUpdateColor() async {
-        let store = TestStore(
-            initialState: ColorPickerReducer.State(),
-            reducer: ColorPickerReducer()
-        )
+        let store = TestStore(initialState: ColorPickerReducer.State()) {
+            ColorPickerReducer()
+        }
         let color = ColorPickerReducer.State.Color.blue
         
         await store.send(.colorChanged(color)) {

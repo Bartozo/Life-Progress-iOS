@@ -9,11 +9,8 @@ import SwiftUI
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `ColorPickerReducer`'s state and action types.
-typealias ColorPickerStore = Store<ColorPickerReducer.State, ColorPickerReducer.Action>
-
 /// A reducer that manages the state of the color picker.
-struct ColorPickerReducer: ReducerProtocol {
+struct ColorPickerReducer: Reducer {
     
     /// The state of the color picker.
     struct State: Equatable {
@@ -64,7 +61,7 @@ struct ColorPickerReducer: ReducerProtocol {
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .colorChanged(let color):

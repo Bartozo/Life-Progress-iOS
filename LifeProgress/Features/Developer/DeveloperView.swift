@@ -13,10 +13,10 @@ struct DeveloperView: View {
     
     @Environment(\.theme) var theme
     
-    let store: DeveloperStore
+    let store: StoreOf<DeveloperReducer>
     
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             Button {
                 viewStore.send(.developerButtonTapped)
             } label: {
@@ -44,10 +44,10 @@ struct DeveloperView: View {
 struct DeveloperView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<DeveloperReducer.State, DeveloperReducer.Action>(
-            initialState: DeveloperReducer.State(),
-            reducer: DeveloperReducer()
-        )
+        let store = Store(initialState: DeveloperReducer.State()) {
+            DeveloperReducer()
+        }
+        
         DeveloperView(store: store)
     }
 }

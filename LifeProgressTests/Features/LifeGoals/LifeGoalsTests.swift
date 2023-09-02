@@ -30,10 +30,9 @@ class LifeGoalsTests: XCTestCase {
                 details: "details2"
             ),
         ]
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.lifeGoalsClient.fetchLifeGoals = {
                 return lifeGoals
             }
@@ -47,10 +46,9 @@ class LifeGoalsTests: XCTestCase {
     }
     
     func testListTypeChanged_ShouldUpdateListType() async {
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        )
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.listTypeChanged(.completed)) {
             $0.listType = .completed
@@ -78,10 +76,9 @@ class LifeGoalsTests: XCTestCase {
                 details: "details2"
             ),
         ]
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        )
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.lifeGoalsChanged(lifeGoals)) {
             $0.lifeGoals = lifeGoals
@@ -89,10 +86,9 @@ class LifeGoalsTests: XCTestCase {
     }
     
     func testAddButtonTapped_ShouldShowAddOrEditLifeGoalSheet() async {
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -134,9 +130,10 @@ class LifeGoalsTests: XCTestCase {
                     purchasedProductIDs: ["com.bartozo.lifeprogress.premium"]
                 ),
                 lifeGoals: lifeGoals
-            ),
-            reducer: LifeGoalsReducer()
+            )
         ) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -175,9 +172,10 @@ class LifeGoalsTests: XCTestCase {
         let store = TestStore(
             initialState: LifeGoalsReducer.State(
                 lifeGoals: lifeGoals
-            ),
-            reducer: LifeGoalsReducer()
-        )
+            )
+        ) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.addButtonTapped) {
             $0.iap.isSheetVisible = true
@@ -186,10 +184,9 @@ class LifeGoalsTests: XCTestCase {
     
     func testAddButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -208,9 +205,10 @@ class LifeGoalsTests: XCTestCase {
         let store = TestStore(
             initialState: LifeGoalsReducer.State(
                 isAddLifeGoalSheetVisible: true
-            ),
-            reducer: LifeGoalsReducer()
-        )
+            )
+        ) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.closeAddLifeGoalSheet) {
             $0.isAddLifeGoalSheetVisible = false
@@ -229,9 +227,10 @@ class LifeGoalsTests: XCTestCase {
             initialState: LifeGoalsReducer.State(
                 shareLifeGoal: .init(lifeGoal: lifeGoal),
                 isShareLifeGoalSheetVisible: true
-            ),
-            reducer: LifeGoalsReducer()
-        )
+            )
+        ) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.closeShareLifeGoalSheet) {
             $0.isShareLifeGoalSheetVisible = false
@@ -254,10 +253,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "",
             details: ""
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.lifeGoalsClient.deleteLifeGoal = { lifeGoal in
                 deletedLifeGoal = lifeGoal
             }
@@ -279,10 +277,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -309,10 +306,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "",
             details: ""
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.lifeGoalsClient.updateLifeGoal = { lifeGoal in
                 updatedLifeGoal = lifeGoal
             }
@@ -344,10 +340,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventNames.append(event)
             }
@@ -377,10 +372,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "",
             details: ""
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.lifeGoalsClient.updateLifeGoal = { lifeGoal in
                 updatedLifeGoal = lifeGoal
             }
@@ -406,10 +400,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -429,10 +422,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        )
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.swipeToShare(lifeGoal)) {
             $0.shareLifeGoal = .init(lifeGoal: lifeGoal)
@@ -449,10 +441,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        ) {
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -472,10 +463,9 @@ class LifeGoalsTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(),
-            reducer: LifeGoalsReducer()
-        )
+        let store = TestStore(initialState: LifeGoalsReducer.State()) {
+            LifeGoalsReducer()
+        }
         
         await store.send(.lifeGoalTapped(lifeGoal)) {
             $0.isAddLifeGoalSheetVisible = true

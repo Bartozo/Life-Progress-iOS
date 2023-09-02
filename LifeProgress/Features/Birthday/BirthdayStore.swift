@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `BirthdayReducer`'s state and action types.
-typealias BirthdayStore = Store<BirthdayReducer.State, BirthdayReducer.Action>
-
 /// A reducer that manages the state of the birthday.
-struct BirthdayReducer: ReducerProtocol {
+struct BirthdayReducer: Reducer {
     
     /// The state of the birthday.
     struct State: Equatable {
@@ -36,12 +33,11 @@ struct BirthdayReducer: ReducerProtocol {
     }
     
     @Dependency(\.userSettingsClient) var userSettingsClient
-    private enum BirthdayRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .changeBirthdayTapped(let birthday):
@@ -49,7 +45,6 @@ struct BirthdayReducer: ReducerProtocol {
                     await userSettingsClient.updateBirthday(birthday)
                     await send(.birthdayChanged(birthday))
                 }
-                .cancellable(id: BirthdayRequestID.self)
                 
             case .birthdayChanged(let birthday):
                 state.birthday = birthday
@@ -60,12 +55,11 @@ struct BirthdayReducer: ReducerProtocol {
                 return .none
                 
             case .onAppear:
-                return userSettingsClient
-                    .birthdayPublisher
-                    .receive(on: mainQueue)
-                    .eraseToEffect()
-                    .map { Action.birthdayChanged($0) }
-                    .cancellable(id: BirthdayRequestID.self)
+                return .run { send in
+                    for await birthday in userSettingsClient.birthdayPublisher.values {
+                        await send(.birthdayChanged(birthday))
+                    }
+                }
             }
         }
     }

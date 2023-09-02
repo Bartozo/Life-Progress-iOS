@@ -18,9 +18,10 @@ class AboutTheAppTests: XCTestCase {
             initialState: AboutTheAppReducer.State(
                 life: Life.mock,
                 isAboutTheCalendarSheetVisible: true
-            ),
-            reducer: AboutTheAppReducer()
-        )
+            )
+        ) {
+            AboutTheAppReducer()
+        }
         
         await store.send(.closeAboutTheCalendarSheet) {
             $0.isAboutTheCalendarSheetVisible = false

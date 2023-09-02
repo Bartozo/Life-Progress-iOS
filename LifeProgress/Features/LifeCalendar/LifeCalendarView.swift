@@ -12,10 +12,10 @@ struct LifeCalendarView: View {
     
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     
-    let store: LifeCalendarStore
+    let store: StoreOf<LifeCalendarReducer>
     
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             calendarContent
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -71,7 +71,7 @@ struct LifeCalendarView: View {
     }
     
     private var calendar: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             let life = viewStore.life
             let calendarType = viewStore.calendarType
             let currentYearModeColumnCount = viewStore.currentYearModeColumnCount

@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `SettingsReducer`'s state and action types.
-typealias SettingsStore = Store<SettingsReducer.State, SettingsReducer.Action>
-
 /// A reducer that manages the state of the settings.
-struct SettingsReducer: ReducerProtocol {
+struct SettingsReducer: Reducer {
 
     /// The state of the settings.
     struct State: Equatable {
@@ -57,7 +54,7 @@ struct SettingsReducer: ReducerProtocol {
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.iap, action: /Action.iap) {
             IAPReducer()
         }

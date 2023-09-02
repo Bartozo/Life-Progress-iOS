@@ -8,12 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-
-/// A type alias for a store of the `SFSymbolPickerReducer`'s state and action types.
-typealias SFSymbolPickerStore = Store<SFSymbolPickerReducer.State, SFSymbolPickerReducer.Action>
-
 /// A reducer that manages the state of the SF Symbol picker.
-struct SFSymbolPickerReducer: ReducerProtocol {
+struct SFSymbolPickerReducer: Reducer {
     
     /// The state of the about the app.
     struct State: Equatable {
@@ -35,7 +31,7 @@ struct SFSymbolPickerReducer: ReducerProtocol {
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .symbolNameChanged(let symbolName):

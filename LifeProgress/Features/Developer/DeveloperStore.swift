@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `DeveloperReducer`'s state and action types.
-typealias DeveloperStore = Store<DeveloperReducer.State, DeveloperReducer.Action>
-
 /// A reducer that manages the state of the developer.
-struct DeveloperReducer: ReducerProtocol {
+struct DeveloperReducer: Reducer {
     
     /// The state of the developer.
     struct State: Equatable {
@@ -31,7 +28,7 @@ struct DeveloperReducer: ReducerProtocol {
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .developerButtonTapped:

@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `DatePickerReducer`'s state and action types.
-typealias DatePickerStore = Store<DatePickerReducer.State, DatePickerReducer.Action>
-
 /// A reducer that manages the state of the date picker.
-struct DatePickerReducer: ReducerProtocol {
+struct DatePickerReducer: Reducer {
     
     /// The state of the date picker.
     struct State: Equatable {
@@ -32,7 +29,7 @@ struct DatePickerReducer: ReducerProtocol {
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .dateChanged(let date):

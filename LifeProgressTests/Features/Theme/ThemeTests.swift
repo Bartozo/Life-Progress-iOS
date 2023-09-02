@@ -14,10 +14,9 @@ import ComposableArchitecture
 class ThemeTests: XCTestCase {
     
     func testThemeChanged_ShouldUpdateTheme() async {
-        let store = TestStore(
-            initialState: ThemeReducer.State(),
-            reducer: ThemeReducer()
-        )
+        let store = TestStore(initialState: ThemeReducer.State()) {
+            ThemeReducer()
+        }
         
         await store.send(.themeChanged(.orange)) {
             $0.selectedTheme = .orange
@@ -26,10 +25,9 @@ class ThemeTests: XCTestCase {
     
     func testChangeThemeTapped_ShouldSaveAndUpdatetheme() async {
         var updatedTheme = Theme.blue
-        let store = TestStore(
-            initialState: ThemeReducer.State(),
-            reducer: ThemeReducer()
-        ) {
+        let store = TestStore(initialState: ThemeReducer.State()) {
+            ThemeReducer()
+        } withDependencies: {
             $0.userSettingsClient.updateTheme = { @MainActor theme in
                 updatedTheme = theme
             }
@@ -48,10 +46,9 @@ class ThemeTests: XCTestCase {
         var eventName = ""
         var eventPayload = [String: String]()
         var updatedTheme = Theme.blue
-        let store = TestStore(
-            initialState: ThemeReducer.State(),
-            reducer: ThemeReducer()
-        ) {
+        let store = TestStore(initialState: ThemeReducer.State()) {
+            ThemeReducer()
+        } withDependencies: {
             $0.analyticsClient.sendWithPayload = { event, payload in
                 eventName = event
                 eventPayload = payload

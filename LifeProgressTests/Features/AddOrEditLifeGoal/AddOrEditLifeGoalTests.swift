@@ -15,10 +15,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
     
     func testTitleChanged_ShouldUpdateTitle() async {
         let title = "newTitle"
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        ) {
+        let store = TestStore(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -31,10 +30,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
     
     func testDetailsChanged_ShouldUpdateDetails() async {
         let details = "newDetails"
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        ) {
+        let store = TestStore(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -47,10 +45,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
     
     func testIsCompletedChanged_ShouldUpdateIsCompletedAndShowConfetti() async {
         let isCompleted = true
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        ) {
+        let store = TestStore(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -71,9 +68,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
             initialState: AddOrEditLifeGoalReducer.State(
                 isCompleted: true,
                 isDatePickerVisible: true
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -87,10 +85,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
     
     func testFinishedAtChanged_ShouldUpdateFinishedAt() async {
         let finishedAt = Date.createDate(year: 2023, month: 1, day: 1)
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        ) {
+        let store = TestStore(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2022, month: 1, day: 1)
             }()
@@ -120,9 +117,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
                 isCompleted: true,
                 symbolName: symbolName,
                 finishedAt: finishedAt
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.lifeGoalsClient.createLifeGoal = { lifeGoal in
                 newLifeGoal = lifeGoal
             }
@@ -139,10 +137,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
     
     func testAddButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        ) {
+        let store = TestStore(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -180,9 +177,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
                 symbolName: lifeGoal.symbolName,
                 finishedAt: lifeGoal.finishedAt!,
                 lifeGoalToEdit: lifeGoal
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.lifeGoalsClient.updateLifeGoal = { lifeGoal in
                 updatedLifeGoal = lifeGoal
             }
@@ -210,9 +208,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(
                 lifeGoalToEdit: lifeGoal
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -238,9 +237,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(
                 lifeGoalToEdit: lifeGoal
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -253,10 +253,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
     }
     
     func testShareLifeGoalButtonTapped_ShouldntShowShareLifeGoalSheet() async {
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(),
-            reducer: AddOrEditLifeGoalReducer()
-        ) {
+        let store = TestStore(initialState: AddOrEditLifeGoalReducer.State()) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
@@ -277,9 +276,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(
                 lifeGoalToEdit: lifeGoal
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -307,9 +307,10 @@ class AddOrEditLifeGoalTests: XCTestCase {
             initialState: AddOrEditLifeGoalReducer.State(
                 shareLifeGoal: .init(lifeGoal: lifeGoal),
                 isShareLifeGoalSheetVisible: true
-            ),
-            reducer: AddOrEditLifeGoalReducer()
+            )
         ) {
+            AddOrEditLifeGoalReducer()
+        } withDependencies: {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()

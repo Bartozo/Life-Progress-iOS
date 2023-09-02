@@ -13,11 +13,11 @@ struct IAPView: View {
     
     @Environment(\.theme) var theme
     
-    let store: IAPStore
+    let store: StoreOf<IAPReducer>
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 VStack {
                     List {
                         HStack {
@@ -78,8 +78,7 @@ struct IAPView: View {
                 }
             }
             .alert(
-              self.store.scope(state: \.alert),
-              dismiss: .alertDismissed
+                store: self.store.scope(state: \.$alert, action: IAPReducer.Action.alert)
             )
         }
     }
@@ -89,7 +88,7 @@ private struct BuyPremiumButton: View {
     
     @Environment(\.theme) var theme
     
-    let store: IAPStore
+    let store: StoreOf<IAPReducer>
     
     struct ViewState: Equatable {
         let isLoading: Bool
@@ -134,10 +133,10 @@ private struct BuyPremiumButton: View {
 struct IAPView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<IAPReducer.State, IAPReducer.Action>(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        )
+        let store = Store(initialState: IAPReducer.State()) {
+            IAPReducer()
+        }
+        
         IAPView(store: store)
     }
 }

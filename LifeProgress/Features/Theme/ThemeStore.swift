@@ -9,11 +9,8 @@ import Foundation
 import ComposableArchitecture
 import SwiftUI
 
-/// A type alias for a store of the `ThemeReducer`'s state and action types.
-typealias ThemeStore = Store<ThemeReducer.State, ThemeReducer.Action>
-
 /// A reducer that manages the state of the theme.
-struct ThemeReducer: ReducerProtocol {
+struct ThemeReducer: Reducer {
     
     /// The state of the theme.
     struct State: Equatable {
@@ -35,38 +32,36 @@ struct ThemeReducer: ReducerProtocol {
     }
     
     @Dependency(\.userSettingsClient) var userSettingsClient
-    private enum ThemeRequestID {}
     
     @Dependency(\.mainQueue) var mainQueue
     
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .changeThemeTapped(let theme):
                 analyticsClient.sendWithPayload(
                     "theme.change_theme_tapped", [
                         "selectedTheme": "\(theme)"
-                    ])
+                    ]
+                )
                 return .run { send in
                     await userSettingsClient.updateTheme(theme)
                     await send(.themeChanged(theme))
                 }
-                .cancellable(id: ThemeRequestID.self)
                 
             case .themeChanged(let theme):
                 state.selectedTheme = theme
                 return .none
                 
             case .onAppear:
-                return userSettingsClient
-                    .themePublisher
-                    .receive(on: mainQueue)
-                    .eraseToEffect()
-                    .map { Action.themeChanged($0) }
-                    .cancellable(id: ThemeRequestID.self)
+                return .run { send in
+                    for await theme in userSettingsClient.themePublisher.values {
+                        await send(.themeChanged(theme))
+                    }
+                }
             }
         }
     }

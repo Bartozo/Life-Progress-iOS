@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `WeeklyNotificationReducer`'s state and action types.
-typealias WeeklyNotificationStore = Store<WeeklyNotificationReducer.State, WeeklyNotificationReducer.Action>
-
 /// A reducer that manages the state of the weekly notification.
-struct WeeklyNotificationReducer: ReducerProtocol {
+struct WeeklyNotificationReducer: Reducer {
     
     /// The state of the weekly notification.
     struct State: Equatable {
@@ -31,7 +28,7 @@ struct WeeklyNotificationReducer: ReducerProtocol {
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .isWeeklyNotificationChanged:

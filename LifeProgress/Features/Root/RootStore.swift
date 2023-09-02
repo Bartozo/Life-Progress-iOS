@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `RootReducer`'s state and action types.
-typealias RootStore = Store<RootReducer.State, RootReducer.Action>
-
 /// A reducer that manages the state of the root.
-struct RootReducer: ReducerProtocol {
+struct RootReducer: Reducer {
     
     /// The state of the root.
     struct State: Equatable {
@@ -101,7 +98,7 @@ struct RootReducer: ReducerProtocol {
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.onboarding, action: /Action.onboarding) {
             OnboardingReducer()
         }

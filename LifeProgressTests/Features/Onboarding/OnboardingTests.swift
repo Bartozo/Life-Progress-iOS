@@ -14,10 +14,9 @@ import ComposableArchitecture
 class OnboardingTests: XCTestCase {
     
     func testGetStartedButtonTapped_ShouldShowAboutScreen() async {
-        let store = TestStore(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        )
+        let store = TestStore(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
         
         await store.send(.getStartedButtonTapped) {
             $0.path = [OnboardingReducer.State.Screen.about]
@@ -26,10 +25,9 @@ class OnboardingTests: XCTestCase {
     
     func testGetStartedButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        ) {
+        let store = TestStore(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -45,9 +43,10 @@ class OnboardingTests: XCTestCase {
         let store = TestStore(
             initialState: OnboardingReducer.State(
                 path: [OnboardingReducer.State.Screen.about]
-            ),
-            reducer: OnboardingReducer()
-        )
+            )
+        ) {
+            OnboardingReducer()
+        }
         
         await store.send(.continueButtonTapped) {
             $0.path = [
@@ -93,9 +92,10 @@ class OnboardingTests: XCTestCase {
                     OnboardingReducer.State.Screen.lifeExpectancy,
                     OnboardingReducer.State.Screen.notifications,
                 ]
-            ),
-            reducer: OnboardingReducer()
-        )
+            )
+        ) {
+            OnboardingReducer()
+        }
         
         await store.send(.allowNotificationsButtonTapped)
         await store.receive(.continueButtonTapped) {
@@ -111,10 +111,9 @@ class OnboardingTests: XCTestCase {
     
     func testAllowNotificationsButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        ) {
+        let store = TestStore(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -135,9 +134,10 @@ class OnboardingTests: XCTestCase {
                     OnboardingReducer.State.Screen.lifeExpectancy,
                     OnboardingReducer.State.Screen.notifications,
                 ]
-            ),
-            reducer: OnboardingReducer()
-        )
+            )
+        ) {
+            OnboardingReducer()
+        }
         
         await store.send(.skipNotificationsButtonTapped) {
             $0.path = [
@@ -152,10 +152,9 @@ class OnboardingTests: XCTestCase {
     
     func testSkipNotificationsButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        ) {
+        let store = TestStore(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -178,9 +177,10 @@ class OnboardingTests: XCTestCase {
                     OnboardingReducer.State.Screen.notifications,
                     OnboardingReducer.State.Screen.completed
                 ]
-            ),
-            reducer: OnboardingReducer()
+            )
         ) {
+            OnboardingReducer()
+        } withDependencies: {
             $0.userSettingsClient.updateDidCompleteOnboarding = { didComplete in
                 didCompleteOnboarding = didComplete
             }
@@ -194,10 +194,9 @@ class OnboardingTests: XCTestCase {
     
     func testStartJourneyButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        ) {
+        let store = TestStore(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 if eventName.isEmpty {
                     eventName = event
@@ -213,10 +212,9 @@ class OnboardingTests: XCTestCase {
     
     func testFinishOnboarding_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        ) {
+        let store = TestStore(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }

@@ -9,11 +9,8 @@ import SwiftUI
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `ShareLifeGoalReducer`'s state and action types.
-typealias ShareLifeGoalStore = Store<ShareLifeGoalReducer.State, ShareLifeGoalReducer.Action>
-
 /// A reducer that manages the state of the share life goal.
-struct ShareLifeGoalReducer: ReducerProtocol {
+struct ShareLifeGoalReducer: Reducer {
     
     /// The state of the share life goal.
     struct State: Equatable {
@@ -68,7 +65,7 @@ struct ShareLifeGoalReducer: ReducerProtocol {
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Scope(state: \.colorPicker, action: /Action.colorPicker) {
             ColorPickerReducer()
         }

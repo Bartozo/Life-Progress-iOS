@@ -9,11 +9,8 @@ import Foundation
 import ComposableArchitecture
 import StoreKit
 
-/// A type alias for a store of the `IAPReducer`'s state and action types.
-typealias IAPStore = Store<IAPReducer.State, IAPReducer.Action>
-
 /// A reducer that manages the state of the IAP.
-struct IAPReducer: ReducerProtocol {
+struct IAPReducer: Reducer {
     
     /// The state of the IAP.
     struct State: Equatable {
@@ -38,7 +35,7 @@ struct IAPReducer: ReducerProtocol {
         var isSheetVisible = false
         
         /// The state of the alert related to IAP actions.
-        var alert: AlertState<Action>?
+        @PresentationState var alert: AlertState<Action.Alert>?
     }
     
     /// The actions that can be taken on the IAP.
@@ -67,29 +64,32 @@ struct IAPReducer: ReducerProtocol {
         case refreshPurchasedProducts
         /// The result of the refresh purchased products request.
         case refreshPurchasedProductsResponse([String])
-        /// Indicates that the alert has been dismissed.
-        case alertDismissed
+        /// The actions that can be taken on the alert.
+        case alert(PresentationAction<Alert>)
+        
+        /// The actions that can be taken on the alert.
+        enum Alert: Equatable {
+            /// Indicates that the alert has been dismissed.
+            case alertDismissed
+        }
     }
     
     @Dependency(\.iapClient) var iapClient
     
     @Dependency(\.analyticsClient) var analyticsClient
     
-    private enum CancelID {}
-    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .fetchProducts:
                 analyticsClient.send("iap.fetch_products")
                 state.isLoading = true
-                return .task { [productIds = state.productIds] in
-                    await .productsResponse(TaskResult {
+                return .run { [productIds = state.productIds] send in
+                    await send(.productsResponse(TaskResult {
                         try await self.iapClient.requestProducts(productIds)
-                    })
+                    }))
                 }
-                .cancellable(id: CancelID.self)
 
             case .productsResponse(.success(let products)):
                 analyticsClient.send("iap.products_response_success")
@@ -103,7 +103,7 @@ struct IAPReducer: ReducerProtocol {
                 state.alert = AlertState {
                     TextState("Product Fetch Failed")
                 } actions: {
-                    ButtonState(role: .cancel) {
+                    ButtonState(role: .cancel, action: .alertDismissed) {
                         TextState("Ok")
                     }
                 } message: {
@@ -112,12 +112,11 @@ struct IAPReducer: ReducerProtocol {
                 return .none
                 
             case .purchase(let product):
-                return .task {
-                    await .purchaseResponse(TaskResult {
+                return .run { send in
+                    await send(.purchaseResponse(TaskResult {
                         try await self.iapClient.purchase(product)
-                    })
+                    }))
                 }
-                .cancellable(id: CancelID.self)
                 
             case .purchaseResponse(.success(let productId)):
                 analyticsClient.send("iap.purchase_response_success")
@@ -130,13 +129,13 @@ struct IAPReducer: ReducerProtocol {
                 analyticsClient.send("iap.purchase_response_failure")
                 state.isLoading = false
                 state.alert = AlertState {
-                  TextState("Purchase Failed")
+                    TextState("Purchase Failed")
                 } actions: {
-                  ButtonState(role: .cancel) {
-                    TextState("Ok")
-                  }
+                    ButtonState(role: .cancel, action: .alertDismissed) {
+                        TextState("Ok")
+                    }
                 } message: {
-                  TextState("The in-app purchase could not be completed. Please check your internet connection and try again.")
+                    TextState("The in-app purchase could not be completed. Please check your internet connection and try again.")
                 }
                 return .none
                 
@@ -163,12 +162,11 @@ struct IAPReducer: ReducerProtocol {
                 
             case .restorePurchasesButtonTapped:
                 analyticsClient.send("iap.restore_purchases_button_tapped")
-                return .task {
-                    await .restorePurchasesResponse(TaskResult {
+                return .run { send in
+                    await send(.restorePurchasesResponse(TaskResult {
                         try await self.iapClient.restorePurchases()
-                    })
+                    }))
                 }
-                .cancellable(id: CancelID.self)
                 
             case .restorePurchasesResponse(.success):
                 analyticsClient.send("iap.restore_purchases_response_success")
@@ -181,20 +179,22 @@ struct IAPReducer: ReducerProtocol {
                 return .none
                 
             case .refreshPurchasedProducts:
-                return .task {
+                return .run { send in
                     let purchasedProductsIds = await self.iapClient.requestPurchasedProductIds()
-                    return .refreshPurchasedProductsResponse(purchasedProductsIds)
+                    await send(.refreshPurchasedProductsResponse(purchasedProductsIds))
                 }
-                .cancellable(id: CancelID.self)
 
             case .refreshPurchasedProductsResponse(let purchasedProductsIds):
                 state.purchasedProductIDs = Set(purchasedProductsIds)
                 return .none
                 
-            case .alertDismissed:
-                state.alert = nil
+            case .alert(.presented(.alertDismissed)):
+              return .none
+                
+            case .alert:
                 return .none
             }
         }
+        .ifLet(\.alert, action: /Action.alert)
     }
 }

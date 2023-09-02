@@ -10,10 +10,10 @@ import ComposableArchitecture
 import ConfettiSwiftUI
 
 struct ConfettiView: View {
-    let store: ConfettiStore
+    let store: StoreOf<ConfettiReducer>
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             ConfettiCannon(
                 counter: viewStore.binding(
                     get: \.confetti,
@@ -31,10 +31,10 @@ struct ConfettiView: View {
 struct ConfettiView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<ConfettiReducer.State, ConfettiReducer.Action>(
-            initialState: ConfettiReducer.State(),
-            reducer: ConfettiReducer()
-        )
+        let store = Store(initialState: ConfettiReducer.State()) {
+            ConfettiReducer()
+        }
+        
         ConfettiView(store: store)
     }
 }

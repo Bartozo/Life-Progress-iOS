@@ -12,7 +12,7 @@ struct ColorPickerView: View {
     
     @Environment(\.theme) var theme
     
-    let store: ColorPickerStore
+    let store: StoreOf<ColorPickerReducer>
     
     private var gridItems: [GridItem] {
         [GridItem(.adaptive(minimum:50, maximum: 70))]
@@ -49,10 +49,9 @@ struct ColorPickerView: View {
 struct ColorPickerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<ColorPickerReducer.State, ColorPickerReducer.Action>(
-            initialState: ColorPickerReducer.State(),
-            reducer: ColorPickerReducer()
-        )
+        let store = Store(initialState: ColorPickerReducer.State()) {
+            ColorPickerReducer()
+        }
         
         ColorPickerView(store: store)
     }

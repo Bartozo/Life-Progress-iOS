@@ -12,7 +12,7 @@ struct PremiumCell: View {
     
     @Environment(\.theme) var theme
     
-    let store: IAPStore
+    let store: StoreOf<IAPReducer>
     
     struct ViewState: Equatable {
         let isSheetVisible: Bool
@@ -91,10 +91,10 @@ struct PremiumCell: View {
 struct PremiumCell_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<IAPReducer.State, IAPReducer.Action>(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        )
+        let store = Store(initialState: IAPReducer.State()) {
+            IAPReducer()
+        }
+
         PremiumCell(store: store)
     }
 }

@@ -14,56 +14,53 @@ struct OnboardingNotificationsView: View {
     
     @Environment(\.theme) var theme
     
-    let store: OnboardingStore
+    let store: StoreOf<OnboardingReducer>
     
     var body: some View {
-        WithViewStore(self.store.stateless) { viewStore in
-            VStack(spacing: 0) {
-                VStack {
+        VStack(spacing: 0) {
+            VStack {
+                Spacer()
+                NotificationView()
+                Spacer()
+            }
+            .aspectRatio(1, contentMode: .fit)
+            .frame(maxWidth: .infinity)
+            .edgesIgnoringSafeArea(.horizontal)
+            .background(Color(.secondarySystemBackground))
+            
+            ScrollView {
+                VStack(spacing: 24) {
                     Spacer()
-                    NotificationView()
-                    Spacer()
+                    Text("Notifications")
+                        .font(.system(size: 32, weight: .bold))
+                        .multilineTextAlignment(.center)
+                    
+                    Text("Allow notifications to never miss a key milestone in your life progress tracking.\n\n Stay informed about your life progress milestones, receive timely reminders, and get valuable insights that help you stay focused and achieve your goals more effectively.")
+                           .font(.callout)
+                           .multilineTextAlignment(.center)
+                           .padding(.horizontal)
                 }
-                .aspectRatio(1, contentMode: .fit)
-                .frame(maxWidth: .infinity)
-                .edgesIgnoringSafeArea(.horizontal)
-                .background(Color(.secondarySystemBackground))
-                
-                ScrollView {
-                    VStack(spacing: 24) {
-                        Spacer()
-                        Text("Notifications")
-                            .font(.system(size: 32, weight: .bold))
-                            .multilineTextAlignment(.center)
-                        
-                        Text("Allow notifications to never miss a key milestone in your life progress tracking.\n\n Stay informed about your life progress milestones, receive timely reminders, and get valuable insights that help you stay focused and achieve your goals more effectively.")
-                               .font(.callout)
-                               .multilineTextAlignment(.center)
-                               .padding(.horizontal)
-                       
-                    }
-                    .padding()
-                }
-                .listStyle(.plain)
-                
-                Button {
-                    viewStore.send(.allowNotificationsButtonTapped)
-                } label: {
-                    Text("Allow notifications")
-                        .font(.headline)
-                }
-                .tint(theme.color)
                 .padding()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        viewStore.send(.skipNotificationsButtonTapped)
-                    } label: {
-                        Text("Skip")
-                    }
-                    .tint(.secondary)
+            .listStyle(.plain)
+            
+            Button {
+                self.store.send(.allowNotificationsButtonTapped)
+            } label: {
+                Text("Allow notifications")
+                    .font(.headline)
+            }
+            .tint(theme.color)
+            .padding()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    self.store.send(.skipNotificationsButtonTapped)
+                } label: {
+                    Text("Skip")
                 }
+                .tint(.secondary)
             }
         }
     }
@@ -100,10 +97,10 @@ struct NotificationView: View {
 struct OnboardingNotificationsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<OnboardingReducer.State, OnboardingReducer.Action>(
-            initialState: OnboardingReducer.State(),
-            reducer: OnboardingReducer()
-        )
+        let store = Store(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
+        
         NavigationStack {
             OnboardingNotificationsView(store: store)
         }

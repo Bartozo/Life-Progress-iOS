@@ -20,15 +20,14 @@ struct LifeProgressApp: App {
     @Dependency(\.userSettingsClient) var userSettingsClient
     @Dependency(\.analyticsClient) var analyticsClient
     
-    let store: RootStore
+    let store: StoreOf<RootReducer>
     
     let coreDataManager: CoreDataManager
     
     init() {
-        self.store = RootStore(
-            initialState: RootReducer.State(),
-            reducer: RootReducer()
-        )
+        self.store = Store(initialState: RootReducer.State()) {
+            RootReducer()
+        }
         self.coreDataManager = CoreDataManager.shared
         
         analyticsClient.initialize()
@@ -39,7 +38,12 @@ struct LifeProgressApp: App {
             RootView(store: self.store)
                 .modifier(
                     ThemeApplicator(
-                        store: self.store.scope(state: \.settings.theme).actionless
+                        store: self.store.scope(
+                            state: \.settings.theme,
+                            action: { themeAction in
+                                return RootReducer.Action.settings(.theme(themeAction))
+                            }
+                        )
                     )
                 )
                 .environment(\.managedObjectContext, coreDataManager.container.viewContext)

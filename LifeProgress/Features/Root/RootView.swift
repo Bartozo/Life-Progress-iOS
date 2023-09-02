@@ -13,7 +13,7 @@ struct RootView: View {
     
     @Environment(\.theme) var theme
     
-    let store: RootStore
+    let store: StoreOf<RootReducer>
     
     var body: some View {
         WithViewStore(self.store, observe: \.didCompleteOnboarding) { viewStore in
@@ -38,7 +38,7 @@ private struct ContentView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.theme) var theme
     
-    let store: RootStore
+    let store: StoreOf<RootReducer>
     
     var nonAnimatedTransaction: Transaction {
         var t = Transaction()
@@ -70,7 +70,7 @@ private struct ContentView: View {
                     .navigationTitle("Life Progress")
                 }
             } detail: {
-                WithViewStore(self.store) { viewStore in
+                WithViewStore(self.store, observe: { $0 }) { viewStore in
                     NavigationStack(
                         path: viewStore.binding(
                             get: \.path,
@@ -112,7 +112,7 @@ private struct ContentView: View {
             .accentColor(theme.color)
         } else {
             // Tab View Navigation for iPhone
-            WithViewStore(self.store) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 TabView(
                     selection: viewStore.binding(
                         get: \.selectedTabIndex,
@@ -164,10 +164,10 @@ private struct ContentView: View {
 struct RootView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<RootReducer.State, RootReducer.Action>(
-            initialState: RootReducer.State(),
-            reducer: RootReducer()
-        )
+        let store = Store(initialState: RootReducer.State()) {
+            RootReducer()
+        }
+        
         RootView(store: store)
     }
 }

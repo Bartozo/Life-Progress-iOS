@@ -8,11 +8,8 @@
 import Foundation
 import ComposableArchitecture
 
-/// A type alias for a store of the `ConfettiReducer`'s state and action types.
-typealias ConfettiStore = Store<ConfettiReducer.State, ConfettiReducer.Action>
-
 /// A reducer that manages the state of the confetti.
-struct ConfettiReducer: ReducerProtocol {
+struct ConfettiReducer: Reducer {
     
     /// The state of the confetti.
     struct State: Equatable {
@@ -31,7 +28,7 @@ struct ConfettiReducer: ReducerProtocol {
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .showConfetti:

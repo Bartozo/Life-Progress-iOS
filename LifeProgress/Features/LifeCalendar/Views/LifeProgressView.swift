@@ -39,8 +39,6 @@ struct LifeProgressView: View {
                 .font(.title)
                 .bold()
 
-            // TODO: Make sure other strings are pluralized properly
-            // Maybe use stringsdict instead
             Text(
                 "^[**\(life.currentYearRemainingWeeks)** weeks](inflect: true) until your birthday"
             )
@@ -49,8 +47,11 @@ struct LifeProgressView: View {
     }
 }
 
-//struct LifeProgressView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LifeProgressView()
-//    }
-//}
+// MARK: - Previews
+
+struct LifeProgressView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        LifeProgressView(life: Life.mock, type: .currentYear)
+    }
+}

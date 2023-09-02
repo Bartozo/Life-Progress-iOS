@@ -14,11 +14,11 @@ struct AboutTheAppView: View {
     
     @Environment(\.theme) var theme
     
-    let store: AboutTheAppStore
+    let store: StoreOf<AboutTheAppReducer>
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 Form {
                     HowItWorksSection(store: self.store)
                     LearnMoreSection { url in
@@ -47,7 +47,7 @@ private struct HowItWorksSection: View {
     
     @Environment(\.theme) var theme
     
-    let store: AboutTheAppStore
+    let store: StoreOf<AboutTheAppReducer>
     
     var body: some View {
         Section("How it works") {
@@ -181,13 +181,15 @@ private struct LearnMoreSection: View {
 struct AboutTheAppView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let store = Store<AboutTheAppReducer.State, AboutTheAppReducer.Action>(
+        let store = Store(
             initialState: AboutTheAppReducer.State(
                 life: Life.mock,
                 isAboutTheCalendarSheetVisible: false
-            ),
-            reducer: AboutTheAppReducer()
-        )
+            )
+        ) {
+            AboutTheAppReducer()
+        }
+        
         AboutTheAppView(store: store)
     }
 }

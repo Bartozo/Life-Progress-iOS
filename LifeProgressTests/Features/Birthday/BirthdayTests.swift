@@ -17,10 +17,9 @@ class BirthdayTests: XCTestCase {
     func testOnAppear_ShouldListenToBirthdayChanges() async {
         let birthdayPublisher = PassthroughSubject<Date, Never>()
         let mainQueue = DispatchQueue.test
-        let store = TestStore(
-            initialState: BirthdayReducer.State(),
-            reducer: BirthdayReducer()
-        ) {
+        let store = TestStore(initialState: BirthdayReducer.State()) {
+            BirthdayReducer()
+        } withDependencies: {
             $0.userSettingsClient.birthdayPublisher = birthdayPublisher.eraseToAnyPublisher()
             $0.mainQueue = mainQueue.eraseToAnyScheduler()
         }
@@ -55,10 +54,9 @@ class BirthdayTests: XCTestCase {
     func testChangeBirthdayTapped_ShouldSaveAndUpdateBirthday() async {
         let initialBirthday = Date.createDate(year: 2000, month: 1, day: 1)
         var birthday = Date()
-        let store = TestStore(
-            initialState: BirthdayReducer.State(),
-            reducer: BirthdayReducer()
-        ) {
+        let store = TestStore(initialState: BirthdayReducer.State()) {
+            BirthdayReducer()
+        } withDependencies: {
             $0.userSettingsClient.updateBirthday = { @MainActor newBirthday in
                 birthday = newBirthday
             }
@@ -74,10 +72,9 @@ class BirthdayTests: XCTestCase {
 
     func testBirthdayChanged_ShouldUpdateBirthday() async {
         let birthday = Date.createDate(year: 2000, month: 1, day: 1)
-        let store = TestStore(
-            initialState: BirthdayReducer.State(),
-            reducer: BirthdayReducer()
-        )
+        let store = TestStore(initialState: BirthdayReducer.State()) {
+            BirthdayReducer()
+        }
         
         await store.send(.birthdayChanged(birthday)) {
             $0.birthday = birthday
@@ -85,10 +82,9 @@ class BirthdayTests: XCTestCase {
     }
     
     func testIsDatePickerVisibleChanged_ShouldShowPicker() async {
-        let store = TestStore(
-            initialState: BirthdayReducer.State(),
-            reducer: BirthdayReducer()
-        )
+        let store = TestStore(initialState: BirthdayReducer.State()) {
+            BirthdayReducer()
+        }
         
         await store.send(.isDatePickerVisibleChanged) {
             $0.isDatePickerVisible = true
@@ -97,9 +93,10 @@ class BirthdayTests: XCTestCase {
     
     func testIsDatePickerVisibleChanged_ShouldHidePicker() async {
         let store = TestStore(
-            initialState: BirthdayReducer.State(isDatePickerVisible: true),
-            reducer: BirthdayReducer()
-        )
+            initialState: BirthdayReducer.State(isDatePickerVisible: true)
+        ) {
+            BirthdayReducer()
+        }
         
         await store.send(.isDatePickerVisibleChanged) {
             $0.isDatePickerVisible = false
