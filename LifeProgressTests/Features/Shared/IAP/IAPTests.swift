@@ -28,20 +28,18 @@ class IAPTests: XCTestCase {
     
     func testProductIds_ShouldBeCorrect() async {
         let productIds: Set<String> = ["com.bartozo.lifeprogress.premium"]
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        )
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        }
         
         XCTAssertEqual(store.state.productIds, productIds)
     }
     
     func testFetchProducts_ShouldShowProducts() async {
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        ) {
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.requestProducts = { @MainActor _ in
                 products
             }
@@ -58,10 +56,9 @@ class IAPTests: XCTestCase {
     }
     
     func testFetchProducts_ShouldShowError() async {
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        ) {
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.requestProducts = { _ in
                 throw PurchaseError.unknown
             }
@@ -76,7 +73,7 @@ class IAPTests: XCTestCase {
             $0.alert = AlertState {
                 TextState("Product Fetch Failed")
             } actions: {
-                ButtonState(role: .cancel) {
+                ButtonState(role: .cancel, action: .alertDismissed) {
                     TextState("Ok")
                 }
             } message: {
@@ -89,9 +86,10 @@ class IAPTests: XCTestCase {
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
         let id = "id"
         let store = TestStore(
-            initialState: IAPReducer.State(products: products),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(products: products)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase  = { _ in
                 id
             }
@@ -110,9 +108,10 @@ class IAPTests: XCTestCase {
     func testPurchase_ShouldShowError() async {
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
         let store = TestStore(
-            initialState: IAPReducer.State(products: products),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(products: products)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase = { _ in
                 throw PurchaseError.unknown
             }
@@ -125,13 +124,13 @@ class IAPTests: XCTestCase {
             $0.isLoading = false
             $0.alert = AlertState {
                 TextState("Purchase Failed")
-              } actions: {
-                ButtonState(role: .cancel) {
-                  TextState("Ok")
+            } actions: {
+                ButtonState(role: .cancel, action: .alertDismissed) {
+                    TextState("Ok")
                 }
-              } message: {
-                  TextState("The in-app purchase could not be completed. Please check your internet connection and try again.")
-              }
+            } message: {
+                TextState("The in-app purchase could not be completed. Please check your internet connection and try again.")
+            }
         }
     }
     
@@ -139,9 +138,10 @@ class IAPTests: XCTestCase {
         var eventName = ""
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
         let store = TestStore(
-            initialState: IAPReducer.State(products: products),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(products: products)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase = { _ in
                 "id"
             }
@@ -161,9 +161,10 @@ class IAPTests: XCTestCase {
         var eventName = ""
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
         let store = TestStore(
-            initialState: IAPReducer.State(products: products),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(products: products)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase = { _ in
                 throw PurchaseError.unknown
             }
@@ -181,9 +182,10 @@ class IAPTests: XCTestCase {
     
     func testCloseButtonTapped_ShouldHideSheet() async {
         let store = TestStore(
-            initialState: IAPReducer.State(isSheetVisible: true),
-            reducer: IAPReducer()
-        )
+            initialState: IAPReducer.State(isSheetVisible: true)
+        ) {
+            IAPReducer()
+        }
         
         await store.send(.closeButtonTapped) {
             $0.isSheetVisible = false
@@ -191,10 +193,9 @@ class IAPTests: XCTestCase {
     }
     
     func testShowSheet_ShouldShowSheet() async {
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        )
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        }
         
         await store.send(.showSheet) {
             $0.isSheetVisible = true
@@ -203,9 +204,10 @@ class IAPTests: XCTestCase {
     
     func testHideSheet_ShouldHideSheet() async {
         let store = TestStore(
-            initialState: IAPReducer.State(isSheetVisible: true),
-            reducer: IAPReducer()
-        )
+            initialState: IAPReducer.State(isSheetVisible: true)
+        ) {
+            IAPReducer()
+        }
         
         await store.send(.hideSheet) {
             $0.isSheetVisible = false
@@ -215,9 +217,10 @@ class IAPTests: XCTestCase {
     func testBuyPremiumButtonTapped_ShouldBuyProduct() async {
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
         let store = TestStore(
-            initialState: IAPReducer.State(products: products),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(products: products)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase = { _ in
                 throw PurchaseError.unknown
             }
@@ -234,13 +237,13 @@ class IAPTests: XCTestCase {
             $0.isLoading = false
             $0.alert = AlertState {
                 TextState("Purchase Failed")
-              } actions: {
-                ButtonState(role: .cancel) {
+            } actions: {
+                ButtonState(role: .cancel, action: .alertDismissed) {
                   TextState("Ok")
                 }
-              } message: {
-                  TextState("The in-app purchase could not be completed. Please check your internet connection and try again.")
-              }
+            } message: {
+                TextState("The in-app purchase could not be completed. Please check your internet connection and try again.")
+            }
         }
     }
     
@@ -248,9 +251,10 @@ class IAPTests: XCTestCase {
         var eventName = ""
         let products = try! await Product.products(for: ["com.bartozo.lifeprogress.premium"])
         let store = TestStore(
-            initialState: IAPReducer.State(products: products),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(products: products)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase = { _ in
                 throw PurchaseError.unknown
             }
@@ -269,9 +273,10 @@ class IAPTests: XCTestCase {
     
     func testRestorePurchasesButtonTapped_ShouldRestorePurchases() async {
         let store = TestStore(
-            initialState: IAPReducer.State(isSheetVisible: true),
-            reducer: IAPReducer()
+            initialState: IAPReducer.State(isSheetVisible: true)
         ) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.restorePurchases = {
                 true
             }
@@ -286,11 +291,9 @@ class IAPTests: XCTestCase {
     }
     
     func testRestorePurchasesButtonTapped_ShouldntRestorePurchases() async {
-        var eventName = ""
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        ) {
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.restorePurchases = {
                 throw PurchaseError.unknown
             }
@@ -304,10 +307,9 @@ class IAPTests: XCTestCase {
     
     func testRestorePurchasesButtonTapped_ShouldAddToAnalytics() async {
         var eventNames: [String] = []
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        ) {
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.purchase = { _ in
                 throw PurchaseError.unknown
             }
@@ -325,10 +327,9 @@ class IAPTests: XCTestCase {
     
     func testRestorePurchasesButtonTapped_ShouldAddErrorToAnalytics() async {
         var eventNames: [String] = []
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        ) {
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.restorePurchases = {
                 throw PurchaseError.unknown
             }
@@ -345,10 +346,9 @@ class IAPTests: XCTestCase {
     
     func testRefreshPurchasedProducts_ShouldShowPurchasedProducts() async {
         let ids = ["1", "2", "3"]
-        let store = TestStore(
-            initialState: IAPReducer.State(),
-            reducer: IAPReducer()
-        ) {
+        let store = TestStore(initialState: IAPReducer.State()) {
+            IAPReducer()
+        } withDependencies: {
             $0.iapClient.requestPurchasedProductIds = {
                 ids
             }
@@ -373,11 +373,12 @@ class IAPTests: XCTestCase {
                 } message: {
                     TextState("Unable to fetch available in-app purchases. Please check your internet connection and try again.")
                 }
-            ),
-            reducer: IAPReducer()
-        )
+            )
+        ) {
+            IAPReducer()
+        }
         
-        await store.send(.alertDismissed) {
+        await store.send(.alert(.presented(.alertDismissed))) {
             $0.alert = nil
         }
     }

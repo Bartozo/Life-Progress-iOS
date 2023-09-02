@@ -14,10 +14,9 @@ import ComposableArchitecture
 class WeeklyNotificationTests: XCTestCase {
     
     func testIsWeeklyNotificationChanged_ShouldBeEnabled() async {
-        let store = TestStore(
-            initialState: WeeklyNotificationReducer.State(),
-            reducer: WeeklyNotificationReducer()
-        )
+        let store = TestStore(initialState: WeeklyNotificationReducer.State()) {
+            WeeklyNotificationReducer()
+        }
         
         await store.send(.isWeeklyNotificationChanged) {
             $0.isWeeklyNotificationEnabled = true
@@ -26,9 +25,10 @@ class WeeklyNotificationTests: XCTestCase {
     
     func testIsWeeklyNotificationChanged_ShouldBeDisabled() async {
         let store = TestStore(
-            initialState: WeeklyNotificationReducer.State(isWeeklyNotificationEnabled: true),
-            reducer: WeeklyNotificationReducer()
-        )
+            initialState: WeeklyNotificationReducer.State(isWeeklyNotificationEnabled: true)
+        ) {
+            WeeklyNotificationReducer()
+        }
         
         await store.send(.isWeeklyNotificationChanged) {
             $0.isWeeklyNotificationEnabled = false
@@ -39,9 +39,10 @@ class WeeklyNotificationTests: XCTestCase {
         var eventName = ""
         var eventPayload = [String: String]()
         let store = TestStore(
-            initialState: WeeklyNotificationReducer.State(),
-            reducer: WeeklyNotificationReducer()
+            initialState: WeeklyNotificationReducer.State()
         ) {
+            WeeklyNotificationReducer()
+        } withDependencies: {
             $0.analyticsClient.sendWithPayload = { event, payload in
                 eventName = event
                 eventPayload = payload

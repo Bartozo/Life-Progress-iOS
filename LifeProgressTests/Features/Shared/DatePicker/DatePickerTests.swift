@@ -14,10 +14,9 @@ import ComposableArchitecture
 class DatePickerTests: XCTestCase {
     
     func testDateChanged_ShouldUpdateDate() async {
-        let store = TestStore(
-            initialState: DatePickerReducer.State(),
-            reducer: DatePickerReducer()
-        )
+        let store = TestStore(initialState: DatePickerReducer.State()) {
+            DatePickerReducer()
+        }
         let newDate = Date.createDate(year: 2000, month: 1, day: 1)
         
         await store.send(.dateChanged(newDate)) {
@@ -26,10 +25,9 @@ class DatePickerTests: XCTestCase {
     }
     
     func testIsDatePickerVisibleChanged_ShouldShowPicker() async {
-        let store = TestStore(
-            initialState: DatePickerReducer.State(),
-            reducer: DatePickerReducer()
-        )
+        let store = TestStore(initialState: DatePickerReducer.State()) {
+            DatePickerReducer()
+        }
         
         await store.send(.isDatePickerVisibleChanged) {
             $0.isDatePickerVisible = true
@@ -37,10 +35,9 @@ class DatePickerTests: XCTestCase {
     }
     
     func testIsDatePickerVisibleChanged_ShouldHidePicker() async {
-        let store = TestStore(
-            initialState: DatePickerReducer.State(isDatePickerVisible: true),
-            reducer: DatePickerReducer()
-        )
+        let store = TestStore(initialState: DatePickerReducer.State(isDatePickerVisible: true)) {
+            DatePickerReducer()
+        }
         
         await store.send(.isDatePickerVisibleChanged) {
             $0.isDatePickerVisible = false

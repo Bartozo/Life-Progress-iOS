@@ -14,10 +14,9 @@ import ComposableArchitecture
 class SFSymbolPickerTests: XCTestCase {
     
     func testSymbolNameChanged_ShouldUpdateSymbol() async {
-        let store = TestStore(
-            initialState: SFSymbolPickerReducer.State(),
-            reducer: SFSymbolPickerReducer()
-        )
+        let store = TestStore(initialState: SFSymbolPickerReducer.State()) {
+            SFSymbolPickerReducer()
+        }
         let symbolName = "book"
         
         await store.send(.symbolNameChanged(symbolName)) {
@@ -26,10 +25,9 @@ class SFSymbolPickerTests: XCTestCase {
     }
     
     func testShowSheet_ShouldShowSheet() async {
-        let store = TestStore(
-            initialState: SFSymbolPickerReducer.State(),
-            reducer: SFSymbolPickerReducer()
-        )
+        let store = TestStore(initialState: SFSymbolPickerReducer.State()) {
+            SFSymbolPickerReducer()
+        }
         
         await store.send(.showSheet) {
             $0.isSheetVisible = true
@@ -38,9 +36,10 @@ class SFSymbolPickerTests: XCTestCase {
     
     func testHideSheet_ShouldHideSheet() async {
         let store = TestStore(
-            initialState: SFSymbolPickerReducer.State(isSheetVisible: true),
-            reducer: SFSymbolPickerReducer()
-        )
+            initialState: SFSymbolPickerReducer.State(isSheetVisible: true)
+        ) {
+            SFSymbolPickerReducer()
+        }
         
         await store.send(.hideSheet) {
             $0.isSheetVisible = false

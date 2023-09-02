@@ -18,10 +18,9 @@ class LifeCalendarTests: XCTestCase {
         let birthdayPublisher = PassthroughSubject<Date, Never>()
         let lifeExpectancyPublisher = PassthroughSubject<Int, Never>()
         let mainQueue = DispatchQueue.test
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        ) {
+        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        } withDependencies: {
             $0.userSettingsClient.birthdayPublisher = birthdayPublisher.eraseToAnyPublisher()
             $0.userSettingsClient.lifeExpectancyPublisher = lifeExpectancyPublisher.eraseToAnyPublisher()
             $0.mainQueue = mainQueue.eraseToAnyScheduler()
@@ -62,10 +61,9 @@ class LifeCalendarTests: XCTestCase {
     }
     
     func testCalendarTypeChanged_ShouldUpdateCalendarType() async {
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        )
+        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        }
         
         await store.send(.calendarTypeChanged(.currentYear)) {
             $0.calendarType = .currentYear
@@ -79,10 +77,9 @@ class LifeCalendarTests: XCTestCase {
     func testCalendarTypeChanged_ShouldAddToAnalytics() async {
         var eventName = ""
         var eventPayload = [String: String]()
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        ) {
+        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        } withDependencies: {
             $0.analyticsClient.sendWithPayload = { event, payload in
                 eventName = event
                 eventPayload = payload
@@ -101,10 +98,9 @@ class LifeCalendarTests: XCTestCase {
             birthday: Date.createDate(year: 2000, month: 1, day: 1),
             lifeExpectancy: 100
         )
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        )
+        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        }
         
         await store.send(.lifeChanged(life)) {
             $0.life = life
@@ -112,10 +108,9 @@ class LifeCalendarTests: XCTestCase {
     }
     
     func testAboutLifeCalendarButtonTapped_ShouldShowAboutTheCalendarSheet() async {
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        )
+        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        }
         
         await store.send(.aboutLifeCalendarButtonTapped) {
             $0.isAboutTheCalendarSheetVisible = true
@@ -124,10 +119,9 @@ class LifeCalendarTests: XCTestCase {
     
     func testAboutLifeCalendarButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(),
-            reducer: LifeCalendarReducer()
-        ) {
+        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in
                 eventName = event
             }
@@ -143,9 +137,10 @@ class LifeCalendarTests: XCTestCase {
         let store = TestStore(
             initialState: LifeCalendarReducer.State(
                 isAboutTheCalendarSheetVisible: true
-            ),
-            reducer: LifeCalendarReducer()
-        )
+            )
+        ) {
+            LifeCalendarReducer()
+        }
         
         await store.send(.closeAboutTheCalendarSheet) {
             $0.isAboutTheCalendarSheetVisible = false

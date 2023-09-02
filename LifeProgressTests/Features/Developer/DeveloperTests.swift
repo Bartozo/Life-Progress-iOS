@@ -14,10 +14,9 @@ import ComposableArchitecture
 class DeveloperTests: XCTestCase {
     
     func testDeveloperButtonTapped_ShouldShowConfetti() async {
-        let store = TestStore(
-            initialState: DeveloperReducer.State(),
-            reducer: DeveloperReducer()
-        )
+        let store = TestStore(initialState: DeveloperReducer.State()) {
+            DeveloperReducer()
+        }
         
         await store.send(.developerButtonTapped) {
             $0.confetti = 1
@@ -26,10 +25,9 @@ class DeveloperTests: XCTestCase {
     
     func testDeveloperButtonTapped_ShouldAddToAnalytics() async {
         var sentEvent = ""
-        let store = TestStore(
-            initialState: DeveloperReducer.State(),
-            reducer: DeveloperReducer()
-        ) {
+        let store = TestStore(initialState: DeveloperReducer.State()) {
+            DeveloperReducer()
+        } withDependencies: {
             $0.analyticsClient.send = { event in sentEvent = event }
         }
         
@@ -41,9 +39,10 @@ class DeveloperTests: XCTestCase {
     
     func testConfettiChanged_ShouldUpdateConfettiState() async {
         let store = TestStore(
-            initialState: DeveloperReducer.State(confetti: 1),
-            reducer: DeveloperReducer()
-        )
+            initialState: DeveloperReducer.State(confetti: 1)
+        ) {
+            DeveloperReducer()
+        }
         
         await store.send(.confettiChanged(0)) {
             $0.confetti = 0

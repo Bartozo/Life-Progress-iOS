@@ -17,10 +17,9 @@ class LifeExpectancyTests: XCTestCase {
     func testOnAppear_ShouldListenToLifeExpectancyChanges() async {
         let lifeExpectancyPublisher = PassthroughSubject<Int, Never>()
         let mainQueue = DispatchQueue.test
-        let store = TestStore(
-            initialState: LifeExpectancyReducer.State(),
-            reducer: LifeExpectancyReducer()
-        ) {
+        let store = TestStore(initialState: LifeExpectancyReducer.State()) {
+            LifeExpectancyReducer()
+        } withDependencies: {
             $0.userSettingsClient.lifeExpectancyPublisher = lifeExpectancyPublisher.eraseToAnyPublisher()
             $0.mainQueue = mainQueue.eraseToAnyScheduler()
         }
@@ -51,10 +50,9 @@ class LifeExpectancyTests: XCTestCase {
 
     func testLifeExpectancySelectionEnded_ShouldSaveAndUpdateLifeExpectancy() async {
         var lifeExpectancy = 0
-        let store = TestStore(
-            initialState: LifeExpectancyReducer.State(),
-            reducer: LifeExpectancyReducer()
-        ) {
+        let store = TestStore(initialState: LifeExpectancyReducer.State()) {
+            LifeExpectancyReducer()
+        } withDependencies: {
             $0.userSettingsClient.updateLifeExpectancy = { @MainActor newLifeExpectancy in
                 lifeExpectancy = newLifeExpectancy
             }
@@ -69,10 +67,9 @@ class LifeExpectancyTests: XCTestCase {
     }
 
     func testLifeExpectancyChanged_ShouldUpdateLifeExpectancy() async {
-        let store = TestStore(
-            initialState: LifeExpectancyReducer.State(),
-            reducer: LifeExpectancyReducer()
-        )
+        let store = TestStore(initialState: LifeExpectancyReducer.State()) {
+            LifeExpectancyReducer()
+        }
 
         await store.send(.lifeExpectancyChanged(100)) {
             $0.lifeExpectancy = 100
@@ -80,10 +77,9 @@ class LifeExpectancyTests: XCTestCase {
     }
     
     func testIsSliderVisibleChanged_ShouldShowSlider() async {
-        let store = TestStore(
-            initialState: LifeExpectancyReducer.State(),
-            reducer: LifeExpectancyReducer()
-        )
+        let store = TestStore(initialState: LifeExpectancyReducer.State()) {
+            LifeExpectancyReducer()
+        }
         
         await store.send(.isSliderVisibleChanged) {
             $0.isSliderVisible = true
@@ -92,9 +88,10 @@ class LifeExpectancyTests: XCTestCase {
     
     func testIsSliderVisibleChanged_ShouldHideSlider() async {
         let store = TestStore(
-            initialState: LifeExpectancyReducer.State(isSliderVisible: true),
-            reducer: LifeExpectancyReducer()
-        )
+            initialState: LifeExpectancyReducer.State(isSliderVisible: true)
+        ) {
+            LifeExpectancyReducer()
+        }
         
         await store.send(.isSliderVisibleChanged) {
             $0.isSliderVisible = false

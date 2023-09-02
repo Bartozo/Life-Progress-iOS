@@ -21,10 +21,9 @@ class CreditsTests: XCTestCase {
             title: "app",
             url: "https://github.com/Bartozo/Life-Progress-iOS"
         )
-        let store = TestStore(
-            initialState: CreditsReducer.State(),
-            reducer: CreditsReducer()
-        ) {
+        let store = TestStore(initialState: CreditsReducer.State()) {
+            CreditsReducer()
+        } withDependencies: {
             $0.openURL = openURL
         }
         
