@@ -73,7 +73,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
-         identifier = "../../LifeProgress/StoreKit/Configuration.storekit">
+         identifier = "../../LifeProgress/Resources/StoreKit/Configuration.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
