@@ -49,17 +49,20 @@ struct IAPView: View {
                             }
                         }
                     }
-                    
-                    VStack(spacing: 20) {
-                        BuyPremiumButton(store: self.store)
+                    VStack(spacing: 8) {
+                        PriceLabel(store: self.store)
                         
-                        Button {
-                            viewStore.send(.restorePurchasesButtonTapped)
-                        } label: {
-                            Text("Restore Purchases")
-                                .font(.subheadline)
+                        VStack(spacing: 20) {
+                            BuyPremiumButton(store: self.store)
+                            
+                            Button {
+                                viewStore.send(.restorePurchasesButtonTapped)
+                            } label: {
+                                Text("Restore Purchases")
+                                    .font(.subheadline)
+                            }
+                            .tint(theme.color)
                         }
-                        .tint(theme.color)
                     }
                     .padding()
                 }
@@ -84,37 +87,47 @@ struct IAPView: View {
     }
 }
 
+private struct PriceLabel: View {
+    
+    let store: StoreOf<IAPReducer>
+    
+    var body: some View {
+        WithViewStore(self.store, observe: { $0.products }) { products in
+            VStack(alignment: .center) {
+                if let product = products.first {
+                    Text("\(product.displayPrice)")
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(.secondary)
+                }
+                Text("Buy once. Enjoy forever!")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
+
 private struct BuyPremiumButton: View {
     
     @Environment(\.theme) var theme
     
     let store: StoreOf<IAPReducer>
     
-    struct ViewState: Equatable {
-        let isLoading: Bool
-        let products: [Product]
-
-        init(state: IAPReducer.State) {
-            self.isLoading = state.isLoading
-            self.products = state.products
-        }
-    }
-    
     var body: some View {
-        WithViewStore(self.store, observe: ViewState.init) { viewStore in
+        WithViewStore(self.store, observe: { $0.isLoading }) { viewStore in
+            let isLoading = viewStore.state
+            
             Button {
-                if (!viewStore.state.isLoading) {
+                if (!isLoading) {
                     viewStore.send(.buyPremiumButtonTapped)
                 }
             } label: {
                 HStack {
-                    if let product = viewStore.state.products.first {
-                        Text("\(product.displayPrice) Premium")
-                            .font(.callout.weight(.semibold))
-                            .padding(8)
-                    }
+                    Text("Unlock Premium")
+                        .font(.callout.weight(.semibold))
+                        .padding(8)
                     
-                    if (viewStore.state.isLoading) {
+                    if (isLoading) {
                         ProgressView()
                             .progressViewStyle(.circular)
                             .tint(.white)
