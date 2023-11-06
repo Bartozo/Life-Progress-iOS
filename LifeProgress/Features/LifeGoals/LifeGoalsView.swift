@@ -20,7 +20,7 @@ struct LifeGoalsView: View {
         let isAddLifeGoalSheetVisible: Bool
         let isIAPSheetVisible: Bool
         let isShareLifeGoalSheetVisible: Bool
-
+        
         init(state: LifeGoalsReducer.State) {
             self.isAddLifeGoalSheetVisible = state.isAddLifeGoalSheetVisible
             self.isIAPSheetVisible = state.iap.isSheetVisible
@@ -33,14 +33,22 @@ struct LifeGoalsView: View {
             LifeGoalsList(store: self.store)
                 .navigationTitle("Life Goals")
                 .toolbar {
-                      ToolbarItem(placement: .navigationBarTrailing) {
-                          Button(action: {
-                              viewStore.send(.addButtonTapped)
-                          }) {
-                              Image(systemName: "plus.circle.fill")
-                          }
-                      }
-                  }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        PremiumButton(
+                            store: self.store.scope(
+                                state: \.iap,
+                                action: LifeGoalsReducer.Action.iap
+                            )
+                        )
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            viewStore.send(.addButtonTapped)
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                        }
+                    }
+                }
                 .sheet(isPresented: viewStore.binding(
                     get: \.isIAPSheetVisible,
                     send: LifeGoalsReducer.Action.iap(.hideSheet)

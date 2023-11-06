@@ -61,6 +61,9 @@ struct LifeCalendarReducer: Reducer {
                 self.isAboutTheCalendarSheetVisible = newValue.isAboutTheCalendarSheetVisible
             }
         }
+        
+        /// The in-app purchases's state.
+        var iap = IAPReducer.State()
     }
     
     /// The actions that can be taken on the life calendar.
@@ -77,11 +80,11 @@ struct LifeCalendarReducer: Reducer {
         case closeAboutTheCalendarSheet
         /// The actions that can be taken on the about the app.
         case aboutTheApp(AboutTheAppReducer.Action)
+        /// The actions that can be taken on the in-app purchase.
+        case iap(IAPReducer.Action)
     }
     
     @Dependency(\.userSettingsClient) var userSettingsClient
-    
-    @Dependency(\.mainQueue) var mainQueue
     
     @Dependency(\.analyticsClient) var analyticsClient
     
@@ -89,6 +92,9 @@ struct LifeCalendarReducer: Reducer {
     var body: some Reducer<State, Action> {
         Scope(state: \.aboutTheApp, action: /Action.aboutTheApp) {
             AboutTheAppReducer()
+        }
+        Scope(state: \.iap, action: /Action.iap) {
+            IAPReducer()
         }
         Reduce { state, action in
             switch action {
@@ -122,6 +128,9 @@ struct LifeCalendarReducer: Reducer {
                 return .none
                 
             case .aboutTheApp:
+                return .none
+                
+            case .iap:
                 return .none
             }
         }

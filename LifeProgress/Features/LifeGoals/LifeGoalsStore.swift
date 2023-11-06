@@ -61,6 +61,8 @@ struct LifeGoalsReducer: Reducer {
         case lifeGoalsChanged([LifeGoal])
         /// Indicates that the add button has been tapped.
         case addButtonTapped
+        /// Indicates that the buy premium button has been tapped.
+        case buyPremiumButtonTapped
         /// Indicates that is add life goal sheet should be hidden.
         case closeAddLifeGoalSheet
         /// Indicates that is share life goal sheet should be hidden.
@@ -140,6 +142,9 @@ struct LifeGoalsReducer: Reducer {
                     state.isAddLifeGoalSheetVisible = true
                     state.addOrEditLifeGoal = .init()
                 }
+                return .none
+                
+            case .buyPremiumButtonTapped:
                 return .none
                 
             case .closeAddLifeGoalSheet:
