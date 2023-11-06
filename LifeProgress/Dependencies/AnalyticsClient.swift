@@ -27,7 +27,7 @@ extension AnalyticsClient: DependencyKey {
     
     static let liveValue = Self(
         initialize: {
-            let configuration = TelemetryManagerConfiguration(appID: "")
+            let configuration = TelemetryManagerConfiguration(appID: UUID().uuidString)
             TelemetryManager.initialize(with: configuration)
         },
         send: { event in
