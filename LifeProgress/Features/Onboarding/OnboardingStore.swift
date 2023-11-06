@@ -35,6 +35,8 @@ struct OnboardingReducer: Reducer {
             case lifeExpectancy
             /// Represents the notifications screen
             case notifications
+            /// Represents the review screen
+            case review
             /// Represents the completed screen
             case completed
             
@@ -108,6 +110,11 @@ struct OnboardingReducer: Reducer {
                 
                 guard state.path.contains(State.Screen.notifications) else {
                     state.path.append(State.Screen.notifications)
+                    return .none
+                }
+                
+                guard state.path.contains(State.Screen.review) else {
+                    state.path.append(State.Screen.review)
                     return .none
                 }
                 
