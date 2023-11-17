@@ -78,6 +78,17 @@ class OnboardingTests: XCTestCase {
                 OnboardingReducer.State.Screen.birthday,
                 OnboardingReducer.State.Screen.lifeExpectancy,
                 OnboardingReducer.State.Screen.notifications,
+                OnboardingReducer.State.Screen.review,
+            ]
+        }
+        
+        await store.send(.continueButtonTapped) {
+            $0.path = [
+                OnboardingReducer.State.Screen.about,
+                OnboardingReducer.State.Screen.birthday,
+                OnboardingReducer.State.Screen.lifeExpectancy,
+                OnboardingReducer.State.Screen.notifications,
+                OnboardingReducer.State.Screen.review,
                 OnboardingReducer.State.Screen.completed,
             ]
         }
@@ -104,7 +115,7 @@ class OnboardingTests: XCTestCase {
                 OnboardingReducer.State.Screen.birthday,
                 OnboardingReducer.State.Screen.lifeExpectancy,
                 OnboardingReducer.State.Screen.notifications,
-                OnboardingReducer.State.Screen.completed,
+                OnboardingReducer.State.Screen.review,
             ]
         }
     }
