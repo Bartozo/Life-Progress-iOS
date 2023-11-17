@@ -122,7 +122,7 @@ struct SettingsView: View {
     }
     
     func rateApp() {
-        guard let url = URL(string: "https://apps.apple.com/us/app/life-progress-calendar/id6447311106") else { return }
+        guard let url = URL(string: "https://apps.apple.com/us/app/life-progress-calendar/id6447311106?action=write-review") else { return }
         
         UIApplication.shared.open(url)
     }
