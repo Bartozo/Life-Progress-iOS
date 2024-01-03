@@ -26,10 +26,7 @@ struct DeveloperView: View {
             .tint(theme.color)
             .overlay {
                 ConfettiCannon(
-                    counter: viewStore.binding(
-                        get: \.confetti,
-                        send: DeveloperReducer.Action.confettiChanged
-                    ),
+                    counter: viewStore.$confetti,
                     confettis: [
                         .text("❤️"),
                     ]
@@ -41,14 +38,10 @@ struct DeveloperView: View {
 
 // MARK: - Previews
 
-struct DeveloperView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: DeveloperReducer.State()) {
-            DeveloperReducer()
-        }
-        
-        DeveloperView(store: store)
+#Preview {
+    let store = Store(initialState: DeveloperReducer.State()) {
+        DeveloperReducer()
     }
+    
+    return DeveloperView(store: store)
 }
-
