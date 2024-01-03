@@ -9,7 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the credits.
-struct CreditsReducer: Reducer {
+@Reducer
+struct CreditsReducer {
     
     /// The state of the credits.
     struct State: Equatable {

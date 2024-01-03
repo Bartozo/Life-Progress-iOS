@@ -31,8 +31,6 @@ struct CreditCell: View {
 
 // MARK: - Previews
 
-struct CreditCell_Previews: PreviewProvider {
-    static var previews: some View {
-        CreditCell(title: "Package XYZ") {}
-    }
+#Preview {
+    CreditCell(title: "Package XYZ") {}
 }

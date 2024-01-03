@@ -37,16 +37,12 @@ struct CreditsView: View {
 
 // MARK: - Previews
 
-struct CreditsView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: CreditsReducer.State()) {
+        CreditsReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: CreditsReducer.State()) {
-            CreditsReducer()
-        }
-        
-        NavigationStack {
-            CreditsView(store: store)
-        }
+    return NavigationStack {
+        CreditsView(store: store)
     }
 }
-
