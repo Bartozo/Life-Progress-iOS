@@ -160,14 +160,10 @@ private struct ThemePicker: View {
     let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: \.theme) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             Picker(
                 "Theme",
-                selection: viewStore.binding(
-                    get: { $0 },
-                    send: ShareLifeGoalReducer.Action.themeChanged
-                )
-                .animation()
+                selection: viewStore.$theme.animation()
             ) {
                 ForEach(ShareLifeGoalReducer.State.Theme.allCases, id: \.self) { theme in
                     Text(theme.title)
@@ -184,14 +180,10 @@ private struct TimeSwitch: View {
     let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: \.isTimeVisible) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             Toggle(
                 "Show time",
-                isOn: viewStore.binding(
-                    get: { $0 },
-                    send: ShareLifeGoalReducer.Action.isTimeVisibleChanged
-                )
-                .animation(.default)
+                isOn: viewStore.$isTimeVisible.animation(.default)
             )
         }
     }
@@ -202,40 +194,32 @@ private struct WatermarkSwitch: View {
     let store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: \.isWatermarkVisible) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             Toggle(
                 "Show watermark",
-                isOn: viewStore.binding(
-                    get: { $0 },
-                    send: ShareLifeGoalReducer.Action.isWatermarkVisibleChanged
-                )
-                .animation(.default)
+                isOn: viewStore.$isWatermarkVisible.animation(.default)
             )
         }
     }
 }
 
 // MARK: - Previews
-
-struct ShareLifeGoalView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(
-            initialState: ShareLifeGoalReducer.State(
-                lifeGoal: LifeGoal(
-                    id: UUID(),
-                    title: "Road Trip on Route 66",
-                    finishedAt: Date.now,
-                    symbolName: "trophy",
-                    details: "Plan and embark on a memorable road trip across America's historic Route 66"
-                )
+#Preview {
+    let store = Store(
+        initialState: ShareLifeGoalReducer.State(
+            lifeGoal: LifeGoal(
+                id: UUID(),
+                title: "Road Trip on Route 66",
+                finishedAt: Date.now,
+                symbolName: "trophy",
+                details: "Plan and embark on a memorable road trip across America's historic Route 66"
             )
-        ) {
-            ShareLifeGoalReducer()
-        }
-        
-        NavigationStack {
-            ShareLifeGoalView(store: store)
-        }
+        )
+    ) {
+        ShareLifeGoalReducer()
+    }
+    
+    return NavigationStack {
+        ShareLifeGoalView(store: store)
     }
 }

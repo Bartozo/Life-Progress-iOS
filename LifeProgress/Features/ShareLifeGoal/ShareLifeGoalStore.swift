@@ -10,7 +10,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the share life goal.
-struct ShareLifeGoalReducer: Reducer {
+@Reducer
+struct ShareLifeGoalReducer {
     
     /// The state of the share life goal.
     struct State: Equatable {
@@ -18,13 +19,13 @@ struct ShareLifeGoalReducer: Reducer {
         var lifeGoal: LifeGoal
         
         /// Represents the currently selected theme.
-        var theme = Theme.light
+        @BindingState var theme = Theme.light
         
         /// Whether the time is visible.
-        var isTimeVisible = true
+        @BindingState var isTimeVisible = true
         
         /// Whether the watermark is visible.
-        var isWatermarkVisible = true
+        @BindingState var isWatermarkVisible = true
         
         /// The user's life expectancy state.
         var colorPicker = ColorPickerReducer.State()
@@ -47,13 +48,9 @@ struct ShareLifeGoalReducer: Reducer {
     }
     
     /// The actions that can be taken on the share life goal.
-    enum Action: Equatable {
-        /// Indicates that theme has changed.
-        case themeChanged(State.Theme)
-        /// Indicates that is time visible flag has changed.
-        case isTimeVisibleChanged(Bool)
-        /// Indicates that is watermark visible flag has changed.
-        case isWatermarkVisibleChanged(Bool)
+    enum Action: BindableAction, Equatable {
+        /// The binding for the share life goal.
+        case binding(BindingAction<State>)
         /// Indicates that close button was tapped.
         case closeButtonTapped
         /// Indicates that share button was tapped.
@@ -66,21 +63,13 @@ struct ShareLifeGoalReducer: Reducer {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Scope(state: \.colorPicker, action: /Action.colorPicker) {
             ColorPickerReducer()
         }
         Reduce { state, action in
             switch action {
-            case .themeChanged(let theme):
-                state.theme = theme
-                return .none
-                
-            case .isTimeVisibleChanged(let isTimeVisible):
-                state.isTimeVisible = isTimeVisible
-                return .none
-                
-            case .isWatermarkVisibleChanged(let isWatermarkVisible):
-                state.isWatermarkVisible = isWatermarkVisible
+            case .binding(_):
                 return .none
                 
             case .closeButtonTapped:
