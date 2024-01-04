@@ -10,7 +10,8 @@ import ComposableArchitecture
 import StoreKit
 
 /// A reducer that manages the state of the IAP.
-struct IAPReducer: Reducer {
+@Reducer
+struct IAPReducer {
     
     /// The state of the IAP.
     struct State: Equatable {
@@ -32,14 +33,16 @@ struct IAPReducer: Reducer {
         }
         
         /// Whether the about IAP sheet is visible.
-        var isSheetVisible = false
+        @BindingState var isSheetVisible = false
         
         /// The state of the alert related to IAP actions.
         @PresentationState var alert: AlertState<Action.Alert>?
     }
     
     /// The actions that can be taken on the IAP.
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
+        /// The binding for the IAP.
+        case binding(BindingAction<State>)
         /// Indicates that products should be fetched.
         case fetchProducts
         /// The result of the fetch products request.
@@ -80,8 +83,12 @@ struct IAPReducer: Reducer {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
+            case .binding(_):
+                return .none
+                
             case .fetchProducts:
                 analyticsClient.send("iap.fetch_products")
                 state.isLoading = true

@@ -14,18 +14,8 @@ struct PremiumButton: View {
     
     let store: StoreOf<IAPReducer>
     
-    struct ViewState: Equatable {
-        let isSheetVisible: Bool
-        let hasUnlockedPremium: Bool
-
-        init(state: IAPReducer.State) {
-            self.isSheetVisible = state.isSheetVisible
-            self.hasUnlockedPremium = state.hasUnlockedPremium
-        }
-    }
-    
     var body: some View {
-        WithViewStore(self.store, observe: ViewState.init) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             
             if !viewStore.hasUnlockedPremium {
                 Button(action: {
@@ -37,10 +27,7 @@ struct PremiumButton: View {
                 .onAppear {
                     viewStore.send(.refreshPurchasedProducts)
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.isSheetVisible,
-                    send: IAPReducer.Action.hideSheet
-                )) {
+                .sheet(isPresented: viewStore.$isSheetVisible) {
                     IAPView(store: self.store)
                 }
             } else {
@@ -52,14 +39,10 @@ struct PremiumButton: View {
 
 // MARK: - Previews
 
-struct PremiumButton_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: IAPReducer.State()) {
-            IAPReducer()
-        }
-
-        PremiumButton(store: store)
+#Preview {
+    let store = Store(initialState: IAPReducer.State()) {
+        IAPReducer()
     }
+    
+    return PremiumButton(store: store)
 }
-
