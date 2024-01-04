@@ -61,13 +61,12 @@ struct OnboardingLifeExpectancyView: View {
 
 // MARK: - Previews
 
-struct OnboardingLifeExpectancyView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: OnboardingReducer.State()) {
+        OnboardingReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: OnboardingReducer.State()) {
-            OnboardingReducer()
-        }
-        
+    return NavigationStack {
         OnboardingLifeExpectancyView(store: store)
     }
 }

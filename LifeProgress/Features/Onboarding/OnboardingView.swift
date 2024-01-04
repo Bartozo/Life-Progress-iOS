@@ -14,14 +14,11 @@ struct OnboardingView: View {
     @Environment(\.theme) var theme
     
     let store: StoreOf<OnboardingReducer>
-
+    
     var body: some View {
-        WithViewStore(self.store, observe: \.path) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationStack(
-                path: viewStore.binding(
-                    get: { $0 },
-                    send: OnboardingReducer.Action.pathChanged
-                )
+                path: viewStore.$path
             ) {
                 VStack {
                     Spacer()
@@ -29,7 +26,7 @@ struct OnboardingView: View {
                         .font(.largeTitle.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .padding(.bottom)
-            
+                    
                     Spacer()
                     
                     Button {
@@ -48,10 +45,10 @@ struct OnboardingView: View {
                         
                     case .birthday:
                         OnboardingBirthdayView(store: self.store)
-
+                        
                     case .lifeExpectancy:
                         OnboardingLifeExpectancyView(store: self.store)
-
+                        
                     case .notifications:
                         OnboardingNotificationsView(store: self.store)
                         
@@ -70,14 +67,11 @@ struct OnboardingView: View {
 
 // MARK: - Previews
 
-struct OnboardingView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: OnboardingReducer.State()) {
-            OnboardingReducer()
-        }
-        
-        OnboardingView(store: store)
+#Preview {
+    let store = Store(initialState: OnboardingReducer.State()) {
+        OnboardingReducer()
     }
+    
+    return OnboardingView(store: store)
 }
 
