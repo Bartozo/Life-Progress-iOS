@@ -43,10 +43,7 @@ struct DatePickerView: View {
             if isDatePickerVisible {
                 DatePicker(
                     "",
-                    selection: viewStore.binding(
-                        get: \.date,
-                        send: DatePickerReducer.Action.dateChanged
-                    ),
+                    selection: viewStore.$date,
                     displayedComponents: .date
                 )
                 .labelsHidden()
@@ -59,13 +56,11 @@ struct DatePickerView: View {
 
 // MARK: - Previews
 
-struct DatePickerView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: DatePickerReducer.State()) {
-            DatePickerReducer()
-        }
-        
-        DatePickerView(title: "Selected date", store: store)
+#Preview {
+    let store = Store(initialState: DatePickerReducer.State()) {
+        DatePickerReducer()
     }
+    
+    return DatePickerView(title: "Selected date", store: store)
 }
+
