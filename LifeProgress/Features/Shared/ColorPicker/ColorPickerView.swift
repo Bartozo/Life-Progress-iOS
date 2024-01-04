@@ -10,8 +10,6 @@ import ComposableArchitecture
 
 struct ColorPickerView: View {
     
-    @Environment(\.theme) var theme
-    
     let store: StoreOf<ColorPickerReducer>
     
     private var gridItems: [GridItem] {
@@ -46,13 +44,10 @@ struct ColorPickerView: View {
 
 // MARK: - Previews
 
-struct ColorPickerView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: ColorPickerReducer.State()) {
-            ColorPickerReducer()
-        }
-        
-        ColorPickerView(store: store)
+#Preview {
+    let store = Store(initialState: ColorPickerReducer.State()) {
+        ColorPickerReducer()
     }
+    
+    return ColorPickerView(store: store)
 }

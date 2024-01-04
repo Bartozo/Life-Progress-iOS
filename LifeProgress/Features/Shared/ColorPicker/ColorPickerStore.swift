@@ -10,7 +10,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the color picker.
-struct ColorPickerReducer: Reducer {
+@Reducer
+struct ColorPickerReducer {
     
     /// The state of the color picker.
     struct State: Equatable {
