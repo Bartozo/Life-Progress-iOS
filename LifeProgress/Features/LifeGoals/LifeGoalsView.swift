@@ -16,20 +16,8 @@ struct LifeGoalsView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.createdAt)])
     var lifeGoalEntities: FetchedResults<LifeGoalEntity>
     
-    struct ViewState: Equatable {
-        let isAddLifeGoalSheetVisible: Bool
-        let isIAPSheetVisible: Bool
-        let isShareLifeGoalSheetVisible: Bool
-        
-        init(state: LifeGoalsReducer.State) {
-            self.isAddLifeGoalSheetVisible = state.isAddLifeGoalSheetVisible
-            self.isIAPSheetVisible = state.iap.isSheetVisible
-            self.isShareLifeGoalSheetVisible = state.isShareLifeGoalSheetVisible
-        }
-    }
-    
     var body: some View {
-        WithViewStore(self.store, observe: ViewState.init) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             LifeGoalsList(store: self.store)
                 .navigationTitle("Life Goals")
                 .toolbar {
@@ -50,7 +38,7 @@ struct LifeGoalsView: View {
                     }
                 }
                 .sheet(isPresented: viewStore.binding(
-                    get: \.isIAPSheetVisible,
+                    get: \.iap.isSheetVisible,
                     send: LifeGoalsReducer.Action.iap(.hideSheet)
                 )) {
                     IAPView(
@@ -60,10 +48,7 @@ struct LifeGoalsView: View {
                         )
                     )
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.isAddLifeGoalSheetVisible,
-                    send: LifeGoalsReducer.Action.closeAddLifeGoalSheet
-                )) {
+                .sheet(isPresented: viewStore.$isAddLifeGoalSheetVisible) {
                     IfLetStore(
                         self.store.scope(
                             state: \.addOrEditLifeGoal,
@@ -73,10 +58,7 @@ struct LifeGoalsView: View {
                         AddOrEditLifeGoalView(store: $0)
                     }
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.isShareLifeGoalSheetVisible,
-                    send: LifeGoalsReducer.Action.closeShareLifeGoalSheet
-                )) {
+                .sheet(isPresented: viewStore.$isShareLifeGoalSheetVisible) {
                     IfLetStore(
                         self.store.scope(
                             state: \.shareLifeGoal,
@@ -106,16 +88,12 @@ struct LifeGoalsView: View {
 
 // MARK: - Previews
 
-struct LifeGoalsView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: LifeGoalsReducer.State()) {
+        LifeGoalsReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: LifeGoalsReducer.State()) {
-            LifeGoalsReducer()
-        }
-        
-        NavigationStack {
-            LifeGoalsView(store: store)
-        }
+    return NavigationStack {
+        LifeGoalsView(store: store)
     }
 }
-
