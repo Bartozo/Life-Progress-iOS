@@ -132,12 +132,9 @@ private struct TitleSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.title) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 TextField(
-                    text: viewStore.binding(
-                        get: { $0 },
-                        send: AddOrEditLifeGoalReducer.Action.titleChanged
-                    ),
+                    text: viewStore.$title,
                     prompt: Text("Required")
                 ) {
                     Text("Username")
@@ -155,12 +152,9 @@ private struct DetailsSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.details) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 TextField(
-                    text: viewStore.binding(
-                        get: { $0 },
-                        send: AddOrEditLifeGoalReducer.Action.detailsChanged
-                    ),
+                    text: viewStore.$details,
                     prompt: Text("Optional"),
                     axis: .vertical
                 ) {
@@ -184,15 +178,12 @@ private struct OthersSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.isCompleted) { viewStore in
-                let isCompleted = viewStore.state
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                let isCompleted = viewStore.state.isCompleted
                 
                 Toggle(
                     "Mark as completed",
-                    isOn: viewStore.binding(
-                        get: { $0 },
-                        send: AddOrEditLifeGoalReducer.Action.isCompletedChanged
-                    ).animation(.default)
+                    isOn: viewStore.$isCompleted.animation(.default)
                 )
                 .onChange(of: isCompleted) { isCompleted in
                     guard isCompleted else { return }
@@ -239,15 +230,12 @@ private struct ShareSection: View {
 
 // MARK: - Previews
 
-struct AddOrEditLifeGoalView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: AddOrEditLifeGoalReducer.State()) {
+        AddOrEditLifeGoalReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: AddOrEditLifeGoalReducer.State()) {
-            AddOrEditLifeGoalReducer()
-        }
-        
-        NavigationStack {
-            AddOrEditLifeGoalView(store: store)
-        }
+    return NavigationStack {
+        AddOrEditLifeGoalView(store: store)
     }
 }
