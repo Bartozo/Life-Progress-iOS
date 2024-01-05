@@ -178,18 +178,15 @@ private struct LearnMoreSection: View {
 
 // MARK: - Previews
 
-struct AboutTheAppView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(
-            initialState: AboutTheAppReducer.State(
-                life: Life.mock,
-                isAboutTheCalendarSheetVisible: false
-            )
-        ) {
-            AboutTheAppReducer()
-        }
-        
-        AboutTheAppView(store: store)
+#Preview {
+    let store = Store(
+        initialState: AboutTheAppReducer.State(
+            life: Life.mock,
+            isAboutTheCalendarSheetVisible: false
+        )
+    ) {
+        AboutTheAppReducer()
     }
+    
+    return AboutTheAppView(store: store)
 }

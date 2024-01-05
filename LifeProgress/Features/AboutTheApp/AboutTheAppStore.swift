@@ -9,7 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the about the app.
-struct AboutTheAppReducer: Reducer {
+@Reducer
+struct AboutTheAppReducer {
     
     /// The state of the about the app.
     struct State: Equatable {
