@@ -185,7 +185,7 @@ private struct OthersSection: View {
                     "Mark as completed",
                     isOn: viewStore.$isCompleted.animation(.default)
                 )
-                .onChange(of: isCompleted) { isCompleted in
+                .onChange(of: isCompleted) { oldIsCompleted, newIsCompleted in
                     guard isCompleted else { return }
                     
                     requestReview()
