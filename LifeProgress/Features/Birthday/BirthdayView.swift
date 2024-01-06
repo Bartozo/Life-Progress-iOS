@@ -46,10 +46,7 @@ struct BirthdayView: View {
             if isDatePickerVisible {
                 DatePicker(
                     "",
-                    selection: viewStore.binding(
-                        get: \.birthday,
-                        send: BirthdayReducer.Action.changeBirthdayTapped
-                    ),
+                    selection: viewStore.$birthday,
                     displayedComponents: .date
                 )
                 .labelsHidden()
@@ -62,13 +59,10 @@ struct BirthdayView: View {
 
 // MARK: - Previews
 
-struct BirthdayView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: BirthdayReducer.State()) {
-            BirthdayReducer()
-        }
-        
-        BirthdayView(store: store)
+#Preview {
+    let store = Store(initialState: BirthdayReducer.State()) {
+        BirthdayReducer()
     }
+    
+    return BirthdayView(store: store)
 }
