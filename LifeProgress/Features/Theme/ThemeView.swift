@@ -15,10 +15,7 @@ struct ThemeView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             Picker(
                 "Color",
-                selection: viewStore.binding(
-                    get: { $0.selectedTheme },
-                    send: ThemeReducer.Action.changeThemeTapped
-                )
+                selection: viewStore.$selectedTheme
             ) {
                 ForEach(viewStore.themes, id: \.self) { theme in
                     Label( 
@@ -50,13 +47,12 @@ struct ThemeApplicator: ViewModifier {
 
 // MARK: - Previews
 
-struct ThemeView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: ThemeReducer.State()) {
+        ThemeReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: ThemeReducer.State()) {
-            ThemeReducer()
-        }
-        
+    return NavigationStack {
         ThemeView(store: store)
     }
 }
