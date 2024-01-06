@@ -20,7 +20,7 @@ class ConfettiTests: XCTestCase {
         let confetti = 1
     
     
-        await store.send(.confettiChanged(confetti)) {
+        await store.send(.set(\.$confetti, confetti)) {
             $0.confetti = confetti
         }
     }

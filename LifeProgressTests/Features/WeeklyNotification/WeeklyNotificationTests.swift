@@ -18,7 +18,7 @@ class WeeklyNotificationTests: XCTestCase {
             WeeklyNotificationReducer()
         }
         
-        await store.send(.isWeeklyNotificationChanged) {
+        await store.send(.set(\.$isWeeklyNotificationEnabled, true)) {
             $0.isWeeklyNotificationEnabled = true
         }
     }
@@ -30,7 +30,7 @@ class WeeklyNotificationTests: XCTestCase {
             WeeklyNotificationReducer()
         }
         
-        await store.send(.isWeeklyNotificationChanged) {
+        await store.send(.set(\.$isWeeklyNotificationEnabled, false)) {
             $0.isWeeklyNotificationEnabled = false
         }
     }
@@ -49,7 +49,7 @@ class WeeklyNotificationTests: XCTestCase {
             }
         }
         
-        await store.send(.isWeeklyNotificationChanged) {
+        await store.send(.set(\.$isWeeklyNotificationEnabled, true)) {
             $0.isWeeklyNotificationEnabled = true
         }
         

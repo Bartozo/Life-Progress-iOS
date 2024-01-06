@@ -23,7 +23,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.titleChanged(title)) {
+        await store.send(.set(\.$title, title)) {
             $0.title = title
         }
     }
@@ -38,7 +38,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.detailsChanged(details)) {
+        await store.send(.set(\.$details, details)) {
             $0.details = details
         }
     }
@@ -53,7 +53,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.isCompletedChanged(isCompleted)) {
+        await store.send(.set(\.$isCompleted, isCompleted)) {
             $0.isCompleted = isCompleted
         }
         
@@ -77,7 +77,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.isCompletedChanged(isCompleted)) {
+        await store.send(.set(\.$isCompleted, isCompleted)) {
             $0.isCompleted = isCompleted
             $0.isDatePickerVisible = false
         }
@@ -93,7 +93,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.finishedAtChanged(finishedAt)) {
+        await store.send(.datePicker(.set(\.$date, finishedAt))) {
             $0.finishedAt = finishedAt
         }
     }
@@ -155,7 +155,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
     }
     
     func testSaveButtonTapped_ShouldUpdateLifeGoal() async {
-        var lifeGoal = LifeGoal(
+        let lifeGoal = LifeGoal(
             id: UUID(),
             title: "title",
             finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
@@ -198,7 +198,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
     
     func testSaveButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        var lifeGoal = LifeGoal(
+        let lifeGoal = LifeGoal(
             id: UUID(),
             title: "title",
             finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
@@ -302,7 +302,6 @@ class AddOrEditLifeGoalTests: XCTestCase {
             symbolName: "symbolName",
             details: "details"
         )
-        var eventName = ""
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(
                 shareLifeGoal: .init(lifeGoal: lifeGoal),

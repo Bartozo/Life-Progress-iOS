@@ -29,7 +29,7 @@ class ShareLifeGoalTests: XCTestCase {
         }
         let theme: ShareLifeGoalReducer.State.Theme = .dark
         
-        await store.send(.themeChanged(theme)) {
+        await store.send(.set(\.$theme, theme)) {
             $0.theme = theme
         }
     }
@@ -49,7 +49,7 @@ class ShareLifeGoalTests: XCTestCase {
             ShareLifeGoalReducer()
         }
         
-        await store.send(.isTimeVisibleChanged(false)) {
+        await store.send(.set(\.$isTimeVisible, false)) {
             $0.isTimeVisible = false
         }
     }
@@ -69,7 +69,7 @@ class ShareLifeGoalTests: XCTestCase {
             ShareLifeGoalReducer()
         }
         
-        await store.send(.isWatermarkVisibleChanged(false)) {
+        await store.send(.set(\.$isWatermarkVisible, false)) {
             $0.isWatermarkVisible = false
         }
     }

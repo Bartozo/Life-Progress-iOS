@@ -62,11 +62,12 @@ class BirthdayTests: XCTestCase {
             }
         }
 
-        await store.send(.changeBirthdayTapped(initialBirthday))
-        
-        await store.receive(.birthdayChanged(initialBirthday)) {
+        await store.send(.set(\.$birthday, initialBirthday)) {
             $0.birthday = initialBirthday
         }
+        
+        await store.receive(.birthdayChanged(initialBirthday))
+
         XCTAssert(birthday == initialBirthday)
     }
 

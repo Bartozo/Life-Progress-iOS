@@ -50,11 +50,11 @@ class LifeGoalsTests: XCTestCase {
             LifeGoalsReducer()
         }
         
-        await store.send(.listTypeChanged(.completed)) {
+        await store.send(.set(\.$listType, .completed)) {
             $0.listType = .completed
         }
         
-        await store.send(.listTypeChanged(.uncompleted)) {
+        await store.send(.set(\.$listType, .uncompleted)) {
             $0.listType = .uncompleted
         }
     }
@@ -201,20 +201,6 @@ class LifeGoalsTests: XCTestCase {
         XCTAssertEqual(eventName, "life_goals.add_button_tapped")
     }
     
-    func testCloseAddLifeGoalSheet_ShouldCloseAddLifeGoalSheet() async {
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(
-                isAddLifeGoalSheetVisible: true
-            )
-        ) {
-            LifeGoalsReducer()
-        }
-        
-        await store.send(.closeAddLifeGoalSheet) {
-            $0.isAddLifeGoalSheetVisible = false
-        }
-    }
-    
     func testCloseShareLifeGoalSheet_ShouldCloseShareLifeGoalSheet() async {
         let lifeGoal = LifeGoal(
             id: UUID(),
@@ -232,7 +218,7 @@ class LifeGoalsTests: XCTestCase {
             LifeGoalsReducer()
         }
         
-        await store.send(.closeShareLifeGoalSheet) {
+        await store.send(.set(\.$isShareLifeGoalSheetVisible, false)) {
             $0.isShareLifeGoalSheetVisible = false
             $0.shareLifeGoal = nil
         }

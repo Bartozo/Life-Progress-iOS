@@ -19,7 +19,7 @@ class SFSymbolPickerTests: XCTestCase {
         }
         let symbolName = "book"
         
-        await store.send(.symbolNameChanged(symbolName)) {
+        await store.send(.set(\.$symbolName, symbolName)) {
             $0.symbolName = symbolName
         }
     }
@@ -31,18 +31,6 @@ class SFSymbolPickerTests: XCTestCase {
         
         await store.send(.showSheet) {
             $0.isSheetVisible = true
-        }
-    }
-    
-    func testHideSheet_ShouldHideSheet() async {
-        let store = TestStore(
-            initialState: SFSymbolPickerReducer.State(isSheetVisible: true)
-        ) {
-            SFSymbolPickerReducer()
-        }
-        
-        await store.send(.hideSheet) {
-            $0.isSheetVisible = false
         }
     }
 }

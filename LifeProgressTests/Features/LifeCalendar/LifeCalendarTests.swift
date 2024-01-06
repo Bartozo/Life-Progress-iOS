@@ -90,7 +90,7 @@ class LifeCalendarTests: XCTestCase {
         await store.send(.calendarTypeChanged(.currentYear))
         
         XCTAssertEqual(eventName, "life_calendar.calendar_type_changed")
-        XCTAssertEqual(eventPayload, ["calendarType": "\(CalendarType.currentYear)"])
+        XCTAssertEqual(eventPayload, ["calendarType": "\(LifeCalendarReducer.State.CalendarType.currentYear)"])
     }
     
     func testLifeChanged_ShouldUpdateLife() async {
