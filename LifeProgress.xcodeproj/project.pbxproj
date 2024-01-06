@@ -125,7 +125,6 @@
 		9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */; };
 		9DE3429529E6F48700E64548 /* AddOrEditLifeGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */; };
 		9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */; };
-		9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */; };
 		9DEBBB9C29CF2A40008CE08C /* NavigationLink+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */; };
 		9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */; };
 		9DEBBBA229CF4D3E008CE08C /* ZoomedInCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */; };
@@ -284,7 +283,6 @@
 		9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalStore.swift; sourceTree = "<group>"; };
 		9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalView.swift; sourceTree = "<group>"; };
 		9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLifeCalendarView.swift; sourceTree = "<group>"; };
 		9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationLink+Extension.swift"; sourceTree = "<group>"; };
 		9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomedInCalendarView.swift; sourceTree = "<group>"; };
@@ -875,7 +873,6 @@
 			children = (
 				9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */,
 				9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */,
-				9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */,
 				9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */,
 				9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */,
 				9DEBBBA529CF5118008CE08C /* CurrentYearProgressView.swift */,
@@ -1268,7 +1265,6 @@
 				9D83363C2A7A476000DC6720 /* ShareLifeGoalView.swift in Sources */,
 				9DE2CED429FFD60500A9BE6D /* SettingsCell.swift in Sources */,
 				9D813B152A039AA20054020F /* OnboardingAboutView.swift in Sources */,
-				9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */,
 				9D7CCA7D29DC7BBF008CA928 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */,
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
 				9DC634552A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift in Sources */,

@@ -66,7 +66,7 @@ struct CalendarWithoutCurrentYear: View {
 
        - Returns: An `Animation` object representing the appropriate animation to use.
      */
-    private func calendarAnimation(for calendarType: CalendarType) -> Animation {
+    private func calendarAnimation(for calendarType: LifeCalendarReducer.State.CalendarType) -> Animation {
         let animation = Animation.easeInOut(duration: 0.4)
         guard calendarType == .life else {
             return animation.delay(0.4)
@@ -78,22 +78,10 @@ struct CalendarWithoutCurrentYear: View {
 
 // MARK: - Previews
 
-struct CalendarWithoutCurrentYear_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: LifeCalendarReducer.State()) {
-            LifeCalendarReducer()
-        }
-        
-        Group {
-            CalendarWithoutCurrentYear(store: store)
-                .previewDevice("iPhone 14 Pro")
-            
-            CalendarWithoutCurrentYear(store: store)
-                .previewDevice("iPhone 13 Pro Max")
-            
-            CalendarWithoutCurrentYear(store: store)
-                .previewDevice("iPhone 13 mini")
-        }
+#Preview {
+    let store = Store(initialState: LifeCalendarReducer.State()) {
+        LifeCalendarReducer()
     }
+    
+    return CalendarWithoutCurrentYear(store: store)
 }

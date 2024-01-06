@@ -10,7 +10,7 @@ import SwiftUI
 struct LifeProgressView: View {
     
     let life: Life
-    let type: CalendarType
+    let type: LifeCalendarReducer.State.CalendarType
     
     var body: some View {
         switch type {
@@ -49,9 +49,6 @@ struct LifeProgressView: View {
 
 // MARK: - Previews
 
-struct LifeProgressView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        LifeProgressView(life: Life.mock, type: .currentYear)
-    }
+#Preview {
+    LifeProgressView(life: Life.mock, type: .currentYear)
 }

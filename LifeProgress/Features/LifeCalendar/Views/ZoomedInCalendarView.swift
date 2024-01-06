@@ -70,13 +70,10 @@ private struct TopLeftGrid: View {
 
 // MARK: - Previews
 
-struct ZoomedInCalendarView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        Group {
-            ZoomedInCalendarView()
+#Preview {
+    ZStack {
+        ZoomedInCalendarView()
 
-            TopLeftGrid()
-        }
+        TopLeftGrid()
     }
 }

@@ -21,12 +21,9 @@ struct LifeCalendarView: View {
                     ToolbarItem(placement: .principal) {
                         Picker(
                             "",
-                            selection: viewStore.binding(
-                                get: \.calendarType,
-                                send: LifeCalendarReducer.Action.calendarTypeChanged
-                            )
+                            selection: viewStore.$calendarType
                         ) {
-                            ForEach(CalendarType.allCases, id: \.self) { calendarType in
+                            ForEach(LifeCalendarReducer.State.CalendarType.allCases, id: \.self) { calendarType in
                                 Text(calendarType.title)
                                     .tag(calendarType)
                             }
@@ -53,10 +50,7 @@ struct LifeCalendarView: View {
                         }
                     }
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.isAboutTheCalendarSheetVisible,
-                    send: LifeCalendarReducer.Action.closeAboutTheCalendarSheet
-                )) {
+                .sheet(isPresented: viewStore.$isAboutTheCalendarSheetVisible) {
                     AboutTheAppView(
                         store: self.store.scope(
                             state: \.aboutTheApp,
@@ -108,3 +102,11 @@ struct LifeCalendarView: View {
 }
 
 // MARK: - Previews
+
+#Preview {
+    let store = Store(initialState: LifeCalendarReducer.State()) {
+        LifeCalendarReducer()
+    }
+    
+    return LifeCalendarView(store: store)
+}
