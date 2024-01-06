@@ -37,6 +37,7 @@ struct BirthdayReducer {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
             case .binding(\.$birthday):
