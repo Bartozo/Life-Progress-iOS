@@ -31,21 +31,8 @@ struct LifeCalendarReducer {
             lifeExpectancy: 90
         )
         
-        /// Whether the about calendar sheet is visible.
-        @BindingState var isAboutTheCalendarSheetVisible = false
-        
         /// The about the app state.
-        var aboutTheApp: AboutTheAppReducer.State {
-            get {
-                AboutTheAppReducer.State(
-                    life: self.life,
-                    isAboutTheCalendarSheetVisible: self.isAboutTheCalendarSheetVisible
-                )
-            }
-            set {
-                self.isAboutTheCalendarSheetVisible = newValue.isAboutTheCalendarSheetVisible
-            }
-        }
+        @PresentationState var aboutTheApp: AboutTheAppReducer.State?
         
         /// The in-app purchases's state.
         var iap = IAPReducer.State()
@@ -79,10 +66,8 @@ struct LifeCalendarReducer {
         case lifeChanged(Life)
         /// Indicates that is about the life calendar button has been tapped.
         case aboutLifeCalendarButtonTapped
-        /// Indicates that is about the app sheet should be hidden.
-        case closeAboutTheCalendarSheet
         /// The actions that can be taken on the about the app.
-        case aboutTheApp(AboutTheAppReducer.Action)
+        case aboutTheApp(PresentationAction<AboutTheAppReducer.Action>)
         /// The actions that can be taken on the in-app purchase.
         case iap(IAPReducer.Action)
     }
@@ -94,9 +79,6 @@ struct LifeCalendarReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.aboutTheApp, action: /Action.aboutTheApp) {
-            AboutTheAppReducer()
-        }
         Scope(state: \.iap, action: /Action.iap) {
             IAPReducer()
         }
@@ -134,11 +116,7 @@ struct LifeCalendarReducer {
                 
             case .aboutLifeCalendarButtonTapped:
                 analyticsClient.send("life_calendar.about_life_calendar_button_tapped")
-                state.isAboutTheCalendarSheetVisible = true
-                return .none
-                
-            case .closeAboutTheCalendarSheet:
-                state.isAboutTheCalendarSheetVisible = false
+                state.aboutTheApp = .init(life: state.life)
                 return .none
                 
             case .aboutTheApp:
@@ -147,6 +125,9 @@ struct LifeCalendarReducer {
             case .iap:
                 return .none
             }
+        }
+        .ifLet(\.$aboutTheApp, action: \.aboutTheApp) {
+            AboutTheAppReducer()
         }
     }
 }

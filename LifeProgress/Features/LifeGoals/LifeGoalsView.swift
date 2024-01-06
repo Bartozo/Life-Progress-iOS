@@ -48,25 +48,21 @@ struct LifeGoalsView: View {
                         )
                     )
                 }
-                .sheet(isPresented: viewStore.$isAddLifeGoalSheetVisible) {
-                    IfLetStore(
-                        self.store.scope(
-                            state: \.addOrEditLifeGoal,
-                            action: LifeGoalsReducer.Action.addOrEditLifeGoal
-                        )
-                    ) {
-                        AddOrEditLifeGoalView(store: $0)
-                    }
+                .sheet(
+                    store: self.store.scope(
+                        state: \.$addOrEditLifeGoal,
+                        action: { .addOrEditLifeGoal($0) }
+                    )
+                ) { store in
+                    AddOrEditLifeGoalView(store: store)
                 }
-                .sheet(isPresented: viewStore.$isShareLifeGoalSheetVisible) {
-                    IfLetStore(
-                        self.store.scope(
-                            state: \.shareLifeGoal,
-                            action: LifeGoalsReducer.Action.shareLifeGoal
-                        )
-                    ) {
-                        ShareLifeGoalView(store: $0)
-                    }
+                .sheet(
+                    store: self.store.scope(
+                        state: \.$shareLifeGoal,
+                        action: { .shareLifeGoal($0) }
+                    )
+                ) { store in
+                    ShareLifeGoalView(store: store)
                 }
                 .onReceive(lifeGoalEntities.publisher) { _ in
                     viewStore.send(.onAppear, animation: .default)

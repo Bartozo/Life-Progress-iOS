@@ -68,10 +68,7 @@ struct AddOrEditLifeGoalReducer {
         var confetti = ConfettiReducer.State()
         
         /// The share life goal's state.
-        var shareLifeGoal: ShareLifeGoalReducer.State?
-        
-        /// Whether the share life goal sheet is visible.
-        var isShareLifeGoalSheetVisible = false
+        @PresentationState var shareLifeGoal: ShareLifeGoalReducer.State?
     }
     
     /// The actions that can be taken on the about the app.
@@ -86,8 +83,6 @@ struct AddOrEditLifeGoalReducer {
         case saveButtonTapped
         /// Indicates that the share life goal button was tapped.
         case shareLifeGoalButtonTapped
-        /// Indicates that is share life goal sheet should be hidden.
-        case closeShareLifeGoalSheet
         /// The actions that can be taken on the date picker.
         case datePicker(DatePickerReducer.Action)
         /// The actions that can be taken on the SF Symbol picker.
@@ -95,16 +90,16 @@ struct AddOrEditLifeGoalReducer {
         /// The actions that can be taken on the confetti.
         case confetti(ConfettiReducer.Action)
         /// The actions that can be taken on the share life goal.
-        case shareLifeGoal(ShareLifeGoalReducer.Action)
+        case shareLifeGoal(PresentationAction<ShareLifeGoalReducer.Action>)
     }
     
     @Dependency(\.date) var date
     
     @Dependency(\.lifeGoalsClient) var lifeGoalsClient
     
-    @Dependency(\.mainQueue) var mainQueue
-    
     @Dependency(\.analyticsClient) var analyticsClient
+    
+    @Dependency(\.dismiss) var dismiss
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
@@ -132,7 +127,7 @@ struct AddOrEditLifeGoalReducer {
                 return .none
                 
             case .closeButtonTapped:
-                return .none
+                return .run { _ in await self.dismiss() }
                 
             case .addButtonTapped:
                 analyticsClient.send("add_or_edit_life_goal.add_button_tapped")
@@ -188,12 +183,6 @@ struct AddOrEditLifeGoalReducer {
                         details: lifeGoal.details
                     )
                 )
-                state.isShareLifeGoalSheetVisible = true
-                return .none
-                
-            case .closeShareLifeGoalSheet:
-                state.shareLifeGoal = nil
-                state.isShareLifeGoalSheetVisible = false
                 return .none
                 
             case .datePicker:
@@ -205,14 +194,11 @@ struct AddOrEditLifeGoalReducer {
             case .confetti:
                 return .none
                 
-            case .shareLifeGoal(let shareLifeGoalAction):
-                if shareLifeGoalAction == .closeButtonTapped {
-                    state.isShareLifeGoalSheetVisible = false
-                }
+            case .shareLifeGoal(_):
                 return .none
             }
         }
-        .ifLet(\.shareLifeGoal, action: /Action.shareLifeGoal) {
+        .ifLet(\.$shareLifeGoal, action: \.shareLifeGoal) {
             ShareLifeGoalReducer()
         }
     }

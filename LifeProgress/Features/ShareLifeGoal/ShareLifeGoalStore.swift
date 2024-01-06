@@ -61,6 +61,8 @@ struct ShareLifeGoalReducer {
     
     @Dependency(\.analyticsClient) var analyticsClient
     
+    @Dependency(\.dismiss) var dismiss
+    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
@@ -73,7 +75,7 @@ struct ShareLifeGoalReducer {
                 return .none
                 
             case .closeButtonTapped:
-                return .none
+                return .run { _ in await self.dismiss() }
                 
             case .shareButtonTapped:
                 analyticsClient.send("share_life_goal.share_button_tapped")

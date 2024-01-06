@@ -15,20 +15,10 @@ struct AddOrEditLifeGoalView: View {
     
     let store: StoreOf<AddOrEditLifeGoalReducer>
     
-    struct ViewState: Equatable {
-        let isEditing: Bool
-        let isShareLifeGoalSheetVisible: Bool
-
-        init(state: AddOrEditLifeGoalReducer.State) {
-            self.isEditing = state.isEditing
-            self.isShareLifeGoalSheetVisible = state.isShareLifeGoalSheetVisible
-        }
-    }
-    
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: ViewState.init) { viewStore in
-                let isEditing = viewStore.isEditing
+            WithViewStore(self.store, observe: \.isEditing) { viewStore in
+                let isEditing = viewStore.state
                 
                 Form {
                     IconSection(store: self.store)
@@ -57,18 +47,13 @@ struct AddOrEditLifeGoalView: View {
                         action: AddOrEditLifeGoalReducer.Action.confetti
                     ))
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.isShareLifeGoalSheetVisible,
-                    send: AddOrEditLifeGoalReducer.Action.closeShareLifeGoalSheet
-                )) {
-                    IfLetStore(
-                        self.store.scope(
-                            state: \.shareLifeGoal,
-                            action: AddOrEditLifeGoalReducer.Action.shareLifeGoal
-                        )
-                    ) {
-                        ShareLifeGoalView(store: $0)
-                    }
+                .sheet(
+                    store: self.store.scope(
+                        state: \.$shareLifeGoal,
+                        action: { .shareLifeGoal($0) }
+                    )
+                ) { store in
+                    ShareLifeGoalView(store: store)
                 }
             }
         }

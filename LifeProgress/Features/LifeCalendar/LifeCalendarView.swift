@@ -50,13 +50,13 @@ struct LifeCalendarView: View {
                         }
                     }
                 }
-                .sheet(isPresented: viewStore.$isAboutTheCalendarSheetVisible) {
-                    AboutTheAppView(
-                        store: self.store.scope(
-                            state: \.aboutTheApp,
-                            action: LifeCalendarReducer.Action.aboutTheApp
-                        )
+                .sheet(
+                    store: self.store.scope(
+                        state: \.$aboutTheApp,
+                        action: { .aboutTheApp($0) }
                     )
+                ) { store in
+                    AboutTheAppView(store: store)
                 }
         }
     }
