@@ -18,7 +18,7 @@ struct AboutTheAppReducer {
         var life: Life
     }
     
-    /// The actions that can be taken on the about the app.
+    /// The actions that can be taken on the about the app. 
     enum Action: Equatable {
         /// Indicates that is about the app sheet should be hidden.
         case closeAboutTheCalendarSheet

@@ -108,12 +108,13 @@ class LifeCalendarTests: XCTestCase {
     }
     
     func testAboutLifeCalendarButtonTapped_ShouldShowAboutTheCalendarSheet() async {
-        let store = TestStore(initialState: LifeCalendarReducer.State()) {
+        let life = Life.mock
+        let store = TestStore(initialState: LifeCalendarReducer.State(life: life)) {
             LifeCalendarReducer()
         }
         
         await store.send(.aboutLifeCalendarButtonTapped) {
-            $0.isAboutTheCalendarSheetVisible = true
+            $0.aboutTheApp = .init(life: life)
         }
     }
     
@@ -131,20 +132,6 @@ class LifeCalendarTests: XCTestCase {
         await store.send(.aboutLifeCalendarButtonTapped)
         
         XCTAssertEqual(eventName, "life_calendar.about_life_calendar_button_tapped")
-    }
-    
-    func testCloseAboutTheCalendarSheet_ShouldHideAboutTheCalendarSheet() async {
-        let store = TestStore(
-            initialState: LifeCalendarReducer.State(
-                isAboutTheCalendarSheetVisible: true
-            )
-        ) {
-            LifeCalendarReducer()
-        }
-        
-        await store.send(.closeAboutTheCalendarSheet) {
-            $0.isAboutTheCalendarSheetVisible = false
-        }
     }
 }
 
