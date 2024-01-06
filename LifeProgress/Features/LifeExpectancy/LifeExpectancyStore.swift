@@ -10,19 +10,22 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the life expectancy.
-struct LifeExpectancyReducer: Reducer {
+@Reducer
+struct LifeExpectancyReducer {
     
     /// The state of the birthday.
     struct State: Equatable {
         /// The user's life expectancy.
-        var lifeExpectancy: Int = NSUbiquitousKeyValueStoreHelper.getLifeExpectancy()
+        @BindingState var lifeExpectancy: Int = NSUbiquitousKeyValueStoreHelper.getLifeExpectancy()
         
         /// Whether the slider is visible.
         var isSliderVisible = false
     }
     
     /// The actions that can be taken on the life expectancy.
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
+        /// The binding for the life expectancy.
+        case binding(BindingAction<State>)
         /// Indicates that user has ended using slider.
         case lifeExpectancySelectionEnded(Double)
         /// Indicates that the life expectancy value has changed.
@@ -35,12 +38,14 @@ struct LifeExpectancyReducer: Reducer {
     
     @Dependency(\.userSettingsClient) var userSettingsClient
     
-    @Dependency(\.mainQueue) var mainQueue
-    
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
+            case .binding(_):
+                return .none
+                
             case .lifeExpectancySelectionEnded(let sliderValue):
                 return .run { send in
                     await userSettingsClient.updateLifeExpectancy(Int(sliderValue))

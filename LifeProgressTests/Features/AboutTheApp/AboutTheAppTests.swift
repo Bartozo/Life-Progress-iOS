@@ -14,17 +14,18 @@ import ComposableArchitecture
 class AboutTheAppTests: XCTestCase {
     
     func testCloseAboutTheCalendarSheet_ShouldHideAboutTheCalendarSheet() async {
+        var isDismissed = false
         let store = TestStore(
-            initialState: AboutTheAppReducer.State(
-                life: Life.mock,
-                isAboutTheCalendarSheetVisible: true
-            )
+            initialState: AboutTheAppReducer.State(life: Life.mock)
         ) {
             AboutTheAppReducer()
+        } withDependencies: {
+            $0.dismiss = DismissEffect {
+                isDismissed = true
+            }
         }
         
-        await store.send(.closeAboutTheCalendarSheet) {
-            $0.isAboutTheCalendarSheetVisible = false
-        }
+        await store.send(.closeAboutTheCalendarSheet)
+        XCTAssertTrue(isDismissed, "Sheet should be dismissed")
     }
 }

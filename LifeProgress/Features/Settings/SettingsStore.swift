@@ -9,7 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the settings.
-struct SettingsReducer: Reducer {
+@Reducer
+struct SettingsReducer {
 
     /// The state of the settings.
     struct State: Equatable {

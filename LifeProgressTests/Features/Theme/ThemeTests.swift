@@ -33,13 +33,13 @@ class ThemeTests: XCTestCase {
             }
         }
         
-        await store.send(.changeThemeTapped(.orange))
-        
-        await store.receive(.themeChanged(.orange)) {
-            $0.selectedTheme = .orange
+        await store.send(.set(\.$selectedTheme, Theme.red)) {
+            $0.selectedTheme = Theme.red
         }
         
-        XCTAssertEqual(updatedTheme, Theme.orange)
+        await store.receive(.themeChanged(.red))
+        
+        XCTAssertEqual(updatedTheme, Theme.red)
     }
     
     func testChangeThemeTapped_ShouldAddToAnalytics() async {
@@ -59,7 +59,8 @@ class ThemeTests: XCTestCase {
         }
         store.exhaustivity = .off
 
-        await store.send(.changeThemeTapped(.orange))
+        await store.send(.set(\.$selectedTheme, Theme.orange))
+        await store.send(.themeChanged(.orange))
 
         XCTAssertEqual(eventName, "theme.change_theme_tapped")
         XCTAssertEqual(eventPayload, ["selectedTheme": "\(updatedTheme)"])

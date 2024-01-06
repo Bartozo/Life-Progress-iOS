@@ -25,7 +25,6 @@
 		9D556A972A628D1D00A7E8F3 /* IAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D556A962A628D1D00A7E8F3 /* IAPTests.swift */; };
 		9D5D81052A8101D90080E37D /* Siren in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5D81042A8101D90080E37D /* Siren */; };
 		9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5F8E0B2A66C72200867D1F /* ThemeTests.swift */; };
-		9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D813B292A04005A0054020F /* Life-Progress---Calendar-Info.plist */; };
 		9D62261829D9546B000C1EA8 /* AboutTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D62261729D9546B000C1EA8 /* AboutTheAppView.swift */; };
 		9D660B7D29EA998900AE2445 /* SymbolPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9D660B7C29EA998900AE2445 /* SymbolPicker */; };
 		9D660B8029EAA30B00AE2445 /* DatePickerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D660B7F29EAA30B00AE2445 /* DatePickerStore.swift */; };
@@ -125,7 +124,6 @@
 		9DE3429329E6F46300E64548 /* AddOrEditLifeGoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */; };
 		9DE3429529E6F48700E64548 /* AddOrEditLifeGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */; };
 		9DEA94512A3F5A2000E125EA /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */; };
-		9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */; };
 		9DEBBB9C29CF2A40008CE08C /* NavigationLink+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */; };
 		9DEBBB9E29CF37F4008CE08C /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */; };
 		9DEBBBA229CF4D3E008CE08C /* ZoomedInCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */; };
@@ -284,7 +282,6 @@
 		9DE3429229E6F46300E64548 /* AddOrEditLifeGoalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalStore.swift; sourceTree = "<group>"; };
 		9DE3429429E6F48700E64548 /* AddOrEditLifeGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditLifeGoalView.swift; sourceTree = "<group>"; };
 		9DEA94502A3F5A2000E125EA /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLifeCalendarView.swift; sourceTree = "<group>"; };
 		9DEBBB9B29CF2A40008CE08C /* NavigationLink+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationLink+Extension.swift"; sourceTree = "<group>"; };
 		9DEBBB9D29CF37F4008CE08C /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomedInCalendarView.swift; sourceTree = "<group>"; };
@@ -875,7 +872,6 @@
 			children = (
 				9DCF41F529BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift */,
 				9DCF41F729BB993200F30BB3 /* CalendarWithCurrentYear.swift */,
-				9DEBBB9629CF2182008CE08C /* AboutLifeCalendarView.swift */,
 				9DEBBBA129CF4D3E008CE08C /* ZoomedInCalendarView.swift */,
 				9DEBBBA329CF4EB7008CE08C /* SimplifiedLifeCalendarView.swift */,
 				9DEBBBA529CF5118008CE08C /* CurrentYearProgressView.swift */,
@@ -1125,7 +1121,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					9D70827429B8D1A000846F55 = {
 						CreatedOnToolsVersion = 14.2;
@@ -1178,7 +1174,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D70828029B8D1A100846F55 /* Preview Assets.xcassets in Resources */,
-				9D5FB3CB2A321A7C000E69D7 /* Life-Progress---Calendar-Info.plist in Resources */,
 				9D70DC3D2A010291000C2AF0 /* Configuration.storekit in Resources */,
 				9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */,
 			);
@@ -1268,7 +1263,6 @@
 				9D83363C2A7A476000DC6720 /* ShareLifeGoalView.swift in Sources */,
 				9DE2CED429FFD60500A9BE6D /* SettingsCell.swift in Sources */,
 				9D813B152A039AA20054020F /* OnboardingAboutView.swift in Sources */,
-				9DEBBB9729CF2182008CE08C /* AboutLifeCalendarView.swift in Sources */,
 				9D7CCA7D29DC7BBF008CA928 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */,
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
 				9DC634552A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift in Sources */,
@@ -1377,6 +1371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1409,6 +1404,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1423,7 +1419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1437,6 +1433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1469,6 +1466,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1477,7 +1475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1509,7 +1507,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1549,7 +1547,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1576,7 +1574,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgressTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1596,7 +1594,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgressTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1615,7 +1613,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgressUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1634,7 +1632,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgressUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1653,19 +1651,19 @@
 				CODE_SIGN_ENTITLEMENTS = LifeProgressWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LifeProgressWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LifeProgressWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgress.LifeProgressWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1683,19 +1681,19 @@
 				CODE_SIGN_ENTITLEMENTS = LifeProgressWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = H2YRS6RS63;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LifeProgressWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LifeProgressWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgress.LifeProgressWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1785,7 +1783,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
+				minimumVersion = 1.5.6;
 			};
 		};
 		9DC6344F2A22370C00BC55CB /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {

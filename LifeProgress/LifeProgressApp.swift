@@ -72,7 +72,7 @@ struct LifeProgressApp: App {
             // Reschedule the background task for next week
             scheduleBackgroundTask()
         }
-        .onChange(of: phase) { newPhase in
+        .onChange(of: phase) { oldPhase, newPhase in
              switch newPhase {
              case .background: scheduleBackgroundTask()
              default: break

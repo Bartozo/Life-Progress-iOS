@@ -9,35 +9,36 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the developer.
-struct DeveloperReducer: Reducer {
+@Reducer
+struct DeveloperReducer {
     
     /// The state of the developer.
     struct State: Equatable {
         /// State responsible for showing the heart confetti.
-        var confetti: Int = 0
+        @BindingState var confetti: Int = 0
     }
     
     /// The actions that can be taken on the developer.
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
+        /// The binding for the developer.
+        case binding(BindingAction<State>)
         /// Indicates that the developer button has been tapped.
         case developerButtonTapped
-        /// Indicates that the heart confetti has changed.
-        case confettiChanged(Int)
     }
     
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
+            case .binding(_):
+                return .none
+                
             case .developerButtonTapped:
                 analyticsClient.send("developer.developer_button_tapped")
                 state.confetti += 1
-                return .none
-                
-            case .confettiChanged(let confetti):
-                state.confetti = confetti
                 return .none
             }
         }

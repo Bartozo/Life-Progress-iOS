@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import ComposableArchitecture
 
 struct OnboardingNotificationsView: View {
@@ -66,7 +64,7 @@ struct OnboardingNotificationsView: View {
     }
 }
 
-struct NotificationView: View {
+private struct NotificationView: View {
     
     @Environment(\.theme) var theme
     
@@ -94,15 +92,12 @@ struct NotificationView: View {
 
 // MARK: - Previews
 
-struct OnboardingNotificationsView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: OnboardingReducer.State()) {
+        OnboardingReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: OnboardingReducer.State()) {
-            OnboardingReducer()
-        }
-        
-        NavigationStack {
-            OnboardingNotificationsView(store: store)
-        }
+    return NavigationStack {
+        OnboardingNotificationsView(store: store)
     }
 }

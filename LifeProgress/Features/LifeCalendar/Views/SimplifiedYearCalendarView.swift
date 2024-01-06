@@ -33,9 +33,6 @@ struct SimplifiedYearCalendarView: View {
 
 // MARK: - Previews
 
-struct SimplifiedYearCalendarView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        SimplifiedYearCalendarView(life: Life.mock)
-    }
+#Preview {
+    SimplifiedYearCalendarView(life: Life.mock)
 }

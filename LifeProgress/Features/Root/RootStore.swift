@@ -9,7 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the root.
-struct RootReducer: Reducer {
+@Reducer
+struct RootReducer {
     
     /// The state of the root.
     struct State: Equatable {
@@ -26,16 +27,16 @@ struct RootReducer: Reducer {
         var settings = SettingsReducer.State()
 
         /// The current selected tab.
-        var selectedTab: Tab? = .lifeCalendar
+        @BindingState var selectedTab: Tab? = .lifeCalendar
         
         /// The index of selected tab.
-        var selectedTabIndex: Int = 0
+        @BindingState var selectedTabIndex: Int = 0
         
         /// Whether the user has completed the onboarding flow.
         var didCompleteOnboarding = UserDefaultsHelper.didCompleteOnboarding()
         
         /// The path used for NavigationStack.
-        var path: [Tab] = []
+        @BindingState var path: [Tab] = []
         
         /// An enumeration that represents the different tabs in an application.
         /// It conforms to `CaseIterable`,`Identifiable` and `Hashable`, allowing for iteration
@@ -80,7 +81,9 @@ struct RootReducer: Reducer {
     }
     
     /// The actions that can be taken on the root.
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
+        /// The binding for the root.
+        case binding(BindingAction<State>)
         /// The actions that can be taken on the onboarding.
         case onboarding(OnboardingReducer.Action)
         /// The actions that can be taken on the life calendar.
@@ -89,16 +92,11 @@ struct RootReducer: Reducer {
         case lifeGoals(LifeGoalsReducer.Action)
         /// The actions that can be taken on the settings.
         case settings(SettingsReducer.Action)
-        /// Indicates that the tab has changed.
-        case tabChanged(State.Tab?)
-        /// Indicates that the tab index has changed.
-        case tabIndexChanged(Int)
-        /// Indicates that path has changed.
-        case pathChanged([State.Tab])
     }
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Scope(state: \.onboarding, action: /Action.onboarding) {
             OnboardingReducer()
         }
@@ -113,6 +111,25 @@ struct RootReducer: Reducer {
         }
         Reduce { state, action in
             switch action {
+            case .binding(\.$selectedTab):
+                guard
+                    let tab = state.selectedTab
+                else {
+                    state.path = []
+                    return .none
+                }
+                
+                state.selectedTabIndex = tab.rawValue
+                state.path = [tab]
+                return .none
+                
+            case .binding(\.$selectedTabIndex):
+                state.selectedTab = State.Tab(rawValue: state.selectedTabIndex)
+                return .none
+                
+            case .binding:
+                return .none
+                
             case .onboarding(let onboardingAction):
                 if onboardingAction == .finishOnboarding {
                     state.didCompleteOnboarding = true
@@ -126,31 +143,6 @@ struct RootReducer: Reducer {
                 return .none
                 
             case .settings(_):
-                return .none
-                
-            case .tabChanged(let tab):
-                guard
-                    let tab,
-                    tab != state.selectedTab
-                else {
-                    state.path = []
-                    return .none
-                }
-                
-                state.selectedTab = tab
-                state.selectedTabIndex = tab.rawValue
-                state.path = [tab]
-                return .none
-                
-            case .tabIndexChanged(let index):
-                guard index != state.selectedTabIndex else { return .none }
-                
-                state.selectedTabIndex = index
-                state.selectedTab = State.Tab(rawValue: index)
-                return .none
-                
-            case .pathChanged(let path):
-                state.path = path
                 return .none
             }
         }

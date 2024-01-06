@@ -9,7 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 /// A reducer that manages the state of the about the app.
-struct LifeGoalsReducer: Reducer {
+@Reducer
+struct LifeGoalsReducer {
     
     /// The state of the about the app.
     struct State: Equatable {
@@ -30,44 +31,34 @@ struct LifeGoalsReducer: Reducer {
         }
         
         /// Represents the currently selected list type.
-        var listType: ListType = .uncompleted
-        
-        /// Whether the about calendar sheet is visible.
-        var isAddLifeGoalSheetVisible = false
+        @BindingState var listType: ListType = .uncompleted
         
         /// The confetti's state.
         var confetti = ConfettiReducer.State()
         
         /// The add or edit life goal's state.
-        var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
+        @PresentationState var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
         
         /// The share life goal's state.
-        var shareLifeGoal: ShareLifeGoalReducer.State?
-        
-        /// Whether the share life goal sheet is visible.
-        var isShareLifeGoalSheetVisible = false
+        @PresentationState var shareLifeGoal: ShareLifeGoalReducer.State?
     }
     
     
     /// The actions that can be taken on the about the app.
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
+        /// The binding for the life goals.
+        case binding(BindingAction<State>)
         /// The actions that can be taken on the in-app purchase.
         case iap(IAPReducer.Action)
         /// Indicates that the view has appeared.
         case onAppear
-        /// Indicates that list type has changed.
-        case listTypeChanged(ListType)
         /// Indicates that life goals have changed.
         case lifeGoalsChanged([LifeGoal])
         /// Indicates that the add button has been tapped.
         case addButtonTapped
         /// Indicates that the buy premium button has been tapped.
         case buyPremiumButtonTapped
-        /// Indicates that is add life goal sheet should be hidden.
-        case closeAddLifeGoalSheet
         /// Indicates that is share life goal sheet should be hidden.
-        case closeShareLifeGoalSheet
-        /// Indicates that the swipe to delete action was performed.
         case swipeToDelete(LifeGoal)
         /// Indicates that the swipe to complete action was performed.
         case swipeToComplete(LifeGoal)
@@ -80,9 +71,9 @@ struct LifeGoalsReducer: Reducer {
         /// The actions that can be taken on the confetti.
         case confetti(ConfettiReducer.Action)
         /// The actions that can be taken on the add or edit life goal.
-        case addOrEditLifeGoal(AddOrEditLifeGoalReducer.Action)
+        case addOrEditLifeGoal(PresentationAction<AddOrEditLifeGoalReducer.Action>)
         /// The actions that can be taken on the share life goal.
-        case shareLifeGoal(ShareLifeGoalReducer.Action)
+        case shareLifeGoal(PresentationAction<ShareLifeGoalReducer.Action>)
     }
     
     /// An enumeration representing the two possible types of calendars:
@@ -109,6 +100,7 @@ struct LifeGoalsReducer: Reducer {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Scope(state: \.iap, action: /Action.iap) {
             IAPReducer()
         }
@@ -117,6 +109,9 @@ struct LifeGoalsReducer: Reducer {
         }
         Reduce { state, action in
             switch action {
+            case .binding(_):
+                return .none
+                
             case .iap(_):
                 return .none
                 
@@ -125,10 +120,6 @@ struct LifeGoalsReducer: Reducer {
                     let lifeGoals = await lifeGoalsClient.fetchLifeGoals()
                     await send(.lifeGoalsChanged(lifeGoals))
                 }
-                
-            case .listTypeChanged(let listType):
-                state.listType = listType
-                return .none
                 
             case .lifeGoalsChanged(let lifeGoals):
                 state.lifeGoals = lifeGoals
@@ -139,21 +130,11 @@ struct LifeGoalsReducer: Reducer {
                 if !state.iap.hasUnlockedPremium && state.lifeGoals.count >= 3 {
                     state.iap.isSheetVisible = true
                 } else {
-                    state.isAddLifeGoalSheetVisible = true
                     state.addOrEditLifeGoal = .init()
                 }
                 return .none
                 
             case .buyPremiumButtonTapped:
-                return .none
-                
-            case .closeAddLifeGoalSheet:
-                state.isAddLifeGoalSheetVisible = false
-                return .none
-                
-            case .closeShareLifeGoalSheet:
-                state.isShareLifeGoalSheetVisible = false
-                state.shareLifeGoal = nil
                 return .none
                 
             case .swipeToDelete(let lifeGoal):
@@ -197,11 +178,9 @@ struct LifeGoalsReducer: Reducer {
             case .swipeToShare(let lifeGoal):
                 analyticsClient.send("life_goals.swipe_to_share")
                 state.shareLifeGoal = .init(lifeGoal: lifeGoal)
-                state.isShareLifeGoalSheetVisible = true
                 return .none
                 
             case .lifeGoalTapped(let lifeGoal):
-                state.isAddLifeGoalSheetVisible = true
                 state.addOrEditLifeGoal = .init(
                     title: lifeGoal.title,
                     details: lifeGoal.details,
@@ -212,27 +191,20 @@ struct LifeGoalsReducer: Reducer {
                 )
                 return .none
             
-            case .addOrEditLifeGoal(let addOrEditLifeGoalAction):
-                if addOrEditLifeGoalAction == .closeButtonTapped {
-                    state.isAddLifeGoalSheetVisible = false
-                    return .send(.onAppear)
-                }
+            case .addOrEditLifeGoal(_):
                 return .none
                 
-            case .confetti:
+            case .confetti(_):
                 return .none
                 
-            case .shareLifeGoal(let shareLifeGoalAction):
-                if shareLifeGoalAction == .closeButtonTapped {
-                    state.isShareLifeGoalSheetVisible = false
-                }
+            case .shareLifeGoal(_):
                 return .none
             }
         }
-        .ifLet(\.addOrEditLifeGoal, action: /Action.addOrEditLifeGoal) {
+        .ifLet(\.$addOrEditLifeGoal, action: \.addOrEditLifeGoal) {
             AddOrEditLifeGoalReducer()
         }
-        .ifLet(\.shareLifeGoal, action: /Action.shareLifeGoal) {
+        .ifLet(\.$shareLifeGoal, action: \.shareLifeGoal) {
             ShareLifeGoalReducer()
         }
     }

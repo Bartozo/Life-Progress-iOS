@@ -29,18 +29,8 @@ struct SFSymbolPickerView: View {
                     .cornerRadius(8)
             }
             .foregroundColor(theme.color)
-            .sheet(
-                isPresented: viewStore.binding(
-                    get: \.isSheetVisible,
-                    send: SFSymbolPickerReducer.Action.hideSheet
-                )
-            ) {
-                SymbolPicker(
-                    symbol: viewStore.binding(
-                        get: \.symbolName,
-                        send: SFSymbolPickerReducer.Action.symbolNameChanged
-                    )
-                )
+            .sheet(isPresented: viewStore.$isSheetVisible) {
+                SymbolPicker(symbol: viewStore.$symbolName)
             }
         }
     }
@@ -48,13 +38,10 @@ struct SFSymbolPickerView: View {
 
 // MARK: - Previews
 
-struct SFSymbolPickerView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: SFSymbolPickerReducer.State()) {
-            SFSymbolPickerReducer()
-        }
-        
-        SFSymbolPickerView(store: store)
+#Preview {
+    let store = Store(initialState: SFSymbolPickerReducer.State()) {
+        SFSymbolPickerReducer()
     }
+    
+    return SFSymbolPickerView(store: store)
 }

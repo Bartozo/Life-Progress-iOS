@@ -62,13 +62,10 @@ struct OnboardingAboutView: View {
 
 // MARK: - Previews
 
-struct OnboardingAboutView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: OnboardingReducer.State()) {
-            OnboardingReducer()
-        }
-        
-        OnboardingAboutView(store: store)
+#Preview {
+    let store = Store(initialState: OnboardingReducer.State()) {
+        OnboardingReducer()
     }
+    
+    return OnboardingAboutView(store: store)
 }

@@ -23,7 +23,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.titleChanged(title)) {
+        await store.send(.set(\.$title, title)) {
             $0.title = title
         }
     }
@@ -38,7 +38,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.detailsChanged(details)) {
+        await store.send(.set(\.$details, details)) {
             $0.details = details
         }
     }
@@ -53,7 +53,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.isCompletedChanged(isCompleted)) {
+        await store.send(.set(\.$isCompleted, isCompleted)) {
             $0.isCompleted = isCompleted
         }
         
@@ -77,7 +77,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.isCompletedChanged(isCompleted)) {
+        await store.send(.set(\.$isCompleted, isCompleted)) {
             $0.isCompleted = isCompleted
             $0.isDatePickerVisible = false
         }
@@ -93,7 +93,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.finishedAtChanged(finishedAt)) {
+        await store.send(.datePicker(.set(\.$date, finishedAt))) {
             $0.finishedAt = finishedAt
         }
     }
@@ -110,6 +110,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             symbolName: "",
             details: ""
         )
+        var isDismissed = false
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(
                 title: title,
@@ -124,8 +125,11 @@ class AddOrEditLifeGoalTests: XCTestCase {
             $0.lifeGoalsClient.createLifeGoal = { lifeGoal in
                 newLifeGoal = lifeGoal
             }
+            $0.dismiss = DismissEffect {
+                isDismissed = true
+            }
         }
-        
+
         await store.send(.addButtonTapped)
         await store.receive(.closeButtonTapped)
         
@@ -133,6 +137,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
         XCTAssertEqual(newLifeGoal.details, details)
         XCTAssertEqual(newLifeGoal.finishedAt, finishedAt)
         XCTAssertEqual(newLifeGoal.symbolName, symbolName)
+        XCTAssertTrue(isDismissed, "Sheet should be dismissed")
     }
     
     func testAddButtonTapped_ShouldAddToAnalytics() async {
@@ -146,6 +151,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
+            $0.dismiss = DismissEffect { }
         }
         store.exhaustivity = .off
         
@@ -155,7 +161,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
     }
     
     func testSaveButtonTapped_ShouldUpdateLifeGoal() async {
-        var lifeGoal = LifeGoal(
+        let lifeGoal = LifeGoal(
             id: UUID(),
             title: "title",
             finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
@@ -169,6 +175,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             symbolName: "",
             details: ""
         )
+        var isDismissed = false
         let store = TestStore(
             initialState: AddOrEditLifeGoalReducer.State(
                 title: "updatedTitle",
@@ -184,6 +191,9 @@ class AddOrEditLifeGoalTests: XCTestCase {
             $0.lifeGoalsClient.updateLifeGoal = { lifeGoal in
                 updatedLifeGoal = lifeGoal
             }
+            $0.dismiss = DismissEffect {
+                isDismissed = true
+            }
         }
         
         await store.send(.saveButtonTapped)
@@ -194,11 +204,12 @@ class AddOrEditLifeGoalTests: XCTestCase {
         XCTAssertEqual(lifeGoal.details, updatedLifeGoal.details)
         XCTAssertEqual(lifeGoal.finishedAt, updatedLifeGoal.finishedAt)
         XCTAssertEqual(lifeGoal.symbolName, updatedLifeGoal.symbolName)
+        XCTAssertTrue(isDismissed, "Sheet should be dismissed")
     }
     
     func testSaveButtonTapped_ShouldAddToAnalytics() async {
         var eventName = ""
-        var lifeGoal = LifeGoal(
+        let lifeGoal = LifeGoal(
             id: UUID(),
             title: "title",
             finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
@@ -218,6 +229,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             $0.date.now = {
                 Date.createDate(year: 2023, month: 1, day: 1)
             }()
+            $0.dismiss = DismissEffect { }
         }
         store.exhaustivity = .off
         
@@ -248,7 +260,6 @@ class AddOrEditLifeGoalTests: XCTestCase {
         
         await store.send(.shareLifeGoalButtonTapped) {
             $0.shareLifeGoal = .init(lifeGoal: lifeGoal)
-            $0.isShareLifeGoalSheetVisible = true
         }
     }
     
@@ -292,33 +303,5 @@ class AddOrEditLifeGoalTests: XCTestCase {
         await store.send(.shareLifeGoalButtonTapped)
         
         XCTAssertEqual(eventName, "add_or_edit_life_goal.share_life_goal_button_tapped")
-    }
-    
-    func testCloseShareLifeGoalSheet_ShouldCloseLifeGoalSheet() async {
-        let lifeGoal = LifeGoal(
-            id: UUID(),
-            title: "title",
-            finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
-            symbolName: "symbolName",
-            details: "details"
-        )
-        var eventName = ""
-        let store = TestStore(
-            initialState: AddOrEditLifeGoalReducer.State(
-                shareLifeGoal: .init(lifeGoal: lifeGoal),
-                isShareLifeGoalSheetVisible: true
-            )
-        ) {
-            AddOrEditLifeGoalReducer()
-        } withDependencies: {
-            $0.date.now = {
-                Date.createDate(year: 2023, month: 1, day: 1)
-            }()
-        }
-        
-        await store.send(.closeShareLifeGoalSheet) {
-            $0.shareLifeGoal = nil
-            $0.isShareLifeGoalSheetVisible = false
-        }
     }
 }

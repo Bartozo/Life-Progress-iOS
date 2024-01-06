@@ -121,13 +121,13 @@ struct SettingsView: View {
         .navigationTitle("Settings")
     }
     
-    func rateApp() {
+    private func rateApp() {
         guard let url = URL(string: "https://apps.apple.com/us/app/life-progress-calendar/id6447311106?action=write-review") else { return }
         
         UIApplication.shared.open(url)
     }
     
-    func contactDeveloper() {
+    private func contactDeveloper() {
         guard let email = URL(string: "mailto:bartozo.dev@gmail.com")  else { return }
         
         UIApplication.shared.open(email)
@@ -137,15 +137,12 @@ struct SettingsView: View {
 
 // MARK: - Previews
 
-struct ProfileView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: SettingsReducer.State()) {
+        SettingsReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: SettingsReducer.State()) {
-            SettingsReducer()
-        }
-        
-        NavigationStack {
-            SettingsView(store: store)
-        }
+    return NavigationStack {
+        SettingsView(store: store)
     }
 }

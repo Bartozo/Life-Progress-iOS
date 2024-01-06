@@ -143,13 +143,10 @@ private struct BuyPremiumButton: View {
 
 // MARK: - Previews
 
-struct IAPView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: IAPReducer.State()) {
-            IAPReducer()
-        }
-        
-        IAPView(store: store)
+#Preview {
+    let store = Store(initialState: IAPReducer.State()) {
+        IAPReducer()
     }
+    
+    return IAPView(store: store)
 }

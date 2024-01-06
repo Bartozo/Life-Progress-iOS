@@ -50,11 +50,11 @@ class LifeGoalsTests: XCTestCase {
             LifeGoalsReducer()
         }
         
-        await store.send(.listTypeChanged(.completed)) {
+        await store.send(.set(\.$listType, .completed)) {
             $0.listType = .completed
         }
         
-        await store.send(.listTypeChanged(.uncompleted)) {
+        await store.send(.set(\.$listType, .uncompleted)) {
             $0.listType = .uncompleted
         }
     }
@@ -95,7 +95,6 @@ class LifeGoalsTests: XCTestCase {
         }
         
         await store.send(.addButtonTapped) {
-            $0.isAddLifeGoalSheetVisible = true
             $0.addOrEditLifeGoal = .init()
         }
     }
@@ -140,7 +139,6 @@ class LifeGoalsTests: XCTestCase {
         }
         
         await store.send(.addButtonTapped) {
-            $0.isAddLifeGoalSheetVisible = true
             $0.addOrEditLifeGoal = .init()
         }
     }
@@ -199,43 +197,6 @@ class LifeGoalsTests: XCTestCase {
         await store.send(.addButtonTapped)
         
         XCTAssertEqual(eventName, "life_goals.add_button_tapped")
-    }
-    
-    func testCloseAddLifeGoalSheet_ShouldCloseAddLifeGoalSheet() async {
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(
-                isAddLifeGoalSheetVisible: true
-            )
-        ) {
-            LifeGoalsReducer()
-        }
-        
-        await store.send(.closeAddLifeGoalSheet) {
-            $0.isAddLifeGoalSheetVisible = false
-        }
-    }
-    
-    func testCloseShareLifeGoalSheet_ShouldCloseShareLifeGoalSheet() async {
-        let lifeGoal = LifeGoal(
-            id: UUID(),
-            title: "title",
-            finishedAt: Date.createDate(year: 2023, month: 1, day: 1),
-            symbolName: "symbolName",
-            details: "details"
-        )
-        let store = TestStore(
-            initialState: LifeGoalsReducer.State(
-                shareLifeGoal: .init(lifeGoal: lifeGoal),
-                isShareLifeGoalSheetVisible: true
-            )
-        ) {
-            LifeGoalsReducer()
-        }
-        
-        await store.send(.closeShareLifeGoalSheet) {
-            $0.isShareLifeGoalSheetVisible = false
-            $0.shareLifeGoal = nil
-        }
     }
     
     func testSwipeToDelete_ShouldDeleteLifeGoal() async {
@@ -428,7 +389,6 @@ class LifeGoalsTests: XCTestCase {
         
         await store.send(.swipeToShare(lifeGoal)) {
             $0.shareLifeGoal = .init(lifeGoal: lifeGoal)
-            $0.isShareLifeGoalSheetVisible = true
         }
     }
     
@@ -468,7 +428,6 @@ class LifeGoalsTests: XCTestCase {
         }
         
         await store.send(.lifeGoalTapped(lifeGoal)) {
-            $0.isAddLifeGoalSheetVisible = true
             $0.addOrEditLifeGoal = .init(
                 title: lifeGoal.title,
                 details: lifeGoal.details,

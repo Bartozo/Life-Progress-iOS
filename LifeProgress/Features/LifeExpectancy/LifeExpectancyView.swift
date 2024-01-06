@@ -13,7 +13,7 @@ struct LifeExpectancyView: View {
     @Environment(\.theme) var theme
     
     let store: StoreOf<LifeExpectancyReducer>
-
+    
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             let isSliderVisible = viewStore.isSliderVisible
@@ -46,16 +46,13 @@ struct LifeExpectancyView: View {
             
             if isSliderVisible {
                 Slider(
-                  value: viewStore.binding(
-                    get: { Double($0.lifeExpectancy) },
-                    send: LifeExpectancyReducer.Action.lifeExpectancyChanged
-                  ),
-                  in: 0...150,
-                  onEditingChanged: { editing in
-                      guard !editing else { return }
-                      
-                      viewStore.send(.lifeExpectancySelectionEnded(Double(viewStore.lifeExpectancy)))
-                  }
+                    value: IntDoubleBinding(viewStore.$lifeExpectancy).doubleValue,
+                    in: 0...150,
+                    onEditingChanged: { editing in
+                        guard !editing else { return }
+                        
+                        viewStore.send(.lifeExpectancySelectionEnded(Double(viewStore.lifeExpectancy)))
+                    }
                 )
                 .tint(theme.color)
             }
@@ -63,15 +60,26 @@ struct LifeExpectancyView: View {
     }
 }
 
+private struct IntDoubleBinding {
+    let intValue : Binding<Int>
+    
+    let doubleValue : Binding<Double>
+    
+    init(_ intValue : Binding<Int>) {
+        self.intValue = intValue
+        self.doubleValue = Binding<Double>(
+            get: { return Double(intValue.wrappedValue) },
+            set: { intValue.wrappedValue = Int($0) }
+        )
+    }
+}
+
 // MARK: - Previews
 
-struct LifeExpectancyView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: LifeExpectancyReducer.State()) {
-            LifeExpectancyReducer()
-        }
-        
-        LifeExpectancyView(store: store)
+#Preview {
+    let store = Store(initialState: LifeExpectancyReducer.State()) {
+        LifeExpectancyReducer()
     }
+    
+    return LifeExpectancyView(store: store)
 }

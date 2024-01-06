@@ -15,27 +15,18 @@ struct WeeklyNotificationView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             Toggle(
                 "Weekly Notification",
-                isOn: viewStore.binding(
-                    get: \.isWeeklyNotificationEnabled,
-                    send: WeeklyNotificationReducer.Action.isWeeklyNotificationChanged
-                )
+                isOn: viewStore.$isWeeklyNotificationEnabled
             )
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
         }
     }
 }
 
 // MARK: - Previews
 
-struct WeeklyNotificationView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: WeeklyNotificationReducer.State()) {
-            WeeklyNotificationReducer()
-        }
-        
-        WeeklyNotificationView(store: store)
+#Preview {
+    let store = Store(initialState: WeeklyNotificationReducer.State()) {
+        WeeklyNotificationReducer()
     }
+    
+    return WeeklyNotificationView(store: store)
 }

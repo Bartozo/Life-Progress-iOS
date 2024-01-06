@@ -15,10 +15,7 @@ struct ConfettiView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ConfettiCannon(
-                counter: viewStore.binding(
-                    get: \.confetti,
-                    send: ConfettiReducer.Action.confettiChanged
-                ),
+                counter: viewStore.$confetti,
                 num: 100,
                 radius: 350
             )
@@ -28,13 +25,10 @@ struct ConfettiView: View {
 
 // MARK: - Previews
 
-struct ConfettiView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: ConfettiReducer.State()) {
-            ConfettiReducer()
-        }
-        
-        ConfettiView(store: store)
+#Preview {
+    let store = Store(initialState: ConfettiReducer.State()) {
+        ConfettiReducer()
     }
+    
+    return ConfettiView(store: store)
 }

@@ -69,6 +69,7 @@ struct LifeProgressWidgetEntryView: View {
                     .foregroundColor(.secondary)
             }
         }
+        .containerBackground(for: .widget) { }
     }
 }
 
@@ -79,17 +80,14 @@ struct LifeProgressWidget: Widget {
         StaticConfiguration(kind: kind, provider: LifeProgressProvider()) { entry in
             LifeProgressWidgetEntryView(entry: entry)
         }
+        .contentMarginsDisabled()
         .configurationDisplayName("Life Progress")
         .description("Track your progress in life.")
     }
 }
 
-struct LifeProgressWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        let life = Life.mock
-        let entry = LifeProgressEntry(life: life)
-        
-        LifeProgressWidgetEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
+#Preview(as: .systemSmall) {
+    LifeProgressWidget()
+} timeline: {
+    LifeProgressEntry(life: Life.mock)
 }

@@ -49,13 +49,10 @@ struct OnboardingCompletedView: View {
 
 // MARK: - Previews
 
-struct OnboardingCompletedView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: OnboardingReducer.State()) {
-            OnboardingReducer()
-        }
-        
-        OnboardingCompletedView(store: store)
+#Preview {
+    let store = Store(initialState: OnboardingReducer.State()) {
+        OnboardingReducer()
     }
+    
+    return OnboardingCompletedView(store: store)
 }

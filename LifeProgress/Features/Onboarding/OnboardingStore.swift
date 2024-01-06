@@ -10,7 +10,8 @@ import ComposableArchitecture
 import UserNotifications
 
 /// A reducer that manages the state of the onboarding.
-struct OnboardingReducer: Reducer {
+@Reducer
+struct OnboardingReducer {
     
     /// The state of the onboarding.
     struct State: Equatable {
@@ -21,7 +22,7 @@ struct OnboardingReducer: Reducer {
         var lifeExpectancy = LifeExpectancyReducer.State()
         
         /// The path used for NavigationStack.
-        var path: [Screen] = []
+        @BindingState var path: [Screen] = []
         
         /// An enumeration that represents the different screens in an onboarding flow.
         /// It conforms to `CaseIterable`,`Identifiable` and `Hashable`, allowing for iteration
@@ -46,7 +47,9 @@ struct OnboardingReducer: Reducer {
     }
     
     /// The actions that can be taken on the onboarding.
-    enum Action: Equatable {
+    enum Action: BindableAction, Equatable {
+        /// The binding for the onboarding.
+        case binding(BindingAction<State>)
         /// The actions that can be taken on the birthday.
         case birthday(BirthdayReducer.Action)
         /// The actions that can be taken on the life expectancy.
@@ -59,8 +62,6 @@ struct OnboardingReducer: Reducer {
         case allowNotificationsButtonTapped
         /// Indicates that the skip notifications button has been tapped.
         case skipNotificationsButtonTapped
-        /// Indicates that path has changed.
-        case pathChanged([State.Screen])
         /// Indicates that start journey button has been tapped.
         case startJourneyButtonTapped
         /// Indicates that onboarding is finished.
@@ -78,6 +79,7 @@ struct OnboardingReducer: Reducer {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Scope(state: \.birthday, action: /Action.birthday) {
             BirthdayReducer()
         }
@@ -86,6 +88,9 @@ struct OnboardingReducer: Reducer {
         }
         Reduce { state, action in
             switch action {
+            case .binding(_):
+                return .none
+                
             case .birthday:
                 return .none
                 
@@ -134,10 +139,6 @@ struct OnboardingReducer: Reducer {
             case .skipNotificationsButtonTapped:
                 state.path.append(State.Screen.completed)
                 analyticsClient.send("onboarding.skip_notifications_button_tapped")
-                return .none
-                
-            case .pathChanged(let path):
-                state.path = path
                 return .none
                 
             case .startJourneyButtonTapped:

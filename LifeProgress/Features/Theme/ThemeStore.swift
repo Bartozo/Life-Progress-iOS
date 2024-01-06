@@ -10,21 +10,22 @@ import ComposableArchitecture
 import SwiftUI
 
 /// A reducer that manages the state of the theme.
-struct ThemeReducer: Reducer {
+@Reducer
+struct ThemeReducer {
     
     /// The state of the theme.
     struct State: Equatable {
         /// The user's selected theme.
-        var selectedTheme = NSUbiquitousKeyValueStoreHelper.getTheme()
+        @BindingState var selectedTheme = NSUbiquitousKeyValueStoreHelper.getTheme()
         
         /// A list of themes available in the app.
-        var themes = Theme.allCases
+        let themes = Theme.allCases
     }
     
     /// The actions that can be taken on the theme.
-    enum Action: Equatable {
-        /// Indicates that the theme picker was tapped.
-        case changeThemeTapped(Theme)
+    enum Action: BindableAction, Equatable {
+        /// The binding for the theme.
+        case binding(BindingAction<State>)
         /// Indicates that the theme has changed.
         case themeChanged(Theme)
         /// Indicates that the view has appeared.
@@ -33,15 +34,15 @@ struct ThemeReducer: Reducer {
     
     @Dependency(\.userSettingsClient) var userSettingsClient
     
-    @Dependency(\.mainQueue) var mainQueue
-    
     @Dependency(\.analyticsClient) var analyticsClient
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
-            case .changeThemeTapped(let theme):
+            case .binding(\.$selectedTheme):
+                let theme = state.selectedTheme
                 analyticsClient.sendWithPayload(
                     "theme.change_theme_tapped", [
                         "selectedTheme": "\(theme)"
@@ -51,6 +52,9 @@ struct ThemeReducer: Reducer {
                     await userSettingsClient.updateTheme(theme)
                     await send(.themeChanged(theme))
                 }
+                
+            case .binding:
+                return .none
                 
             case .themeChanged(let theme):
                 state.selectedTheme = theme

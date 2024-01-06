@@ -77,7 +77,7 @@ struct CalendarWithCurrentYear: View {
 
        - Returns: An `Animation` object representing the appropriate animation to use.
      */
-    private func calendarAnimation(for calendarType: CalendarType) -> Animation {
+    private func calendarAnimation(for calendarType: LifeCalendarReducer.State.CalendarType) -> Animation {
         let animation = Animation.easeInOut(duration: 0.4)
         guard calendarType == .life else {
             return animation.delay(0.4)

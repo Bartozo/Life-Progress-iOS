@@ -69,21 +69,7 @@ struct LifeGoalsList: View {
                         }
                     }
                 } header: {
-                    Picker(
-                        "",
-                        selection: viewStore.binding(
-                            get: \.listType,
-                            send: LifeGoalsReducer.Action.listTypeChanged
-                        )
-                        .animation()
-                    ) {
-                        ForEach(LifeGoalsReducer.ListType.allCases, id: \.self) {
-                            listType in
-                            Text(listType.title)
-                                .tag(listType)
-                        }
-                    }
-                    .pickerStyle(.segmented)
+                    ListTypePicker(store: self.store)
                 }
             }
             .listStyle(.plain)
@@ -106,6 +92,27 @@ struct LifeGoalsList: View {
                     }
                 }
             }
+        }
+    }
+}
+
+private struct ListTypePicker: View {
+    
+    let store: StoreOf<LifeGoalsReducer>
+    
+    var body: some View {
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            Picker(
+                "",
+                selection: viewStore.$listType.animation()
+            ) {
+                ForEach(LifeGoalsReducer.ListType.allCases, id: \.self) {
+                    listType in
+                    Text(listType.title)
+                        .tag(listType)
+                }
+            }
+            .pickerStyle(.segmented)
         }
     }
 }
@@ -189,13 +196,10 @@ private struct LifeGoalRow: View {
 
 // MARK: - Previews
 
-struct LifeGoalsList_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: LifeGoalsReducer.State()) {
-            LifeGoalsReducer()
-        }
-        
-        LifeGoalsList(store: store)
+#Preview {
+    let store = Store(initialState: LifeGoalsReducer.State()) {
+        LifeGoalsReducer()
     }
+    
+    return LifeGoalsList(store: store)
 }

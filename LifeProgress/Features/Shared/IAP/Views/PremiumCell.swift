@@ -14,18 +14,8 @@ struct PremiumCell: View {
     
     let store: StoreOf<IAPReducer>
     
-    struct ViewState: Equatable {
-        let isSheetVisible: Bool
-        let hasUnlockedPremium: Bool
-
-        init(state: IAPReducer.State) {
-            self.isSheetVisible = state.isSheetVisible
-            self.hasUnlockedPremium = state.hasUnlockedPremium
-        }
-    }
-    
     var body: some View {
-        WithViewStore(self.store, observe: ViewState.init) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack {
                 if viewStore.hasUnlockedPremium {
                     HStack {
@@ -76,10 +66,7 @@ struct PremiumCell: View {
             .onAppear {
                 viewStore.send(.refreshPurchasedProducts)
             }
-            .sheet(isPresented: viewStore.binding(
-                get: \.isSheetVisible,
-                send: IAPReducer.Action.hideSheet
-            )) {
+            .sheet(isPresented: viewStore.$isSheetVisible) {
                 IAPView(store: self.store)
             }
         }
@@ -88,13 +75,10 @@ struct PremiumCell: View {
 
 // MARK: - Previews
 
-struct PremiumCell_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        let store = Store(initialState: IAPReducer.State()) {
-            IAPReducer()
-        }
-
-        PremiumCell(store: store)
+#Preview {
+    let store = Store(initialState: IAPReducer.State()) {
+        IAPReducer()
     }
+    
+    return PremiumCell(store: store)
 }

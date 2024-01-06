@@ -15,20 +15,10 @@ struct AddOrEditLifeGoalView: View {
     
     let store: StoreOf<AddOrEditLifeGoalReducer>
     
-    struct ViewState: Equatable {
-        let isEditing: Bool
-        let isShareLifeGoalSheetVisible: Bool
-
-        init(state: AddOrEditLifeGoalReducer.State) {
-            self.isEditing = state.isEditing
-            self.isShareLifeGoalSheetVisible = state.isShareLifeGoalSheetVisible
-        }
-    }
-    
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: ViewState.init) { viewStore in
-                let isEditing = viewStore.isEditing
+            WithViewStore(self.store, observe: \.isEditing) { viewStore in
+                let isEditing = viewStore.state
                 
                 Form {
                     IconSection(store: self.store)
@@ -57,18 +47,13 @@ struct AddOrEditLifeGoalView: View {
                         action: AddOrEditLifeGoalReducer.Action.confetti
                     ))
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.isShareLifeGoalSheetVisible,
-                    send: AddOrEditLifeGoalReducer.Action.closeShareLifeGoalSheet
-                )) {
-                    IfLetStore(
-                        self.store.scope(
-                            state: \.shareLifeGoal,
-                            action: AddOrEditLifeGoalReducer.Action.shareLifeGoal
-                        )
-                    ) {
-                        ShareLifeGoalView(store: $0)
-                    }
+                .sheet(
+                    store: self.store.scope(
+                        state: \.$shareLifeGoal,
+                        action: { .shareLifeGoal($0) }
+                    )
+                ) { store in
+                    ShareLifeGoalView(store: store)
                 }
             }
         }
@@ -132,12 +117,9 @@ private struct TitleSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.title) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 TextField(
-                    text: viewStore.binding(
-                        get: { $0 },
-                        send: AddOrEditLifeGoalReducer.Action.titleChanged
-                    ),
+                    text: viewStore.$title,
                     prompt: Text("Required")
                 ) {
                     Text("Username")
@@ -155,12 +137,9 @@ private struct DetailsSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.details) { viewStore in
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
                 TextField(
-                    text: viewStore.binding(
-                        get: { $0 },
-                        send: AddOrEditLifeGoalReducer.Action.detailsChanged
-                    ),
+                    text: viewStore.$details,
                     prompt: Text("Optional"),
                     axis: .vertical
                 ) {
@@ -184,17 +163,14 @@ private struct OthersSection: View {
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.isCompleted) { viewStore in
-                let isCompleted = viewStore.state
+            WithViewStore(self.store, observe: { $0 }) { viewStore in
+                let isCompleted = viewStore.state.isCompleted
                 
                 Toggle(
                     "Mark as completed",
-                    isOn: viewStore.binding(
-                        get: { $0 },
-                        send: AddOrEditLifeGoalReducer.Action.isCompletedChanged
-                    ).animation(.default)
+                    isOn: viewStore.$isCompleted.animation(.default)
                 )
-                .onChange(of: isCompleted) { isCompleted in
+                .onChange(of: isCompleted) { oldIsCompleted, newIsCompleted in
                     guard isCompleted else { return }
                     
                     requestReview()
@@ -239,15 +215,12 @@ private struct ShareSection: View {
 
 // MARK: - Previews
 
-struct AddOrEditLifeGoalView_Previews: PreviewProvider {
+#Preview {
+    let store = Store(initialState: AddOrEditLifeGoalReducer.State()) {
+        AddOrEditLifeGoalReducer()
+    }
     
-    static var previews: some View {
-        let store = Store(initialState: AddOrEditLifeGoalReducer.State()) {
-            AddOrEditLifeGoalReducer()
-        }
-        
-        NavigationStack {
-            AddOrEditLifeGoalView(store: store)
-        }
+    return NavigationStack {
+        AddOrEditLifeGoalView(store: store)
     }
 }
