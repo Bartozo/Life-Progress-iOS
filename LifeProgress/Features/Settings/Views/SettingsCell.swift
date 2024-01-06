@@ -38,8 +38,6 @@ struct SettingsCell: View {
 
 // MARK: - Previews
 
-struct SettingsCell_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsCell(title: "Share the app",systemImage: "square.and.arrow.up") {}
-    }
+#Preview {
+    SettingsCell(title: "Share the app",systemImage: "square.and.arrow.up") {}
 }
