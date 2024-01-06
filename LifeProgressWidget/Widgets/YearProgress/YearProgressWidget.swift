@@ -5,8 +5,6 @@
 //  Created by Bartosz Król on 09/04/2023.
 //
 
-import Foundation
-
 import WidgetKit
 import SwiftUI
 import Dependencies
@@ -71,6 +69,7 @@ struct YearProgressWidgetEntryView: View {
                     .foregroundColor(.secondary)
             }
         }
+        .containerBackground(for: .widget) { }
     }
 }
 
@@ -81,17 +80,14 @@ struct YearProgressWidget: Widget {
         StaticConfiguration(kind: kind, provider: YearProgressProvider()) { entry in
             YearProgressWidgetEntryView(entry: entry)
         }
+        .contentMarginsDisabled()
         .configurationDisplayName("Year Progress")
         .description("Track your progress in current year.")
     }
 }
 
-struct YearProgressWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        let life = Life.mock
-        let entry = YearProgressEntry(life: life)
-        
-        YearProgressWidgetEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
+#Preview(as: .systemSmall) {
+    YearProgressWidget()
+} timeline: {
+    YearProgressEntry(life: Life.mock)
 }
