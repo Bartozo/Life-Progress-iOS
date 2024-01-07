@@ -39,13 +39,23 @@ extension LifeGoalsClient: DependencyKey {
             
             do {
                 let fetchedEntities = try viewContext.fetch(fetchRequest)
-                let lifeGoals = fetchedEntities.map { entity in
+                let lifeGoals: [LifeGoal] = fetchedEntities.compactMap { entity in
+                    guard
+                        let id = entity.id,
+                        let title = entity.title,
+                        let symbolName = entity.symbolName,
+                        let details = entity.details
+                    else {
+                        print("❌ Skipping a life goal due to missing properties")
+                        return nil
+                    }
+                    
                     return LifeGoal(
-                        id: entity.id!,
-                        title: entity.title!,
+                        id: id,
+                        title: title,
                         finishedAt: entity.finishedAt,
-                        symbolName: entity.symbolName!,
-                        details: entity.details!
+                        symbolName: symbolName,
+                        details: details
                     )
                 }
                 return lifeGoals
@@ -65,7 +75,7 @@ extension LifeGoalsClient: DependencyKey {
             entity.symbolName = lifeGoal.symbolName
             entity.finishedAt = lifeGoal.finishedAt
             entity.type = 1
-                        
+            
             do {
                 viewContext.insert(entity)
                 try viewContext.save()
@@ -77,7 +87,7 @@ extension LifeGoalsClient: DependencyKey {
             let viewContext = CoreDataManager.shared.container.viewContext
             let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id == %@", lifeGoal.id as CVarArg)
-
+            
             do {
                 let fetchedEntities = try viewContext.fetch(fetchRequest)
                 if let entity = fetchedEntities.first {
@@ -98,7 +108,7 @@ extension LifeGoalsClient: DependencyKey {
             let viewContext = CoreDataManager.shared.container.viewContext
             let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id == %@", lifeGoal.id as CVarArg)
-
+            
             do {
                 let fetchedEntities = try viewContext.fetch(fetchRequest)
                 if let entity = fetchedEntities.first {
@@ -123,11 +133,11 @@ extension LifeGoalsClient: TestDependencyKey {
         fetchLifeGoals: {
             let viewContext = CoreDataManager.preview.container.viewContext
             let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
-
+            
             // Add a sort descriptor to sort by creationDate
             let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
-
+            
             do {
                 let fetchedEntities = try viewContext.fetch(fetchRequest)
                 let lifeGoals = fetchedEntities.map { entity in
@@ -148,7 +158,7 @@ extension LifeGoalsClient: TestDependencyKey {
         createLifeGoal: { lifeGoal in
             let viewContext = CoreDataManager.preview.container.viewContext
             let entity = LifeGoalEntity(context: viewContext)
-
+            
             entity.id = UUID()
             entity.createdAt = Date()
             entity.title = lifeGoal.title
@@ -156,7 +166,7 @@ extension LifeGoalsClient: TestDependencyKey {
             entity.symbolName = lifeGoal.symbolName
             entity.finishedAt = lifeGoal.finishedAt
             entity.type = 1
-
+            
             do {
                 viewContext.insert(entity)
                 try viewContext.save()
@@ -168,7 +178,7 @@ extension LifeGoalsClient: TestDependencyKey {
             let viewContext = CoreDataManager.preview.container.viewContext
             let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id == %@", lifeGoal.id as CVarArg)
-
+            
             do {
                 let fetchedEntities = try viewContext.fetch(fetchRequest)
                 if let entity = fetchedEntities.first {
@@ -176,7 +186,7 @@ extension LifeGoalsClient: TestDependencyKey {
                     entity.details = lifeGoal.details
                     entity.symbolName = lifeGoal.symbolName
                     entity.finishedAt = lifeGoal.finishedAt
-
+                    
                     try viewContext.save()
                 } else {
                     print("❌ Couldn't find life goal with id: \(lifeGoal.id)")
@@ -189,7 +199,7 @@ extension LifeGoalsClient: TestDependencyKey {
             let viewContext = CoreDataManager.preview.container.viewContext
             let fetchRequest: NSFetchRequest<LifeGoalEntity> = LifeGoalEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id == %@", lifeGoal.id as CVarArg)
-
+            
             do {
                 let fetchedEntities = try viewContext.fetch(fetchRequest)
                 if let entity = fetchedEntities.first {
