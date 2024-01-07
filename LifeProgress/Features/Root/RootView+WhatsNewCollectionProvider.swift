@@ -72,5 +72,30 @@ extension RootView: WhatsNewCollectionProvider {
                 backgroundColor: theme.color
             )
         )
+        WhatsNew(
+            version: "1.1.4",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "paintbrush",
+                        foregroundColor: theme.color
+                    ),
+                    title: "UI improvements",
+                    subtitle: "Enhanced user interface for a better experience"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "wrench",
+                        foregroundColor: theme.color
+                    ),
+                    title: "Bug fixes",
+                    subtitle: "Improving stability and reliability"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: theme.color
+            )
+        )
     }
 }
