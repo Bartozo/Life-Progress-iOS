@@ -29,50 +29,46 @@ struct LifeGoalsList: View {
     var body: some View {
         WithViewStore(self.store, observe: ViewState.init) { viewStore in
             List {
-                Section {
-                    ForEach(viewStore.lifeGoals, id: \.id) { lifeGoal in
-                        LifeGoalRow(
-                            lifeGoal: lifeGoal,
-                            onTapped: { viewStore.send(.lifeGoalTapped(lifeGoal)) }
-                        )
-                        .swipeActions(allowsFullSwipe: false) {
-                            Button(role: .destructive) {
-                                viewStore.send(.swipeToDelete(lifeGoal))
-                            } label: {
-                                Label("Delete", systemImage: "trash.fill")
-                            }
-                                
-                            if lifeGoal.isCompleted {
-                                Button {
-                                    viewStore.send(.swipeToUncomplete(lifeGoal))
-                                } label: {
-                                    Label("Uncomplete", systemImage: "xmark.circle.fill")
-                                }
-                                Button {
-                                    viewStore.send(.swipeToShare(lifeGoal))
-                                } label: {
-                                    Label("Share", systemImage: "square.and.arrow.up.fill")
-                                }
-                                .tint(theme.color)
-                            } else {
-                                Button {
-                                    viewStore.send(.swipeToComplete(lifeGoal))
-                                    requestReview()
-                                } label: {
-                                    Label("Complete", systemImage: "checkmark.circle.fill")
-                                }
-                                .tint(.green)
-                            }
+                ForEach(viewStore.lifeGoals, id: \.id) { lifeGoal in
+                    LifeGoalRow(
+                        lifeGoal: lifeGoal,
+                        onTapped: { viewStore.send(.lifeGoalTapped(lifeGoal)) }
+                    )
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            viewStore.send(.swipeToDelete(lifeGoal))
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
                         }
-                        .onTapGesture {
-                            viewStore.send(.lifeGoalTapped(lifeGoal))
+                            
+                        if lifeGoal.isCompleted {
+                            Button {
+                                viewStore.send(.swipeToUncomplete(lifeGoal))
+                            } label: {
+                                Label("Uncomplete", systemImage: "xmark.circle.fill")
+                            }
+                            Button {
+                                viewStore.send(.swipeToShare(lifeGoal))
+                            } label: {
+                                Label("Share", systemImage: "square.and.arrow.up.fill")
+                            }
+                            .tint(theme.color)
+                        } else {
+                            Button {
+                                viewStore.send(.swipeToComplete(lifeGoal))
+                                requestReview()
+                            } label: {
+                                Label("Complete", systemImage: "checkmark.circle.fill")
+                            }
+                            .tint(.green)
                         }
                     }
-                } header: {
-                    ListTypePicker(store: self.store)
+                    .onTapGesture {
+                        viewStore.send(.lifeGoalTapped(lifeGoal))
+                    }
                 }
             }
-            .listStyle(.plain)
+            .listStyle(.insetGrouped)
             .overlay {
                 if viewStore.lifeGoals.isEmpty {
                     GeometryReader { geometry in
@@ -92,27 +88,6 @@ struct LifeGoalsList: View {
                     }
                 }
             }
-        }
-    }
-}
-
-private struct ListTypePicker: View {
-    
-    let store: StoreOf<LifeGoalsReducer>
-    
-    var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Picker(
-                "",
-                selection: viewStore.$listType.animation()
-            ) {
-                ForEach(LifeGoalsReducer.ListType.allCases, id: \.self) {
-                    listType in
-                    Text(listType.title)
-                        .tag(listType)
-                }
-            }
-            .pickerStyle(.segmented)
         }
     }
 }
@@ -183,11 +158,12 @@ private struct LifeGoalRow: View {
                     Text(lifeGoal.title)
                         .font(.headline)
                         .lineLimit(2)
+                        .foregroundColor(.primary)
 
                     Text(lifeGoal.details)
                         .lineLimit(2)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
             }
         }

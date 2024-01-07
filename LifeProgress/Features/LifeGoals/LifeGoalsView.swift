@@ -29,6 +29,9 @@ struct LifeGoalsView: View {
                             )
                         )
                     }
+                    ToolbarItem(placement: .principal) {
+                        ListTypePicker(store: self.store)
+                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             viewStore.send(.addButtonTapped)
@@ -81,6 +84,27 @@ struct LifeGoalsView: View {
     }
 }
 
+private struct ListTypePicker: View {
+    
+    let store: StoreOf<LifeGoalsReducer>
+    
+    var body: some View {
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            Picker(
+                "",
+                selection: viewStore.$listType.animation()
+            ) {
+                ForEach(LifeGoalsReducer.ListType.allCases, id: \.self) {
+                    listType in
+                    Text(listType.title)
+                        .tag(listType)
+                }
+            }
+            .pickerStyle(.segmented)
+            .fixedSize()
+        }
+    }
+}
 
 // MARK: - Previews
 
