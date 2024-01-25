@@ -40,17 +40,6 @@ struct LifeGoalsView: View {
                         }
                     }
                 }
-                .sheet(isPresented: viewStore.binding(
-                    get: \.iap.isSheetVisible,
-                    send: LifeGoalsReducer.Action.iap(.hideSheet)
-                )) {
-                    IAPView(
-                        store: self.store.scope(
-                            state: \.iap,
-                            action: LifeGoalsReducer.Action.iap
-                        )
-                    )
-                }
                 .sheet(
                     store: self.store.scope(
                         state: \.$addOrEditLifeGoal,
