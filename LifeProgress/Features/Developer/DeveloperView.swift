@@ -13,25 +13,23 @@ struct DeveloperView: View {
     
     @Environment(\.theme) var theme
     
-    let store: StoreOf<DeveloperReducer>
+    @Bindable var store: StoreOf<DeveloperReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Button {
-                viewStore.send(.developerButtonTapped)
-            } label: {
-                Text("Developed with ❤️ by Bartozo")
-                    .font(.footnote)
-            }
-            .tint(theme.color)
-            .overlay {
-                ConfettiCannon(
-                    counter: viewStore.$confetti,
-                    confettis: [
-                        .text("❤️"),
-                    ]
-                )
-            }
+        Button {
+            store.send(.developerButtonTapped)
+        } label: {
+            Text("Developed with ❤️ by Bartozo")
+                .font(.footnote)
+        }
+        .tint(theme.color)
+        .overlay {
+            ConfettiCannon(
+                counter: $store.confetti,
+                confettis: [
+                    .text("❤️"),
+                ]
+            )
         }
     }
 }
@@ -39,9 +37,9 @@ struct DeveloperView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: DeveloperReducer.State()) {
-        DeveloperReducer()
-    }
-    
-    return DeveloperView(store: store)
+    DeveloperView(
+        store: Store(initialState: DeveloperReducer.State()) {
+            DeveloperReducer()
+        }
+    )
 }

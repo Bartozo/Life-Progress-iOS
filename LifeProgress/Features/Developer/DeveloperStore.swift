@@ -13,9 +13,10 @@ import ComposableArchitecture
 struct DeveloperReducer {
     
     /// The state of the developer.
+    @ObservableState
     struct State: Equatable {
         /// State responsible for showing the heart confetti.
-        @BindingState var confetti: Int = 0
+        var confetti: Int = 0
     }
     
     /// The actions that can be taken on the developer.
