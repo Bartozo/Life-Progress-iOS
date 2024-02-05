@@ -16,47 +16,43 @@ struct ShareLifeGoalView: View {
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: \.theme) { viewStore in
-                let theme = viewStore.state
+            List {
+                Section {
+                    ImagePreview(store: self.store)
+                        .environment(\.colorScheme, store.theme == .dark ? .dark : .light)
+                }
+                .listRowInsets(EdgeInsets())
                 
-                List {
-                    Section {
-                        ImagePreview(store: self.store)
-                            .environment(\.colorScheme, theme == .dark ? .dark : .light)
-                    }
-                    .listRowInsets(EdgeInsets())
-                    
-                    Section {
-                        ThemePicker(store: self.store)
-                        ColorPickerView(
-                            store: self.store.scope(
-                                state: \.colorPicker,
-                                action: ShareLifeGoalReducer.Action.colorPicker
-                            )
+                Section {
+                    ThemePicker(store: self.store)
+                    ColorPickerView(
+                        store: self.store.scope(
+                            state: \.colorPicker,
+                            action: \.colorPicker
                         )
-                        TimeSwitch(store: self.store)
-                        WatermarkSwitch(store: self.store)
+                    )
+                    TimeSwitch(store: self.store)
+                    WatermarkSwitch(store: self.store)
+                }
+            }
+            .navigationTitle("Share Life Goal")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        store.send(.closeButtonTapped)
+                    } label: {
+                        Text("Close")
                     }
                 }
-                .navigationTitle("Share Life Goal")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            viewStore.send(.closeButtonTapped)
-                        } label: {
-                            Text("Close")
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        ShareLink(
-                            item: Image(uiImage: generateSnapshot(theme: theme)),
-                            preview: SharePreview(
-                                "Life Goal",
-                                image: Image(uiImage: generateSnapshot(theme: theme))
-                            )
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareLink(
+                        item: Image(uiImage: generateSnapshot(theme: store.theme)),
+                        preview: SharePreview(
+                            "Life Goal",
+                            image: Image(uiImage: generateSnapshot(theme: store.theme))
                         )
-                    }
+                    )
                 }
             }
         }
@@ -80,146 +76,123 @@ struct ShareLifeGoalView: View {
 private struct ImagePreview: View {
     
     let store: StoreOf<ShareLifeGoalReducer>
-    
-    struct ViewState: Equatable {
-        let lifeGoal: LifeGoal
-        let theme: ShareLifeGoalReducer.State.Theme
-        let color: ColorPickerReducer.State.Color
-        let isTimeVisible: Bool
-        let isWaterMarkVisible: Bool
-        
-        init(state: ShareLifeGoalReducer.State) {
-            self.lifeGoal = state.lifeGoal
-            self.theme = state.theme
-            self.color = state.colorPicker.color
-            self.isTimeVisible = state.isTimeVisible
-            self.isWaterMarkVisible = state.isWatermarkVisible
-        }
-    }
-    
+
     var body: some View {
-        WithViewStore(self.store, observe: ViewState.init) { viewStore in
-            ZStack {
-                Rectangle()
-                    .fill(viewStore.color.colorValue.gradient)
+        ZStack {
+            Rectangle()
+                .fill(store.colorPicker.color.colorValue.gradient)
+            
+            VStack {
+                Image(systemName: store.lifeGoal.symbolName)
+                    .padding()
+                    .background(in: Circle())
+                    .foregroundStyle(.white.shadow(.drop(radius: 1, x: 2, y: 2)))
+                    .backgroundStyle(store.colorPicker.color.colorValue.gradient)
+                    .font(.system(size: 60))
+                    .padding(.bottom)
                 
-                VStack {
-                    Image(systemName: viewStore.lifeGoal.symbolName)
-                        .padding()
-                        .background(in: Circle())
-                        .foregroundStyle(.white.shadow(.drop(radius: 1, x: 2, y: 2)))
-                        .backgroundStyle(viewStore.color.colorValue.gradient)
-                        .font(.system(size: 60))
-                        .padding(.bottom)
+                VStack(alignment: .center) {
+                    Text(store.lifeGoal.title)
+                        .lineLimit(2)
+                        .font(.headline)
                     
-                    VStack(alignment: .center) {
-                        Text(viewStore.lifeGoal.title)
-                            .lineLimit(2)
-                            .font(.headline)
-                        
-                        Text(viewStore.lifeGoal.details)
-                            .lineLimit(3)
+                    Text(store.lifeGoal.details)
+                        .lineLimit(3)
+                        .font(.footnote)
+                        .padding(.horizontal)
+                    
+                    if store.isTimeVisible {
+                        Text(store.lifeGoal.finishedAt!, style: .date)
                             .font(.footnote)
-                            .padding(.horizontal)
-                        
-                        if viewStore.isTimeVisible {
-                            Text(viewStore.lifeGoal.finishedAt!, style: .date)
-                                .font(.footnote)
-                                .padding(.top)
-                        }
+                            .padding(.top)
                     }
-                    .foregroundStyle(.white)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.thinMaterial)
-                .cornerRadius(16)
-                .padding()
-                .padding()
+                .foregroundStyle(.white)
             }
-            .aspectRatio(1, contentMode: .fill)
-            .overlay(
-                 VStack {
-                     if viewStore.isWaterMarkVisible {
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.thinMaterial)
+            .cornerRadius(16)
+            .padding()
+            .padding()
+        }
+        .aspectRatio(1, contentMode: .fill)
+        .overlay(
+             VStack {
+                 if store.isWatermarkVisible {
+                     Spacer()
+                     HStack {
                          Spacer()
-                         HStack {
-                             Spacer()
-                             Text("Life Progress")
-                                 .font(.footnote)
-                         }
+                         Text("Life Progress")
+                             .font(.footnote)
                      }
                  }
-                 .padding(10)
-                 .foregroundColor(.white)
-             )
-        }
+             }
+             .padding(10)
+             .foregroundColor(.white)
+         )
     }
 }
 
 private struct ThemePicker: View {
     
-    let store: StoreOf<ShareLifeGoalReducer>
+    @Bindable var store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Picker(
-                "Theme",
-                selection: viewStore.$theme.animation()
-            ) {
-                ForEach(ShareLifeGoalReducer.State.Theme.allCases, id: \.self) { theme in
-                    Text(theme.title)
-                        .tag(theme)
-                }
+        Picker(
+            "Theme",
+            selection: $store.theme.animation()
+        ) {
+            ForEach(ShareLifeGoalReducer.State.Theme.allCases, id: \.self) { theme in
+                Text(theme.title)
+                    .tag(theme)
             }
-            .pickerStyle(.segmented)
         }
+        .pickerStyle(.segmented)
     }
 }
 
 private struct TimeSwitch: View {
     
-    let store: StoreOf<ShareLifeGoalReducer>
+    @Bindable var store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Toggle(
-                "Show time",
-                isOn: viewStore.$isTimeVisible.animation(.default)
-            )
-        }
+        Toggle(
+            "Show time",
+            isOn: $store.isTimeVisible.animation()
+        )
     }
 }
 
 private struct WatermarkSwitch: View {
     
-    let store: StoreOf<ShareLifeGoalReducer>
+    @Bindable var store: StoreOf<ShareLifeGoalReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Toggle(
-                "Show watermark",
-                isOn: viewStore.$isWatermarkVisible.animation(.default)
-            )
-        }
+        Toggle(
+            "Show watermark",
+            isOn: $store.isWatermarkVisible.animation()
+        )
     }
 }
 
 // MARK: - Previews
+
 #Preview {
-    let store = Store(
-        initialState: ShareLifeGoalReducer.State(
-            lifeGoal: LifeGoal(
-                id: UUID(),
-                title: "Road Trip on Route 66",
-                finishedAt: Date.now,
-                symbolName: "trophy",
-                details: "Plan and embark on a memorable road trip across America's historic Route 66"
-            )
+    NavigationStack {
+        ShareLifeGoalView(
+            store: Store(
+                initialState: ShareLifeGoalReducer.State(
+                    lifeGoal: LifeGoal(
+                        id: UUID(),
+                        title: "Road Trip on Route 66",
+                        finishedAt: Date.now,
+                        symbolName: "trophy",
+                        details: "Plan and embark on a memorable road trip across America's historic Route 66"
+                    )
+                )
+            ) {
+                ShareLifeGoalReducer()
+            }
         )
-    ) {
-        ShareLifeGoalReducer()
-    }
-    
-    return NavigationStack {
-        ShareLifeGoalView(store: store)
     }
 }
