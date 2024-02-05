@@ -15,34 +15,32 @@ struct CreditsView: View {
     let store: StoreOf<CreditsReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List {
-                Section {
-                    ForEach(viewStore.packageCredits, id: \.id) { packageCredit in
-                        CreditCell(
-                            title: packageCredit.title,
-                            onTapped: {
-                                viewStore.send(.packageCreditTapped(packageCredit))
-                            }
-                        )
-                    }
-                } header: {
-                    Text("Dependencies")
+        List {
+            Section {
+                ForEach(store.packageCredits, id: \.id) { packageCredit in
+                    CreditCell(
+                        title: packageCredit.title,
+                        onTapped: {
+                            store.send(.packageCreditTapped(packageCredit))
+                        }
+                    )
                 }
+            } header: {
+                Text("Dependencies")
             }
-            .navigationTitle("Credits")
         }
+        .navigationTitle("Credits")
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: CreditsReducer.State()) {
-        CreditsReducer()
-    }
-    
-    return NavigationStack {
-        CreditsView(store: store)
+    NavigationStack {
+        CreditsView(
+            store: Store(initialState: CreditsReducer.State()) {
+                CreditsReducer()
+            }
+        )
     }
 }

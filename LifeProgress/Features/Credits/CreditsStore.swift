@@ -13,6 +13,7 @@ import ComposableArchitecture
 struct CreditsReducer {
     
     /// The state of the credits.
+    @ObservableState
     struct State: Equatable {
         /// List of used packages in the app.
         var packageCredits: [PackageCredit] = PackageCredit.getPackageCredits()
