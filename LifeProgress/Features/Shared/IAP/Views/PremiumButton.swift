@@ -12,27 +12,24 @@ struct PremiumButton: View {
     
     @Environment(\.theme) var theme
     
-    let store: StoreOf<IAPReducer>
+    @Bindable var store: StoreOf<IAPReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            
-            if !viewStore.hasUnlockedPremium {
-                Button(action: {
-                    viewStore.send(.showSheet)
-                }) {
-                    Image(systemName: "crown.fill")
-                }
-                .tint(theme.color)
-                .onAppear {
-                    viewStore.send(.refreshPurchasedProducts)
-                }
-                .sheet(isPresented: viewStore.$isSheetVisible) {
-                    IAPView(store: self.store)
-                }
-            } else {
-                EmptyView()
+        if !store.hasUnlockedPremium {
+            Button {
+                store.send(.showSheet)
+            } label: {
+                Image(systemName: "crown.fill")
             }
+            .tint(theme.color)
+            .onAppear {
+                store.send(.refreshPurchasedProducts)
+            }
+            .sheet(isPresented: $store.isSheetVisible) {
+                IAPView(store: self.store)
+            }
+        } else {
+            EmptyView()
         }
     }
 }
@@ -40,9 +37,9 @@ struct PremiumButton: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: IAPReducer.State()) {
-        IAPReducer()
-    }
-    
-    return PremiumButton(store: store)
+    PremiumButton(
+        store: Store(initialState: IAPReducer.State()) {
+            IAPReducer()
+        }
+    )
 }

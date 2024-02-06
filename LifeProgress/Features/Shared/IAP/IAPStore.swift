@@ -14,6 +14,7 @@ import StoreKit
 struct IAPReducer {
     
     /// The state of the IAP.
+    @ObservableState
     struct State: Equatable {
         /// The list of product identifiers for in-app purchase.
         let productIds: Set<String> = ["com.bartozo.lifeprogress.premium"]
@@ -31,12 +32,12 @@ struct IAPReducer {
         var hasUnlockedPremium: Bool {
             return purchasedProductIDs.contains("com.bartozo.lifeprogress.premium")
         }
-        
+         
         /// Whether the about IAP sheet is visible.
-        @BindingState var isSheetVisible = false
+        var isSheetVisible = false
         
         /// The state of the alert related to IAP actions.
-        @PresentationState var alert: AlertState<Action.Alert>?
+        @Presents var alert: AlertState<Action.Alert>?
     }
     
     /// The actions that can be taken on the IAP.
@@ -202,6 +203,6 @@ struct IAPReducer {
                 return .none
             }
         }
-        .ifLet(\.alert, action: /Action.alert)
+        .ifLet(\.$alert, action: \.alert)
     }
 }
