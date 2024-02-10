@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AboutTheAppView: View {
-    
     @Environment(\.openURL) var openURL
     
     @Environment(\.theme) var theme
@@ -18,21 +17,19 @@ struct AboutTheAppView: View {
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                Form {
-                    HowItWorksSection(store: self.store)
-                    LearnMoreSection { url in
-                        openURL(URL(string: url)!)
-                    }
+            Form {
+                HowItWorksSection(store: store)
+                LearnMoreSection { url in
+                    openURL(URL(string: url)!)
                 }
-                .navigationTitle("About Life Progress")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            viewStore.send(.closeAboutTheCalendarSheet)
-                        } label: {
-                            Text("Close")
-                        }
+            }
+            .navigationTitle("About Life Progress")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        store.send(.closeAboutTheCalendarSheet)
+                    } label: {
+                        Text("Close")
                     }
                 }
             }
@@ -44,7 +41,6 @@ struct AboutTheAppView: View {
 // MARK: - How it works section
 
 private struct HowItWorksSection: View {
-    
     @Environment(\.theme) var theme
     
     let store: StoreOf<AboutTheAppReducer>
@@ -59,18 +55,13 @@ private struct HowItWorksSection: View {
                     tint: theme.color
                 )
                 
-                WithViewStore(self.store, observe: \.life) { viewStore in
-                    let life = viewStore.state
+                ZStack(alignment: .topLeading) {
+                    SimplifiedLifeCalendarView(life: store.life)
+                        .frame(width: 150, height: 200)
+                        .padding(.leading, 100)
+                        .padding(.top, 100)
                     
-                    ZStack(alignment: .topLeading) {
-                        SimplifiedLifeCalendarView(life: life)
-                            .frame(width: 150, height: 200)
-                            .padding(.leading, 100)
-                            .padding(.top, 100)
-
-                        ZoomedInCalendarView()
-                    }
-
+                    ZoomedInCalendarView()
                 }
             }
             
@@ -94,19 +85,14 @@ private struct HowItWorksSection: View {
                     tint: theme.color
                 )
                 
-                WithViewStore(self.store, observe: \.life) { viewStore in
-                    let life = viewStore.state
-                    
-                    CurrentYearProgressView(life: life)
-                        .padding()
-                }
+                CurrentYearProgressView(life: store.life)
+                    .padding()
             }
         }
     }
 }
 
 private struct AgeGroupGridView: View {
-        
     let columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -132,7 +118,6 @@ private struct AgeGroupGridView: View {
 // MARK: - Learn more section
 
 private struct LearnMoreSection: View {
-    
     @Environment(\.theme) var theme
     
     private let openUrl: (String) -> Void
@@ -162,7 +147,7 @@ private struct LearnMoreSection: View {
                     openUrl("https://www.youtube.com/watch?v=JXeJANDKwDc")
                 }
             )
-
+            
             CustomCell(
                 title: "The project is open source!",
                 description: "Learn how this project was created and contribute to it. Check out the code on GitHub.",
@@ -179,9 +164,9 @@ private struct LearnMoreSection: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: AboutTheAppReducer.State(life: Life.mock)) {
-        AboutTheAppReducer()
-    }
-    
-    return AboutTheAppView(store: store)
+    AboutTheAppView(
+        store: Store(initialState: AboutTheAppReducer.State(life: Life.mock)) {
+            AboutTheAppReducer()
+        }
+    )
 }
