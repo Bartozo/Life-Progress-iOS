@@ -10,99 +10,89 @@ import ComposableArchitecture
 import ConfettiSwiftUI
 
 struct LifeGoalsView: View {
-    
-    let store: StoreOf<LifeGoalsReducer>
+    @Bindable var store: StoreOf<LifeGoalsReducer>
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.createdAt)])
     var lifeGoalEntities: FetchedResults<LifeGoalEntity>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            LifeGoalsList(store: self.store)
-                .navigationTitle("Life Goals")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        PremiumButton(
-                            store: self.store.scope(
-                                state: \.iap,
-                                action: LifeGoalsReducer.Action.iap
-                            )
+        LifeGoalsList(store: store)
+            .navigationTitle("Life Goals")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    PremiumButton(
+                        store: store.scope(
+                            state: \.iap,
+                            action: \.iap
                         )
-                    }
-                    ToolbarItem(placement: .principal) {
-                        ListTypePicker(store: self.store)
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            viewStore.send(.addButtonTapped)
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                        }
-                    }
-                }
-                .sheet(
-                    store: self.store.scope(
-                        state: \.$addOrEditLifeGoal,
-                        action: { .addOrEditLifeGoal($0) }
                     )
-                ) { store in
-                    AddOrEditLifeGoalView(store: store)
                 }
-                .sheet(
-                    store: self.store.scope(
-                        state: \.$shareLifeGoal,
-                        action: { .shareLifeGoal($0) }
-                    )
-                ) { store in
-                    ShareLifeGoalView(store: store)
+                ToolbarItem(placement: .principal) {
+                    ListTypePicker(store: store)
                 }
-                .onReceive(lifeGoalEntities.publisher) { _ in
-                    viewStore.send(.onAppear, animation: .default)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        store.send(.addButtonTapped)
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                    }
                 }
-                .onAppear {
-                    viewStore.send(.onAppear, animation: .default)
-                    viewStore.send(.iap(.refreshPurchasedProducts))
-                }
-                .overlay {
-                    ConfettiView(store: self.store.scope(
+            }
+            .sheet(
+                item: $store.scope(state: \.addOrEditLifeGoal, action: \.addOrEditLifeGoal)
+            ) { store in
+                AddOrEditLifeGoalView(store: store)
+            }
+            .sheet(
+                item: $store.scope(state: \.shareLifeGoal, action: \.shareLifeGoal)
+            ) { store in
+                ShareLifeGoalView(store: store)
+            }
+            .onReceive(lifeGoalEntities.publisher) { _ in
+                store.send(.onAppear, animation: .default)
+            }
+            .onAppear {
+                store.send(.onAppear, animation: .default)
+                store.send(.iap(.refreshPurchasedProducts))
+            }
+            .overlay {
+                ConfettiView(
+                    store: store.scope(
                         state: \.confetti,
-                        action: LifeGoalsReducer.Action.confetti
-                    ))
-                }
-        }
+                        action: \.confetti
+                    )
+                )
+            }
     }
 }
 
 private struct ListTypePicker: View {
-    
-    let store: StoreOf<LifeGoalsReducer>
+    @Bindable var store: StoreOf<LifeGoalsReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Picker(
-                "",
-                selection: viewStore.$listType.animation()
-            ) {
-                ForEach(LifeGoalsReducer.ListType.allCases, id: \.self) {
-                    listType in
-                    Text(listType.title)
-                        .tag(listType)
-                }
+        Picker(
+            "",
+            selection: $store.listType.animation()
+        ) {
+            ForEach(LifeGoalsReducer.ListType.allCases, id: \.self) {
+                listType in
+                Text(listType.title)
+                    .tag(listType)
             }
-            .pickerStyle(.segmented)
-            .fixedSize()
         }
+        .pickerStyle(.segmented)
+        .fixedSize()
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: LifeGoalsReducer.State()) {
-        LifeGoalsReducer()
-    }
-    
-    return NavigationStack {
-        LifeGoalsView(store: store)
+    NavigationStack {
+        LifeGoalsView(
+            store: Store(initialState: LifeGoalsReducer.State()) {
+                LifeGoalsReducer()
+            }
+        )
     }
 }
