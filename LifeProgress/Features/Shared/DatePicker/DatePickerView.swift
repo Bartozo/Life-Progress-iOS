@@ -9,47 +9,35 @@ import SwiftUI
 import ComposableArchitecture
 
 struct DatePickerView: View {
-    
     @Environment(\.theme) var theme
     
-    init(title: String, store: StoreOf<DatePickerReducer>) {
-        self.title = title
-        self.store = store
-    }
-    
-    let store: StoreOf<DatePickerReducer>
     let title: String
-
+    
+    @Bindable var store: StoreOf<DatePickerReducer>
+    
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let isDatePickerVisible = viewStore.isDatePickerVisible
-            
-            HStack {
-                Text(title)
-                Spacer()
-                Button {
-                    viewStore.send(
-                        .isDatePickerVisibleChanged,
-                        animation: .default
-                    )
-                } label: {
-                    Text("\(DateFormatters.medium.string(from: viewStore.date))")
-                }
-                .buttonStyle(.bordered)
-                .tint(.gray)
-                .foregroundColor(isDatePickerVisible ? theme.color : .primary)
+        HStack {
+            Text(title)
+            Spacer()
+            Button {
+                store.send(.isDatePickerVisibleChanged, animation: .default)
+            } label: {
+                Text("\(DateFormatters.medium.string(from: store.date))")
             }
-            
-            if isDatePickerVisible {
-                DatePicker(
-                    "",
-                    selection: viewStore.$date,
-                    displayedComponents: .date
-                )
-                .labelsHidden()
-                .datePickerStyle(.graphical)
-                .tint(theme.color)
-            }
+            .buttonStyle(.bordered)
+            .tint(.gray)
+            .foregroundColor(store.isDatePickerVisible ? theme.color : .primary)
+        }
+        
+        if store.isDatePickerVisible {
+            DatePicker(
+                "",
+                selection: $store.date,
+                displayedComponents: .date
+            )
+            .labelsHidden()
+            .datePickerStyle(.graphical)
+            .tint(theme.color)
         }
     }
 }
@@ -57,10 +45,11 @@ struct DatePickerView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: DatePickerReducer.State()) {
-        DatePickerReducer()
-    }
-    
-    return DatePickerView(title: "Selected date", store: store)
+    DatePickerView(
+        title: "Selected date",
+        store: Store(initialState: DatePickerReducer.State()) {
+            DatePickerReducer()
+        }
+    )
 }
 
