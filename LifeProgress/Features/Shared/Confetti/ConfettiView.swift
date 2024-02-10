@@ -10,25 +10,23 @@ import ComposableArchitecture
 import ConfettiSwiftUI
 
 struct ConfettiView: View {
-    let store: StoreOf<ConfettiReducer>
+    @Bindable var store: StoreOf<ConfettiReducer>
 
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            ConfettiCannon(
-                counter: viewStore.$confetti,
-                num: 100,
-                radius: 350
-            )
-        }
+        ConfettiCannon(
+            counter: $store.confetti,
+            num: 100,
+            radius: 350
+        )
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: ConfettiReducer.State()) {
-        ConfettiReducer()
-    }
-    
-    return ConfettiView(store: store)
+    ConfettiView(
+        store: Store(initialState: ConfettiReducer.State()) {
+            ConfettiReducer()
+        }
+    )
 }
