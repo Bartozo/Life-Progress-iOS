@@ -10,28 +10,23 @@ import ComposableArchitecture
 import SymbolPicker
 
 struct SFSymbolPickerView: View {
-        
     @Environment(\.theme) var theme
-
-    let store: StoreOf<SFSymbolPickerReducer>
-
+    
+    @Bindable var store: StoreOf<SFSymbolPickerReducer>
+    
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let symbolName = viewStore.symbolName
-            
-            Button {
-                viewStore.send(.showSheet)
-            } label: {
-                Image(systemName: symbolName)
-                    .font(.title)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-            }
-            .foregroundColor(theme.color)
-            .sheet(isPresented: viewStore.$isSheetVisible) {
-                SymbolPicker(symbol: viewStore.$symbolName)
-            }
+        Button {
+            store.send(.showSheet)
+        } label: {
+            Image(systemName: store.symbolName)
+                .font(.title)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(8)
+        }
+        .foregroundColor(theme.color)
+        .sheet(isPresented: $store.isSheetVisible) {
+            SymbolPicker(symbol: $store.symbolName)
         }
     }
 }
@@ -39,9 +34,9 @@ struct SFSymbolPickerView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: SFSymbolPickerReducer.State()) {
-        SFSymbolPickerReducer()
-    }
-    
-    return SFSymbolPickerView(store: store)
+    SFSymbolPickerView(
+        store: Store(initialState: SFSymbolPickerReducer.State()) {
+            SFSymbolPickerReducer()
+        }
+    )
 }

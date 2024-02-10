@@ -13,12 +13,13 @@ import ComposableArchitecture
 struct SFSymbolPickerReducer {
     
     /// The state of the about the app.
+    @ObservableState
     struct State: Equatable {
         /// The selected SF Symbol for the life goal. By default set to "trophy"
-        @BindingState var symbolName = "trophy"
+        var symbolName = "trophy"
         
         /// Whether the SF Symbol sheet is visible.
-        @BindingState var isSheetVisible = false
+        var isSheetVisible = false
     }
     
     /// The actions that can be taken on the about the app.
