@@ -37,8 +37,6 @@
 		9D70827D29B8D1A100846F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827C29B8D1A100846F55 /* Assets.xcassets */; };
 		9D70828029B8D1A100846F55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D70827F29B8D1A100846F55 /* Preview Assets.xcassets */; };
 		9D70828529B8D1A100846F55 /* LifeProgress.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D70828329B8D1A100846F55 /* LifeProgress.xcdatamodeld */; };
-		9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */; };
-		9D70829B29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */; };
 		9D7082A929B8D34900846F55 /* Life.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7082A829B8D34900846F55 /* Life.swift */; };
 		9D70DC352A00FAFC000C2AF0 /* IAPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70DC342A00FAFC000C2AF0 /* IAPClient.swift */; };
 		9D70DC382A00FC97000C2AF0 /* IAPStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70DC372A00FC97000C2AF0 /* IAPStore.swift */; };
@@ -144,13 +142,6 @@
 			remoteGlobalIDString = 9D70827429B8D1A000846F55;
 			remoteInfo = LifeProgress;
 		};
-		9D70829529B8D1A100846F55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D70826D29B8D1A000846F55 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9D70827429B8D1A000846F55;
-			remoteInfo = LifeProgress;
-		};
 		9DA378DB29E19B9100074F01 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9D70826D29B8D1A000846F55 /* Project object */;
@@ -203,9 +194,6 @@
 		9D70827F29B8D1A100846F55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9D70828429B8D1A100846F55 /* LifeProgress.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeProgress.xcdatamodel; sourceTree = "<group>"; };
 		9D70828A29B8D1A100846F55 /* LifeProgressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeProgressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeProgressUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITests.swift; sourceTree = "<group>"; };
-		9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeProgressUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9D7082A829B8D34900846F55 /* Life.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Life.swift; sourceTree = "<group>"; };
 		9D70DC342A00FAFC000C2AF0 /* IAPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPClient.swift; sourceTree = "<group>"; };
 		9D70DC372A00FC97000C2AF0 /* IAPStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPStore.swift; sourceTree = "<group>"; };
@@ -308,13 +296,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9D70828729B8D1A100846F55 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D70829129B8D1A100846F55 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -486,7 +467,6 @@
 				9DA378F229E1D20300074F01 /* LifeProgressWidgetExtension.entitlements */,
 				9D70827729B8D1A000846F55 /* LifeProgress */,
 				9D70828D29B8D1A100846F55 /* LifeProgressTests */,
-				9D70829729B8D1A100846F55 /* LifeProgressUITests */,
 				9DA378D329E19B9000074F01 /* LifeProgressWidget */,
 				9DA378CE29E19B9000074F01 /* Frameworks */,
 				9D70827629B8D1A000846F55 /* Products */,
@@ -498,7 +478,6 @@
 			children = (
 				9D70827529B8D1A000846F55 /* Life Progress - Calendar.app */,
 				9D70828A29B8D1A100846F55 /* LifeProgressTests.xctest */,
-				9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */,
 				9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */,
 			);
 			name = Products;
@@ -535,15 +514,6 @@
 				9D8322032A3D9AE300A66037 /* Features */,
 			);
 			path = LifeProgressTests;
-			sourceTree = "<group>";
-		};
-		9D70829729B8D1A100846F55 /* LifeProgressUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9D70829829B8D1A100846F55 /* LifeProgressUITests.swift */,
-				9D70829A29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift */,
-			);
-			path = LifeProgressUITests;
 			sourceTree = "<group>";
 		};
 		9D7082A729B8D32A00846F55 /* Models */ = {
@@ -1072,24 +1042,6 @@
 			productReference = 9D70828A29B8D1A100846F55 /* LifeProgressTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9D70829329B8D1A100846F55 /* LifeProgressUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9D7082A429B8D1A100846F55 /* Build configuration list for PBXNativeTarget "LifeProgressUITests" */;
-			buildPhases = (
-				9D70829029B8D1A100846F55 /* Sources */,
-				9D70829129B8D1A100846F55 /* Frameworks */,
-				9D70829229B8D1A100846F55 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9D70829629B8D1A100846F55 /* PBXTargetDependency */,
-			);
-			name = LifeProgressUITests;
-			productName = LifeProgressUITests;
-			productReference = 9D70829429B8D1A100846F55 /* LifeProgressUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		9DA378CC29E19B9000074F01 /* LifeProgressWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DA378E129E19B9200074F01 /* Build configuration list for PBXNativeTarget "LifeProgressWidgetExtension" */;
@@ -1127,10 +1079,6 @@
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 9D70827429B8D1A000846F55;
 					};
-					9D70829329B8D1A100846F55 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 9D70827429B8D1A000846F55;
-					};
 					9DA378CC29E19B9000074F01 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -1159,7 +1107,6 @@
 			targets = (
 				9D70827429B8D1A000846F55 /* Life Progress - Calendar */,
 				9D70828929B8D1A100846F55 /* LifeProgressTests */,
-				9D70829329B8D1A100846F55 /* LifeProgressUITests */,
 				9DA378CC29E19B9000074F01 /* LifeProgressWidgetExtension */,
 			);
 		};
@@ -1181,13 +1128,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D70DC3E2A010291000C2AF0 /* Configuration.storekit in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D70829229B8D1A100846F55 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1313,15 +1253,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9D70829029B8D1A100846F55 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D70829929B8D1A100846F55 /* LifeProgressUITests.swift in Sources */,
-				9D70829B29B8D1A100846F55 /* LifeProgressUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9DA378C929E19B9000074F01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1349,11 +1280,6 @@
 			isa = PBXTargetDependency;
 			target = 9D70827429B8D1A000846F55 /* Life Progress - Calendar */;
 			targetProxy = 9D70828B29B8D1A100846F55 /* PBXContainerItemProxy */;
-		};
-		9D70829629B8D1A100846F55 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9D70827429B8D1A000846F55 /* Life Progress - Calendar */;
-			targetProxy = 9D70829529B8D1A100846F55 /* PBXContainerItemProxy */;
 		};
 		9DA378DC29E19B9100074F01 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1611,52 +1537,6 @@
 			};
 			name = Release;
 		};
-		9D7082A529B8D1A100846F55 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H2YRS6RS63;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgressUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = LifeProgress;
-			};
-			name = Debug;
-		};
-		9D7082A629B8D1A100846F55 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H2YRS6RS63;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bartozo.LifeProgressUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = LifeProgress;
-			};
-			name = Release;
-		};
 		9DA378DF29E19B9200074F01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1751,15 +1631,6 @@
 			buildConfigurations = (
 				9D7082A229B8D1A100846F55 /* Debug */,
 				9D7082A329B8D1A100846F55 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9D7082A429B8D1A100846F55 /* Build configuration list for PBXNativeTarget "LifeProgressUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D7082A529B8D1A100846F55 /* Debug */,
-				9D7082A629B8D1A100846F55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
