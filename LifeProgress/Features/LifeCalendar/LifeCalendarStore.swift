@@ -15,11 +15,12 @@ import Combine
 struct LifeCalendarReducer {
     
     /// The state of the life calendar.
+    @ObservableState
     struct State: Equatable {
         let currentYearModeColumnCount = 6
         
         /// The current type of calendar.
-        @BindingState var calendarType: CalendarType = .life
+        var calendarType: CalendarType = .life
         
         /// The user's life information.
         var life: Life = Life(
@@ -32,7 +33,7 @@ struct LifeCalendarReducer {
         )
         
         /// The about the app state.
-        @PresentationState var aboutTheApp: AboutTheAppReducer.State?
+        @Presents var aboutTheApp: AboutTheAppReducer.State?
         
         /// The in-app purchases's state.
         var iap = IAPReducer.State()
@@ -79,12 +80,12 @@ struct LifeCalendarReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.iap, action: /Action.iap) {
+        Scope(state: \.iap, action: \.iap) {
             IAPReducer()
         }
         Reduce { state, action in
             switch action {
-            case .binding(\.$calendarType):
+            case .binding(\.calendarType):
                 analyticsClient.sendWithPayload(
                     "life_calendar.calendar_type_changed", [
                         "calendarType": "\(state.calendarType)"
