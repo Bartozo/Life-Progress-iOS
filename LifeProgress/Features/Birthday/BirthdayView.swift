@@ -9,50 +9,37 @@ import SwiftUI
 import ComposableArchitecture
 
 struct BirthdayView: View {
-    
     @Environment(\.theme) var theme
     
-    let store: StoreOf<BirthdayReducer>
+    @Bindable var store: StoreOf<BirthdayReducer>
 
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let isDatePickerVisible = viewStore.isDatePickerVisible
-            
-            HStack {
-                Text("Your Birthday")
-                Spacer()
-                Button {
-                    viewStore.send(
-                        .isDatePickerVisibleChanged,
-                        animation: .default
-                    )
-                } label: {
-                    Text("\(DateFormatters.medium.string(from: viewStore.birthday))")
-                }
-                .buttonStyle(.bordered)
-                .tint(.gray)
-                .foregroundColor(isDatePickerVisible ? theme.color : .primary)
+        HStack {
+            Text("Your Birthday")
+            Spacer()
+            Button {
+                store.send(.isDatePickerVisibleChanged, animation: .default)
+            } label: {
+                Text("\(DateFormatters.medium.string(from: store.birthday))")
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
-            .onTapGesture {
-                viewStore.send(
-                    .isDatePickerVisibleChanged,
-                    animation: .default
-                )
-            }
-            
-            if isDatePickerVisible {
-                DatePicker(
-                    "",
-                    selection: viewStore.$birthday,
-                    displayedComponents: .date
-                )
-                .labelsHidden()
-                .datePickerStyle(.graphical)
-                .tint(theme.color)
-            }
+            .buttonStyle(.bordered)
+            .tint(.gray)
+            .foregroundColor(store.isDatePickerVisible ? theme.color : .primary)
+        }
+        .onAppear { store.send(.onAppear) }
+        .onTapGesture {
+            store.send(.isDatePickerVisibleChanged, animation: .default)
+        }
+        
+        if store.isDatePickerVisible {
+            DatePicker(
+                "",
+                selection: $store.birthday,
+                displayedComponents: .date
+            )
+            .labelsHidden()
+            .datePickerStyle(.graphical)
+            .tint(theme.color)
         }
     }
 }
@@ -60,9 +47,9 @@ struct BirthdayView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: BirthdayReducer.State()) {
-        BirthdayReducer()
-    }
-    
-    return BirthdayView(store: store)
+    BirthdayView(
+        store: Store(initialState: BirthdayReducer.State()) {
+            BirthdayReducer()
+        }
+    )
 }
