@@ -2,7 +2,7 @@
 
 [![Swift](https://img.shields.io/badge/swift-5.8-brightgreen.svg)](https://developer.apple.com/swift/)
 [![SwiftUI](https://img.shields.io/badge/-SwiftUI-ff69b4)](https://developer.apple.com/documentation/swiftui)
-[![iOS 16](https://img.shields.io/badge/-iOS%2016-blue)](https://developer.apple.com/ios/)
+![iOS 17](https://img.shields.io/badge/-iOS%2017-blue)
 [![The Composable Architecture](https://img.shields.io/badge/-TCA-blue)](https://developer.apple.com/ios/)
 [![license](https://img.shields.io/badge/license-mit-brightgreen.svg)](https://en.wikipedia.org/wiki/MIT_License)
 
@@ -59,6 +59,8 @@ As the solo developer behind Life Progress, I appreciate your interest in contri
 - [x] ~~Write TCA store tests~~
 - [x] ~~Implement share life goal feature~~
 - [ ] Add localizations
+- [ ] Add ability to share Life Calendar as an image (Similar to Share Life Goal feature)
+- [ ] Implement different types of Life Goals (We should be able to track progress in our goals)
 
 
 ## License
