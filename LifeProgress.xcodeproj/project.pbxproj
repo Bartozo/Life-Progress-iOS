@@ -95,7 +95,6 @@
 		9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A029C4F88300E2A4FA /* RootView.swift */; };
 		9DC5B6A329C4FBB400E2A4FA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC5B6A229C4FBB400E2A4FA /* Theme.swift */; };
 		9DC634512A22370C00BC55CB /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC634502A22370C00BC55CB /* WhatsNewKit */; };
-		9DC634552A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC634542A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift */; };
 		9DC756A82A73D7AE00E6F3F1 /* LifeGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC756A72A73D7AE00E6F3F1 /* LifeGoalsTests.swift */; };
 		9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */; };
 		9DC9B71429BDEA610088D6F9 /* BirthdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */; };
@@ -254,7 +253,6 @@
 		9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStore.swift; sourceTree = "<group>"; };
 		9DC5B6A029C4F88300E2A4FA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9DC5B6A229C4FBB400E2A4FA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		9DC634542A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView+WhatsNewCollectionProvider.swift"; sourceTree = "<group>"; };
 		9DC756A72A73D7AE00E6F3F1 /* LifeGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGoalsTests.swift; sourceTree = "<group>"; };
 		9DC9B71129BDE8590088D6F9 /* BirthdayStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayStore.swift; sourceTree = "<group>"; };
 		9DC9B71329BDEA610088D6F9 /* BirthdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayView.swift; sourceTree = "<group>"; };
@@ -784,7 +782,6 @@
 			children = (
 				9DC5B69E29C4F87B00E2A4FA /* RootStore.swift */,
 				9DC5B6A029C4F88300E2A4FA /* RootView.swift */,
-				9DC634542A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -1265,7 +1262,6 @@
 				9D813B152A039AA20054020F /* OnboardingAboutView.swift in Sources */,
 				9D7CCA7D29DC7BBF008CA928 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */,
 				9DC9B71229BDE8590088D6F9 /* BirthdayStore.swift in Sources */,
-				9DC634552A2249E400BC55CB /* RootView+WhatsNewCollectionProvider.swift in Sources */,
 				9DD7210029BFBD5100634AB2 /* WeeklyNotificationView.swift in Sources */,
 				9D7082A929B8D34900846F55 /* Life.swift in Sources */,
 				9DE2CECF29FFBD1400A9BE6D /* ConfettiStore.swift in Sources */,
@@ -1809,7 +1805,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.2;
+				minimumVersion = 1.7.3;
 			};
 		};
 		9DC6344F2A22370C00BC55CB /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
