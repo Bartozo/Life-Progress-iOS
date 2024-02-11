@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct OnboardingLifeExpectancyView: View {
-    
     @Environment(\.theme) var theme
     
     let store: StoreOf<OnboardingReducer>
@@ -37,9 +36,9 @@ struct OnboardingLifeExpectancyView: View {
                 
                 Section {
                     LifeExpectancyView(
-                        store: self.store.scope(
+                        store: store.scope(
                             state: \.lifeExpectancy,
-                            action: OnboardingReducer.Action.lifeExpectancy
+                            action: \.lifeExpectancy
                         )
                     )
                 } footer: {
@@ -48,7 +47,7 @@ struct OnboardingLifeExpectancyView: View {
             }
             
             Button {
-                self.store.send(.continueButtonTapped)
+                store.send(.continueButtonTapped)
             } label: {
                 Text("Continue")
                     .font(.headline)
@@ -62,11 +61,11 @@ struct OnboardingLifeExpectancyView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: OnboardingReducer.State()) {
-        OnboardingReducer()
-    }
-    
-    return NavigationStack {
-        OnboardingLifeExpectancyView(store: store)
+    NavigationStack {
+        OnboardingLifeExpectancyView(
+            store: Store(initialState: OnboardingReducer.State()) {
+                OnboardingReducer()
+            }
+        )
     }
 }

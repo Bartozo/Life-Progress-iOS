@@ -9,50 +9,43 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ThemeView: View {
-    let store: StoreOf<ThemeReducer>
+    @Bindable var store: StoreOf<ThemeReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Picker(
-                "Color",
-                selection: viewStore.$selectedTheme
-            ) {
-                ForEach(viewStore.themes, id: \.self) { theme in
-                    Label( 
-                        theme.color.description.capitalized,
-                        systemImage:  "circle.fill"
-                    )
-                    .labelStyle(.titleAndIcon)
-                    .foregroundColor(theme.color)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .onAppear {
-                viewStore.send(.onAppear)
+        Picker(
+            "Color",
+            selection: $store.selectedTheme
+        ) {
+            ForEach(store.themes, id: \.self) { theme in
+                Label(
+                    theme.color.description.capitalized,
+                    systemImage:  "circle.fill"
+                )
+                .labelStyle(.titleAndIcon)
+                .foregroundColor(theme.color)
             }
         }
+        .pickerStyle(.navigationLink)
+        .onAppear { store.send(.onAppear) }
     }
 }
 
 struct ThemeApplicator: ViewModifier {
-    
     let store: StoreOf<ThemeReducer>
         
     func body(content: Content) -> some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            content.environment(\.theme, viewStore.selectedTheme)
-        }
+        content.environment(\.theme, store.selectedTheme)
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: ThemeReducer.State()) {
-        ThemeReducer()
-    }
-    
-    return NavigationStack {
-        ThemeView(store: store)
+    NavigationStack {
+        ThemeView(
+            store: Store(initialState: ThemeReducer.State()) {
+                ThemeReducer()
+            }
+        )
     }
 }

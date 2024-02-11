@@ -13,6 +13,7 @@ import ComposableArchitecture
 struct AboutTheAppReducer {
     
     /// The state of the about the app.
+    @ObservableState
     struct State: Equatable {
         /// The user's life information.
         var life: Life

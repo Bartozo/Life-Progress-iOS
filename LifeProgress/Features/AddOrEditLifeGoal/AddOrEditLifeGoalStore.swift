@@ -13,15 +13,16 @@ import ComposableArchitecture
 struct AddOrEditLifeGoalReducer {
     
     /// The state of the about the app.
+    @ObservableState
     struct State: Equatable {
         /// The title of the life goal.
-        @BindingState var title = ""
+        var title = ""
         
         /// The description of the life goal.
-        @BindingState var details = ""
+        var details = ""
         
-         /// Whether the life goal was completed.
-        @BindingState var isCompleted = false
+        /// Whether the life goal was completed.
+        var isCompleted = false
         
         /// The selected SF Symbol for the life goal. By default set to "trophy"
         var symbolName = "trophy"
@@ -45,7 +46,12 @@ struct AddOrEditLifeGoalReducer {
         
         /// The state of date picker.
         var datePicker: DatePickerReducer.State {
-            get { .init(date: self.finishedAt, isDatePickerVisible: self.isDatePickerVisible) }
+            get {
+                .init(
+                    date: self.finishedAt,
+                    isDatePickerVisible: self.isDatePickerVisible
+                )
+            }
             set {
                 self.finishedAt = newValue.date
                 self.isDatePickerVisible = newValue.isDatePickerVisible
@@ -57,7 +63,12 @@ struct AddOrEditLifeGoalReducer {
         
         /// The state of SF Symbol picker.
         var sfSymbolPicker: SFSymbolPickerReducer.State {
-            get { .init(symbolName: self.symbolName, isSheetVisible: self.isSFSymbolPickerVisible) }
+            get {
+                .init(
+                    symbolName: self.symbolName,
+                    isSheetVisible: self.isSFSymbolPickerVisible
+                )
+            }
             set {
                 self.symbolName = newValue.symbolName
                 self.isSFSymbolPickerVisible = newValue.isSheetVisible
@@ -68,7 +79,7 @@ struct AddOrEditLifeGoalReducer {
         var confetti = ConfettiReducer.State()
         
         /// The share life goal's state.
-        @PresentationState var shareLifeGoal: ShareLifeGoalReducer.State?
+        @Presents var shareLifeGoal: ShareLifeGoalReducer.State?
     }
     
     /// The actions that can be taken on the about the app.
@@ -104,23 +115,23 @@ struct AddOrEditLifeGoalReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.datePicker, action: /Action.datePicker) {
+        Scope(state: \.datePicker, action: \.datePicker) {
             DatePickerReducer()
         }
-        Scope(state: \.sfSymbolPicker, action: /Action.sfSymbolPicker) {
+        Scope(state: \.sfSymbolPicker, action: \.sfSymbolPicker) {
             SFSymbolPickerReducer()
         }
-        Scope(state: \.confetti, action: /Action.confetti) {
+        Scope(state: \.confetti, action: \.confetti) {
             ConfettiReducer()
         }
         Reduce { state, action in
             switch action {
-            case .binding(\.$isCompleted):
+            case .binding(\.isCompleted):
                 guard state.isCompleted else {
                     state.isDatePickerVisible = false
                     return .none
                 }
-            
+                
                 return .send(.confetti(.showConfetti))
                 
             case .binding:

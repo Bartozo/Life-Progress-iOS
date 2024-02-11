@@ -9,56 +9,50 @@ import SwiftUI
 import ComposableArchitecture
 
 struct LifeCalendarView: View {
-    
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     
-    let store: StoreOf<LifeCalendarReducer>
+    @Bindable var store: StoreOf<LifeCalendarReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            calendarContent
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Picker(
-                            "",
-                            selection: viewStore.$calendarType
-                        ) {
-                            ForEach(LifeCalendarReducer.State.CalendarType.allCases, id: \.self) { calendarType in
-                                Text(calendarType.title)
-                                    .tag(calendarType)
-                            }
+        calendarContent
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Picker(
+                        "",
+                        selection: $store.calendarType
+                    ) {
+                        ForEach(LifeCalendarReducer.State.CalendarType.allCases, id: \.self) { calendarType in
+                            Text(calendarType.title)
+                                .tag(calendarType)
                         }
-                        .pickerStyle(.segmented)
-                        .scaledToFit()
                     }
+                    .pickerStyle(.segmented)
+                    .scaledToFit()
                 }
-                .navigationTitle("Life Calendar")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        PremiumButton(
-                            store: self.store.scope(
-                                state: \.iap,
-                                action: LifeCalendarReducer.Action.iap
-                            )
+            }
+            .navigationTitle("Life Calendar")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    PremiumButton(
+                        store: store.scope(
+                            state: \.iap,
+                            action: \.iap
                         )
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            viewStore.send(.aboutLifeCalendarButtonTapped)
-                        }) {
-                            Image(systemName: "questionmark.circle")
-                        }
-                    }
-                }
-                .sheet(
-                    store: self.store.scope(
-                        state: \.$aboutTheApp,
-                        action: { .aboutTheApp($0) }
                     )
-                ) { store in
-                    AboutTheAppView(store: store)
                 }
-        }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        store.send(.aboutLifeCalendarButtonTapped)
+                    }) {
+                        Image(systemName: "questionmark.circle")
+                    }
+                }
+            }
+            .sheet(
+                item: $store.scope(state: \.aboutTheApp, action: \.aboutTheApp)
+            ) { store in
+                AboutTheAppView(store: store)
+            }
     }
     
     @ViewBuilder
@@ -72,41 +66,38 @@ struct LifeCalendarView: View {
         }
     }
     
+    @ViewBuilder
     private var calendar: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let life = viewStore.life
-            let calendarType = viewStore.calendarType
-            let currentYearModeColumnCount = viewStore.currentYearModeColumnCount
-            
-            let fullCalendarAspectRatio = Double(Life.totalWeeksInAYear) / Double(life.lifeExpectancy)
-            let currentYearGridAspectRatio = Double(currentYearModeColumnCount) / (Double(Life.totalWeeksInAYear) / Double(currentYearModeColumnCount) + 1)
-            
-            ZStack(alignment: .topLeading) {
-                CalendarWithoutCurrentYear(store: self.store)
-                CalendarWithCurrentYear(store: self.store)
-            }
-            .aspectRatio(
-                min(fullCalendarAspectRatio, currentYearGridAspectRatio),
-                contentMode: .fit
-            )
-            .onTapGesture {
-                viewStore.send(.calendarTypeChanged(
-                    calendarType == .currentYear ? .life : .currentYear)
-                )
-            }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
+        let life = store.life
+        let calendarType = store.calendarType
+        let currentYearModeColumnCount = store.currentYearModeColumnCount
+        
+        let fullCalendarAspectRatio = Double(Life.totalWeeksInAYear) / Double(life.lifeExpectancy)
+        let currentYearGridAspectRatio = Double(currentYearModeColumnCount) / (Double(Life.totalWeeksInAYear) / Double(currentYearModeColumnCount) + 1)
+        
+        ZStack(alignment: .topLeading) {
+            CalendarWithoutCurrentYear(store: store)
+            CalendarWithCurrentYear(store: store)
         }
+        .aspectRatio(
+            min(fullCalendarAspectRatio, currentYearGridAspectRatio),
+            contentMode: .fit
+        )
+        .onTapGesture {
+            store.send(.calendarTypeChanged(
+                calendarType == .currentYear ? .life : .currentYear)
+            )
+        }
+        .onAppear { store.send(.onAppear) }
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: LifeCalendarReducer.State()) {
-        LifeCalendarReducer()
-    }
-    
-    return LifeCalendarView(store: store)
+    LifeCalendarView(
+        store: Store(initialState: LifeCalendarReducer.State()) {
+            LifeCalendarReducer()
+        }
+    )
 }

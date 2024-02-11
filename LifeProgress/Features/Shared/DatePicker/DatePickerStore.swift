@@ -13,9 +13,10 @@ import ComposableArchitecture
 struct DatePickerReducer {
     
     /// The state of the date picker.
+    @ObservableState
     struct State: Equatable {
         /// The selected date.
-        @BindingState var date = Date.now
+        var date = Date.now
 
         /// Whether the date picker is visible.
         var isDatePickerVisible = false

@@ -13,76 +13,72 @@ struct IAPView: View {
     
     @Environment(\.theme) var theme
     
-    let store: StoreOf<IAPReducer>
+    @Bindable var store: StoreOf<IAPReducer>
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                VStack {
-                    List {
-                        HStack {
-                            Spacer()
-                            Text("Life Progress Premium")
-                                .font(.largeTitle.weight(.bold))
-                                .multilineTextAlignment(.center)
-                            Spacer()
-                        }
-                        .listRowBackground(Color.clear)
-                        
-                        Section {
-                            ForEach(Feature.getFeatures(), id: \.self) { feature in
-                                HStack {
-                                    Image(systemName: feature.symbolName)
-                                        .foregroundColor(theme.color)
-                                        .font(.title.weight(.regular))
-                                        .frame(width: 60, height: 50)
-                                        .clipped()
-                                    
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        Text(feature.title)
-                                            .font(.footnote.weight(.semibold))
-                                        Text(feature.description)
-                                            .font(.footnote)
-                                            .foregroundColor(.secondary)
-                                    }
+            VStack {
+                List {
+                    HStack {
+                        Spacer()
+                        Text("Life Progress Premium")
+                            .font(.largeTitle.weight(.bold))
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }
+                    .listRowBackground(Color.clear)
+                    
+                    Section {
+                        ForEach(Feature.getFeatures(), id: \.self) { feature in
+                            HStack {
+                                Image(systemName: feature.symbolName)
+                                    .foregroundColor(theme.color)
+                                    .font(.title.weight(.regular))
+                                    .frame(width: 60, height: 50)
+                                    .clipped()
+                                
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(feature.title)
+                                        .font(.footnote.weight(.semibold))
+                                    Text(feature.description)
+                                        .font(.footnote)
+                                        .foregroundColor(.secondary)
                                 }
                             }
                         }
                     }
-                    VStack(spacing: 8) {
-                        PriceLabel(store: self.store)
-                        
-                        VStack(spacing: 20) {
-                            BuyPremiumButton(store: self.store)
-                            
-                            Button {
-                                viewStore.send(.restorePurchasesButtonTapped)
-                            } label: {
-                                Text("Restore Purchases")
-                                    .font(.subheadline)
-                            }
-                            .tint(theme.color)
-                        }
-                    }
-                    .padding()
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                VStack(spacing: 8) {
+                    PriceLabel(store: self.store)
+                    
+                    VStack(spacing: 20) {
+                        BuyPremiumButton(store: self.store)
+                        
                         Button {
-                            viewStore.send(.closeButtonTapped)
+                            store.send(.restorePurchasesButtonTapped)
                         } label: {
-                            Text("Close")
+                            Text("Restore Purchases")
+                                .font(.subheadline)
                         }
                         .tint(theme.color)
                     }
                 }
-                .onAppear {
-                    viewStore.send(.fetchProducts)
+                .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        store.send(.closeButtonTapped)
+                    } label: {
+                        Text("Close")
+                    }
+                    .tint(theme.color)
                 }
             }
-            .alert(
-                store: self.store.scope(state: \.$alert, action: IAPReducer.Action.alert)
-            )
+            .onAppear {
+                store.send(.fetchProducts)
+            }
+            .alert($store.scope(state: \.alert, action: \.alert))
         }
     }
 }
@@ -92,17 +88,15 @@ private struct PriceLabel: View {
     let store: StoreOf<IAPReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0.products }) { products in
-            VStack(alignment: .center) {
-                if let product = products.first {
-                    Text("\(product.displayPrice)")
-                        .font(.caption.weight(.semibold))
-                        .foregroundColor(.secondary)
-                }
-                Text("Buy once. Enjoy forever!")
-                    .font(.caption)
+        VStack(alignment: .center) {
+            if let product = store.products.first {
+                Text("\(product.displayPrice)")
+                    .font(.caption.weight(.semibold))
                     .foregroundColor(.secondary)
             }
+            Text("Buy once. Enjoy forever!")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 }
@@ -114,39 +108,35 @@ private struct BuyPremiumButton: View {
     let store: StoreOf<IAPReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0.isLoading }) { viewStore in
-            let isLoading = viewStore.state
-            
-            Button {
-                if (!isLoading) {
-                    viewStore.send(.buyPremiumButtonTapped)
-                }
-            } label: {
-                HStack {
-                    Text("Unlock Premium")
-                        .font(.callout.weight(.semibold))
-                        .padding(8)
-                    
-                    if (isLoading) {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .tint(.white)
-                    }
-                }
-                .frame(maxWidth: .infinity)
+        Button {
+            if (!store.isLoading) {
+                store.send(.buyPremiumButtonTapped)
             }
-            .tint(theme.color)
-            .buttonStyle(.borderedProminent)
+        } label: {
+            HStack {
+                Text("Unlock Premium")
+                    .font(.callout.weight(.semibold))
+                    .padding(8)
+                
+                if (store.isLoading) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .tint(.white)
+                }
+            }
+            .frame(maxWidth: .infinity)
         }
+        .tint(theme.color)
+        .buttonStyle(.borderedProminent)
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: IAPReducer.State()) {
-        IAPReducer()
-    }
-    
-    return IAPView(store: store)
+    IAPView(
+        store: Store(initialState: IAPReducer.State()) {
+            IAPReducer()
+        }
+    )
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LifeProgressView: View {
-    
     let life: Life
     let type: LifeCalendarReducer.State.CalendarType
     

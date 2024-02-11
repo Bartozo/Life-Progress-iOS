@@ -13,6 +13,7 @@ import ComposableArchitecture
 struct LifeGoalsReducer {
     
     /// The state of the about the app.
+    @ObservableState
     struct State: Equatable {
         /// The in-app purchases's state.
         var iap = IAPReducer.State()
@@ -31,16 +32,16 @@ struct LifeGoalsReducer {
         }
         
         /// Represents the currently selected list type.
-        @BindingState var listType: ListType = .uncompleted
+        var listType: ListType = .uncompleted
         
         /// The confetti's state.
         var confetti = ConfettiReducer.State()
         
         /// The add or edit life goal's state.
-        @PresentationState var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
+        @Presents var addOrEditLifeGoal: AddOrEditLifeGoalReducer.State?
         
         /// The share life goal's state.
-        @PresentationState var shareLifeGoal: ShareLifeGoalReducer.State?
+        @Presents var shareLifeGoal: ShareLifeGoalReducer.State?
     }
     
     
@@ -101,10 +102,10 @@ struct LifeGoalsReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.iap, action: /Action.iap) {
+        Scope(state: \.iap, action: \.iap) {
             IAPReducer()
         }
-        Scope(state: \.confetti, action: /Action.confetti) {
+        Scope(state: \.confetti, action: \.confetti) {
             ConfettiReducer()
         }
         Reduce { state, action in

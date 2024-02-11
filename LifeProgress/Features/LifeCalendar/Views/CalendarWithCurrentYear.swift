@@ -9,65 +9,62 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CalendarWithCurrentYear: View {
-    
     let store: StoreOf<LifeCalendarReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let life = viewStore.life
-            let calendarType = viewStore.calendarType
-            let currentYearModeColumnCount = viewStore.currentYearModeColumnCount
+        let life = store.life
+        let calendarType = store.calendarType
+        let currentYearModeColumnCount = store.currentYearModeColumnCount
+        
+        GeometryReader { geometry in
+            let totalWeeksInAYear = Life.totalWeeksInAYear
+            let containerWidth = geometry.size.width
+            let cellSize: Double = {
+                switch calendarType {
+                case .currentYear:
+                    return containerWidth / Double(currentYearModeColumnCount)
+                case .life:
+                    return containerWidth / Double(Life.totalWeeksInAYear)
+                }
+            }()
+            let cellPadding = cellSize / 12
             
-            GeometryReader { geometry in
-                let totalWeeksInAYear = Life.totalWeeksInAYear
-                let containerWidth = geometry.size.width
-                let cellSize: Double = {
+            ForEach(0..<totalWeeksInAYear, id: \.self) { weekIndex in
+                let rowIndex: Int = {
                     switch calendarType {
                     case .currentYear:
-                        return containerWidth / Double(currentYearModeColumnCount)
+                        return weekIndex / currentYearModeColumnCount
                     case .life:
-                        return containerWidth / Double(Life.totalWeeksInAYear)
+                        return life.age - 1
                     }
                 }()
-                let cellPadding = cellSize / 12
+                let columnIndex: Int = {
+                    switch (calendarType) {
+                    case .currentYear:
+                        return weekIndex % currentYearModeColumnCount
+                    case .life:
+                        return weekIndex
+                    }
+                }()
+                let color = (weekIndex < life.weekOfYear)
+                    ? AgeGroup(age: life.age + 1).color
+                    : Color(.systemFill)
                 
-                ForEach(0..<totalWeeksInAYear, id: \.self) { weekIndex in
-                    let rowIndex: Int = {
-                        switch calendarType {
-                        case .currentYear:
-                            return weekIndex / currentYearModeColumnCount
-                        case .life:
-                            return life.age - 1
-                        }
-                    }()
-                    let columnIndex: Int = {
-                        switch (calendarType) {
-                        case .currentYear:
-                            return weekIndex % currentYearModeColumnCount
-                        case .life:
-                            return weekIndex
-                        }
-                    }()
-                    let color = (weekIndex < life.weekOfYear)
-                        ? AgeGroup(age: life.age + 1).color
-                        : Color(.systemFill)
-                    
-                    Rectangle()
-                        .fill(color)
-                        .padding(cellPadding)
-                        .frame(width: cellSize, height: cellSize)
-                        .offset(
-                            x: Double(columnIndex) * cellSize,
-                            y: Double(rowIndex) * cellSize
-                        )
-                        .animation(
-                            calendarAnimation(for: calendarType),
-                            value: calendarType
-                        )
-                }
+                Rectangle()
+                    .fill(color)
+                    .padding(cellPadding)
+                    .frame(width: cellSize, height: cellSize)
+                    .offset(
+                        x: Double(columnIndex) * cellSize,
+                        y: Double(rowIndex) * cellSize
+                    )
+                    .animation(
+                        calendarAnimation(for: calendarType),
+                        value: calendarType
+                    )
             }
-            .aspectRatio(contentMode: .fit)
         }
+        .aspectRatio(contentMode: .fit)
     }
     
     /**

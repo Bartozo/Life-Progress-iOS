@@ -10,51 +10,45 @@ import ComposableArchitecture
 import SymbolPicker
 
 struct AddOrEditLifeGoalView: View {
-    
     @Environment(\.theme) var theme
     
-    let store: StoreOf<AddOrEditLifeGoalReducer>
+    @Bindable var store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         NavigationStack {
-            WithViewStore(self.store, observe: \.isEditing) { viewStore in
-                let isEditing = viewStore.state
-                
-                Form {
-                    IconSection(store: self.store)
-                    TitleSection(store: self.store)
-                    DetailsSection(store: self.store)
-                    OthersSection(store: self.store)
-                    ShareSection(store: self.store)
-                }
-                .navigationTitle(isEditing ? "Edit Life Goal" : "Add Life Goal")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            viewStore.send(.closeButtonTapped)
-                        } label: {
-                            Text("Close")
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        AddOrSaveButton(store: self.store)
+            Form {
+                IconSection(store: store)
+                TitleSection(store: store)
+                DetailsSection(store: store)
+                OthersSection(store: store)
+                ShareSection(store: store)
+            }
+            .navigationTitle(store.isEditing ? "Edit Life Goal" : "Add Life Goal")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        store.send(.closeButtonTapped)
+                    } label: {
+                        Text("Close")
                     }
                 }
-                .overlay {
-                    ConfettiView(store: self.store.scope(
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    AddOrSaveButton(store: store)
+                }
+            }
+            .overlay {
+                ConfettiView(
+                    store: store.scope(
                         state: \.confetti,
-                        action: AddOrEditLifeGoalReducer.Action.confetti
-                    ))
-                }
-                .sheet(
-                    store: self.store.scope(
-                        state: \.$shareLifeGoal,
-                        action: { .shareLifeGoal($0) }
+                        action: \.confetti
                     )
-                ) { store in
-                    ShareLifeGoalView(store: store)
-                }
+                )
+            }
+            .sheet(
+                item: $store.scope(state: \.shareLifeGoal, action: \.shareLifeGoal)
+            ) { store in
+                ShareLifeGoalView(store: store)
             }
         }
         .tint(theme.color)
@@ -62,36 +56,19 @@ struct AddOrEditLifeGoalView: View {
 }
 
 private struct AddOrSaveButton: View {
-    
     let store: StoreOf<AddOrEditLifeGoalReducer>
     
-    struct ViewState: Equatable {
-        let isEditing: Bool
-        let title: String
-        
-        init(state: AddOrEditLifeGoalReducer.State) {
-            self.isEditing = state.isEditing
-            self.title = state.title
-        }
-    }
-    
     var body: some View {
-        WithViewStore(self.store, observe: ViewState.init) { viewStore in
-            let isEditing = viewStore.isEditing;
-            let title = viewStore.title
-            
-            Button {
-                viewStore.send(isEditing ? .saveButtonTapped : .addButtonTapped)
-            } label: {
-                Text(isEditing ? "Save" : "Add")
-            }
-            .disabled(title.isEmpty)
+        Button {
+            store.send(store.isEditing ? .saveButtonTapped : .addButtonTapped)
+        } label: {
+            Text(store.isEditing ? "Save" : "Add")
         }
+        .disabled(store.title.isEmpty)
     }
 }
 
 private struct IconSection: View {
-    
     let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
@@ -99,9 +76,9 @@ private struct IconSection: View {
             HStack {
                 Spacer()
                 SFSymbolPickerView(
-                    store: self.store.scope(
+                    store: store.scope(
                         state: \.sfSymbolPicker,
-                        action: AddOrEditLifeGoalReducer.Action.sfSymbolPicker
+                        action: \.sfSymbolPicker
                     )
                 )
                 Spacer()
@@ -112,18 +89,15 @@ private struct IconSection: View {
 }
 
 private struct TitleSection: View {
-    
-    let store: StoreOf<AddOrEditLifeGoalReducer>
+    @Bindable var store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                TextField(
-                    text: viewStore.$title,
-                    prompt: Text("Required")
-                ) {
-                    Text("Username")
-                }
+            TextField(
+                text: $store.title,
+                prompt: Text("Required")
+            ) {
+                Text("Username")
             }
         } header: {
             Text("Title")
@@ -132,21 +106,18 @@ private struct TitleSection: View {
 }
 
 private struct DetailsSection: View {
-    
-    let store: StoreOf<AddOrEditLifeGoalReducer>
+    @Bindable var store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                TextField(
-                    text: viewStore.$details,
-                    prompt: Text("Optional"),
-                    axis: .vertical
-                ) {
-                    Text("Details")
-                }
-                .lineLimit(5)
+            TextField(
+                text: $store.details,
+                prompt: Text("Optional"),
+                axis: .vertical
+            ) {
+                Text("Details")
             }
+            .lineLimit(5)
         } header: {
             Text("Details")
         } footer: {
@@ -156,56 +127,46 @@ private struct DetailsSection: View {
 }
 
 private struct OthersSection: View {
-    
     @Environment(\.requestReview) var requestReview
     
-    let store: StoreOf<AddOrEditLifeGoalReducer>
+    @Bindable var store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                let isCompleted = viewStore.state.isCompleted
+            Toggle(
+                "Mark as completed",
+                isOn: $store.isCompleted.animation(.default)
+            )
+            .onChange(of: store.isCompleted) { oldIsCompleted, newIsCompleted in
+                guard store.isCompleted else { return }
                 
-                Toggle(
-                    "Mark as completed",
-                    isOn: viewStore.$isCompleted.animation(.default)
-                )
-                .onChange(of: isCompleted) { oldIsCompleted, newIsCompleted in
-                    guard isCompleted else { return }
-                    
-                    requestReview()
-                }
+                requestReview()
+            }
             
             
-                if isCompleted {
-                    DatePickerView(
-                        title: "Accomplished on day",
-                        store: self.store.scope(
-                            state: \.datePicker,
-                            action: AddOrEditLifeGoalReducer.Action.datePicker
-                        )
+            if store.isCompleted {
+                DatePickerView(
+                    title: "Accomplished on day",
+                    store: store.scope(
+                        state: \.datePicker,
+                        action: \.datePicker
                     )
-                }
+                )
             }
         }
     }
 }
 
 private struct ShareSection: View {
-
     let store: StoreOf<AddOrEditLifeGoalReducer>
     
     var body: some View {
         Section {
-            WithViewStore(self.store, observe: \.isCompleted) { viewStore in
-                let isCompleted = viewStore.state
-                
-                if isCompleted {
-                    Button {
-                        viewStore.send(.shareLifeGoalButtonTapped)
-                    } label: {
-                        Text("Share Life Goal")
-                    }
+            if store.isCompleted {
+                Button {
+                    store.send(.shareLifeGoalButtonTapped)
+                } label: {
+                    Text("Share Life Goal")
                 }
             }
         }
@@ -216,11 +177,11 @@ private struct ShareSection: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: AddOrEditLifeGoalReducer.State()) {
-        AddOrEditLifeGoalReducer()
-    }
-    
-    return NavigationStack {
-        AddOrEditLifeGoalView(store: store)
+    NavigationStack {
+        AddOrEditLifeGoalView(
+            store: Store(initialState: AddOrEditLifeGoalReducer.State()) {
+                AddOrEditLifeGoalReducer()
+            }
+        )
     }
 }

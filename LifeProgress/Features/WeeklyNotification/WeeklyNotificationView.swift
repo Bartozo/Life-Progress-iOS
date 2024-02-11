@@ -9,24 +9,22 @@ import SwiftUI
 import ComposableArchitecture
 
 struct WeeklyNotificationView: View {
-    let store: StoreOf<WeeklyNotificationReducer>
+    @Bindable var store: StoreOf<WeeklyNotificationReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Toggle(
-                "Weekly Notification",
-                isOn: viewStore.$isWeeklyNotificationEnabled
-            )
-        }
+        Toggle(
+            "Weekly Notification",
+            isOn: $store.isWeeklyNotificationEnabled
+        )
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: WeeklyNotificationReducer.State()) {
-        WeeklyNotificationReducer()
-    }
-    
-    return WeeklyNotificationView(store: store)
+    WeeklyNotificationView(
+        store: Store(initialState: WeeklyNotificationReducer.State()) {
+            WeeklyNotificationReducer()
+        }
+    )
 }

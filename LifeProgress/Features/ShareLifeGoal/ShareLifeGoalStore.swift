@@ -14,18 +14,19 @@ import ComposableArchitecture
 struct ShareLifeGoalReducer {
     
     /// The state of the share life goal.
+    @ObservableState
     struct State: Equatable {
         /// The user's selected life goal to share.
         var lifeGoal: LifeGoal
         
         /// Represents the currently selected theme.
-        @BindingState var theme = Theme.light
+        var theme = Theme.light
         
         /// Whether the time is visible.
-        @BindingState var isTimeVisible = true
+        var isTimeVisible = true
         
         /// Whether the watermark is visible.
-        @BindingState var isWatermarkVisible = true
+        var isWatermarkVisible = true
         
         /// The user's life expectancy state.
         var colorPicker = ColorPickerReducer.State()

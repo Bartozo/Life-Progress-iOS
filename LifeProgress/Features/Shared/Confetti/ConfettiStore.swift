@@ -13,9 +13,10 @@ import ComposableArchitecture
 struct ConfettiReducer {
     
     /// The state of the confetti.
+    @ObservableState
     struct State: Equatable {
         /// State responsible for showing the confetti.
-        @BindingState var confetti: Int = 0
+        var confetti: Int = 0
     }
     
     /// The actions that can be taken on the confetti.

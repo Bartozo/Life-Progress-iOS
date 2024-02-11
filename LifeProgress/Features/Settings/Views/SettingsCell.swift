@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsCell: View {
-    
     @Environment(\.theme) var theme
     
     let title: String

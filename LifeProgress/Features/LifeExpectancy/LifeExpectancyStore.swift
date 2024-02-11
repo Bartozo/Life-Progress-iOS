@@ -14,9 +14,10 @@ import ComposableArchitecture
 struct LifeExpectancyReducer {
     
     /// The state of the birthday.
+    @ObservableState
     struct State: Equatable {
         /// The user's life expectancy.
-        @BindingState var lifeExpectancy: Int = NSUbiquitousKeyValueStoreHelper.getLifeExpectancy()
+        var lifeExpectancy: Int = NSUbiquitousKeyValueStoreHelper.getLifeExpectancy()
         
         /// Whether the slider is visible.
         var isSliderVisible = false
@@ -43,7 +44,7 @@ struct LifeExpectancyReducer {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .binding(_):
+            case .binding:
                 return .none
                 
             case .lifeExpectancySelectionEnded(let sliderValue):

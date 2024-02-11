@@ -10,50 +10,44 @@ import ComposableArchitecture
 import WhatsNewKit
 
 struct RootView: View {
-    
     @Environment(\.theme) var theme
     
     let store: StoreOf<RootReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: \.didCompleteOnboarding) { viewStore in
-            if viewStore.state {
-                ContentView(store: self.store)
-                    .whatsNewSheet()
-            } else {
-                OnboardingView(
-                    store: self.store.scope(
-                        state: \.onboarding,
-                        action: RootReducer.Action.onboarding
-                    )
+        if store.didCompleteOnboarding {
+            ContentView(store: store)
+                .whatsNewSheet()
+        } else {
+            OnboardingView(
+                store: store.scope(
+                    state: \.onboarding,
+                    action: \.onboarding
                 )
-            }
+            )
         }
-        .environment(\.whatsNew, WhatsNewEnvironment(whatsNewCollection: self))
     }
 }
 
 private struct ContentView: View {
-    
     @Environment(\.horizontalSizeClass) var sizeClass
     
     let store: StoreOf<RootReducer>
     
     var body: some View {
         if sizeClass == .regular {
-            RootSplitView(store: self.store)
+            RootSplitView(store: store)
         } else {
             // Tab View Navigation for iPhone
-            RootTabView(store: self.store)
+            RootTabView(store: store)
         }
     }
 }
 
 private struct RootSplitView: View {
-    
     @Environment(\.theme) var theme
     
-    let store: StoreOf<RootReducer>
+    @Bindable var store: StoreOf<RootReducer>
     
     var nonAnimatedTransaction: Transaction {
         var t = Transaction()
@@ -64,53 +58,49 @@ private struct RootSplitView: View {
     
     var body: some View {
         NavigationSplitView {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                List(
-                    RootReducer.State.Tab.allCases,
-                    id: \.self,
-                    selection: viewStore.$selectedTab.transaction(nonAnimatedTransaction)
-                ) { tab in
-                    Label {
-                        Text(tab.title)
-                    } icon: {
-                        Image(systemName: tab.systemImage)
-                    }
-                    .labelStyle(.titleAndIcon)
+            List(
+                RootReducer.State.Tab.allCases,
+                id: \.self,
+                selection: $store.selectedTab.transaction(nonAnimatedTransaction)
+            ) { tab in
+                Label {
+                    Text(tab.title)
+                } icon: {
+                    Image(systemName: tab.systemImage)
                 }
-                .navigationTitle("Life Progress")
+                .labelStyle(.titleAndIcon)
             }
+            .navigationTitle("Life Progress")
         } detail: {
-            WithViewStore(self.store, observe: { $0 }) { viewStore in
-                NavigationStack(path: viewStore.$path) {
-                    if let selectedTab = viewStore.selectedTab {
-                        switch selectedTab {
-                        case .lifeCalendar:
-                            LifeCalendarView(
-                                store: store.scope(
-                                    state: \.lifeCalendar,
-                                    action: RootReducer.Action.lifeCalendar
-                                )
+            NavigationStack(path: $store.path) {
+                if let selectedTab = store.selectedTab {
+                    switch selectedTab {
+                    case .lifeCalendar:
+                        LifeCalendarView(
+                            store: store.scope(
+                                state: \.lifeCalendar,
+                                action: \.lifeCalendar
                             )
-                            
-                        case .lifeGoals:
-                            LifeGoalsView(
-                                store: store.scope(
-                                    state: \.lifeGoals,
-                                    action: RootReducer.Action.lifeGoals
-                                )
+                        )
+                        
+                    case .lifeGoals:
+                        LifeGoalsView(
+                            store: store.scope(
+                                state: \.lifeGoals,
+                                action: \.lifeGoals
                             )
-                            
-                        case .settings:
-                            SettingsView(
-                                store: store.scope(
-                                    state: \.settings,
-                                    action: RootReducer.Action.settings
-                                )
+                        )
+                        
+                    case .settings:
+                        SettingsView(
+                            store: store.scope(
+                                state: \.settings,
+                                action: \.settings
                             )
-                        }
-                    } else {
-                        Text("")
+                        )
                     }
+                } else {
+                    Text("")
                 }
             }
         }
@@ -119,58 +109,55 @@ private struct RootSplitView: View {
 }
 
 private struct RootTabView: View {
-    
     @Environment(\.theme) var theme
     
-    let store: StoreOf<RootReducer>
+    @Bindable var store: StoreOf<RootReducer>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            TabView(selection: viewStore.$selectedTabIndex) {
-                ForEach(RootReducer.State.Tab.allCases) { tab in
-                    NavigationStack {
-                        switch tab {
-                        case .lifeCalendar:
-                            LifeCalendarView(
-                                store: store.scope(
-                                    state: \.lifeCalendar,
-                                    action: RootReducer.Action.lifeCalendar
-                                )
+        TabView(selection: $store.selectedTabIndex) {
+            ForEach(RootReducer.State.Tab.allCases) { tab in
+                NavigationStack {
+                    switch tab {
+                    case .lifeCalendar:
+                        LifeCalendarView(
+                            store: store.scope(
+                                state: \.lifeCalendar,
+                                action: \.lifeCalendar
                             )
-                            
-                        case .lifeGoals:
-                            LifeGoalsView(
-                                store: store.scope(
-                                    state: \.lifeGoals,
-                                    action: RootReducer.Action.lifeGoals
-                                )
+                        )
+                        
+                    case .lifeGoals:
+                        LifeGoalsView(
+                            store: store.scope(
+                                state: \.lifeGoals,
+                                action: \.lifeGoals
                             )
-                            
-                        case .settings:
-                            SettingsView(
-                                store: store.scope(
-                                    state: \.settings,
-                                    action: RootReducer.Action.settings
-                                )
+                        )
+                        
+                    case .settings:
+                        SettingsView(
+                            store: store.scope(
+                                state: \.settings,
+                                action: \.settings
                             )
-                        }
-                    }
-                    .tabItem {
-                        Label(tab.title, systemImage: tab.systemImage)
+                        )
                     }
                 }
+                .tabItem {
+                    Label(tab.title, systemImage: tab.systemImage)
+                }
             }
-            .accentColor(theme.color)
         }
+        .accentColor(theme.color)
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: RootReducer.State()) {
-        RootReducer()
-    }
-    
-    return RootView(store: store)
+    RootView(
+        store: Store(initialState: RootReducer.State()) {
+            RootReducer()
+        }
+    )
 }

@@ -13,9 +13,10 @@ import ComposableArchitecture
 struct BirthdayReducer {
     
     /// The state of the birthday.
+    @ObservableState
     struct State: Equatable {
         /// The user's birthday.
-        @BindingState var birthday: Date = NSUbiquitousKeyValueStoreHelper.getBirthday()
+        var birthday: Date = NSUbiquitousKeyValueStoreHelper.getBirthday()
 
         /// Whether the date picker is visible.
         var isDatePickerVisible = false
@@ -40,7 +41,7 @@ struct BirthdayReducer {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .binding(\.$birthday):
+            case .binding(\.birthday):
                 let birthday = state.birthday
                 return .run { send in
                     await userSettingsClient.updateBirthday(birthday)

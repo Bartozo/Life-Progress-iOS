@@ -14,6 +14,7 @@ import ComposableArchitecture
 struct ColorPickerReducer {
     
     /// The state of the color picker.
+    @ObservableState
     struct State: Equatable {
         
         /// Represents the currently selected color.

@@ -17,26 +17,24 @@ struct ColorPickerView: View {
     }
     
     var body: some View {
-        WithViewStore(self.store, observe: \.color) { viewStore in
-            LazyVGrid(columns: gridItems, spacing: 8) {
-                ForEach(ColorPickerReducer.State.Color.allCases) { color in
-                    ZStack {
-                        if viewStore.state == color {
-                            Circle()
-                                .stroke(color.colorValue, lineWidth: 3)
-                                .frame(width: 50, height: 50)
-                        }
-                        
+        LazyVGrid(columns: gridItems, spacing: 8) {
+            ForEach(ColorPickerReducer.State.Color.allCases) { color in
+                ZStack {
+                    if store.color == color {
                         Circle()
-                           .fill(color.colorValue.gradient)
-                           .frame(width: 40, height: 40)
-                           .tag(color)
-                           .onTapGesture {
-                               viewStore.send(.colorChanged(color))
-                           }
+                            .stroke(color.colorValue, lineWidth: 3)
+                            .frame(width: 50, height: 50)
                     }
-                    .frame(width: 50, height: 50)
+                    
+                    Circle()
+                       .fill(color.colorValue.gradient)
+                       .frame(width: 40, height: 40)
+                       .tag(color)
+                       .onTapGesture {
+                           store.send(.colorChanged(color))
+                       }
                 }
+                .frame(width: 50, height: 50)
             }
         }
     }
@@ -45,9 +43,9 @@ struct ColorPickerView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: ColorPickerReducer.State()) {
-        ColorPickerReducer()
-    }
-    
-    return ColorPickerView(store: store)
+    ColorPickerView(
+        store: Store(initialState: ColorPickerReducer.State()) {
+            ColorPickerReducer()
+        }
+    )
 }
