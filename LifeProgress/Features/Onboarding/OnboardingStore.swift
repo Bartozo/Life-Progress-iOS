@@ -14,6 +14,7 @@ import UserNotifications
 struct OnboardingReducer {
     
     /// The state of the onboarding.
+    @ObservableState
     struct State: Equatable {
         /// The user's birthday state.
         var birthday = BirthdayReducer.State()
@@ -22,7 +23,7 @@ struct OnboardingReducer {
         var lifeExpectancy = LifeExpectancyReducer.State()
         
         /// The path used for NavigationStack.
-        @BindingState var path: [Screen] = []
+        var path: [Screen] = []
         
         /// An enumeration that represents the different screens in an onboarding flow.
         /// It conforms to `CaseIterable`,`Identifiable` and `Hashable`, allowing for iteration

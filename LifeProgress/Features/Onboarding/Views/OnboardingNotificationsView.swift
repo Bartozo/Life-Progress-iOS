@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct OnboardingNotificationsView: View {
-    
     @Environment(\.theme) var theme
     
     let store: StoreOf<OnboardingReducer>
@@ -43,7 +42,7 @@ struct OnboardingNotificationsView: View {
             .listStyle(.plain)
             
             Button {
-                self.store.send(.allowNotificationsButtonTapped)
+                store.send(.allowNotificationsButtonTapped)
             } label: {
                 Text("Allow notifications")
                     .font(.headline)
@@ -54,7 +53,7 @@ struct OnboardingNotificationsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    self.store.send(.skipNotificationsButtonTapped)
+                    store.send(.skipNotificationsButtonTapped)
                 } label: {
                     Text("Skip")
                 }
@@ -65,7 +64,6 @@ struct OnboardingNotificationsView: View {
 }
 
 private struct NotificationView: View {
-    
     @Environment(\.theme) var theme
     
     var body: some View {
@@ -93,11 +91,11 @@ private struct NotificationView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: OnboardingReducer.State()) {
-        OnboardingReducer()
-    }
-    
-    return NavigationStack {
-        OnboardingNotificationsView(store: store)
+    NavigationStack {
+        OnboardingNotificationsView(
+            store: Store(initialState: OnboardingReducer.State()) {
+                OnboardingReducer()
+            }
+        )
     }
 }

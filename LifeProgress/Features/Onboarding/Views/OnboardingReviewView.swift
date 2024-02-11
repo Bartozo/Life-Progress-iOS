@@ -58,7 +58,7 @@ struct OnboardingReviewView: View {
             }
             
             Button {
-                self.store.send(.continueButtonTapped)
+                store.send(.continueButtonTapped)
             } label: {
                 Text("Continue")
                     .font(.headline)
@@ -73,9 +73,9 @@ struct OnboardingReviewView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: OnboardingReducer.State()) {
-        OnboardingReducer()
-    }
-    
-    return OnboardingReviewView(store: store)
+    OnboardingReviewView(
+        store: Store(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
+    )
 }
