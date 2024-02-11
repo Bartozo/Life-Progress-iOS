@@ -13,6 +13,7 @@ import ComposableArchitecture
 struct SettingsReducer {
 
     /// The state of the settings.
+    @ObservableState
     struct State: Equatable {
         /// The in-app purchases's state.
         var iap = IAPReducer.State()
@@ -56,42 +57,42 @@ struct SettingsReducer {
     
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
-        Scope(state: \.iap, action: /Action.iap) {
+        Scope(state: \.iap, action: \.iap) {
             IAPReducer()
         }
-        Scope(state: \.birthday, action: /Action.birthday) {
+        Scope(state: \.birthday, action: \.birthday) {
             BirthdayReducer()
         }
-        Scope(state: \.lifeExpectancy, action: /Action.lifeExpectancy) {
+        Scope(state: \.lifeExpectancy, action: \.lifeExpectancy) {
             LifeExpectancyReducer()
         }
-        Scope(state: \.weeklyNotification, action: /Action.weeklyNotification) {
+        Scope(state: \.weeklyNotification, action: \.weeklyNotification) {
             WeeklyNotificationReducer()
         }
-        Scope(state: \.theme, action: /Action.theme) {
+        Scope(state: \.theme, action: \.theme) {
             ThemeReducer()
         }
-        Scope(state: \.developer, action: /Action.developer) {
+        Scope(state: \.developer, action: \.developer) {
             DeveloperReducer()
         }
-        Scope(state: \.credits, action: /Action.credits) {
+        Scope(state: \.credits, action: \.credits) {
             CreditsReducer()
         }
         Reduce { state, action in
             switch action {
-            case .iap(_):
+            case .iap:
                 return .none
                 
-            case .birthday(_):
+            case .birthday:
                 return .none
                 
-            case .lifeExpectancy(_):
+            case .lifeExpectancy:
                 return .none
                 
-            case .weeklyNotification(_):
+            case .weeklyNotification:
                 return .none
                 
-            case .theme(_):
+            case .theme:
                 return .none
                 
             case .developer:

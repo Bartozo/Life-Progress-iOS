@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct SettingsView: View {
-    
     @Environment(\.theme) var theme
     
     let store: StoreOf<SettingsReducer>
@@ -17,23 +16,23 @@ struct SettingsView: View {
     var body: some View {
         Form {
             PremiumCell(
-                store: self.store.scope(
+                store: store.scope(
                     state: \.iap,
-                    action: SettingsReducer.Action.iap
+                    action: \.iap
                 )
             )
             
             Section {
                 BirthdayView(
-                    store: self.store.scope(
+                    store: store.scope(
                         state: \.birthday,
-                        action: SettingsReducer.Action.birthday
+                        action: \.birthday
                     )
                 )
                 LifeExpectancyView(
-                    store: self.store.scope(
+                    store: store.scope(
                         state: \.lifeExpectancy,
-                        action: SettingsReducer.Action.lifeExpectancy
+                        action: \.lifeExpectancy
                     )
                 )
             } header: {
@@ -42,9 +41,9 @@ struct SettingsView: View {
             
             Section {
                 WeeklyNotificationView(
-                    store: self.store.scope(
+                    store: store.scope(
                         state: \.weeklyNotification,
-                        action: SettingsReducer.Action.weeklyNotification
+                        action: \.weeklyNotification
                     )
                 )
             } header: {
@@ -55,9 +54,9 @@ struct SettingsView: View {
             
             Section {
                 ThemeView(
-                    store: self.store.scope(
+                    store: store.scope(
                         state: \.theme,
-                        action: SettingsReducer.Action.theme
+                        action: \.theme
                     )
                 )
             } header: {
@@ -89,9 +88,9 @@ struct SettingsView: View {
                 }
                 NavigationLink {
                     CreditsView(
-                        store: self.store.scope(
+                        store: store.scope(
                             state: \.credits,
-                            action: SettingsReducer.Action.credits
+                            action: \.credits
                         )
                     )
                 } label: {
@@ -108,9 +107,9 @@ struct SettingsView: View {
                 HStack {
                     Spacer()
                     DeveloperView(
-                        store: self.store.scope(
+                        store: store.scope(
                             state: \.developer,
-                            action: SettingsReducer.Action.developer
+                            action: \.developer
                         )
                     )
                     .padding()
@@ -138,11 +137,11 @@ struct SettingsView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: SettingsReducer.State()) {
-        SettingsReducer()
-    }
-    
-    return NavigationStack {
-        SettingsView(store: store)
+    NavigationStack {
+        SettingsView(
+            store: Store(initialState: SettingsReducer.State()) {
+                SettingsReducer()
+            }
+        )
     }
 }
