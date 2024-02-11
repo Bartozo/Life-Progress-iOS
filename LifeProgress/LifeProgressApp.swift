@@ -10,6 +10,7 @@ import BackgroundTasks
 import ComposableArchitecture
 import TelemetryClient
 import Siren
+import WhatsNewKit
 
 @main
 struct LifeProgressApp: App {
@@ -38,15 +39,14 @@ struct LifeProgressApp: App {
             RootView(store: self.store)
                 .modifier(
                     ThemeApplicator(
-                        store: self.store.scope(
+                        store: store.scope(
                             state: \.settings.theme,
-                            action: { themeAction in
-                                return RootReducer.Action.settings(.theme(themeAction))
-                            }
+                            action: \.settings.theme
                         )
                     )
                 )
                 .environment(\.managedObjectContext, coreDataManager.container.viewContext)
+                .environment(\.whatsNew, WhatsNewEnvironment(whatsNewCollection: self))
                 .task {
                     Siren.shared.wail()
                 }
@@ -97,6 +97,115 @@ struct LifeProgressApp: App {
             print("❌ Could not schedule the background task: \(error)")
             notificationsClient.updateDidScheduleWeeklyNotification(false)
         }
+    }
+}
+
+// MARK: - LifeProgressApp+WhatsNewCollectionProvider
+
+extension LifeProgressApp: WhatsNewCollectionProvider {
+    
+    /// Provides the collection of "What's New" information for the LifeProgressApp.
+    var whatsNewCollection: WhatsNewCollection {
+        WhatsNew(
+            version: "1.1.0",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "arrow.clockwise",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Updates from the app",
+                    subtitle: "Stay informed about new versions"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "wrench",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Bug fixes",
+                    subtitle: "Improving stability and reliability"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "square.and.arrow.up",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Share Life Goal",
+                    subtitle: "Share completed life goals as images with friends"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "gear",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Added Credits to Settings",
+                    subtitle: "View packages used in the project"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: store.settings.theme.selectedTheme.color
+            )
+        )
+        WhatsNew(
+            version: "1.1.1",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "wrench.adjustable",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Bug Fixes",
+                    subtitle: "Fixed issues and improved app stability for a smoother experience"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: store.settings.theme.selectedTheme.color
+            )
+        )
+        WhatsNew(
+            version: "1.1.4",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "paintbrush",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "UI improvements",
+                    subtitle: "Enhanced user interface for a better experience"
+                ),
+                .init(
+                    image: .init(
+                        systemName: "wrench",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Bug fixes",
+                    subtitle: "Improving stability and reliability"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: store.settings.theme.selectedTheme.color
+            )
+        )
+        WhatsNew(
+            version: "1.1.5",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "wrench",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Bug fixes",
+                    subtitle: "Improving stability and reliability"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: store.settings.theme.selectedTheme.color
+            )
+        )
     }
 }
 

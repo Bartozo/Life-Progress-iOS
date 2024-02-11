@@ -13,6 +13,7 @@ import ComposableArchitecture
 struct RootReducer {
     
     /// The state of the root.
+    @ObservableState
     struct State: Equatable {
         /// The onboarding's state.
         var onboarding = OnboardingReducer.State()
@@ -27,16 +28,16 @@ struct RootReducer {
         var settings = SettingsReducer.State()
 
         /// The current selected tab.
-        @BindingState var selectedTab: Tab? = .lifeCalendar
+        var selectedTab: Tab? = .lifeCalendar
         
         /// The index of selected tab.
-        @BindingState var selectedTabIndex: Int = 0
+        var selectedTabIndex: Int = 0
         
         /// Whether the user has completed the onboarding flow.
         var didCompleteOnboarding = UserDefaultsHelper.didCompleteOnboarding()
         
         /// The path used for NavigationStack.
-        @BindingState var path: [Tab] = []
+        var path: [Tab] = []
         
         /// An enumeration that represents the different tabs in an application.
         /// It conforms to `CaseIterable`,`Identifiable` and `Hashable`, allowing for iteration
@@ -97,21 +98,21 @@ struct RootReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.onboarding, action: /Action.onboarding) {
+        Scope(state: \.onboarding, action: \.onboarding) {
             OnboardingReducer()
         }
-        Scope(state: \.lifeCalendar, action: /Action.lifeCalendar) {
+        Scope(state: \.lifeCalendar, action: \.lifeCalendar) {
             LifeCalendarReducer()
         }
-        Scope(state: \.lifeGoals, action: /Action.lifeGoals) {
+        Scope(state: \.lifeGoals, action: \.lifeGoals) {
             LifeGoalsReducer()
         }
-        Scope(state: \.settings, action: /Action.settings) {
+        Scope(state: \.settings, action: \.settings) {
             SettingsReducer()
         }
         Reduce { state, action in
             switch action {
-            case .binding(\.$selectedTab):
+            case .binding(\.selectedTab):
                 guard
                     let tab = state.selectedTab
                 else {
@@ -123,7 +124,7 @@ struct RootReducer {
                 state.path = [tab]
                 return .none
                 
-            case .binding(\.$selectedTabIndex):
+            case .binding(\.selectedTabIndex):
                 state.selectedTab = State.Tab(rawValue: state.selectedTabIndex)
                 return .none
                 
