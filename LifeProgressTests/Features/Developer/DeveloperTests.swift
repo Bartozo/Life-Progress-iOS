@@ -44,7 +44,7 @@ class DeveloperTests: XCTestCase {
             DeveloperReducer()
         }
         
-        await store.send(.set(\.$confetti, 0)) {
+        await store.send(.set(\.confetti, 0)) {
             $0.confetti = 0
         }
     }

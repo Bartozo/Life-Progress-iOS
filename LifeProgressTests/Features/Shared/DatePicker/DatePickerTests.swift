@@ -19,7 +19,7 @@ class DatePickerTests: XCTestCase {
         }
         let newDate = Date.createDate(year: 2000, month: 1, day: 1)
         
-        await store.send(.set(\.$date, newDate)) {
+        await store.send(.set(\.date, newDate)) {
             $0.date = newDate
         }
     }

@@ -50,11 +50,11 @@ class LifeGoalsTests: XCTestCase {
             LifeGoalsReducer()
         }
         
-        await store.send(.set(\.$listType, .completed)) {
+        await store.send(.set(\.listType, .completed)) {
             $0.listType = .completed
         }
         
-        await store.send(.set(\.$listType, .uncompleted)) {
+        await store.send(.set(\.listType, .uncompleted)) {
             $0.listType = .uncompleted
         }
     }

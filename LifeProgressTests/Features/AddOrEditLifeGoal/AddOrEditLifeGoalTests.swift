@@ -23,7 +23,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.set(\.$title, title)) {
+        await store.send(.set(\.title, title)) {
             $0.title = title
         }
     }
@@ -38,7 +38,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.set(\.$details, details)) {
+        await store.send(.set(\.details, details)) {
             $0.details = details
         }
     }
@@ -53,7 +53,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.set(\.$isCompleted, isCompleted)) {
+        await store.send(.set(\.isCompleted, isCompleted)) {
             $0.isCompleted = isCompleted
         }
         
@@ -77,7 +77,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.set(\.$isCompleted, isCompleted)) {
+        await store.send(.set(\.isCompleted, isCompleted)) {
             $0.isCompleted = isCompleted
             $0.isDatePickerVisible = false
         }
@@ -93,7 +93,7 @@ class AddOrEditLifeGoalTests: XCTestCase {
             }()
         }
         
-        await store.send(.datePicker(.set(\.$date, finishedAt))) {
+        await store.send(.datePicker(.set(\.date, finishedAt))) {
             $0.finishedAt = finishedAt
         }
     }

@@ -33,7 +33,7 @@ class ThemeTests: XCTestCase {
             }
         }
         
-        await store.send(.set(\.$selectedTheme, Theme.red)) {
+        await store.send(.set(\.selectedTheme, Theme.red)) {
             $0.selectedTheme = Theme.red
         }
         
@@ -59,7 +59,7 @@ class ThemeTests: XCTestCase {
         }
         store.exhaustivity = .off
 
-        await store.send(.set(\.$selectedTheme, Theme.orange))
+        await store.send(.set(\.selectedTheme, Theme.orange))
         await store.send(.themeChanged(.orange))
 
         XCTAssertEqual(eventName, "theme.change_theme_tapped")

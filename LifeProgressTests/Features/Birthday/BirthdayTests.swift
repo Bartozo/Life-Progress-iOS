@@ -62,7 +62,7 @@ class BirthdayTests: XCTestCase {
             }
         }
 
-        await store.send(.set(\.$birthday, initialBirthday)) {
+        await store.send(.set(\.birthday, initialBirthday)) {
             $0.birthday = initialBirthday
         }
         

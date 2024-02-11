@@ -19,7 +19,7 @@ class SFSymbolPickerTests: XCTestCase {
         }
         let symbolName = "book"
         
-        await store.send(.set(\.$symbolName, symbolName)) {
+        await store.send(.set(\.symbolName, symbolName)) {
             $0.symbolName = symbolName
         }
     }
