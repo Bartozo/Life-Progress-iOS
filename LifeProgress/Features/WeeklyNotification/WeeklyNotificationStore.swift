@@ -13,9 +13,10 @@ import ComposableArchitecture
 struct WeeklyNotificationReducer {
     
     /// The state of the weekly notification.
+    @ObservableState
     struct State: Equatable {
         /// Whether the weekly notification is enabled
-        @BindingState var isWeeklyNotificationEnabled = false
+        var isWeeklyNotificationEnabled = false
     }
     
     /// The actions that can be taken on the weekly notification.
@@ -31,7 +32,7 @@ struct WeeklyNotificationReducer {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .binding(\.$isWeeklyNotificationEnabled):
+            case .binding(\.isWeeklyNotificationEnabled):
                 NSUbiquitousKeyValueStoreHelper.saveIsWeeklyNotificationEnabled(state.isWeeklyNotificationEnabled)
                 analyticsClient.sendWithPayload(
                     "weekly_notification.is_weekly_notification_changed", [
