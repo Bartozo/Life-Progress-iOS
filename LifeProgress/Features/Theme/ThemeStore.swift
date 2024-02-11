@@ -14,9 +14,10 @@ import SwiftUI
 struct ThemeReducer {
     
     /// The state of the theme.
+    @ObservableState
     struct State: Equatable {
         /// The user's selected theme.
-        @BindingState var selectedTheme = NSUbiquitousKeyValueStoreHelper.getTheme()
+        var selectedTheme = NSUbiquitousKeyValueStoreHelper.getTheme()
         
         /// A list of themes available in the app.
         let themes = Theme.allCases
@@ -41,7 +42,7 @@ struct ThemeReducer {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .binding(\.$selectedTheme):
+            case .binding(\.selectedTheme):
                 let theme = state.selectedTheme
                 analyticsClient.sendWithPayload(
                     "theme.change_theme_tapped", [
