@@ -80,15 +80,15 @@ struct OnboardingReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.birthday, action: /Action.birthday) {
+        Scope(state: \.birthday, action: \.birthday) {
             BirthdayReducer()
         }
-        Scope(state: \.lifeExpectancy, action: /Action.lifeExpectancy) {
+        Scope(state: \.lifeExpectancy, action: \.lifeExpectancy) {
             LifeExpectancyReducer()
         }
         Reduce { state, action in
             switch action {
-            case .binding(_):
+            case .binding:
                 return .none
                 
             case .birthday:

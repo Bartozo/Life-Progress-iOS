@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct OnboardingBirthdayView: View {
-    
     @Environment(\.theme) var theme
     
     let store: StoreOf<OnboardingReducer>
@@ -37,9 +36,9 @@ struct OnboardingBirthdayView: View {
                 
                 Section {
                     BirthdayView(
-                        store: self.store.scope(
+                        store: store.scope(
                             state: \.birthday,
-                            action: OnboardingReducer.Action.birthday
+                            action: \.birthday
                         )
                     )
                 } footer: {
@@ -48,7 +47,7 @@ struct OnboardingBirthdayView: View {
             }
             
             Button {
-                self.store.send(.continueButtonTapped)
+                store.send(.continueButtonTapped)
             } label: {
                 Text("Continue")
                     .font(.headline)
@@ -62,9 +61,9 @@ struct OnboardingBirthdayView: View {
 // MARK: - Previews
 
 #Preview {
-    let store = Store(initialState: OnboardingReducer.State()) {
-        OnboardingReducer()
-    }
-    
-    return OnboardingBirthdayView(store: store)
+    OnboardingBirthdayView(
+        store: Store(initialState: OnboardingReducer.State()) {
+            OnboardingReducer()
+        }
+    )
 }
