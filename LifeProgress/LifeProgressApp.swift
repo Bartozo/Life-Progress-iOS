@@ -240,6 +240,23 @@ extension LifeProgressApp: WhatsNewCollectionProvider {
                 backgroundColor: store.settings.theme.selectedTheme.color
             )
         )
+        WhatsNew(
+            version: "1.1.8",
+            title: "What's New in Life Progress",
+            features: [
+                .init(
+                    image: .init(
+                        systemName: "wrench",
+                        foregroundColor: store.settings.theme.selectedTheme.color
+                    ),
+                    title: "Bug fixes",
+                    subtitle: "Improving stability and reliability"
+                ),
+            ],
+            primaryAction: .init(
+                backgroundColor: store.settings.theme.selectedTheme.color
+            )
+        )
     }
 }
 
