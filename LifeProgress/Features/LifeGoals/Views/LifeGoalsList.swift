@@ -18,7 +18,7 @@ struct LifeGoalsList: View {
     
     var body: some View {
         List {
-            ForEach(store.lifeGoals, id: \.id) { lifeGoal in
+            ForEach(store.filteredLifeGoals, id: \.id) { lifeGoal in
                 LifeGoalRow(
                     lifeGoal: lifeGoal,
                     onTapped: { store.send(.lifeGoalTapped(lifeGoal)) }
@@ -59,7 +59,7 @@ struct LifeGoalsList: View {
         }
         .listStyle(.insetGrouped)
         .overlay {
-            if store.lifeGoals.isEmpty {
+            if store.filteredLifeGoals.isEmpty {
                 GeometryReader { geometry in
                     VStack {
                         switch store.listType {

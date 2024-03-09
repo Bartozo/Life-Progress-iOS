@@ -110,10 +110,10 @@ struct LifeGoalsReducer {
         }
         Reduce { state, action in
             switch action {
-            case .binding(_):
+            case .binding:
                 return .none
                 
-            case .iap(_):
+            case .iap:
                 return .none
                 
             case .onAppear:
@@ -192,13 +192,13 @@ struct LifeGoalsReducer {
                 )
                 return .none
             
-            case .addOrEditLifeGoal(_):
+            case .addOrEditLifeGoal:
                 return .none
                 
-            case .confetti(_):
+            case .confetti:
                 return .none
                 
-            case .shareLifeGoal(_):
+            case .shareLifeGoal:
                 return .none
             }
         }
