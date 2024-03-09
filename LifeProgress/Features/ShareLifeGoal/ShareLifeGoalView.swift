@@ -18,21 +18,21 @@ struct ShareLifeGoalView: View {
         NavigationStack {
             List {
                 Section {
-                    ImagePreview(store: self.store)
+                    ImagePreview(store: store)
                         .environment(\.colorScheme, store.theme == .dark ? .dark : .light)
                 }
                 .listRowInsets(EdgeInsets())
                 
                 Section {
-                    ThemePicker(store: self.store)
+                    ThemePicker(store: store)
                     ColorPickerView(
-                        store: self.store.scope(
+                        store: store.scope(
                             state: \.colorPicker,
                             action: \.colorPicker
                         )
                     )
-                    TimeSwitch(store: self.store)
-                    WatermarkSwitch(store: self.store)
+                    TimeSwitch(store: store)
+                    WatermarkSwitch(store: store)
                 }
             }
             .navigationTitle("Share Life Goal")
@@ -47,10 +47,24 @@ struct ShareLifeGoalView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ShareLink(
-                        item: Image(uiImage: generateSnapshot(theme: store.theme)),
+                        item: Image(
+                            uiImage: generateSnapshot(
+                                theme: store.theme,
+                                color: store.colorPicker.color.colorValue,
+                                isTimeVisible: store.isTimeVisible,
+                                isWatermarkVisible: store.isWatermarkVisible
+                            )
+                        ),
                         preview: SharePreview(
                             "Life Goal",
-                            image: Image(uiImage: generateSnapshot(theme: store.theme))
+                            image: Image(
+                                uiImage: generateSnapshot(
+                                    theme: store.theme,
+                                    color: store.colorPicker.color.colorValue,
+                                    isTimeVisible: store.isTimeVisible,
+                                    isWatermarkVisible: store.isWatermarkVisible
+                                )
+                            )
                         )
                     )
                 }
@@ -60,9 +74,14 @@ struct ShareLifeGoalView: View {
     }
     
     @MainActor
-    private func generateSnapshot(theme: ShareLifeGoalReducer.State.Theme) -> UIImage {
+    private func generateSnapshot(
+        theme: ShareLifeGoalReducer.State.Theme,
+        color: Color,
+        isTimeVisible: Bool,
+        isWatermarkVisible: Bool
+    ) -> UIImage {
         let screenSize = UIScreen.main.bounds.size
-        let imagePreview = ImagePreview(store: self.store)
+        let imagePreview = ImagePreview(store: store)
             .frame(width: screenSize.width, height: screenSize.width)
             .environment(\.colorScheme, theme == .dark ? .dark : .light)
             .environment(\.locale, Locale.current)
@@ -79,8 +98,7 @@ private struct ImagePreview: View {
 
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(store.colorPicker.color.colorValue.gradient)
+            ColorGradientBackground(store: store.scope(state: \.colorPicker, action: \.colorPicker))
             
             VStack {
                 Image(systemName: store.lifeGoal.symbolName)

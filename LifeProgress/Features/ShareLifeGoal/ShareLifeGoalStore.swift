@@ -67,12 +67,12 @@ struct ShareLifeGoalReducer {
     /// The body of the reducer that processes incoming actions and updates the state accordingly.
     var body: some Reducer<State, Action> {
         BindingReducer()
-        Scope(state: \.colorPicker, action: /Action.colorPicker) {
+        Scope(state: \.colorPicker, action: \.colorPicker) {
             ColorPickerReducer()
         }
         Reduce { state, action in
             switch action {
-            case .binding(_):
+            case .binding:
                 return .none
                 
             case .closeButtonTapped:
