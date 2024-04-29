@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TelemetryDeck/SwiftClient",
       "state" : {
-        "revision" : "3f8bd438c8681ce7ccdf035b529cb5c4cd82cd7b",
-        "version" : "1.4.4"
+        "revision" : "d20ccc4b8266cf739eede58cdfc7e9c6ffb41cda",
+        "version" : "1.5.1"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xnth97/SymbolPicker.git",
       "state" : {
-        "revision" : "1e81757fc81fdee86f48d101eab0d0f8e9e0ec3d",
-        "version" : "1.4.2"
+        "revision" : "c4b8e7db14256e5d2a603bb2cde6b69a2b142d9b",
+        "version" : "1.5.2"
       }
     },
     {
@@ -149,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SvenTiigi/WhatsNewKit.git",
       "state" : {
-        "revision" : "238dadc14dd58885f51037e63d08baf4275c480e",
-        "version" : "2.1.0"
+        "revision" : "a81f41ea63870205f281b8d051b264f7b303f6d4",
+        "version" : "2.2.0"
       }
     },
     {
