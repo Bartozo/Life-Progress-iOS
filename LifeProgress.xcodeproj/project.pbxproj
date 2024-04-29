@@ -1680,7 +1680,7 @@
 			repositoryURL = "https://github.com/xnth97/SymbolPicker.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
+				minimumVersion = 1.5.2;
 			};
 		};
 		9D6ECBC029BA4EF9000DF545 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
