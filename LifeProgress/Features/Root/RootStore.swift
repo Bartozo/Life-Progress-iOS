@@ -23,10 +23,10 @@ struct RootReducer {
         
         /// The life goals state.
         var lifeGoals = LifeGoalsReducer.State()
-
+        
         /// The settings's state.
         var settings = SettingsReducer.State()
-
+        
         /// The current selected tab.
         var selectedTab: Tab? = .lifeCalendar
         
@@ -34,7 +34,10 @@ struct RootReducer {
         var selectedTabIndex: Int = 0
         
         /// Whether the user has completed the onboarding flow.
-        var didCompleteOnboarding = UserDefaultsHelper.didCompleteOnboarding()
+        @Shared(.didCompleteOnboarding) var didCompleteOnboarding
+        
+        /// Whether the weekly notification was scheduled.
+        @Shared(.didScheduleWeeklyNotification) var didScheduleWeeklyNotification
         
         /// The path used for NavigationStack.
         var path: [Tab] = []
@@ -50,7 +53,7 @@ struct RootReducer {
             /// Represents settings screen
             case settings
             
-
+            
             /// The unique identifier for each case, derived from the rawValue of the enumeration.
             var id: Int { self.rawValue }
             
@@ -85,6 +88,8 @@ struct RootReducer {
     enum Action: BindableAction, Equatable {
         /// The binding for the root.
         case binding(BindingAction<State>)
+        /// Indicates that the did schedule weekly notification has changed.
+        case didScheduleWeeklyNotificationChanged(Bool)
         /// The actions that can be taken on the onboarding.
         case onboarding(OnboardingReducer.Action)
         /// The actions that can be taken on the life calendar.
@@ -129,6 +134,10 @@ struct RootReducer {
                 return .none
                 
             case .binding:
+                return .none
+                
+            case .didScheduleWeeklyNotificationChanged(let didScheduleWeeklyNotification):
+                state.didScheduleWeeklyNotification = didScheduleWeeklyNotification
                 return .none
                 
             case .onboarding(let onboardingAction):

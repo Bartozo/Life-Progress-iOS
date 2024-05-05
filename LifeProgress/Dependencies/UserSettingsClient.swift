@@ -43,12 +43,6 @@ struct UserSettingsClient {
     
     /// A publisher that emits the user's theme whenever it changes.
     var themePublisher: AnyPublisher<Theme, Never>
-    
-    /// A closure that returns the did complete onboarding flag.
-    var getDidCompleteOnboarding: () -> Bool
-    
-    /// A closure that asynchronously updates the did complete onboarding flag.
-    var updateDidCompleteOnboarding: (Bool) async -> Void
 }
 
 // MARK: Dependency Key
@@ -68,9 +62,7 @@ extension UserSettingsClient: DependencyKey {
         updateTheme: { NSUbiquitousKeyValueStoreHelper.saveTheme($0) },
         birthdayPublisher: makeBirthdayPublisher(),
         lifeExpectancyPublisher: makeLifeExpectancyPublisher(),
-        themePublisher: makeThemePublisher(),
-        getDidCompleteOnboarding: { UserDefaultsHelper.didCompleteOnboarding() },
-        updateDidCompleteOnboarding: { UserDefaultsHelper.saveDidCompleteOnboarding($0) }
+        themePublisher: makeThemePublisher()
     )
     
     /// Creates a publisher that emits the user's birthday whenever it changes.
@@ -110,9 +102,7 @@ extension UserSettingsClient: TestDependencyKey {
         updateTheme: { _ in },
         birthdayPublisher: makeTestBirthdayPublisher(),
         lifeExpectancyPublisher: makeTestLifeExpectancyPublisher(),
-        themePublisher: makeThemePublisher(),
-        getDidCompleteOnboarding: { true },
-        updateDidCompleteOnboarding: { _ in }
+        themePublisher: makeThemePublisher()
     )
 
     /// A test instance of `UserSettingsClient` with mock data for unit testing purposes.
@@ -127,9 +117,7 @@ extension UserSettingsClient: TestDependencyKey {
         updateTheme: { _ in },
         birthdayPublisher: makeTestBirthdayPublisher(),
         lifeExpectancyPublisher: makeTestLifeExpectancyPublisher(),
-        themePublisher: makeThemePublisher(),
-        getDidCompleteOnboarding: { true },
-        updateDidCompleteOnboarding: { _ in }
+        themePublisher: makeThemePublisher()
     )
     
     /// Creates a test publisher that emits a constant mock birthday.

@@ -12,7 +12,7 @@ import WhatsNewKit
 struct RootView: View {
     @Environment(\.theme) var theme
     
-    let store: StoreOf<RootReducer>
+    @Bindable var store: StoreOf<RootReducer>
     
     var body: some View {
         if store.didCompleteOnboarding {

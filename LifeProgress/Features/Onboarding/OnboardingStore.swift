@@ -25,6 +25,9 @@ struct OnboardingReducer {
         /// The path used for NavigationStack.
         var path: [Screen] = []
         
+        /// Whether the user has completed the onboarding flow.
+        @Shared(.didCompleteOnboarding) var didCompleteOnboarding
+        
         /// An enumeration that represents the different screens in an onboarding flow.
         /// It conforms to `CaseIterable`,`Identifiable` and `Hashable`, allowing for iteration
         /// over all possible cases and providing a unique identifier for each case.
@@ -143,9 +146,9 @@ struct OnboardingReducer {
                 return .none
                 
             case .startJourneyButtonTapped:
+                state.didCompleteOnboarding = true
+                analyticsClient.send("onboarding.start_journey_button_tapped")
                 return .run { send in
-                    await self.userSettingsClient.updateDidCompleteOnboarding(true)
-                    analyticsClient.send("onboarding.start_journey_button_tapped")
                     await send(.finishOnboarding)
                 }
                 

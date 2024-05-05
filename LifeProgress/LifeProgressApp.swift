@@ -33,7 +33,7 @@ struct LifeProgressApp: App {
         
         analyticsClient.initialize()
     }
-
+    
     var body: some Scene {
         WindowGroup {
             RootView(store: self.store)
@@ -52,10 +52,11 @@ struct LifeProgressApp: App {
                 }
         }
         .backgroundTask(.appRefresh("com.bartozo.LifeProgress.weekly-notification")) {
-            notificationsClient.updateDidScheduleWeeklyNotification(false)
-            
-            // Show the weekly notification only if this feature was enabled
-            guard !userSettingsClient.getIsWeeklyNotificationEnabled() else {
+            // Show the weekly notification only if this feature was enabled and notification wasn't scheduled before
+            guard
+                !userSettingsClient.getIsWeeklyNotificationEnabled(),
+                !store.didScheduleWeeklyNotification
+            else {
                 return scheduleBackgroundTask()
             }
             
@@ -68,22 +69,22 @@ struct LifeProgressApp: App {
             } catch {
                 print("❌ Could not show the notification: \(error)")
             }
-              
+            
             // Reschedule the background task for next week
             scheduleBackgroundTask()
         }
         .onChange(of: phase) { oldPhase, newPhase in
-             switch newPhase {
-             case .background: scheduleBackgroundTask()
-             default: break
-             }
-         }
+            switch newPhase {
+            case .background: scheduleBackgroundTask()
+            default: break
+            }
+        }
     }
     
     // Schedule the background task
     private func scheduleBackgroundTask() {
         // Scheduling the same background task will override the previous one
-        guard !notificationsClient.getDidScheduleWeeklyNotification() else {
+        guard !store.didScheduleWeeklyNotification else {
             return
         }
         
@@ -92,10 +93,10 @@ struct LifeProgressApp: App {
         
         do {
             try BGTaskScheduler.shared.submit(request)
-            notificationsClient.updateDidScheduleWeeklyNotification(true)
+            store.send(.didScheduleWeeklyNotificationChanged(true))
         } catch {
             print("❌ Could not schedule the background task: \(error)")
-            notificationsClient.updateDidScheduleWeeklyNotification(false)
+            store.send(.didScheduleWeeklyNotificationChanged(false))
         }
     }
 }

@@ -11,11 +11,6 @@ import UserNotifications
 
 /// The `NotificationsClient` is a struct that provides a set of closures for managing notifications in the app.
 struct NotificationsClient {
-    /// A closure that returns a boolean indicating whether the weekly notification has been scheduled.
-    var getDidScheduleWeeklyNotification: () -> Bool
-    
-    /// A closure that updates the boolean value representing whether the weekly notification has been scheduled.
-    var updateDidScheduleWeeklyNotification: (Bool) -> Void
     
     /// A closure that asynchronously returns a `UNMutableNotificationContent` for the weekly notification.
     var getWeeklyNotification: () -> UNMutableNotificationContent
@@ -31,8 +26,6 @@ extension NotificationsClient: DependencyKey {
     /// A live value of `NotificationsClient` that uses the `UserDefaultsHelper`
     /// and `NSUbiquitousKeyValueStoreHelper` for managing notifications settings.
     static let liveValue = Self(
-        getDidScheduleWeeklyNotification: { UserDefaultsHelper.didScheduleWeeklyNotification() },
-        updateDidScheduleWeeklyNotification: { UserDefaultsHelper.saveDidScheduleWeeklyNotification($0) },
         getWeeklyNotification: { createWeeklyNotification() },
         requestPermission: {
             let notificationCenter = UNUserNotificationCenter.current()
@@ -74,7 +67,7 @@ extension NotificationsClient: DependencyKey {
         // Randomly select one of the notification text sets
         let randomIndex = Int.random(in: 0..<notificationTexts.count)
         let selectedNotificationText = notificationTexts[randomIndex]
-
+        
         // Create a notification
         let content = UNMutableNotificationContent()
         content.title = selectedNotificationText.title
@@ -88,19 +81,15 @@ extension NotificationsClient: DependencyKey {
 
 // MARK: Test Dependency Key
 extension NotificationsClient: TestDependencyKey {
-
+    
     /// A preview instance of `NotificationsClient` with mock data for SwiftUI previews and testing purposes.
     static let previewValue = Self(
-        getDidScheduleWeeklyNotification: { false },
-        updateDidScheduleWeeklyNotification: { _ in },
         getWeeklyNotification: { UNMutableNotificationContent() },
         requestPermission: { }
     )
-
+    
     /// A test instance of `NotificationsClient` with mock data for unit testing purposes.
     static let testValue = Self(
-        getDidScheduleWeeklyNotification: { false },
-        updateDidScheduleWeeklyNotification: { _ in },
         getWeeklyNotification: { UNMutableNotificationContent() },
         requestPermission: { }
     )

@@ -54,8 +54,6 @@
 		9D80414C2A026BD000E3B74A /* OnboardingLifeExpectancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D80414B2A026BD000E3B74A /* OnboardingLifeExpectancyView.swift */; };
 		9D813B152A039AA20054020F /* OnboardingAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B142A039AA20054020F /* OnboardingAboutView.swift */; };
 		9D813B182A039B710054020F /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B172A039B710054020F /* About.swift */; };
-		9D813B1E2A03A76A0054020F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */; };
-		9D813B1F2A03A7CC0054020F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */; };
 		9D813B222A03C99D0054020F /* DeveloperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B212A03C99D0054020F /* DeveloperStore.swift */; };
 		9D813B262A03CCE60054020F /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B252A03CCE60054020F /* DeveloperView.swift */; };
 		9D813B282A03E8F10054020F /* OnboardingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */; };
@@ -69,6 +67,8 @@
 		9D869C8D29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
 		9D869C8E29E31D0D00841A47 /* SimplifiedYearCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */; };
 		9D877C492A3F55F700CC0562 /* DatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D877C482A3F55F700CC0562 /* DatePickerTests.swift */; };
+		9D9AFE6E2BE7DD7900A91C5D /* PersistenceReaderKey+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9AFE6D2BE7DD7900A91C5D /* PersistenceReaderKey+Extension.swift */; };
+		9D9AFE712BE7EA5A00A91C5D /* RootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9AFE702BE7EA5A00A91C5D /* RootTests.swift */; };
 		9DA378D029E19B9000074F01 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA378CF29E19B9000074F01 /* WidgetKit.framework */; };
 		9DA378D229E19B9000074F01 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA378D129E19B9000074F01 /* SwiftUI.framework */; };
 		9DA378D529E19B9000074F01 /* LifeProgressWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA378D429E19B9000074F01 /* LifeProgressWidgetBundle.swift */; };
@@ -211,7 +211,6 @@
 		9D80414B2A026BD000E3B74A /* OnboardingLifeExpectancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLifeExpectancyView.swift; sourceTree = "<group>"; };
 		9D813B142A039AA20054020F /* OnboardingAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAboutView.swift; sourceTree = "<group>"; };
 		9D813B172A039B710054020F /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
-		9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		9D813B212A03C99D0054020F /* DeveloperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperStore.swift; sourceTree = "<group>"; };
 		9D813B252A03CCE60054020F /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		9D813B272A03E8F10054020F /* OnboardingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedView.swift; sourceTree = "<group>"; };
@@ -225,6 +224,8 @@
 		9D869C8429E3175000841A47 /* YearProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearProgressWidget.swift; sourceTree = "<group>"; };
 		9D869C8C29E31D0D00841A47 /* SimplifiedYearCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedYearCalendarView.swift; sourceTree = "<group>"; };
 		9D877C482A3F55F700CC0562 /* DatePickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTests.swift; sourceTree = "<group>"; };
+		9D9AFE6D2BE7DD7900A91C5D /* PersistenceReaderKey+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceReaderKey+Extension.swift"; sourceTree = "<group>"; };
+		9D9AFE702BE7EA5A00A91C5D /* RootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTests.swift; sourceTree = "<group>"; };
 		9DA378CD29E19B9000074F01 /* LifeProgressWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeProgressWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA378CF29E19B9000074F01 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9DA378D129E19B9000074F01 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -596,14 +597,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9D813B1B2A03A2220054020F /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				9D813B1C2A03A7250054020F /* UserDefaultsHelper.swift */,
-			);
-			path = UserDefaults;
-			sourceTree = "<group>";
-		};
 		9D813B202A03C9810054020F /* Developer */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +617,7 @@
 		9D8322032A3D9AE300A66037 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				9D9AFE6F2BE7EA4600A91C5D /* Root */,
 				9DFFA07F2A7FFE3E00C6D235 /* ShareLifeGoal */,
 				9DCB34EB2A79579F00E0DD7F /* Credits */,
 				9D4CAE0D2A75294100B454B8 /* Onboarding */,
@@ -711,6 +705,14 @@
 			path = DatePicker;
 			sourceTree = "<group>";
 		};
+		9D9AFE6F2BE7EA4600A91C5D /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				9D9AFE702BE7EA5A00A91C5D /* RootTests.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
 		9DA378CE29E19B9000074F01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +790,7 @@
 			children = (
 				9DC9B71629BE052B0088D6F9 /* DateFormatters.swift */,
 				9DA378E429E1AA5000074F01 /* Date+Extension.swift */,
+				9D9AFE6D2BE7DD7900A91C5D /* PersistenceReaderKey+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -953,7 +956,6 @@
 		9DEC1FB929E58A0300305429 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				9D813B1B2A03A2220054020F /* UserDefaults */,
 				9D3B855729FD18D40026D814 /* Entities */,
 				9DEC1FBB29E58A2F00305429 /* CoreData */,
 				9DEC1FBA29E58A2400305429 /* NSUbiquitousKeyValueStore */,
@@ -1207,7 +1209,6 @@
 				9D70827929B8D1A000846F55 /* LifeProgressApp.swift in Sources */,
 				9DA378E529E1AA5000074F01 /* Date+Extension.swift in Sources */,
 				9DD720F929BFB35C00634AB2 /* SettingsView.swift in Sources */,
-				9D813B1E2A03A76A0054020F /* UserDefaultsHelper.swift in Sources */,
 				9D83363C2A7A476000DC6720 /* ShareLifeGoalView.swift in Sources */,
 				9DE2CED429FFD60500A9BE6D /* SettingsCell.swift in Sources */,
 				9D7D87592B9C5FF4007DCA55 /* ColorGradientBackground.swift in Sources */,
@@ -1236,6 +1237,7 @@
 				9D8041422A0263F200E3B74A /* OnboardingStore.swift in Sources */,
 				9D6ECBBF29BA378C000DF545 /* AgeGroup.swift in Sources */,
 				9DCF41F629BB991E00F30BB3 /* CalendarWithoutCurrentYear.swift in Sources */,
+				9D9AFE6E2BE7DD7900A91C5D /* PersistenceReaderKey+Extension.swift in Sources */,
 				9DC5B6A129C4F88300E2A4FA /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1253,6 +1255,7 @@
 				9DFFA0812A7FFE4D00C6D235 /* ShareLifeGoalTests.swift in Sources */,
 				9D04CAAD2A7516E7007C678D /* LifeCalendarTests.swift in Sources */,
 				9DB9F3AC2A3DEEBC001AF6D4 /* BirthdayTests.swift in Sources */,
+				9D9AFE712BE7EA5A00A91C5D /* RootTests.swift in Sources */,
 				9D5F8E0C2A66C72200867D1F /* ThemeTests.swift in Sources */,
 				9D4110492A4821A10069DFED /* SFSymbolPickerTests.swift in Sources */,
 				9D8272412A73A9680001925C /* AddOrEditLifeGoalTests.swift in Sources */,
@@ -1270,7 +1273,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DA378F029E1C2DE00074F01 /* SimplifiedLifeCalendarView.swift in Sources */,
-				9D813B1F2A03A7CC0054020F /* UserDefaultsHelper.swift in Sources */,
 				9DA378EA29E1AC7000074F01 /* NSUbiquitousKeyValueStoreHelper.swift in Sources */,
 				9D869C8329E3174600841A47 /* LifeProgressWidget.swift in Sources */,
 				9DA378E629E1AA7200074F01 /* Date+Extension.swift in Sources */,
