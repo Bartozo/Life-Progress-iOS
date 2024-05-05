@@ -191,16 +191,12 @@ class OnboardingTests: XCTestCase {
             )
         ) {
             OnboardingReducer()
-        } withDependencies: {
-            $0.userSettingsClient.updateDidCompleteOnboarding = { didComplete in
-                didCompleteOnboarding = didComplete
-            }
         }
         
-        await store.send(.startJourneyButtonTapped)
+        await store.send(.startJourneyButtonTapped)  {
+            $0.didCompleteOnboarding = true
+        }
         await store.receive(.finishOnboarding)
-
-        XCTAssertTrue(didCompleteOnboarding)
     }
     
     func testStartJourneyButtonTapped_ShouldAddToAnalytics() async {
