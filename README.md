@@ -21,8 +21,9 @@ Your support help me dedicate more time to enhancing and maintaining this reposi
 
 🔗 Get Astro with my referral [link](https://tryastro.app?aff=v8EvB)
 
-Thank you for your support!
+[![Astro ASO Tool](https://tryastro.app/hero.webp)](https://tryastro.app?aff=v8EvB)
 
+Thank you for your support!
 
 ## Features
 
