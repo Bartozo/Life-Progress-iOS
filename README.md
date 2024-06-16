@@ -6,7 +6,7 @@
 [![The Composable Architecture](https://img.shields.io/badge/-TCA-blue)](https://developer.apple.com/ios/)
 [![license](https://img.shields.io/badge/license-mit-brightgreen.svg)](https://en.wikipedia.org/wiki/MIT_License)
 
-Welcome to Life Progress, a powerful iOS and iPadOS application designed to help you track your life goals and milestones. Whether you're striving for personal or professional milestones, Life Progress is your ultimate companion on the journey of self-improvement. Start tracking your goals, celebrating your achievements, and living a more fulfilling life with Life Progress.
+Welcome to Life Progress, a powerful iOS and iPadOS application designed to help you track your life goals and milestones. Whether you're striving for personal or professional milestones, Life Progress is your ultimate companion on the journey of self-improvement. Start tracking your goals, celebrating your achievements, and living a more fulfilling life with Life Progress.a
 
 [![LifeProgress](Images/iOS-Marketing-Image@1x.png)](https://apps.apple.com/us/app/life-progress-calendar/id6447311106)
 
@@ -17,6 +17,12 @@ Your support help me dedicate more time to enhancing and maintaining this reposi
 - 💵 **Buy Premium**: Consider purchasing the premium version of my application. Your purchase directly supports the ongoing development of this project, allowing me to invest more time and effort into creating valuable content and learning resources centered around The Composable Architecture (TCA).
 - ⭐️ **Leave a Star**: If you find this repository useful or interesting, please leave a star on GitHub. Your stars help me gain visibility and encourage others in the community to discover and benefit from this work.
 - 📲 **Share with Friends**: If you like the idea behind this project, please share it with your friends, colleagues, or anyone who might find it valuable.
+- 🚀 **Get Astro (ASO tool)**: In my journey of developing and enhancing the Life Progress app, I have extensively used Astro, an ASO (App Store Optimization) tool that has significantly contributed to the visibility and success of this project. If you are an app developer looking to elevate your app's performance, I highly recommend giving Astro a try. By using my referral link, you will get access to this powerful tool, and if you decide to purchase it, I will earn a small commission from your purchase. 
+
+🔗 Get Astro with my referral [link](https://tryastro.app?aff=v8EvB)
+
+Thank you for your support!
+
 
 ## Features
 
